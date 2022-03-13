@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source\mesh">
+      <UniqueIdentifier>{a7f83e8b-6724-4ed2-ad33-8ffcfbb573d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\mesh\base">
+      <UniqueIdentifier>{4ffa85d6-59e6-4b6a-ad5d-0ca513c238da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\mesh\reader">
+      <UniqueIdentifier>{c4d6e96d-293a-48e8-aae4-24e6169ddc31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\base">
+      <UniqueIdentifier>{da1dcf94-5994-45eb-ba6c-29f06bb3aa1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\mesh">
+      <UniqueIdentifier>{2f8fa23e-5d0b-4b9d-902f-6f3ed04e77df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\mesh\base">
+      <UniqueIdentifier>{512790ab-6ea7-4ef6-b266-dc5eb7378ef2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\mesh\reader">
+      <UniqueIdentifier>{fcecd160-dbcf-424a-9b14-6772c8779af0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\math">
+      <UniqueIdentifier>{93b2bf29-a144-44db-84c1-ca917250c607}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\mesh\base\cell.h">
+      <Filter>Include\mesh\base</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\base\complex_geometry.h">
+      <Filter>Include\mesh\base</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\base\face.h">
+      <Filter>Include\mesh\base</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\base\node.h">
+      <Filter>Include\mesh\base</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\mesh.h">
+      <Filter>Include\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\mesh_typedefs.h">
+      <Filter>Include\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\reader\luismi_format_mesh_reader.h">
+      <Filter>Include\mesh\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\reader\mesh_loader.h">
+      <Filter>Include\mesh\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\base\global_typedef.h">
+      <Filter>Include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\interpolation.h">
+      <Filter>Include\math</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\surface_integral.h">
+      <Filter>Include\math</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\mesh\mesh.cpp">
+      <Filter>Source\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mesh\base\cell.cpp">
+      <Filter>Source\mesh\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mesh\base\face.cpp">
+      <Filter>Source\mesh\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mesh\base\node.cpp">
+      <Filter>Source\mesh\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodigoCFD.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
