@@ -26,7 +26,7 @@ class Cell;
  * For memory optimization only 1 copy of each Face is created, and a pointer
  * is shared between adjacent Cells. Faces also store a reference to the cells
  * that is boundary of. Further implementation of duplicated faces to 
- * increse speed over memory may take place. Only available for 2D tri-cell.
+ * increse speed over memory may take place. Only available for 2D cell.
  * If face have only 1 cell when build funtion is called it is considered boundary.
  * Cell 1 can't be null, only Cell 2 can be null in case its boundary.
  */

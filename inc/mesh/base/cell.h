@@ -25,7 +25,7 @@ namespace mesh
    
 /**
 * @brief This class represents
-* 2D triangular Cells, 
+* 2D Cells, 
 * other types may be implemented further
 */
 class Cell : public ComplexGeometry
