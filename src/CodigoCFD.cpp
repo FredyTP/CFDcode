@@ -22,7 +22,15 @@ int main()
 
     std::cout <<"Mesh size:(MB): " <<mesh.getMemorySize() /1024.0f/1024.0f << std::endl;
    
-    std::cout << "Interpolation: " << math::FaceInterpolation::uds<double>(vector2d(1,1),vector2d(-1,-1),10,-10) << std::endl;
+    for (int i = 0; i < mesh.faces()->size(); i++)
+    {
+        auto face = mesh.faces()->at(i).get();
+        std::cout << "Area of face (" << i << ") : " << face->area() << std::endl;
+        
+        //std::cout << "p1: (" << cell->nodes().at(0)->pos().x()<<", "<< cell->nodes().at(0)->pos().y()<<"); ";
+        //std::cout << "p2: (" << cell->nodes().at(1)->pos().x() << ", " << cell->nodes().at(1)->pos().y() << "); ";
+        //std::cout << "p3: (" << cell->nodes().at(2)->pos().x() << ", " << cell->nodes().at(2)->pos().y() << "); " << std::endl;
+    }
     /*Node node1(1, {0,0});
     Node node2(2, { 1,0 });
     Node node3(3, { 0,1 });
