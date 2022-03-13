@@ -41,6 +41,9 @@ public:
 
     void loadMesh(MeshLoader *loader);
     size_t getMemorySize();
+    pMeshNodes& nodes() { return _nodes; }
+    pMeshCells& cells() { return _cells; }
+    pMeshFaces& faces() { return _faces; }
 private:
     pMeshNodes _nodes;
     pMeshCells _cells;
@@ -56,8 +59,9 @@ private:
     void buildMesh();
 
     /**
-     * @brief Create faces data from triangular mesh cells and nodes.
-     * @attention ONLY WORKS FOR 2D TRI-CELLS
+     * @brief Create faces data from mesh cells and nodes. For >3 nodes faces are built following the index order
+     * for example: cell:[0,1,2,3] faces:[0-1,1-2,2-3,3-0]
+     * 
      */
     void createFaces();
 };
