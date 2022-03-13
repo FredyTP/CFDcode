@@ -35,7 +35,6 @@ public:
      */
     template<class type> static type uds(vector2d normal,vector2d velocity,
                                          type phi_cell, type phi_neig) {
-        double dotprod = velocity.dot(normal);
         return (velocity.dot(normal) > 0 ? phi_cell : phi_neig);
     }
 
