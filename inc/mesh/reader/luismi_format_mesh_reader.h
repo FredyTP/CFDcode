@@ -105,10 +105,10 @@ private:
     }
 
     /**
-     * @brief create TRIANGULAR cells from file path in
-     * _cellpath variable. Only 2D triangular cells are valid
+     * @brief create arbitrary 2d cells from file path in
+     * _cellpath variable.
      * with the following format:
-     * #    Point1  Point2  Point3
+     * #    Point1  Point2  Point3 ... PointN
      * 1   2   3
      * 2   3   4
      * ...
@@ -123,65 +123,55 @@ private:
         {
 
             //Read file header
-            std::string c1, c2, c3, c4;
-            cellfile >> c1;
-            cellfile >> c2;
-            cellfile >> c3;
-            cellfile >> c4;
+            std::string header;
+            std::getline(cellfile,header);
 
             //Check header format
-            if (c1.compare("#") == 0)
+            if (true)
             {
                 size_t counter = 0;
-                std::string snode1, snode2, snode3;
-                size_t node_index1, node_index2, node_index3;
 
                 //Read whole fille
                 while (!cellfile.eof())
                 {
-                    //This format is only valid for triangle cells!!
+                    std::string cellstring;
+                    std::getline(cellfile, cellstring);
 
-                    cellfile >> snode1; //Cell number 1
-                    if (cellfile.eof())
-                    {
-                        break;
-                    }
-                    cellfile >> snode2; //Cell number 2 
-                    if (cellfile.eof())
-                    {
-                        break;
-                    }
-                    cellfile >> snode3; //Cell number 3
-                    if (cellfile.eof())
-                    {
-                        break;
-                    }
+                    if (cellfile.eof()) break;
 
-                    //Convert string to index
-                    //NOTICE FILE FORMAT INDEX STARTS AT 1
-                    //IN C++ INDEX START AT 0 SO DECIDED TO 
-                    //USE SAME CONVENTION ON CELLS INDEX
-                    node_index1 = std::stoi(snode1) - 1;
-                    node_index2 = std::stoi(snode2) - 1;
-                    node_index3 = std::stoi(snode3) - 1;
+                    std::vector<std::unique_ptr<size_t>> node_ids;
+                    std::string node_id_string;
+                    std::istringstream stream(cellstring);
+                  
+
+                    while (std::getline(stream, node_id_string, '\t'))
+                    {
+                        //Convert string to index
+                        //NOTICE FILE FORMAT INDEX STARTS AT 1
+                        //IN C++ INDEX START AT 0 SO DECIDED TO 
+                        //USE SAME CONVENTION ON CELLS INDEX
+                        size_t idx = std::stoi(node_id_string) - 1;;
+                        node_ids.push_back(std::make_unique<size_t>(idx));
+                    }
 
                     //Create new cell
                     auto cell = std::make_unique<Cell>();
 
                     //Get reference of nodes from index 
-                    Node* node1 = _nodes->at(node_index1).get();
-                    Node* node2 = _nodes->at(node_index2).get();
-                    Node* node3 = _nodes->at(node_index3).get();
+                    std::vector<Node*> nodes;
+                    for (size_t i=0;i<node_ids.size();i++)
+                    {
+                        size_t node_index = *(node_ids.at(i).get());
+                        nodes.push_back(_nodes->at(node_index).get());
+                    }
 
-                    //Asign them to the cell
-                    cell->setNodes({ node1,node2,node3 });
+                    cell->setNodes(nodes);
 
                     //Add new cell to the list
                     _cells->push_back(std::move(cell));
 
 
                     counter++;
-                    //std::cout << counter << ": " << node_index1 << ", " << node_index2 << ", " << node_index3 << std::endl;
                 }
             }
             //Close file
