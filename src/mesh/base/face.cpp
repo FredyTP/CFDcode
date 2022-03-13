@@ -72,6 +72,7 @@ void Face::build()
     _isBoundary = _cell2 == nullptr;
     this->_updateCentroid();
     this->_updateNormals();
+    this->_updateArea();
 }
 
 void Face::_updateNormals()
@@ -91,6 +92,11 @@ void Face::_updateCentroid()
     {
         _centroid = (_node1->pos() + _node2->pos()) / 2;
     }
+}
+
+void Face::_updateArea()
+{
+    _area = (_node2->pos() - _node1->pos()).norm();
 }
 
 vector2d Face::_calculateNormalVector(const Cell* cell)
