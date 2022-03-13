@@ -34,7 +34,7 @@ void Mesh::createFaces() {
     {
         Cell* cell = _cells->at(cellid).get();
 
-        std::array<Node*, 3> nodes = cell->nodes(); //3 nodes (TRI-cell)
+        std::vector<Node*> nodes = cell->nodes(); 
 
         std::vector<std::unique_ptr<Face>> new_faces;
         std::vector<Face*> cell_faces;
@@ -82,9 +82,9 @@ void Mesh::createFaces() {
             //Give face ownership to mesh _faces vector
             _faces->push_back(std::move(to_add_face));
         }
-        if (cell_faces.size() == 3)
+        if (cell_faces.size() >= 3)
         {
-            cell->setFaces({ cell_faces[0],cell_faces[1],cell_faces[2] });
+            cell->setFaces(cell_faces);
         }
 
     }
