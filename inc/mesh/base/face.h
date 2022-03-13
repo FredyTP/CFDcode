@@ -55,6 +55,8 @@ public:
     inline const Node* node2() const { return _node2; }
     inline bool isBoundary() const { return _isBoundary; }
 
+    inline double area() const { return _area; }
+
     //------PUBLIC METHODS----------//
     void build();
     bool isEqual(Face* other) {
@@ -96,6 +98,7 @@ private:
     vector2d _calculateNormalVector(const Cell* cell);
     void _updateNormals();
     void _updateCentroid();
+    void _updateArea();
     
 
 
