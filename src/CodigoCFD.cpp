@@ -11,6 +11,7 @@
 #include <material/material.h>
 #include <material/properties/constant_properties.h>
 #include <material/properties/ideal_gas.h>
+#include <material/material_factory.h>
 
 int main()
 {
@@ -28,14 +29,22 @@ int main()
     std::cout <<"Mesh size:(MB): " <<mesh.getMemorySize() /1024.0f/1024.0f << std::endl;
    
     {
-        std::unique_ptr<DensityBase> airdensity = std::make_unique<IdealGasDensity>(1.225);
+       /* std::unique_ptr<DensityBase> airdensity = std::make_unique<IdealGasDensity>(1.225);
         std::unique_ptr<ViscosityBase> airviscosity = std::make_unique<ConstantViscosity>(1e-5);
         std::unique_ptr<ConductivityBase> airconductivity = std::make_unique<ConstantConductivity>(1e-3);
         material::Material air(airdensity, airviscosity, airconductivity);
+        
+        std::cout << air.density(state) << ", " << air.viscosity(state) << ", " << air.conductivity(state) << std::endl;*/
         mesh::StateVector state;
         state.temperature = 100;
         state.pressure = 50000;
-        std::cout << air.density(state) << ", " << air.viscosity(state) << ", " << air.conductivity(state) << std::endl;
+        material::MaterialFactory matFactory;
+        matFactory.setDensityModel<IdealGasDensity>(1.225);
+        matFactory.setViscosityModel<ConstantViscosity>(1e-5);
+        matFactory.setConductivityModel<ConstantConductivity>(1e-3);
+
+        auto air = matFactory.extractMaterial();
+        std::cout << air->density(state) << ", " << air->viscosity(state) << ", " << air->conductivity(state) << std::endl; 
     }
     /*for (int i = 0; i < mesh.faces()->size(); i++)
     {
