@@ -12,10 +12,12 @@
 namespace material
 {
 
-
+class MaterialFactory;
 class Material
 {
+    friend MaterialFactory;
 public:
+    Material() {}
     Material(std::unique_ptr<prop::DensityBase>& density, std::unique_ptr <prop::ViscosityBase>& viscosity, std::unique_ptr <prop::ConductivityBase>& conductivity)
     {
         _density = std::move(density);

@@ -93,6 +93,9 @@
     <ClInclude Include="inc\material\properties\properties_base.h">
       <Filter>Include\material\properties</Filter>
     </ClInclude>
+    <ClInclude Include="inc\material\material_factory.h">
+      <Filter>Include\material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mesh\mesh.cpp">

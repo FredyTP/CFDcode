@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="inc\base\global_typedef.h" />
     <ClInclude Include="inc\material\material.h" />
+    <ClInclude Include="inc\material\material_factory.h" />
     <ClInclude Include="inc\material\properties\constant_properties.h" />
     <ClInclude Include="inc\material\properties\ideal_gas.h" />
     <ClInclude Include="inc\material\properties\properties_base.h" />
