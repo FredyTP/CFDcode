@@ -37,6 +37,12 @@
     <Filter Include="Include\math">
       <UniqueIdentifier>{93b2bf29-a144-44db-84c1-ca917250c607}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\material">
+      <UniqueIdentifier>{1a20e435-bbfd-4e13-bce7-9e29d976f363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\material\properties">
+      <UniqueIdentifier>{77ce85d7-0777-428b-8be1-2d653e07a798}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\mesh\base\cell.h">
@@ -71,6 +77,21 @@
     </ClInclude>
     <ClInclude Include="inc\math\surface_integral.h">
       <Filter>Include\math</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\state_vector.h">
+      <Filter>Include\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\material\material.h">
+      <Filter>Include\material</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\material\properties\constant_properties.h">
+      <Filter>Include\material\properties</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\material\properties\ideal_gas.h">
+      <Filter>Include\material\properties</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\material\properties\properties_base.h">
+      <Filter>Include\material\properties</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

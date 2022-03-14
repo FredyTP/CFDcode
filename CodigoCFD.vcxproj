@@ -20,6 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\base\global_typedef.h" />
+    <ClInclude Include="inc\material\material.h" />
+    <ClInclude Include="inc\material\properties\constant_properties.h" />
+    <ClInclude Include="inc\material\properties\ideal_gas.h" />
+    <ClInclude Include="inc\material\properties\properties_base.h" />
     <ClInclude Include="inc\math\interpolation.h" />
     <ClInclude Include="inc\math\surface_integral.h" />
     <ClInclude Include="inc\mesh\base\cell.h" />
@@ -30,6 +34,7 @@
     <ClInclude Include="inc\mesh\mesh_typedefs.h" />
     <ClInclude Include="inc\mesh\reader\luismi_format_mesh_reader.h" />
     <ClInclude Include="inc\mesh\reader\mesh_loader.h" />
+    <ClInclude Include="inc\mesh\state_vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CodigoCFD.cpp" />
