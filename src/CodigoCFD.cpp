@@ -8,11 +8,16 @@
 #include <mesh/reader/luismi_format_mesh_reader.h>
 
 #include <math/interpolation.h>
+#include <material/material.h>
+#include <material/properties/constant_properties.h>
+#include <material/properties/ideal_gas.h>
 
 int main()
 {
     
     using namespace std;
+    using namespace material;
+    using namespace material::prop;
 
     mesh::LuisMiformatMeshReader meshReader("D://Alfredo//Academic//MASTER AERO//B//CFD//ProyectoCFD//CodigoCFD//mesh//nodes_4096.dat",
         "D://Alfredo//Academic//MASTER AERO//B//CFD//ProyectoCFD//CodigoCFD//mesh//cells_4096.dat");;
@@ -22,7 +27,17 @@ int main()
 
     std::cout <<"Mesh size:(MB): " <<mesh.getMemorySize() /1024.0f/1024.0f << std::endl;
    
-    for (int i = 0; i < mesh.faces()->size(); i++)
+    {
+        std::unique_ptr<DensityBase> airdensity = std::make_unique<IdealGasDensity>(1.225);
+        std::unique_ptr<ViscosityBase> airviscosity = std::make_unique<ConstantViscosity>(1e-5);
+        std::unique_ptr<ConductivityBase> airconductivity = std::make_unique<ConstantConductivity>(1e-3);
+        material::Material air(airdensity, airviscosity, airconductivity);
+        mesh::StateVector state;
+        state.temperature = 100;
+        state.pressure = 50000;
+        std::cout << air.density(state) << ", " << air.viscosity(state) << ", " << air.conductivity(state) << std::endl;
+    }
+    /*for (int i = 0; i < mesh.faces()->size(); i++)
     {
         auto face = mesh.faces()->at(i).get();
         std::cout << "Area of face (" << i << ") : " << face->area() << std::endl;
@@ -30,7 +45,7 @@ int main()
         //std::cout << "p1: (" << cell->nodes().at(0)->pos().x()<<", "<< cell->nodes().at(0)->pos().y()<<"); ";
         //std::cout << "p2: (" << cell->nodes().at(1)->pos().x() << ", " << cell->nodes().at(1)->pos().y() << "); ";
         //std::cout << "p3: (" << cell->nodes().at(2)->pos().x() << ", " << cell->nodes().at(2)->pos().y() << "); " << std::endl;
-    }
+    }*7
     /*Node node1(1, {0,0});
     Node node2(2, { 1,0 });
     Node node3(3, { 0,1 });
