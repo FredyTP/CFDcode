@@ -19,11 +19,11 @@ public:
         _cells = std::make_unique<meshCells>();
         _nodes = std::make_unique<meshNodes>();
     }
-    virtual pMeshNodes extractNodes() final
+    inline virtual pMeshNodes extractNodes() final
     {
         return std::move(_nodes);
     }
-    virtual pMeshCells extractCells() final
+    inline virtual pMeshCells extractCells() final
     {
         return std::move(_cells);
     }
