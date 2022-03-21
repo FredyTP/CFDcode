@@ -5,21 +5,6 @@
 namespace mesh {
 
 
-Cell::Cell()
-{
-    if (env::show_debug_print__)
-    {
-        std::cout << "Created Cell" << std::endl;
-    }
-
-    _nodes = {};
-    _faces = {};
-}
-
-Cell::Cell(std::vector<Node*> _nodes_, std::vector<Face*> _faces_) : _nodes(_nodes_), _faces(_faces_)
-{
-    this->build();
-}
 
 void Cell::setNodes(std::vector<Node*> _nodes_)
 {
@@ -31,6 +16,11 @@ void Cell::setFaces(std::vector<Face*> _faces_)
 {
     ComplexGeometry::modified();
     _faces = _faces_;
+}
+
+void Cell::setMaterial(material::Material* _material_)
+{
+    _material = _material_;
 }
 
 void Cell::_updateCentroid()

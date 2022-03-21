@@ -90,7 +90,7 @@ private:
                     node_y = std::stod(snode_y);
 
                     //Create and add new node to the list                   
-                    _nodes->push_back(std::make_unique<Node>(vector2d({ node_x,node_y })));
+                    _nodes->push_back(std::make_unique<Node>(counter,vector2d({ node_x,node_y })));
                     counter++;
 
                     //std::cout << counter << ": " << node_x << ", " << node_y << std::endl;
@@ -155,7 +155,7 @@ private:
                     }
 
                     //Create new cell
-                    auto cell = std::make_unique<Cell>();
+                    auto cell = std::make_unique<Cell>(counter);
 
                     //Get reference of nodes from index 
                     std::vector<Node*> nodes;

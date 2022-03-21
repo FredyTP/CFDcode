@@ -38,6 +38,10 @@ public:
     {
         _material->_conductivity = std::make_unique<_ConductivityModel>(_Args...);
     }
+    template <class _SpecificHeatModel, class... _Types> void setSpecificHeatModel(_Types&&... _Args)
+    {
+        _material->_specificHeat = std::make_unique<_SpecificHeatModel>(_Args...);
+    }
     std::unique_ptr<Material> extractMaterial()
     {
         auto temp = std::move(_material);

@@ -13,103 +13,18 @@
 #include <material/properties/ideal_gas.h>
 #include <material/material_factory.h>
 
+#include <field/state_vector.h>
+#include <field/field.h>
+
+#include <core/environment.h>
 int main()
 {
-    
-    using namespace std;
-    using namespace material;
-    using namespace material::prop;
-
-    mesh::LuisMiformatMeshReader meshReader("D://Alfredo//Academic//MASTER AERO//B//CFD//ProyectoCFD//CodigoCFD//mesh//nodes_4096.dat",
-        "D://Alfredo//Academic//MASTER AERO//B//CFD//ProyectoCFD//CodigoCFD//mesh//cells_4096.dat");;
-
-    mesh::Mesh mesh;
-    mesh.loadMesh(&meshReader);
-
-    std::cout <<"Mesh size:(MB): " <<mesh.getMemorySize() /1024.0f/1024.0f << std::endl;
-   
-    {
-       /* std::unique_ptr<DensityBase> airdensity = std::make_unique<IdealGasDensity>(1.225);
-        std::unique_ptr<ViscosityBase> airviscosity = std::make_unique<ConstantViscosity>(1e-5);
-        std::unique_ptr<ConductivityBase> airconductivity = std::make_unique<ConstantConductivity>(1e-3);
-        material::Material air(airdensity, airviscosity, airconductivity);
-        
-        std::cout << air.density(state) << ", " << air.viscosity(state) << ", " << air.conductivity(state) << std::endl;*/
-        mesh::StateVector state;
-        state.temperature = 100;
-        state.pressure = 50000;
-        material::MaterialFactory matFactory;
-        matFactory.setDensityModel<IdealGasDensity>(1.225);
-        matFactory.setViscosityModel<ConstantViscosity>(1e-5);
-        matFactory.setConductivityModel<ConstantConductivity>(1e-3);
-
-        auto air = matFactory.extractMaterial();
-        std::cout << air->density(state) << ", " << air->viscosity(state) << ", " << air->conductivity(state) << std::endl; 
-    }
-    /*for (int i = 0; i < mesh.faces()->size(); i++)
-    {
-        auto face = mesh.faces()->at(i).get();
-        std::cout << "Area of face (" << i << ") : " << face->area() << std::endl;
-        
-        //std::cout << "p1: (" << cell->nodes().at(0)->pos().x()<<", "<< cell->nodes().at(0)->pos().y()<<"); ";
-        //std::cout << "p2: (" << cell->nodes().at(1)->pos().x() << ", " << cell->nodes().at(1)->pos().y() << "); ";
-        //std::cout << "p3: (" << cell->nodes().at(2)->pos().x() << ", " << cell->nodes().at(2)->pos().y() << "); " << std::endl;
-    }*7
-    /*Node node1(1, {0,0});
-    Node node2(2, { 1,0 });
-    Node node3(3, { 0,1 });
-    Node node4(4, { 1,1 });
-
-    Cell cell1;
-    Cell cell2;
-
-    Face face1(&node1, &node2);
-    Face face2(&node1, &node3);
-    Face face3(&node2, &node3);
-    Face face4(&node4, &node2);
-    Face face5(&node3, &node4);
-
-
-    cell1.setNodes({ &node1,&node2,&node3 });
-    cell1.setFaces({ &face1,&face2,&face3 });
-
-    cell2.setNodes({ &node2,&node3,&node4 });
-    cell2.setFaces({ &face3,&face4,&face5 });
-
-    cell1.build();
-    cell2.build();
-
-    face1.setCells(&cell1, nullptr);
-    face2.setCells(&cell1, nullptr);
-    face3.setCells(&cell1, &cell2);
-    face4.setCells(&cell2, nullptr);
-    face5.setCells(&cell2, nullptr);
-  
-
-    face1.build();
-    face2.build();
-    face3.build();
-    face4.build();
-    face5.build();
-
-    auto normal11 = face1.getNormal(&cell1);
-    auto normal21 = face2.getNormal(&cell1);
-    auto normal31 = face3.getNormal(&cell1);
-    auto normal32 = face3.getNormal(&cell2);
-    auto normal42 = face4.getNormal(&cell2);
-    auto normal52 = face5.getNormal(&cell2);
-
-
-    std::cout << "n11: \n" << normal11 << std::endl;
-    std::cout << "n21: \n" << normal21 << std::endl;
-    std::cout << "n31: \n" << normal31 << std::endl;
-    std::cout << "n32: \n" << normal32 << std::endl;
-    std::cout << "n42: \n" << normal42 << std::endl;
-    std::cout << "n52: \n" << normal52 << std::endl;*/
-
-
-
-
+    core::Environment simulation;
+    simulation.loadMesh();
+    simulation.buildMaterials();
+    simulation.createBoundary();
+    simulation.initializeFields();
+    simulation.solve();
 
     return 0;
 }

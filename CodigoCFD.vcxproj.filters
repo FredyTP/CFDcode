@@ -43,6 +43,33 @@
     <Filter Include="Include\material\properties">
       <UniqueIdentifier>{77ce85d7-0777-428b-8be1-2d653e07a798}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\field">
+      <UniqueIdentifier>{86565ec8-098d-4717-b15b-fbfcfa14d551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\field">
+      <UniqueIdentifier>{fa45517a-0e74-4c92-b11f-41d47d1927fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\boundary">
+      <UniqueIdentifier>{1a8e14dd-d53a-4f95-b8d9-bbca9ed11c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\base">
+      <UniqueIdentifier>{47d5ad12-f8f6-4da1-a454-4ec499bff1e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\material">
+      <UniqueIdentifier>{e4aeb62e-8d6b-45b8-97e3-41c6c3e49648}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\math">
+      <UniqueIdentifier>{fc586eac-c116-4c41-a808-15bcb3199012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\boundary">
+      <UniqueIdentifier>{bd2516d2-5b73-47f5-946c-5d5319a65901}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\solver">
+      <UniqueIdentifier>{25b9c47f-2fb9-4388-877b-57f3179bb07b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\solver">
+      <UniqueIdentifier>{0a1f2b5d-dc5a-4cb4-bd0d-6f109595f821}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\mesh\base\cell.h">
@@ -78,9 +105,6 @@
     <ClInclude Include="inc\math\surface_integral.h">
       <Filter>Include\math</Filter>
     </ClInclude>
-    <ClInclude Include="inc\mesh\state_vector.h">
-      <Filter>Include\mesh</Filter>
-    </ClInclude>
     <ClInclude Include="inc\material\material.h">
       <Filter>Include\material</Filter>
     </ClInclude>
@@ -95,6 +119,30 @@
     </ClInclude>
     <ClInclude Include="inc\material\material_factory.h">
       <Filter>Include\material</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\core\environment.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\field\field.h">
+      <Filter>Include\field</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\field\state_vector.h">
+      <Filter>Include\field</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\boundary\boundary_condition.h">
+      <Filter>Include\boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\boundary\constant_temperature.h">
+      <Filter>Include\boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\solver\matrix_builder.h">
+      <Filter>Include\solver</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\gradient.h">
+      <Filter>Include\math</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\central_difference_gradient.h">
+      <Filter>Include\math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +160,21 @@
     </ClCompile>
     <ClCompile Include="src\CodigoCFD.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\field\field.cpp">
+      <Filter>Source\field</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\core\environment.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\boundary\boundary_condition.cpp">
+      <Filter>Source\boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="src\solver\matrix_builder.cpp">
+      <Filter>Source\solver</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\central_differnece_gradient.cpp">
+      <Filter>Source\math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@
  *********************************************************************/
 #pragma once
 
-#include <mesh/state_vector.h>
+#include <field/state_vector.h>
 #include <material/properties/properties_base.h>
 namespace material
 {
@@ -24,13 +24,15 @@ public:
         _viscosity = std::move(viscosity);
         _conductivity = std::move(conductivity);
     }
-    double density(const mesh::StateVector& state) { return _density->density(state); };
-    double viscosity(const mesh::StateVector& state) { return _viscosity->viscosity(state); }
-    double conductivity(const mesh::StateVector& state) { return _conductivity->conductivity(state); };
+    double density(const field::StateVector& state) const { return _density->density(state); };
+    double viscosity(const field::StateVector& state) const { return _viscosity->viscosity(state); }
+    double conductivity(const field::StateVector& state) const { return _conductivity->conductivity(state); };
+    double specificHeat(const field::StateVector& state) const { return _specificHeat->specificHeat(state); };
 private:
     std::unique_ptr<prop::DensityBase> _density;
     std::unique_ptr<prop::ViscosityBase> _viscosity;
     std::unique_ptr<prop::ConductivityBase> _conductivity;
+    std::unique_ptr<prop::SpecificHeatBase> _specificHeat;
 };
 
 

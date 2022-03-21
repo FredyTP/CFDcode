@@ -9,13 +9,13 @@
 #pragma once
 #include <base/global_typedef.h>
 
-namespace mesh
+namespace field
 {
 
 
 struct StateVector
 {
-    vector2d velocity;
+    
     double density;
     double temperature;
     double pressure;

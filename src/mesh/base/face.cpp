@@ -2,11 +2,13 @@
 
 #include <mesh/base/cell.h> //for cell data access
 
+
 namespace mesh{
 
 
 
-    
+
+
 Face::Face()
 {
     if (env::show_debug_print__)
@@ -17,18 +19,6 @@ Face::Face()
     _node2 = nullptr;
     _cell1 = nullptr;
     _cell2 = nullptr;
-        
-}
-
-Face::Face(Node* _node1_, Node* _node2_) :_node1(_node1_), _node2(_node2_)
-{
-    _cell1 = nullptr;
-    _cell2 = nullptr;
-}
-
-Face::Face(Node* _node1_, Node* _node2_, Cell* _cell1_, Cell* _cell2_) :_node1(_node1_), _node2(_node2_), _cell1(_cell1_), _cell2(_cell2_)
-{
-
 }
 
 void Face::setNodes(Node* _node1_, Node* _node2_)
@@ -56,12 +46,27 @@ void Face::setCell2(Cell* _cell2_)
     _cell2 = _cell2_;
 }
 
-vector2d Face::getNormal(Cell* cell) const
+void Face::setIndex(size_t _index_)
+{
+    _index = _index_;
+}
+
+vector2d Face::getNormal(const Cell* cell) const
 {
     return cell == _cell1 ? _normal1 : _normal2;
 }
 
-Cell* Face::getOtherCell(Cell* this_cell) const
+double Face::getUnitFlux(const Cell* cell) const
+{
+    return cell == _cell1 ? _unitFlux1 : _unitFlux2;
+}
+
+vector2d Face::getCentroid() const
+{
+    return _centroid;
+}
+
+Cell* Face::getOtherCell(const Cell* this_cell) const
 {
     return this_cell == _cell1 ? _cell2 : _cell1;
 }
@@ -73,6 +78,21 @@ void Face::build()
     this->_updateCentroid();
     this->_updateNormals();
     this->_updateArea();
+}
+
+void Face::updateUnitFlux(math::GradientScheme* scheme)
+{
+    if (this->isBoundary())
+    {
+        _unitFlux1 = scheme->computeUnitaryBoundaryFaceFlux(_cell1, this);
+    }
+    else
+    {
+        _unitFlux1 = scheme->computeUnitaryFaceFlux(_cell1, this);
+        _unitFlux2 = scheme->computeUnitaryFaceFlux(_cell2, this);
+    }
+
+    
 }
 
 void Face::_updateNormals()

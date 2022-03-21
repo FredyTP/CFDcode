@@ -27,6 +27,14 @@ size_t Mesh::getMemorySize()
     return sizeof(Node) * _nodes->size() + sizeof(Cell) * _cells->size() + sizeof(Face) * _faces->size();
 }
 
+void Mesh::computeUnitFlux(math::GradientScheme* scheme)
+{
+    for (size_t faceid = 0; faceid < _faces->size(); faceid++)
+    {
+        _faces->at(faceid)->updateUnitFlux(scheme);
+    }
+}
+
 void Mesh::createFaces() {
     _faces = std::make_unique<meshFaces>();
 
@@ -87,6 +95,11 @@ void Mesh::createFaces() {
             cell->setFaces(cell_faces);
         }
 
+    }
+
+    for (size_t index = 0; index < _faces->size(); index++)
+    {
+        _faces->at(index)->setIndex(index);
     }
 }
 

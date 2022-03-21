@@ -22,7 +22,7 @@
 #include <mesh/base/face.h>
 #include <mesh/base/node.h>
 #include <mesh/reader/mesh_loader.h>
-
+#include <math/gradient.h>
 namespace mesh {
 
 
@@ -41,9 +41,10 @@ public:
 
     void loadMesh(MeshLoader *loader);
     size_t getMemorySize();
-    pMeshNodes& nodes() { return _nodes; }
-    pMeshCells& cells() { return _cells; }
-    pMeshFaces& faces() { return _faces; }
+    const pMeshNodes& nodes() const { return _nodes; }
+    const pMeshCells& cells() const { return _cells; }
+    const pMeshFaces& faces() const { return _faces; }
+    void computeUnitFlux(math::GradientScheme* scheme);
 private:
     pMeshNodes _nodes;
     pMeshCells _cells;
