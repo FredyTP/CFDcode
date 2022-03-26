@@ -22,7 +22,7 @@
 #include <mesh/base/face.h>
 #include <mesh/base/node.h>
 #include <mesh/reader/mesh_loader.h>
-#include <math/gradient.h>
+
 namespace mesh {
 
 
@@ -34,7 +34,7 @@ namespace mesh {
  */
 class Mesh
 {
-   
+   //CREATE A MESH BASED CONTAINER WHERE INDEX ARE DONE BY CELLS,NODES,FACES
 public:
     Mesh();
     ~Mesh();
@@ -44,11 +44,11 @@ public:
     const pMeshNodes& nodes() const { return _nodes; }
     const pMeshCells& cells() const { return _cells; }
     const pMeshFaces& faces() const { return _faces; }
-    void computeUnitFlux(math::GradientScheme* scheme);
 private:
     pMeshNodes _nodes;
     pMeshCells _cells;
     pMeshFaces _faces;
+    
 
 
     /**
