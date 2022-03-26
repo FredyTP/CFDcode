@@ -1,0 +1,15 @@
+(bad memory management)
+time0debug(100) = 37380 [ms] 
+time0release(100) = 2489 [ms]
+
+(First improved memory management)
+time1debug(100) = 31167 [ms]
+time1release(100) = 2182 [ms]
+
+(Second improved memory management)
+time2debug(100) = 25671[ms]
+time2release(100) = 1994[ms]
+
+(Third improved memory management)
+time3debug(100) = 19872[ms]
+time3release(100) = 1712[ms]
