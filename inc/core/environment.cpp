@@ -5,7 +5,7 @@
 #include <Eigen/Sparse>
 #include <boundary/constant_temperature.h>
 #include <solver/matrix_builder.h>
-#include <math/central_difference_gradient.h>
+#include <chrono>
 
 core::Environment::Environment()
 {
@@ -35,53 +35,97 @@ void core::Environment::buildMaterials()
     matFactory.setSpecificHeatModel<prop::ConstantSpecificHeat>(1040);
 
     _fluidMaterial = matFactory.extractMaterial();
+    for (size_t cellid = 0; cellid < _mesh->cells()->size(); cellid++)
+    {
+        _mesh->cells()->at(cellid)->setMaterial(_fluidMaterial.get());
+    }
 }
 
 void core::Environment::createBoundary()
 {
-    std::unique_ptr<bc::BoundaryCondition> uniquebc = std::make_unique<bc::ConstantTemperature>(300);
-    for (size_t faceid = 0; faceid < _mesh->faces()->size(); faceid++)
-    {
-        auto face = _mesh->faces()->at(faceid).get();
-        if (face->isBoundary())
-        {
-            uniquebc->addFace(face);
-        }
-    }
-    _boundaryConditions.push_back(std::move(uniquebc));
+    std::unique_ptr<bc::BoundaryCondition> bc1 = std::make_unique<bc::ConstantTemperature>(300);
+    std::unique_ptr<bc::BoundaryCondition> bc2 = std::make_unique<bc::ConstantTemperature>(500);
+    std::unique_ptr<bc::BoundaryCondition> bc3 = std::make_unique<bc::ConstantTemperature>(500);
+    std::unique_ptr<bc::BoundaryCondition> bc4 = std::make_unique<bc::ConstantTemperature>(500);
+    bc1->loadBoundaryCondition("mesh//bc_1_4096.dat", _mesh.get());
+    bc2->loadBoundaryCondition("mesh//bc_2_4096.dat", _mesh.get());
+    bc3->loadBoundaryCondition("mesh//bc_3_4096.dat", _mesh.get());
+    bc4->loadBoundaryCondition("mesh//bc_4_4096.dat", _mesh.get());
+    
+
+    _boundaryConditions.push_back(std::move(bc1));
+    _boundaryConditions.push_back(std::move(bc2));
+    //_boundaryConditions.push_back(std::move(bc3));
+    //_boundaryConditions.push_back(std::move(bc4));
 }
 
 void core::Environment::initializeFields()
 {
     using namespace field;
-    _fields = std::make_unique<Field>(_mesh.get());
-    for (size_t i = 0; i < _fields->scalarFields()->size(); i++)
+    _fields = std::make_unique<Fields>(_mesh.get());
+    auto& densityField = _fields->rawDensity();
+    auto& tempField = _fields->rawTemperature();
+    auto& pressField = _fields->rawPressure();
+    auto& velField = _fields->rawVelocity();
+    for (size_t i = 0; i < densityField.size(); i++)
     {
-        auto escalarField = _fields->scalarFields();
-        (*escalarField)[i].density = _fluidMaterial->density((*escalarField)[i]);
-        (*escalarField)[i].pressure = 101325;
-        (*escalarField)[i].temperature = 298.15;
+        
+        densityField[i] = 1.225; //_fluidMaterial->density((*escalarField)[i]);
+        pressField[i]  =101325;
+        tempField[i] = 298.15;
     }
-    for (size_t i = 0; i < _fields->velocityField()->size(); i++)
-    {
-        auto velField = _fields->velocityField();
-        (*velField)[i].x() = 1;
-        (*velField)[i].y() = 1;
-       
+    for (size_t i = 0; i < velField.size(); i++)
+    {        
+        velField[i].x() = 0;
+        velField[i].y() = 0;     
     }
     
 }
 
 void core::Environment::solve()
 {
-    
-    
-    solver::MatrixBuilder matrix;
-    math::CentralDifferenceGradient gradScheme;
-    _mesh->computeUnitFlux((math::GradientScheme*)(&gradScheme));
-    matrix.buildSystem(_mesh.get(), (math::GradientScheme*)(&gradScheme),_boundaryConditions.front().get(),_fields.get());
-    
+    using namespace math::convective;
+    using namespace math::diffusive;
 
+
+    //Incluir esto en una lista de metodos de discretización para que se pueda elegir via terminal...
+    //Face interpolation methods
+    std::unique_ptr<FaceInterpolation> uds = std::make_unique<UDS>();
+    std::unique_ptr<FaceInterpolation> cds = std::make_unique<CDS>();
+
+    //Surface Integral methods
+    std::unique_ptr<SurfaceIntegral> midpoint = std::make_unique<MidPoint>();
+
+   
+    //Gradient Flux methods
+    std::unique_ptr <GradientFlux> centralDiffGrad=std::make_unique<CentralDifferenceGradient>();
+
+    //EQUATION TERMS
+    std::unique_ptr<ConvectiveTerm> convectiveTerm = std::make_unique<ConvectiveTerm>(midpoint.get(), uds.get());
+    std::unique_ptr<DiffusiveTerm> diffusiveTerm = std::make_unique<DiffusiveTerm>(centralDiffGrad.get());
+    
+    for (int i = 0; i < _boundaryConditions.size(); i++)
+    {
+        _boundaryConditions[i]->setConvetiveTerm(convectiveTerm.get());
+        _boundaryConditions[i]->setDiffusiveTerm(diffusiveTerm.get());
+    }
+    solver::MatrixBuilder matrix;
+
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
+    for (int i = 0;i < 1; i++)
+    {
+        matrix.buildSystem(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
+        matrix.solve();
+        matrix.save("Result.txt");
+    }
+
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+    std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
+
+    
+    //system("plotter.exe");
 
 
 }
