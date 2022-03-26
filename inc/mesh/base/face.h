@@ -13,9 +13,7 @@
 //CFD
 #include <mesh/base/node.h>
 #include <base/global_typedef.h>
-#include <mesh/base/complex_geometry.h>
-
-#include <math/gradient.h>
+#include <mesh/base/base_geometry.h>
 
 namespace mesh
 {
@@ -31,7 +29,7 @@ class Cell;
  * If face have only 1 cell when build funtion is called it is considered boundary.
  * Cell 1 can't be null, only Cell 2 can be null in case its boundary.
  */
-class Face : public ComplexGeometry
+class Face : public BaseGeometry
 {
 public:
 
@@ -45,12 +43,11 @@ public:
     void setCells(Cell* _cell1_, Cell* _cell2_);
     void setCell1(Cell* _cell1_);
     void setCell2(Cell* _cell2_);
-    void setIndex(size_t _index_);
+    
 
     //-------GETTERS---------//
-    size_t index() const { return _index; }
+    
     vector2d getNormal(const Cell* cell) const;
-    double getUnitFlux(const Cell* cell) const;
     vector2d getCentroid() const;
     Cell* getOtherCell(const Cell* this_cell) const;
     inline bool hasCell1() const { return _cell1 != nullptr; }
@@ -67,7 +64,7 @@ public:
         return (_node1 == other->node1() && _node2 == other->node2()) 
             || (_node1 == other->node2() && _node2 == other->node1());
     }
-    void updateUnitFlux(math::GradientScheme* scheme);
+   
 
     ~Face()
     {
@@ -77,7 +74,7 @@ public:
         }
     }
 private:
-    size_t _index;
+    
     bool _isBoundary = true;
     
 
@@ -101,9 +98,7 @@ private:
     //Area
     double _area; //FACE AREA [m^2]: Equals to lenght of the face * 1[m] in 2D
 
-    //FLUX
-    double _unitFlux1=0;
-    double _unitFlux2=0;
+    
     //-----PRIVATE METHODS-----//
     vector2d _calculateNormalVector(const Cell* cell);
     void _updateNormals();

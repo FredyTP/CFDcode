@@ -13,9 +13,13 @@
 //CFD
 #include <base/global_typedef.h>
 
+#include <mesh/base/base_geometry.h>
+
 namespace mesh
 {
-class Node
+	class Cell;
+
+class Node : public BaseGeometry
 {
 
 public:
@@ -35,6 +39,7 @@ public:
 private:
 	size_t _index;	//index that represents the node (UNIQUE)
 	vector2d _pos;		//node x and y coordinates in meters
+	std::vector<Cell*> _cells; //Cells this node is cointained in (for node interpolation)
 };
 
 
