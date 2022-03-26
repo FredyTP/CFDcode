@@ -24,7 +24,7 @@ public:
         _gasConstant = _refDensity * _refTemperature / _refPressure;
 
     }
-    virtual double density(const field::StateVector& state) final {
+    virtual double density(const field::ScalarStateVector& state) final {
         return _gasConstant * state.pressure / state.temperature;
     }
     ~IdealGasDensity() override {}

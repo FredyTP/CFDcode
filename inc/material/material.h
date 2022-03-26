@@ -24,10 +24,10 @@ public:
         _viscosity = std::move(viscosity);
         _conductivity = std::move(conductivity);
     }
-    double density(const field::StateVector& state) const { return _density->density(state); };
-    double viscosity(const field::StateVector& state) const { return _viscosity->viscosity(state); }
-    double conductivity(const field::StateVector& state) const { return _conductivity->conductivity(state); };
-    double specificHeat(const field::StateVector& state) const { return _specificHeat->specificHeat(state); };
+    double density(const field::ScalarStateVector& state) const { return _density->density(state); };
+    double viscosity(const field::ScalarStateVector& state) const { return _viscosity->viscosity(state); }
+    double conductivity(const field::ScalarStateVector& state) const { return _conductivity->conductivity(state); };
+    double specificHeat(const field::ScalarStateVector& state) const { return _specificHeat->specificHeat(state); };
 private:
     std::unique_ptr<prop::DensityBase> _density;
     std::unique_ptr<prop::ViscosityBase> _viscosity;
