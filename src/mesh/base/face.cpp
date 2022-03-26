@@ -23,7 +23,7 @@ Face::Face()
 
 void Face::setNodes(Node* _node1_, Node* _node2_)
 {
-    ComplexGeometry::modified();
+    BaseGeometry::modified();
     _node1 = _node1_;
     _node2 = _node2_;
 
@@ -31,7 +31,7 @@ void Face::setNodes(Node* _node1_, Node* _node2_)
 
 void Face::setCells(Cell* _cell1_, Cell* _cell2_)
 {
-    ComplexGeometry::modified();
+    BaseGeometry::modified();
     _cell1 = _cell1_;
     _cell2 = _cell2_;
 }
@@ -46,19 +46,9 @@ void Face::setCell2(Cell* _cell2_)
     _cell2 = _cell2_;
 }
 
-void Face::setIndex(size_t _index_)
-{
-    _index = _index_;
-}
-
 vector2d Face::getNormal(const Cell* cell) const
 {
     return cell == _cell1 ? _normal1 : _normal2;
-}
-
-double Face::getUnitFlux(const Cell* cell) const
-{
-    return cell == _cell1 ? _unitFlux1 : _unitFlux2;
 }
 
 vector2d Face::getCentroid() const
@@ -73,27 +63,13 @@ Cell* Face::getOtherCell(const Cell* this_cell) const
 
 void Face::build()
 {
-    ComplexGeometry::build();
+    BaseGeometry::build();
     _isBoundary = _cell2 == nullptr;
     this->_updateCentroid();
     this->_updateNormals();
     this->_updateArea();
 }
 
-void Face::updateUnitFlux(math::GradientScheme* scheme)
-{
-    if (this->isBoundary())
-    {
-        _unitFlux1 = scheme->computeUnitaryBoundaryFaceFlux(_cell1, this);
-    }
-    else
-    {
-        _unitFlux1 = scheme->computeUnitaryFaceFlux(_cell1, this);
-        _unitFlux2 = scheme->computeUnitaryFaceFlux(_cell2, this);
-    }
-
-    
-}
 
 void Face::_updateNormals()
 {

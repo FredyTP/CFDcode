@@ -8,13 +8,13 @@ namespace mesh {
 
 void Cell::setNodes(std::vector<Node*> _nodes_)
 {
-    ComplexGeometry::modified();
+    BaseGeometry::modified();
     _nodes = _nodes_;
 }
 
 void Cell::setFaces(std::vector<Face*> _faces_)
 {
-    ComplexGeometry::modified();
+    BaseGeometry::modified();
     _faces = _faces_;
 }
 
@@ -44,7 +44,7 @@ void Cell::_updateVolume()
 
 void Cell::build()
 {
-    ComplexGeometry::build();
+    BaseGeometry::build();
     this->_updateCentroid();
     this->_updateVolume();
 }
