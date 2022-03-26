@@ -70,12 +70,21 @@
     <Filter Include="Source\solver">
       <UniqueIdentifier>{0a1f2b5d-dc5a-4cb4-bd0d-6f109595f821}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\math\var">
+      <UniqueIdentifier>{85a773eb-38d8-4b38-a084-4a6e83ce844f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\math\convective">
+      <UniqueIdentifier>{5f05e997-505f-4e7d-9f1d-448d908a1d77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\math\diffusive">
+      <UniqueIdentifier>{920ed899-65d8-4113-8e82-5404204d503c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\mesh\base\cell.h">
       <Filter>Include\mesh\base</Filter>
     </ClInclude>
-    <ClInclude Include="inc\mesh\base\complex_geometry.h">
+    <ClInclude Include="inc\mesh\base\base_geometry.h">
       <Filter>Include\mesh\base</Filter>
     </ClInclude>
     <ClInclude Include="inc\mesh\base\face.h">
@@ -138,11 +147,41 @@
     <ClInclude Include="inc\solver\matrix_builder.h">
       <Filter>Include\solver</Filter>
     </ClInclude>
-    <ClInclude Include="inc\math\gradient.h">
-      <Filter>Include\math</Filter>
+    <ClInclude Include="inc\math\var\face_variable.h">
+      <Filter>Include\math\var</Filter>
     </ClInclude>
-    <ClInclude Include="inc\math\central_difference_gradient.h">
-      <Filter>Include\math</Filter>
+    <ClInclude Include="inc\math\var\cell_variable.h">
+      <Filter>Include\math\var</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\var\system_constant.h">
+      <Filter>Include\math\var</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\var\system_submatrix.h">
+      <Filter>Include\math\var</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\convective\convective_term.h">
+      <Filter>Include\math\convective</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\convective\face_interpolation.h">
+      <Filter>Include\math\convective</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\convective\surface_intergral.h">
+      <Filter>Include\math\convective</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\diffusive\diffusive_term.h">
+      <Filter>Include\math\diffusive</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\diffusive\gradient_flux.h">
+      <Filter>Include\math\diffusive</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\solver\stationary_solver.h">
+      <Filter>Include\solver</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\solver\temporal_solver.h">
+      <Filter>Include\solver</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\base\vector.h">
+      <Filter>Include\mesh\base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -172,9 +211,6 @@
     </ClCompile>
     <ClCompile Include="src\solver\matrix_builder.cpp">
       <Filter>Source\solver</Filter>
-    </ClCompile>
-    <ClCompile Include="src\math\central_differnece_gradient.cpp">
-      <Filter>Source\math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
