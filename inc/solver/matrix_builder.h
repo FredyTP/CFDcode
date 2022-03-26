@@ -9,7 +9,6 @@
 
 #include <Eigen/Eigen>
 #include <vector>
-#include <math/gradient.h>
 #include <mesh/mesh.h>
 #include <boundary/boundary_condition.h>
 namespace solver
@@ -20,14 +19,25 @@ class MatrixBuilder
 public:
     MatrixBuilder();
 
-    void buildSystem(const mesh::Mesh* pMesh,const math::GradientScheme* gradientScheme,const bc::BoundaryCondition* _bCondition, field::Field* _field);
+    
+
+    void buildSystem(const mesh::Mesh* pMesh, 
+        const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
+        math::diffusive::DiffusiveTerm* pDiffusive, math::convective::ConvectiveTerm* pConvective, 
+        const field::Fields* pField);
+
+    void solve();
+    void save(const std::string& filename);
 private:
-    std::vector<Eigen::Triplet<double>> _diffusive;
-    std::vector<Eigen::Triplet<double>> _convective;
-    std::vector<Eigen::Triplet<double>> _diffusiveBC;
-    std::vector<Eigen::Triplet<double>> _convectiveBC;
-    Eigen::VectorXd independent;
-    Eigen::SparseMatrix<double> system;
+    void buildSubMatrix(math::SystemSubmatrix* submatrix,
+        const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
+        math::diffusive::DiffusiveTerm* pDiffusive, math::convective::ConvectiveTerm* pConvective,
+        const field::Fields* pField);
+
+    const mesh::Mesh* _mesh;
+    Eigen::VectorXd _independent;
+    Eigen::VectorXd _solution;
+    Eigen::SparseMatrix<double> systemMatrix;
 };
 
 }
