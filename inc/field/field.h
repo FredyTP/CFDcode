@@ -8,24 +8,41 @@
  *********************************************************************/
 #pragma once
 
-//STL
-#include <vector>
 
 //CFD
 #include <mesh/mesh.h>
 #include <field/state_vector.h>
+
+#include <mesh/base/face.h>
+#include <mesh/base/cell.h>
+#include <mesh/base/vector.h>
+
 namespace field
 {
 
-class Field
+class Fields
 {
 public:
-    Field(const mesh::Mesh* _mesh_);
-    std::vector<vector2d>* velocityField() { return &_velocityField; }; //Face centroids
-    std::vector<StateVector>* scalarFields() { return &_scalarFields; }; //Cell centroids
+    Fields(const mesh::Mesh* _mesh_);
+
+    const vector2d& velocityField(const mesh::Face* face) const;        //Face centroids
+    const ScalarStateVector& scalarField(const mesh::Cell* cell) const; //Cell centroids
+
+    const vector2d& velocityField(size_t index) const;        //Face centroids
+    const ScalarStateVector& scalarField(size_t index) const; //Cell centroids
+
+    Eigen::VectorX<double>& rawDensity() { return _densityField; }
+    Eigen::VectorX<double>& rawTemperature() { return _temperatureField; }
+    Eigen::VectorX<double>& rawPressure() { return _pressureField; }
+    Eigen::VectorX<vector2d>& rawVelocity() { return _velocityField; }
+    
 private:
-    std::vector<vector2d> _velocityField; //Face centroids
-    std::vector<StateVector> _scalarFields; //Cell centroids
+    
+    Eigen::VectorX<vector2d> _velocityField;  //Face centroids
+    Eigen::VectorX<double> _densityField;     //Cell centroids
+    Eigen::VectorX<double> _temperatureField; //Cell centroids
+    Eigen::VectorX<double> _pressureField;    //Cell centroids
+
     const mesh::Mesh* _mesh; //Pointer to the mesh represented
 
 };
