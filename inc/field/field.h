@@ -24,12 +24,19 @@ class Fields
 {
 public:
     Fields(const mesh::Mesh* _mesh_);
+    void copy(const Fields* other);
 
     const vector2d& velocityField(const mesh::Face* face) const;        //Face centroids
     const ScalarStateVector& scalarField(const mesh::Cell* cell) const; //Cell centroids
 
     const vector2d& velocityField(size_t index) const;        //Face centroids
     const ScalarStateVector& scalarField(size_t index) const; //Cell centroids
+
+    const Eigen::VectorX<double>& density() const { return _densityField; }
+    const Eigen::VectorX<double>& temperature() const { return _temperatureField; }
+    const Eigen::VectorX<double>& pressure() const { return _pressureField; }
+    const Eigen::VectorX<vector2d>& velocity() const { return _velocityField; }
+
 
     Eigen::VectorX<double>& rawDensity() { return _densityField; }
     Eigen::VectorX<double>& rawTemperature() { return _temperatureField; }
