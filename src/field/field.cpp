@@ -25,6 +25,16 @@ namespace field
         }
 
     }
+    void Fields::copy(const Fields* other)
+    {
+        if (_mesh == other->_mesh)
+        {
+            _velocityField = other->_velocityField;
+            _densityField = other->_densityField;
+            _temperatureField = other->_temperatureField;
+            _pressureField = other->_pressureField;
+        }
+    }
     const vector2d& Fields::velocityField(const mesh::Face* face) const
     {
         return _velocityField(face->index());
