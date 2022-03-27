@@ -28,6 +28,8 @@ public:
 
     void solve();
     void save(const std::string& filename);
+    Eigen::SparseMatrix<double>& getMatrix() { return systemMatrix; }
+    Eigen::VectorXd& getVector() { return _independent; }
 private:
     void buildSubMatrix(math::SystemSubmatrix* submatrix,
         const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
