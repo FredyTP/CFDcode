@@ -67,7 +67,7 @@ namespace convective
             std::vector<FaceVariable> facevars = surfaceIntegralScheme->integrate(coef, cell, face);
             for (auto & facevar : facevars) //Revisar usar referencias... MEMORY MNG!!
             {
-                faceInterpolationScheme->interpolateBCValue(submatrix,facevar, field,boundaryValue);
+                faceInterpolationScheme->interpolateBCValue(submatrix, facevar, field, boundaryValue);
             }
         }
         void calculateConvectiveEq(SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field)
