@@ -1,7 +1,7 @@
 /*****************************************************************//**
  * \file   gradient_flux.h
- * \brief  
- * 
+ * \brief
+ *
  * \author alfre
  * \date   March 2022
  *********************************************************************/
@@ -35,16 +35,16 @@ namespace math
             }
             virtual void integrateGradient(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell, const mesh::Face* face)
             {
-                double gradient = computeGradient(cell->getCentroid(), face->getOtherCell(cell)->getCentroid(), 
+                double gradient = computeGradient(cell->getCentroid(), face->getOtherCell(cell)->getCentroid(),
                     face->getNormal(cell), face->area());
 
-                submatrix->addCellVar(CellVariable(cell->index(), cell->index(), gradient*coef));
-                submatrix->addCellVar(CellVariable(cell->index(), face->getOtherCell(cell)->index(), -gradient*coef));      
-              
+                submatrix->addCellVar(CellVariable(cell->index(), cell->index(), gradient * coef));
+                submatrix->addCellVar(CellVariable(cell->index(), face->getOtherCell(cell)->index(), -gradient * coef));
+
             }
-            virtual void integrateGradientBoundary(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell,double boundaryValue, const mesh::Face* face)
+            virtual void integrateGradientBoundary(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell, double boundaryValue, const mesh::Face* face)
             {
-                
+
                 double gradient = computeGradient(cell->getCentroid(), face->getCentroid(),
                     face->getNormal(cell), face->area());
 
@@ -53,7 +53,7 @@ namespace math
 
             }
         private:
-            double computeGradient(const vector2d& pos1, const vector2d& pos2, const vector2d facenormal,double area)
+            double computeGradient(const vector2d& pos1, const vector2d& pos2, const vector2d facenormal, double area)
             {
                 vector2d r21 = (pos2 - pos1);
                 double squaredDistance = r21.squaredNorm();

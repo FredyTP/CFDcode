@@ -39,7 +39,9 @@ namespace math
             {             
                 const mesh::Cell* cell=facevar.cell;
                 const mesh::Face* face=facevar.face;
-                double u_v = face->getNormal(cell).dot(field->velocityField(face));
+                vector2d normal = face->getNormal(cell);
+                vector2d vel = field->velocityField(face);
+                double u_v = normal.dot(vel);
                 if (u_v > 0)
                 {
                     submatrix->addCellVar(CellVariable(cell->index(), cell->index(), facevar.coef));
@@ -78,16 +80,15 @@ namespace math
                 const mesh::Cell* cell = facevar.cell;
                 const mesh::Face* face = facevar.face;
                 double u_v = face->getNormal(cell).dot(field->velocityField(face));
-                submatrix->addCellVar(CellVariable(cell->index(), cell->index(), facevar.coef/2));
-                submatrix->addCellVar(CellVariable(cell->index(), face->getOtherCell(cell)->index(), facevar.coef/2));
+                submatrix->addCellVar(CellVariable(cell->index(), cell->index(), facevar.coef/2.0));
+                submatrix->addCellVar(CellVariable(cell->index(), face->getOtherCell(cell)->index(), facevar.coef/2.0));
                 
             }
             virtual void interpolateBCValue(SystemSubmatrix* submatrix, FaceVariable facevar, const field::Fields* field, double value)
             {
                 const mesh::Cell* cell = facevar.cell;
                 const mesh::Face* face = facevar.face;
-                
-
+               
                 double coef = value * facevar.coef;
                 submatrix->addConstant(SystemConstant(cell->index(), -coef));
               

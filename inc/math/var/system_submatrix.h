@@ -1,15 +1,15 @@
 /*****************************************************************//**
  * \file   system_submatrix.h
- * \brief  
- * 
- * 
+ * \brief
+ *
+ *
  * \author alfre
  * \date   March 2022
  *********************************************************************/
 #pragma once
 
 
-//STL
+ //STL
 #include <vector>
 
 //CFD
@@ -57,9 +57,9 @@ namespace math
         {
             std::vector<Eigen::Triplet<double>> triplets;
             triplets.reserve(cellVars.size());
-            for (auto & var : cellVars)
+            for (auto& var : cellVars)
             {
-                triplets.push_back(Eigen::Triplet<double>( var.i, var.j, var.coef));
+                triplets.push_back(Eigen::Triplet<double>(var.i, var.j, var.coef));
             }
             return triplets;
         }
@@ -67,7 +67,7 @@ namespace math
         {
             Eigen::VectorXd vec(size);
             vec.setZero();
-            for(auto con : constants)
+            for (auto con : constants)
             {
                 vec(con.i) += con.coef;
             }
