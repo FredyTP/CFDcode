@@ -13,3 +13,13 @@ time2release(100) = 1994[ms]
 (Third improved memory management)
 time3debug(100) = 19872[ms]
 time3release(100) = 1712[ms]
+
+////////////////////////////////////
+buildMatrix 
+
+time4debug(100) = 15498[ms]
+time4release(100) = 1047[ms]
+
+
+time5debug(100) = 14723[ms]
+time5release(100) = 915[ms]]

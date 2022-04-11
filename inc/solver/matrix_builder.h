@@ -26,10 +26,12 @@ public:
         math::diffusive::DiffusiveTerm* pDiffusive, math::convective::ConvectiveTerm* pConvective, 
         const field::Fields* pField);
 
-    void solve();
-    void save(const std::string& filename);
+
     Eigen::SparseMatrix<double>& getMatrix() { return systemMatrix; }
+    Eigen::SparseMatrix<double>& getVolMatrix() { return _volumeMatrix; }
     Eigen::VectorXd& getVector() { return _independent; }
+
+
 private:
     void buildSubMatrix(math::SystemSubmatrix* submatrix,
         const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
@@ -38,8 +40,9 @@ private:
 
     const mesh::Mesh* _mesh;
     Eigen::VectorXd _independent;
-    Eigen::VectorXd _solution;
     Eigen::SparseMatrix<double> systemMatrix;
+    Eigen::SparseMatrix<double> _volumeMatrix;
+
 };
 
 }

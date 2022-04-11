@@ -10,6 +10,8 @@
 
 
 //CFD
+#include <base/global_typedef.h>
+
 #include <mesh/mesh.h>
 #include <field/state_vector.h>
 
@@ -19,7 +21,18 @@
 
 namespace field
 {
+    enum scalar
+    {
+        density=0,
+        temperature,
+        pressure,
 
+    };
+    enum vectorial
+    {
+        velocity=0,
+        
+    };
 class Fields
 {
 public:

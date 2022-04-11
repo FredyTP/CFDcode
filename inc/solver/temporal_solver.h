@@ -15,6 +15,9 @@
 
 //CFD
 #include <solver/matrix_builder.h>
+#include <time/time_step.h>
+#include <solver/propagator/eurler_explicit.h>
+
 namespace solver
 {
     class TemporalSolver
@@ -32,45 +35,33 @@ namespace solver
             _solution = std::make_unique<field::Fields>(pMesh);
             _solution->copy(initialCondition);
             _builder->buildSystem(pMesh, _bConditions, pDiffusive, pConvective, _solution.get());
-            Eigen::SparseMatrix<double> matrix = _builder->getMatrix();
-            Eigen::VectorXd indep = _builder->getVector();
-
+            Eigen::SparseMatrix<double> &matrix = _builder->getMatrix();
+            Eigen::VectorXd &indep = _builder->getVector();
+            Eigen::SparseMatrix<double> &volumeMatrix = _builder->getVolMatrix();
+            
             size_t size = pMesh->cells()->size();
-            double time = 0;
-            double dt = 0.0003;
-            double vol = pMesh->cells()->at(0)->volume();
+
+            
+            timestep::FixedTimeStep timeStep(0.0003);
+            double dt = timeStep.timeStep();
             //FORWARD NEWTON
             std::string savefile = "temp_int_file.txt";
             std::string imgfile = "temp_img_UDS" + std::to_string(_solution->rawVelocity()[0].y()) + ".jpg";
             initfile(savefile);
-            save(savefile, time, _solution.get(), pMesh);
-            while (time < 10*dt)
+            save(savefile, timeStep.currentTime(), _solution.get(), pMesh);
+            while (timeStep.currentTime() < 10 * dt)
             {
-                double cont =  (1.225 * 1040.0);
-                Eigen::SparseMatrix<double> Identity(size, size);
-                Identity.setIdentity();
-                Eigen::SparseMatrix<double> coefMatrix = (cont * vol * Identity + matrix * dt);
-                Eigen::VectorXd vector = dt * indep +(cont*vol*Identity*_solution->rawTemperature());
+                dt = timeStep.timeStep();
+                /*Eigen::SparseMatrix<double> coefMatrix = (volumeMatrix + matrix * dt);
+                Eigen::VectorXd vector = dt * indep +(volumeMatrix*_solution->rawTemperature());
          
                 Eigen::SparseLU<Eigen::SparseMatrix<double>> chol(coefMatrix);
-                _solution->rawTemperature() = chol.solve(vector);
-                
-                time += dt;
-                /*std::cout << "MATRIX:" << std::endl;
-                std::cout << matrix << std::endl;
-
-                std::cout << "indep: " << std::endl;
-                std::cout << indep << std::endl;
-
-                std::cout << "PRODUCT:" << std::endl;
-                std::cout << product << std::endl;
-
-                std::cout << "TEMPERATURE" << std::endl;
-                std::cout << _solution->rawTemperature() << std::endl;*/
-                
-                
-
-                save(savefile, time, _solution.get(), pMesh);
+                _solution->rawTemperature() = chol.solve(vector);*/
+                Eigen::VectorXd newSolution;
+                EulerImplicit(volumeMatrix, matrix, indep, dt, _solution->rawTemperature(), newSolution);
+                timeStep.nextTimeStep(_solution.get());
+                _solution->rawTemperature() = newSolution;
+                save(savefile, timeStep.currentTime(), _solution.get(), pMesh);
             }
 
             save_contour(savefile, imgfile ,1920,1080);
@@ -93,7 +84,7 @@ namespace solver
             file.open(filename, std::ios::app);
             if (file.is_open())
             {
-                double deltax = static_cast<double>(100) / 3 * time;
+                double deltax = static_cast<double>(100)/3.0 * time;
                 for (int i = 0; i < _solution->temperature().size(); i++)
                 {
                     auto cell = pMesh->cells()->at(i).get();

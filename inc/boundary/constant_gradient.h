@@ -15,10 +15,10 @@
 
 namespace bc
 {
-    class ConstantTemperature : public BoundaryCondition
+    class ConstantGradient : public BoundaryCondition
     {
     public:
-        ConstantTemperature(double _temperature_) :_temperature(_temperature_) {
+        ConstantGradient(double _gradient_) :_gradient(_gradient_) {
             _convectiveTerm = nullptr;
             _diffusiveTerm = nullptr;
         };
@@ -28,18 +28,18 @@ namespace bc
             
             if (_convectiveTerm != nullptr)
             {
-                _convectiveTerm->calculateFaceConvectionBoundaryValue(submatrix,cell, face, _temperature, field);;
+                _convectiveTerm->calculateFaceConvectionBoundaryGradient(submatrix,cell, face, field->scalarField(cell).temperature, field);
             }
             if (_diffusiveTerm != nullptr)
             {
-                _diffusiveTerm->calculateFaceDiffusionBoundaryValue(submatrix,cell, face, _temperature, field);
+                _diffusiveTerm->calculateFaceDiffusionBoundaryGradient(submatrix,cell, face, _gradient, field);
                 
             }
             
         }
 
     private:
-        double _temperature;
+        double _gradient;
     };
 }
 

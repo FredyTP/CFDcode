@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="inc\base\global_typedef.h" />
     <ClInclude Include="inc\boundary\boundary_condition.h" />
+    <ClInclude Include="inc\boundary\constant_gradient.h" />
     <ClInclude Include="inc\boundary\constant_temperature.h" />
     <ClInclude Include="inc\core\environment.h" />
     <ClInclude Include="inc\field\field.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="inc\material\properties\constant_properties.h" />
     <ClInclude Include="inc\material\properties\ideal_gas.h" />
     <ClInclude Include="inc\material\properties\properties_base.h" />
+    <ClInclude Include="inc\math\adimensional.h" />
     <ClInclude Include="inc\math\convective\convective_term.h" />
     <ClInclude Include="inc\math\convective\face_interpolation.h" />
     <ClInclude Include="inc\math\convective\surface_intergral.h" />
@@ -37,10 +39,14 @@
     <ClInclude Include="inc\math\diffusive\gradient_flux.h" />
     <ClInclude Include="inc\math\interpolation.h" />
     <ClInclude Include="inc\math\surface_integral.h" />
+    <ClInclude Include="inc\math\value\cell_value.h" />
+    <ClInclude Include="inc\math\value\face_value.h" />
+    <ClInclude Include="inc\math\value\node_value.h" />
     <ClInclude Include="inc\math\var\cell_variable.h" />
     <ClInclude Include="inc\math\var\face_variable.h" />
     <ClInclude Include="inc\math\var\system_constant.h" />
     <ClInclude Include="inc\math\var\system_submatrix.h" />
+    <ClInclude Include="inc\math\volume\volume_integral.h" />
     <ClInclude Include="inc\mesh\base\cell.h" />
     <ClInclude Include="inc\mesh\base\base_geometry.h" />
     <ClInclude Include="inc\mesh\base\face.h" />
@@ -51,8 +57,10 @@
     <ClInclude Include="inc\mesh\reader\luismi_format_mesh_reader.h" />
     <ClInclude Include="inc\mesh\reader\mesh_loader.h" />
     <ClInclude Include="inc\solver\matrix_builder.h" />
+    <ClInclude Include="inc\solver\propagator\eurler_explicit.h" />
     <ClInclude Include="inc\solver\stationary_solver.h" />
     <ClInclude Include="inc\solver\temporal_solver.h" />
+    <ClInclude Include="inc\time\time_step.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="inc\core\environment.cpp" />

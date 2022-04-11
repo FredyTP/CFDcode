@@ -59,7 +59,7 @@ namespace convective
                 faceInterpolationScheme->interpolate(submatrix,facevar, field);
             }
         }
-        void calculateFaceConvectionBoundary(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const mesh::Face* face,
+        void calculateFaceConvectionBoundaryValue(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const mesh::Face* face,
             double boundaryValue, const field::Fields* field) const
         {
           
@@ -68,6 +68,17 @@ namespace convective
             for (auto & facevar : facevars) //Revisar usar referencias... MEMORY MNG!!
             {
                 faceInterpolationScheme->interpolateBCValue(submatrix, facevar, field, boundaryValue);
+            }
+        }
+        void calculateFaceConvectionBoundaryGradient(math::SystemSubmatrix* submatrix, const mesh::Cell* cell, const mesh::Face* face,
+    double boundaryValue, const field::Fields* field) const
+        {
+
+            double coef = ConvectiveTerm::GetConvectionCoeficient(cell, face, field);
+            std::vector<FaceVariable> facevars = surfaceIntegralScheme->integrate(coef, cell, face);
+            for (auto& facevar : facevars) //Revisar usar referencias... MEMORY MNG!!
+            {
+                faceInterpolationScheme->interpolateBCGradient(submatrix, facevar, field, boundaryValue);
             }
         }
         void calculateConvectiveEq(SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field)

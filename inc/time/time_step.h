@@ -8,7 +8,7 @@
 
 #include <field/field.h>
 
-namespace time
+namespace timestep
 {
     /**
      * \brief Class for time management in termporal solvers.

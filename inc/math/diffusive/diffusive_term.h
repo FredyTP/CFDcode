@@ -41,7 +41,7 @@ namespace math
                     if (!face->isBoundary())
                     {
                         calculateFaceDiffusion(submatrix,cell, face, field);
-                        
+                       
                     }
 
                 }
@@ -52,11 +52,17 @@ namespace math
                 _gradientFlux->integrateGradient(submatrix,diffusionCoef, cell, face);
                 
             }
-            void calculateFaceDiffusionBoundary(SystemSubmatrix* submatrix,const mesh::Cell* cell, const mesh::Face* face,double boundaryValue,const field::Fields* field) const
+            void calculateFaceDiffusionBoundaryValue(SystemSubmatrix* submatrix,const mesh::Cell* cell, const mesh::Face* face,double boundaryValue,const field::Fields* field) const
             {
                 double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(cell, face, field);
-                _gradientFlux->integrateGradientBoundary(submatrix,diffusionCoef, cell, boundaryValue, face);
+                _gradientFlux->integrateGradientBoundaryValue(submatrix,diffusionCoef, cell, boundaryValue, face);
                 
+            }
+            void calculateFaceDiffusionBoundaryGradient(SystemSubmatrix* submatrix, const mesh::Cell* cell, const mesh::Face* face, double boundaryGradient, const field::Fields* field) const
+            {
+                double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(cell, face, field);
+                _gradientFlux->integrateGradientBoundaryGradient(submatrix, diffusionCoef, cell, boundaryGradient, face);
+
             }
 
 

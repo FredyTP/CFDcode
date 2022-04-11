@@ -22,8 +22,10 @@ namespace math
         public:
             GradientFlux() {}
             virtual void integrateGradient(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell, const mesh::Face* face) = 0;
-            virtual void integrateGradientBoundary(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell,
+            virtual void integrateGradientBoundaryValue(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell,
                 double boundaryValue, const mesh::Face* face) = 0;
+            virtual void integrateGradientBoundaryGradient(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell,
+                double boundaryGradient, const mesh::Face* face) = 0;
         };
 
         class CentralDifferenceGradient : public GradientFlux
@@ -42,7 +44,7 @@ namespace math
                 submatrix->addCellVar(CellVariable(cell->index(), face->getOtherCell(cell)->index(), -gradient * coef));
 
             }
-            virtual void integrateGradientBoundary(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell, double boundaryValue, const mesh::Face* face)
+            virtual void integrateGradientBoundaryValue(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell, double boundaryValue, const mesh::Face* face)
             {
 
                 double gradient = computeGradient(cell->getCentroid(), face->getCentroid(),
@@ -50,6 +52,13 @@ namespace math
 
                 submatrix->addCellVar(CellVariable(cell->index(), cell->index(), gradient * coef));
                 submatrix->addConstant(SystemConstant(cell->index(), gradient * boundaryValue * coef));
+
+            }
+            virtual void integrateGradientBoundaryGradient(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell, double boundaryGradient, const mesh::Face* face)
+            {
+
+                double gradient = boundaryGradient * face->area();               
+                submatrix->addConstant(SystemConstant(cell->index(), gradient * coef));
 
             }
         private:

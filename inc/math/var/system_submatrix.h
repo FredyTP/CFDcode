@@ -23,19 +23,20 @@ namespace math
     class SystemSubmatrix
     {
     public:
-        SystemSubmatrix()
+        SystemSubmatrix(int size)
         {
-
+            constants.resize(size);
+            constants.setZero();
         }
         void addCellVar(CellVariable cellvar)
         {
-            cellVars.push_back(cellvar);
+            cellVars.push_back(Eigen::Triplet<double>(cellvar.i,cellvar.j,cellvar.coef));
         }
         void addConstant(SystemConstant constant)
         {
-            constants.push_back(constant);
+            constants(constant.i) += constant.coef;
         }
-        void merge(SystemSubmatrix& other)
+        /*void merge(SystemSubmatrix& other)
         {
             for (auto cellvar : other.cellVars)
             {
@@ -52,29 +53,32 @@ namespace math
             {
                 this->merge(submatrix);
             }
-        }
+        }*/
         std::vector<Eigen::Triplet<double>> toTriplets()
         {
+            return cellVars;
+            /*
             std::vector<Eigen::Triplet<double>> triplets;
             triplets.reserve(cellVars.size());
             for (auto& var : cellVars)
             {
                 triplets.push_back(Eigen::Triplet<double>(var.i, var.j, var.coef));
             }
-            return triplets;
+            return triplets;*/
         }
-        Eigen::VectorXd toVector(size_t size)
+        Eigen::VectorXd toVector()
         {
-            Eigen::VectorXd vec(size);
+            return constants;
+            /*Eigen::VectorXd vec(size);
             vec.setZero();
             for (auto con : constants)
             {
                 vec(con.i) += con.coef;
             }
-            return vec;
+            return vec;*/
         }
-
-        std::vector<CellVariable> cellVars;
-        std::vector<SystemConstant> constants;
+    private:
+        std::vector<Eigen::Triplet<double>> cellVars;
+        Eigen::VectorXd constants;
     };
 }
