@@ -79,6 +79,18 @@
     <Filter Include="Include\math\diffusive">
       <UniqueIdentifier>{920ed899-65d8-4113-8e82-5404204d503c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\time">
+      <UniqueIdentifier>{fa3236d0-05d8-4c7a-a9e9-d7fbf3a7614b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\math\volume">
+      <UniqueIdentifier>{0293468a-5d13-4047-b779-53153611e55e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\solver\propagator">
+      <UniqueIdentifier>{53030057-6f9e-46af-abe0-af1554509a2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\math\value">
+      <UniqueIdentifier>{35cb50e2-6b85-47d2-98fb-2f82c0350f14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\mesh\base\cell.h">
@@ -171,9 +183,6 @@
     <ClInclude Include="inc\math\diffusive\diffusive_term.h">
       <Filter>Include\math\diffusive</Filter>
     </ClInclude>
-    <ClInclude Include="inc\math\diffusive\gradient_flux.h">
-      <Filter>Include\math\diffusive</Filter>
-    </ClInclude>
     <ClInclude Include="inc\solver\stationary_solver.h">
       <Filter>Include\solver</Filter>
     </ClInclude>
@@ -182,6 +191,33 @@
     </ClInclude>
     <ClInclude Include="inc\mesh\base\vector.h">
       <Filter>Include\mesh\base</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\diffusive\gradient_flux.h">
+      <Filter>Include\math\diffusive</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\time\time_step.h">
+      <Filter>Include\time</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\volume\volume_integral.h">
+      <Filter>Include\math\volume</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\solver\propagator\eurler_explicit.h">
+      <Filter>Include\solver\propagator</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\boundary\constant_gradient.h">
+      <Filter>Include\boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\adimensional.h">
+      <Filter>Include\math</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\value\cell_value.h">
+      <Filter>Include\math\value</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\value\face_value.h">
+      <Filter>Include\math\value</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\value\node_value.h">
+      <Filter>Include\math\value</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
