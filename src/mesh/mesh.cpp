@@ -100,6 +100,8 @@ void Mesh::createFaces() {
 void Mesh::buildMesh()
 {
     this->createFaces();
+    _boundaryFaces.clear();
+    _internalFaces.clear();
     for (size_t cellid = 0; cellid < _cells->size(); cellid++)
     {
         auto cell = _cells->at(cellid).get();
@@ -109,6 +111,14 @@ void Mesh::buildMesh()
     {
         auto face = _faces->at(faceid).get();
         face->build();
+        if (face->isBoundary())
+        {
+            _boundaryFaces.push_back(face);
+        }
+        else
+        {
+            _internalFaces.push_back(face);
+        }
     }
 
 }

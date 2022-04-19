@@ -25,10 +25,11 @@ namespace solver
 
             Eigen::SparseLU<Eigen::SparseMatrix<double>> chol(_builder->getMatrix());
             _solution = chol.solve(_builder->getVector());
+            std::string filename = "static_solutionSOUP";
 
-            initfile("static_solution.txt");
-            save("static_solution.txt", _solution, pMesh);
-            save_contour("static_solution.txt", "static_contour.jpg", 1920, 1080);
+            initfile(filename+".txt");
+            save(filename + ".txt", _solution, pMesh);
+            save_contour(filename + ".txt", filename + ".jpg", 1920, 1080);
                 
         }
         Eigen::VectorXd solution() { return _solution; }
@@ -51,10 +52,14 @@ namespace solver
                 for (int i = 0; i < _solution.size(); i++)
                 {
                     auto cell = pMesh->cells()->at(i).get();
+                    if (cell->nodes().size() < 3)
+                    {
+                        break;
+                    }
                     auto n0 = cell->nodes().at(0);
                     auto n1 = cell->nodes().at(1);
                     auto n2 = cell->nodes().at(2);
-
+                  
                     vector2d pos = pMesh->cells()->at(i)->getCentroid();
 
                     file << pos.x() << "," << pos.y() << "," << _solution(i)

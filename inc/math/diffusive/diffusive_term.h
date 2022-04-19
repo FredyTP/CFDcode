@@ -25,43 +25,24 @@ namespace math
             DiffusiveTerm(GradientFlux* gradientScheme) {
                 _gradientFlux = gradientScheme;
             }
-            void calculateDiffusiveMatrix(SystemSubmatrix* submatrix,const mesh::Mesh* _mesh, const field::Fields* field)
-            {
-                
-                for (size_t cellid = 0; cellid < _mesh->cells()->size(); cellid++)
-                {
-                    calculateDiffusiveEq(submatrix,_mesh->cells()->at(cellid).get(), field);
-                }
-              
-            }
-            void calculateDiffusiveEq(SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field)
-            {
-                for (auto face : cell->faces())
-                {
-                    if (!face->isBoundary())
-                    {
-                        calculateFaceDiffusion(submatrix,cell, face, field);
-                       
-                    }
 
-                }
-            }
-            void calculateFaceDiffusion(SystemSubmatrix* submatrix,const mesh::Cell* cell, const mesh::Face* face, const field::Fields* field) const
+
+            void calculateFaceDiffusion(SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* field) const
             {
-                double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(cell, face, field);
-                _gradientFlux->integrateGradient(submatrix,diffusionCoef, cell, face);
+                double diffusionCoef = 10;// DiffusiveTerm::GetDiffusionCoeficient(cell, face, field);
+                std::vector<CellValue<double>> cellvalues;
+                _gradientFlux->integrateGradientFace(cellvalues, diffusionCoef, face);
+                submatrix->addFaceValues(face, cellvalues);
+
                 
             }
-            void calculateFaceDiffusionBoundaryValue(SystemSubmatrix* submatrix,const mesh::Cell* cell, const mesh::Face* face,double boundaryValue,const field::Fields* field) const
+           
+            void calculateFaceDiffusionCell(SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* field, bool isBoundaryCell = false) const
             {
-                double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(cell, face, field);
-                _gradientFlux->integrateGradientBoundaryValue(submatrix,diffusionCoef, cell, boundaryValue, face);
-                
-            }
-            void calculateFaceDiffusionBoundaryGradient(SystemSubmatrix* submatrix, const mesh::Cell* cell, const mesh::Face* face, double boundaryGradient, const field::Fields* field) const
-            {
-                double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(cell, face, field);
-                _gradientFlux->integrateGradientBoundaryGradient(submatrix, diffusionCoef, cell, boundaryGradient, face);
+                double diffusionCoef = 10;// DiffusiveTerm::GetDiffusionCoeficient(cell, face, field);
+                std::vector<CellValue<double>> cellvalues;
+                _gradientFlux->integrateGradientFace(cellvalues, diffusionCoef, face);
+                submatrix->addCellValues(isBoundaryCell ? face->cell2() : face->cell1(), cellvalues, isBoundaryCell);
 
             }
 

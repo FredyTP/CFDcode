@@ -1,3 +1,4 @@
+#pragma once
 /*****************************************************************//**
  * \file   volume_integral.h
  * \brief  
@@ -26,7 +27,6 @@ namespace math
                     double coef = VolumeIntegral::GetVolumeCoef(cell.get(), fields);
                     integrateCell(submatrix, cell.get(), coef);
                 }
-
             }
             void integrateCell(SystemSubmatrix* submatrix, const mesh::Cell* cell, double coef)
             {               
@@ -34,7 +34,7 @@ namespace math
             }
             static double GetVolumeCoef(const mesh::Cell* cell, const field::Fields* fields)
             {
-                return cell->material()->specificHeat(fields->scalarField(cell)) * fields->scalarField(cell).density;
+                return 1300;//cell->material()->specificHeat(fields->scalarField(cell)) * fields->scalarField(cell).density;
             }
         };
     }

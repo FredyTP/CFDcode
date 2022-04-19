@@ -15,31 +15,22 @@
 
 namespace bc
 {
-    class ConstantGradient : public BoundaryCondition
+    class ConstantFlux : public BoundaryCondition
     {
     public:
-        ConstantGradient(double _gradient_) :_gradient(_gradient_) {
+        ConstantFlux(double _flux_) :_flux(_flux_) {
             _convectiveTerm = nullptr;
             _diffusiveTerm = nullptr;
         };
         
-        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const  mesh::Face* face, const field::Fields* field) const
+        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field) const
         {
-            
-            if (_convectiveTerm != nullptr)
-            {
-                _convectiveTerm->calculateFaceConvectionBoundaryGradient(submatrix,cell, face, field->scalarField(cell).temperature, field);
-            }
-            if (_diffusiveTerm != nullptr)
-            {
-                _diffusiveTerm->calculateFaceDiffusionBoundaryGradient(submatrix,cell, face, _gradient, field);
-                
-            }
-            
+            _diffusiveTerm->calculateFaceDiffusionCell(submatrix, cell->faces()[0], field, true);
+            submatrix->addConstant(math::SystemConstant(cell->index(), _flux));                      
         }
 
     private:
-        double _gradient;
+        double _flux;
     };
 }
 

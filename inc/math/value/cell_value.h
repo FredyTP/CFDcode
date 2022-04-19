@@ -1,3 +1,4 @@
+#pragma once
 /*****************************************************************//**
  * \file   cell_value.h
  * \brief  
@@ -15,6 +16,10 @@ namespace math
         CellValue(const mesh::Cell* _cell_, _Ty _coef_) : cell(_cell_), coef(_coef_)
         {
 
+        }
+        CellValue<_Ty>& invert() {
+            coef *= -1;
+            return *this;
         }
         const mesh::Cell* cell;
         _Ty coef;

@@ -24,19 +24,19 @@ class BoundaryCondition
 {
 public:
     BoundaryCondition() {}
-    virtual void getBCCoefs(math::SystemSubmatrix *submatrix,const field::Fields* field) const
+    virtual void calculateBoundaryCondition(math::SystemSubmatrix *submatrix,const field::Fields* field) const
     {     
-        for (auto face : _boundary)
-        {          
-             this->getBoundaryCondition(submatrix,face->getOtherCell(nullptr), face, field);            
-        }       
+        for (auto& cell : _boundaryCells)
+        {
+            this->getBoundaryCondition(submatrix, cell, field);
+        }
     };
-    virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const  mesh::Face* face,const field::Fields* field) const = 0;
+    virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell,const field::Fields* field) const = 0;
     void addFace(mesh::Face* _face_)
     {
         _boundary.push_back(_face_);
     }
-    void loadBoundaryCondition(const std::string& path,const mesh::Mesh *mesh_)
+    void loadBoundaryCondition(const std::string& path, mesh::Mesh *mesh)
     {
         std::ifstream file;
         file.open(path);
@@ -54,10 +54,11 @@ public:
             {
                 node_ids.push_back(std::stoi(node_id_string)-1);
             }
-            this->setFacesFromNodes(mesh_, node_ids);
+            this->setFacesFromNodes(mesh, node_ids);
+            this->createBoundaryCells(mesh);
         }
     }
-    void setFacesFromNodes(const mesh::Mesh* mesh_, std::vector<size_t>& node_ids_)
+    void setFacesFromNodes(mesh::Mesh* mesh_, std::vector<size_t>& node_ids_)
     {
         for (size_t i = 0; i < node_ids_.size() - 1; i++)
         {
@@ -75,6 +76,33 @@ public:
             }
         }
     }
+    void createBoundaryCells(mesh::Mesh* mesh)
+    {
+        for (auto face : _boundary)
+        {
+            std::unique_ptr<mesh::Cell> new_cell = std::make_unique<mesh::Cell>(-1);
+            
+            //Create Connectivity vectors
+            std::vector<mesh::Face*> faces;
+            faces.push_back(face);
+            
+            std::vector<mesh::Node*> nodes;
+            nodes.push_back(face->node1());
+            nodes.push_back(face->node2());
+            new_cell->setNodes(nodes);
+
+            //Set Connectivity info
+            new_cell->setFaces(faces);
+            face->setCell2(new_cell.get());
+
+            //BUILD GEOMETRY INFO
+            new_cell->build();
+            face->rebuild();
+
+            _boundaryCells.push_back(new_cell.get());
+            mesh->addCell(new_cell);
+        }
+    }
     void setConvetiveTerm(math::convective::ConvectiveTerm* _convectiveTerm_)
     {
         _convectiveTerm = _convectiveTerm_;
@@ -84,7 +112,10 @@ public:
         _diffusiveTerm = _diffusiveTerm_;
     }
 protected:
+
     std::vector<mesh::Face*> _boundary;
+    std::vector<mesh::Cell*> _boundaryCells;
+
     math::convective::ConvectiveTerm* _convectiveTerm = nullptr;
     math::diffusive::DiffusiveTerm* _diffusiveTerm = nullptr;
 };

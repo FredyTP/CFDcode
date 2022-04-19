@@ -44,12 +44,25 @@ public:
     const pMeshNodes& nodes() const { return _nodes; }
     const pMeshCells& cells() const { return _cells; }
     const pMeshFaces& faces() const { return _faces; }
+
+    const std::vector<Face*>& internalFaces() const { return _internalFaces; }
+    const std::vector<Face*>& boundaryFaces() const { return _boundaryFaces; }
+    //void addNode(std::unique_ptr<Node>& node){}
+    void addCell(std::unique_ptr<Cell>& cell) { 
+        cell->setIndex(_cells->size());
+        _cells->push_back(std::move(cell));
+    }
+    //void addFace(std::unique_ptr<Face>& node){}
 private:
-    pMeshNodes _nodes;
+    //TODO: create class containing 
+    //encapsulation of index thing
+
+    pMeshNodes _nodes; 
     pMeshCells _cells;
     pMeshFaces _faces;
     
-
+    std::vector<Face*> _internalFaces;
+    std::vector<Face*> _boundaryFaces;
 
     /**
      * @brief Builds the mesh with node and cell data, creates the faces and

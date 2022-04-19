@@ -68,6 +68,15 @@ void Face::build()
     this->_updateCentroid();
     this->_updateNormals();
     this->_updateArea();
+    this->_updateDistances();
+}
+void Face::rebuild()
+{
+    BaseGeometry::build();
+    this->_updateCentroid();
+    this->_updateNormals();
+    this->_updateArea();
+    this->_updateDistances();
 }
 
 
@@ -75,10 +84,8 @@ void Face::_updateNormals()
 {
    
     _normal1 = this->_calculateNormalVector(_cell1);
-    if (this->hasCell2()) //If not at boundary
-    {
-        _normal2 = -_normal1;
-    }
+    _normal2 = -_normal1;
+
    
 }
 
@@ -93,6 +100,19 @@ void Face::_updateCentroid()
 void Face::_updateArea()
 {
     _area = (_node2->pos() - _node1->pos()).norm();
+}
+
+void Face::_updateDistances()
+{
+    if (hasCell2())
+    {
+        vector2d cell2cell = cell2()->getCentroid() - cell1()->getCentroid();
+        _cell_centroid_distance = cell2cell.norm();
+        vector2d cell2face = getCentroid() - cell1()->getCentroid();
+        _cell1_distance = cell2face.norm();
+        _lambda = _cell1_distance / _cell_centroid_distance;
+    }
+
 }
 
 vector2d Face::_calculateNormalVector(const Cell* cell)

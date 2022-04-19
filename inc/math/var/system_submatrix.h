@@ -16,7 +16,7 @@
 #include <math/var/cell_variable.h>
 #include <math/var/system_constant.h>
 
-
+#include <math/value/cell_value.h>
 
 namespace math
 {
@@ -32,6 +32,49 @@ namespace math
         {
             cellVars.push_back(Eigen::Triplet<double>(cellvar.i,cellvar.j,cellvar.coef));
         }
+        void addFaceValues(const mesh::Face* face, const CellValue<double>& cellvalue)
+        {
+            if (cellvalue.cell != nullptr)
+            {
+                cellVars.push_back(Eigen::Triplet<double>(face->cell1()->index(), cellvalue.cell->index(), cellvalue.coef));
+                cellVars.push_back(Eigen::Triplet<double>(face->cell2()->index(), cellvalue.cell->index(), -cellvalue.coef));
+            }
+            else
+            {
+                constants(face->cell1()->index()) += cellvalue.coef;
+                constants(face->cell2()->index()) -= cellvalue.coef;
+            }
+        }
+        void addFaceValues(const mesh::Face* face, const std::vector<CellValue<double>>& cellvalues)
+        {
+            for (auto& cellvalue : cellvalues)
+            {
+                addFaceValues(face, cellvalue);
+            }          
+        }
+
+        void addCellValues(const mesh::Cell* cell, const CellValue<double>& cellvalue, bool invert = false)
+        {
+            double coef = cellvalue.coef;
+            if (invert) coef *= -1;
+            if (cellvalue.cell != nullptr)
+            {
+                cellVars.push_back(Eigen::Triplet<double>(cell->index(), cellvalue.cell->index(), coef));
+            }
+            else
+            {
+                constants(cell->index()) += coef;
+            }
+        }
+        void addCellValues(const mesh::Cell* cell, const std::vector<CellValue<double>>& cellvalues, bool invert = false)
+        {
+            for (auto& cellvalue : cellvalues)
+            {
+                addCellValues(cell, cellvalue, invert);
+            }
+
+        }
+
         void addConstant(SystemConstant constant)
         {
             constants(constant.i) += constant.coef;

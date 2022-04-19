@@ -91,6 +91,9 @@
     <Filter Include="Include\math\value">
       <UniqueIdentifier>{35cb50e2-6b85-47d2-98fb-2f82c0350f14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\math\interpolation">
+      <UniqueIdentifier>{9f888856-7795-450f-8085-e166a5cae541}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\mesh\base\cell.h">
@@ -119,9 +122,6 @@
     </ClInclude>
     <ClInclude Include="inc\base\global_typedef.h">
       <Filter>Include\base</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\math\interpolation.h">
-      <Filter>Include\math</Filter>
     </ClInclude>
     <ClInclude Include="inc\math\surface_integral.h">
       <Filter>Include\math</Filter>
@@ -218,6 +218,15 @@
     </ClInclude>
     <ClInclude Include="inc\math\value\node_value.h">
       <Filter>Include\math\value</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\interpolation\face_interpolation.h">
+      <Filter>Include\math\interpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\interpolation\gradient_flux.h">
+      <Filter>Include\math\interpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\interpolation\gradient_interpolation.h">
+      <Filter>Include\math\interpolation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

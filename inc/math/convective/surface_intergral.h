@@ -33,7 +33,7 @@ public:
 
     }
 
-    virtual std::vector<FaceVariable> integrate(double coef,const mesh::Cell* cell,const mesh::Face* face) = 0;
+    virtual std::vector<FaceVariable> integrate(double coef, const mesh::Face* face) = 0;
 };
 
 class MidPoint : public SurfaceIntegral
@@ -43,9 +43,9 @@ public:
     {
 
     }
-    virtual std::vector<FaceVariable> integrate(double coef, const mesh::Cell* cell, const mesh::Face* face)
+    virtual std::vector<FaceVariable> integrate(double coef, const mesh::Face* face)
     {
-        FaceVariable centerFace(face->getCentroid(), face, cell, coef);
+        FaceVariable centerFace(face->getCentroid(), face, face->cell1()->index(), coef);
         return {centerFace};
     }
 };

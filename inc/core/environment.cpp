@@ -47,8 +47,8 @@ void core::Environment::buildMaterials()
 void core::Environment::createBoundary()
 {
     std::unique_ptr<bc::BoundaryCondition> bc1 = std::make_unique<bc::ConstantTemperature>(600);
-    std::unique_ptr<bc::BoundaryCondition> bc2 = std::make_unique<bc::ConstantTemperature>(300);
-    std::unique_ptr<bc::BoundaryCondition> bc3 = std::make_unique<bc::ConstantTemperature>(300);
+    std::unique_ptr<bc::BoundaryCondition> bc2 = std::make_unique<bc::ConstantTemperature>(600);
+    std::unique_ptr<bc::BoundaryCondition> bc3 = std::make_unique<bc::ConstantFlux>(0);
     std::unique_ptr<bc::BoundaryCondition> bc4 = std::make_unique<bc::ConstantTemperature>(300);
     bc1->loadBoundaryCondition("mesh//bc_1_4096.dat", _mesh.get());
     bc2->loadBoundaryCondition("mesh//bc_2_4096.dat", _mesh.get());
@@ -80,7 +80,7 @@ void core::Environment::initializeFields()
     for (size_t i = 0; i < velField.size(); i++)
     {        
         velField[i].x() = 0;
-        velField[i].y() = 20;
+        velField[i].y() = 0;
     }
     
 }
@@ -95,6 +95,7 @@ void core::Environment::solve()
     //Face interpolation methods
     std::unique_ptr<FaceInterpolation> uds = std::make_unique<UDS>();
     std::unique_ptr<FaceInterpolation> cds = std::make_unique<CDS>();
+    std::unique_ptr<FaceInterpolation> powerLaw = std::make_unique<PowerLaw>();
     std::unique_ptr<FaceInterpolation> secondOrderUpwind = std::make_unique<SecondOrderUpWind>();
 
     //Surface Integral methods
@@ -105,7 +106,7 @@ void core::Environment::solve()
     std::unique_ptr <GradientFlux> centralDiffGrad=std::make_unique<CentralDifferenceGradient>();
 
     //EQUATION TERMS
-    std::unique_ptr<ConvectiveTerm> convectiveTerm = std::make_unique<ConvectiveTerm>(midpoint.get(), uds.get());
+    std::unique_ptr<ConvectiveTerm> convectiveTerm = std::make_unique<ConvectiveTerm>(midpoint.get(), secondOrderUpwind.get());
     std::unique_ptr<DiffusiveTerm> diffusiveTerm = std::make_unique<DiffusiveTerm>(centralDiffGrad.get());
     
 
@@ -125,8 +126,8 @@ void core::Environment::solve()
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     for (int i = 0;i < 1; i++)
     {
-        //sSolver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
-        solver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
+       sSolver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
+        //solver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
         //matrix.solve();
         //matrix.save("Result.txt");
     }

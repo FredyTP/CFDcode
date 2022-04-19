@@ -21,13 +21,21 @@ namespace solver
         math::diffusive::DiffusiveTerm* pDiffusive, math::convective::ConvectiveTerm* pConvective, 
         const field::Fields* pField)
     {
-        pConvective->calculateConvectiveMatrix(submatrix, _mesh, pField);
-        pDiffusive->calculateDiffusiveMatrix(submatrix, _mesh, pField);
+        for(auto internal_face : _mesh->internalFaces())
+        {
+            pDiffusive->calculateFaceDiffusion(submatrix, internal_face, pField);
+            pConvective->calculateFaceConvection(submatrix, internal_face, pField);
+        }
+        for (auto boundary_face : _mesh->boundaryFaces())
+        {
+            pDiffusive->calculateFaceDiffusionCell(submatrix, boundary_face, pField);
+            pConvective->calculateFaceConvectionCell(submatrix, boundary_face, pField);
+        }
 
         for (size_t i = 0; i < _bConditions.size(); i++)
         {
             auto boundary = _bConditions[i].get();
-            boundary->getBCCoefs(submatrix, pField);
+            boundary->calculateBoundaryCondition(submatrix, pField);
         }       
     }
     
@@ -44,6 +52,7 @@ namespace solver
         buildSubMatrix(&matrix,_bConditions, pDiffusive, pConvective, pField);
 
         
+
         //TO EIGEN MATRIX
         auto matrix_triplets = matrix.toTriplets();
         
@@ -66,7 +75,8 @@ namespace solver
                 return phi1 + phi2;
         });
 
-
+        //std::cout << systemMatrix << std::endl;
+        //std::cout << _independent << std::endl;
         
     }
 

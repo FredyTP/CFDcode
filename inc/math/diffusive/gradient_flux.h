@@ -11,6 +11,7 @@
 
 #include <math/var/face_variable.h>
 #include <math/var/system_submatrix.h>
+#include <math/interpolation/gradient_flux.h>
 
 #include <field/field.h>
 namespace math
@@ -21,11 +22,10 @@ namespace math
         {
         public:
             GradientFlux() {}
-            virtual void integrateGradient(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell, const mesh::Face* face) = 0;
-            virtual void integrateGradientBoundaryValue(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell,
-                double boundaryValue, const mesh::Face* face) = 0;
-            virtual void integrateGradientBoundaryGradient(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell,
-                double boundaryGradient, const mesh::Face* face) = 0;
+            virtual void integrateGradientFace(std::vector<CellValue<double>>& cellvalues, double coef, const mesh::Face* face) = 0;
+            
+
+
         };
 
         class CentralDifferenceGradient : public GradientFlux
@@ -35,32 +35,11 @@ namespace math
             {
 
             }
-            virtual void integrateGradient(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell, const mesh::Face* face)
+            virtual void integrateGradientFace(std::vector<CellValue<double>>& cellvalues, double coef, const mesh::Face* face)
             {
-                double gradient = computeGradient(cell->getCentroid(), face->getOtherCell(cell)->getCentroid(),
-                    face->getNormal(cell), face->area());
-
-                submatrix->addCellVar(CellVariable(cell->index(), cell->index(), gradient * coef));
-                submatrix->addCellVar(CellVariable(cell->index(), face->getOtherCell(cell)->index(), -gradient * coef));
-
+                math::GradientFlux::SimpleGradientFlux(face, cellvalues, coef);
             }
-            virtual void integrateGradientBoundaryValue(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell, double boundaryValue, const mesh::Face* face)
-            {
-
-                double gradient = computeGradient(cell->getCentroid(), face->getCentroid(),
-                    face->getNormal(cell), face->area());
-
-                submatrix->addCellVar(CellVariable(cell->index(), cell->index(), gradient * coef));
-                submatrix->addConstant(SystemConstant(cell->index(), gradient * boundaryValue * coef));
-
-            }
-            virtual void integrateGradientBoundaryGradient(SystemSubmatrix* submatrix, double coef, const mesh::Cell* cell, double boundaryGradient, const mesh::Face* face)
-            {
-
-                double gradient = boundaryGradient * face->area();               
-                submatrix->addConstant(SystemConstant(cell->index(), gradient * coef));
-
-            }
+            
         private:
             double computeGradient(const vector2d& pos1, const vector2d& pos2, const vector2d facenormal, double area)
             {

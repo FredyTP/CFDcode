@@ -88,6 +88,10 @@ namespace solver
                 for (int i = 0; i < _solution->temperature().size(); i++)
                 {
                     auto cell = pMesh->cells()->at(i).get();
+                    if (cell->nodes().size() < 3)
+                    {
+                        break;
+                    }
                     auto n0 = cell->nodes().at(0);
                     auto n1 = cell->nodes().at(1);
                     auto n2 = cell->nodes().at(2);

@@ -37,7 +37,6 @@ public:
     Face();
 
 
-
     //------SETTERS-----------//
     void setNodes(Node* _node1_, Node* _node2_);
     void setCells(Cell* _cell1_, Cell* _cell2_);
@@ -50,16 +49,30 @@ public:
     vector2d getNormal(const Cell* cell) const;
     vector2d getCentroid() const;
     Cell* getOtherCell(const Cell* this_cell) const;
+
     inline bool hasCell1() const { return _cell1 != nullptr; }
     inline bool hasCell2() const { return _cell2 != nullptr; }
-    inline const Node* node1() const { return _node1; }
-    inline const Node* node2() const { return _node2; }
+
+    inline Cell* cell1() const { return _cell1; }
+    inline Cell* cell2() const { return _cell2; }
+
+    inline vector2d normal1() const { return _normal1; }
+    inline vector2d normal2() const { return _normal2; }
+
+    inline Node* node1() const { return _node1; }
+    inline Node* node2() const { return _node2; }
     inline bool isBoundary() const { return _isBoundary; }
 
     inline double area() const { return _area; }
+    inline double distanceCell2Cell() const { return _cell_centroid_distance; }
+    inline double distanceToCell1() const { return _cell1_distance; }
+    inline double lambda() const { return _lambda; }
+    
 
     //------PUBLIC METHODS----------//
     void build();
+    void rebuild();
+
     bool isEqual(Face* other) {
         return (_node1 == other->node1() && _node2 == other->node2()) 
             || (_node1 == other->node2() && _node2 == other->node1());
@@ -82,7 +95,12 @@ private:
     Node* _node1;
     Node* _node2;
 
-    //Connectivity info
+
+    //----Connectivity info----//
+     
+    //Cell 1 is the main cell of the face, all calculus are done
+    //based on Cell1 and changed sign to get the Cell2 values.
+    //Cell 2 contains the boundary cell in case this face is a boundary.
     Cell* _cell1;
     Cell* _cell2;
 
@@ -94,7 +112,8 @@ private:
     vector2d _centroid; //Face centroid coordinates (x[m],y[m])
     //Distance
     double _cell_centroid_distance; //Distance [m] between cell centers connected by this face hi+1-hi;
-
+    double _cell1_distance;
+    double _lambda;
     //Area
     double _area; //FACE AREA [m^2]: Equals to lenght of the face * 1[m] in 2D
 
@@ -104,6 +123,7 @@ private:
     void _updateNormals();
     void _updateCentroid();
     void _updateArea();
+    void _updateDistances();
     
     
 

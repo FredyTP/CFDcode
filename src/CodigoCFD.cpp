@@ -7,7 +7,7 @@
 #include <mesh/mesh.h>
 #include <mesh/reader/luismi_format_mesh_reader.h>
 
-#include <math/interpolation.h>
+
 #include <material/material.h>
 #include <material/properties/constant_properties.h>
 #include <material/properties/ideal_gas.h>

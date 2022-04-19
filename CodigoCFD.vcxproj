@@ -37,7 +37,9 @@
     <ClInclude Include="inc\math\convective\surface_intergral.h" />
     <ClInclude Include="inc\math\diffusive\diffusive_term.h" />
     <ClInclude Include="inc\math\diffusive\gradient_flux.h" />
-    <ClInclude Include="inc\math\interpolation.h" />
+    <ClInclude Include="inc\math\interpolation\face_interpolation.h" />
+    <ClInclude Include="inc\math\interpolation\gradient_flux.h" />
+    <ClInclude Include="inc\math\interpolation\gradient_interpolation.h" />
     <ClInclude Include="inc\math\surface_integral.h" />
     <ClInclude Include="inc\math\value\cell_value.h" />
     <ClInclude Include="inc\math\value\face_value.h" />

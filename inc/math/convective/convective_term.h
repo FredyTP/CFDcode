@@ -22,6 +22,7 @@ namespace math
 {
 namespace convective
 {
+    //Generalize this concept in equation terms
     class ConvectiveTerm
     {
     public:
@@ -31,66 +32,48 @@ namespace convective
             faceInterpolationScheme = faceInterpolation;
         }
         
-        void calculateConvectiveMatrix(SystemSubmatrix* submatrix,const mesh::Mesh* _mesh, const field::Fields* field)
-        {        
-            for (size_t cellid = 0; cellid < _mesh->cells()->size(); cellid++)
-            {
-                calculateConvectiveEq(submatrix,_mesh->cells()->at(cellid).get(), field);
-            }
-        }
+   
         static double GetConvectionCoeficient(const mesh::Cell* cell,const mesh::Face* face,const field::Fields* field)
         {
             const field::ScalarStateVector& statevector = field->scalarField(cell);
             double density = statevector.density;
-            double cv = cell->material()->specificHeat(statevector);
+            double cv = 1040;// cell->material()->specificHeat(statevector);
             double area = face->area();
             vector2d normal = face->getNormal(cell);
             const vector2d& velocity = field->velocityField(face);
             return density * cv * area * normal.dot(velocity);
         }
-        void calculateFaceConvection(SystemSubmatrix* submatrix,const mesh::Cell* cell, const mesh::Face* face, const field::Fields* field) const
+
+        void calculateFaceConvection(SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* field) const
         {
+            auto cell = face->cell1();
+            double coef = ConvectiveTerm::GetConvectionCoeficient(cell, face, field);
             
-            double coef = ConvectiveTerm::GetConvectionCoeficient(cell, face, field);
-
-            std::vector<FaceVariable> facevars = surfaceIntegralScheme->integrate(coef, cell, face);
+            std::vector<FaceVariable> facevars = surfaceIntegralScheme->integrate(coef, face);
             for (auto & facevar : facevars) //Revisar usar referencias... MEMORY MNG!!
             {
-                faceInterpolationScheme->interpolate(submatrix,facevar, field);
+                std::vector<CellValue<double>> cellvalues;
+                faceInterpolationScheme->interpolateFace(cellvalues,facevar, field);
+                submatrix->addFaceValues(face, cellvalues);
             }
         }
-        void calculateFaceConvectionBoundaryValue(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const mesh::Face* face,
-            double boundaryValue, const field::Fields* field) const
-        {
-          
-            double coef = ConvectiveTerm::GetConvectionCoeficient(cell, face, field);
-            std::vector<FaceVariable> facevars = surfaceIntegralScheme->integrate(coef, cell, face);
-            for (auto & facevar : facevars) //Revisar usar referencias... MEMORY MNG!!
-            {
-                faceInterpolationScheme->interpolateBCValue(submatrix, facevar, field, boundaryValue);
-            }
-        }
-        void calculateFaceConvectionBoundaryGradient(math::SystemSubmatrix* submatrix, const mesh::Cell* cell, const mesh::Face* face,
-    double boundaryValue, const field::Fields* field) const
+        void calculateFaceConvectionCell(SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* field, bool isBoundaryCell = false) const
         {
 
-            double coef = ConvectiveTerm::GetConvectionCoeficient(cell, face, field);
-            std::vector<FaceVariable> facevars = surfaceIntegralScheme->integrate(coef, cell, face);
+            //TODO: fix coef
+            double coef = ConvectiveTerm::GetConvectionCoeficient(face->cell1(), face, field);
+
+            std::vector<FaceVariable> facevars = surfaceIntegralScheme->integrate(coef, face);
             for (auto& facevar : facevars) //Revisar usar referencias... MEMORY MNG!!
-            {
-                faceInterpolationScheme->interpolateBCGradient(submatrix, facevar, field, boundaryValue);
+            {               
+                std::vector<CellValue<double>> cellvalues;
+                faceInterpolationScheme->interpolateFace(cellvalues, facevar, field);
+                submatrix->addCellValues(isBoundaryCell ? face->cell2() : face->cell1(), cellvalues, isBoundaryCell);
             }
         }
-        void calculateConvectiveEq(SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field)
-        {
-            for (auto face : cell->faces())
-            {
-                if (!face->isBoundary())
-                {
-                    calculateFaceConvection(submatrix, cell, face, field);
-                }
-            }
-        }
+        
+        
+        // GETTERS
         SurfaceIntegral* getSurfaceIntegralScheme() { return surfaceIntegralScheme; }
         FaceInterpolation* getFaceInterpolation() { return faceInterpolationScheme; }
     private:
