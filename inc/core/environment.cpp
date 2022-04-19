@@ -17,10 +17,15 @@ core::Environment::Environment()
 void core::Environment::loadMesh()
 {
     using namespace mesh;
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+ 
     LuisMiformatMeshReader meshReader("D://Alfredo//Academic//MASTER AERO//B//CFD//ProyectoCFD//CodigoCFD//mesh//nodes_4096.dat",
     "D://Alfredo//Academic//MASTER AERO//B//CFD//ProyectoCFD//CodigoCFD//mesh//cells_4096.dat");
     _mesh = std::make_unique<Mesh>();
     _mesh->loadMesh(&meshReader);
+
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    std::cout << "Time loading mesh = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
 }
 
 void core::Environment::computeMesh()
@@ -47,8 +52,8 @@ void core::Environment::buildMaterials()
 void core::Environment::createBoundary()
 {
     std::unique_ptr<bc::BoundaryCondition> bc1 = std::make_unique<bc::ConstantTemperature>(600);
-    std::unique_ptr<bc::BoundaryCondition> bc2 = std::make_unique<bc::ConstantTemperature>(600);
-    std::unique_ptr<bc::BoundaryCondition> bc3 = std::make_unique<bc::ConstantFlux>(0);
+    std::unique_ptr<bc::BoundaryCondition> bc2 = std::make_unique<bc::ConstantTemperature>(300);
+    std::unique_ptr<bc::BoundaryCondition> bc3 = std::make_unique<bc::ConstantFlux>(10);
     std::unique_ptr<bc::BoundaryCondition> bc4 = std::make_unique<bc::ConstantTemperature>(300);
     bc1->loadBoundaryCondition("mesh//bc_1_4096.dat", _mesh.get());
     bc2->loadBoundaryCondition("mesh//bc_2_4096.dat", _mesh.get());
@@ -80,7 +85,7 @@ void core::Environment::initializeFields()
     for (size_t i = 0; i < velField.size(); i++)
     {        
         velField[i].x() = 0;
-        velField[i].y() = 0;
+        velField[i].y() = 10;
     }
     
 }
@@ -126,8 +131,8 @@ void core::Environment::solve()
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     for (int i = 0;i < 1; i++)
     {
-       sSolver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
-        //solver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
+       //sSolver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
+        solver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
         //matrix.solve();
         //matrix.save("Result.txt");
     }
