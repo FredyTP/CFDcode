@@ -34,7 +34,7 @@ namespace math
             vector2d r21 = (face->cell2()->getCentroid() - face->cell1()->getCentroid());
             //TODO: separar cosas que calculan valores de las que calculan ecuaciones
             //flux se calcularia en una ecuacion separada
-            double flux = face->area() * r21.dot(face->normal1()) / face->distanceCell2Cell();
+            double flux = face->area() * r21.dot(face->normal1()) / r21.squaredNorm();
             cellvalues.push_back(CellValue<double>(face->cell1(), flux * factor));
             cellvalues.push_back(CellValue<double>(face->cell2(), -flux * factor));
             
