@@ -102,24 +102,48 @@ void Mesh::buildMesh()
     this->createFaces();
     _boundaryFaces.clear();
     _internalFaces.clear();
-    for (size_t cellid = 0; cellid < _cells->size(); cellid++)
+    for (auto& cell : *_cells)
     {
-        auto cell = _cells->at(cellid).get();
         cell->build();
     }
-    for (size_t faceid = 0; faceid < _faces->size(); faceid++)
+    for (auto& face : *_faces)
     {
-        auto face = _faces->at(faceid).get();
         face->build();
         if (face->isBoundary())
         {
-            _boundaryFaces.push_back(face);
+            _boundaryFaces.push_back(face.get());
+            this->createBoundaryCell(face.get());
         }
         else
         {
-            _internalFaces.push_back(face);
+            _internalFaces.push_back(face.get());
         }
     }
+}
+
+void Mesh::createBoundaryCell(Face* face)
+{
+   
+    std::unique_ptr<mesh::Cell> new_cell = std::make_unique<mesh::Cell>(-1);
+
+    //Create Connectivity vectors
+    std::vector<mesh::Face*> faces;
+    faces.push_back(face);
+
+    std::vector<mesh::Node*> nodes;
+    nodes.push_back(face->node1());
+    nodes.push_back(face->node2());
+    new_cell->setNodes(nodes);
+
+    //Set Connectivity info
+    new_cell->setFaces(faces);
+    face->setCell2(new_cell.get());
+
+    //BUILD GEOMETRY INFO
+    new_cell->build();
+    face->rebuild();
+
+    this->addCell(new_cell);
 
 }
 

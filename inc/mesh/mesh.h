@@ -48,9 +48,28 @@ public:
     const std::vector<Face*>& internalFaces() const { return _internalFaces; }
     const std::vector<Face*>& boundaryFaces() const { return _boundaryFaces; }
     //void addNode(std::unique_ptr<Node>& node){}
-    void addCell(std::unique_ptr<Cell>& cell) { 
+    void addCell(std::unique_ptr<Cell>& cell) const { 
         cell->setIndex(_cells->size());
         _cells->push_back(std::move(cell));
+    }
+
+    template<class mesh_type>
+    const std::unique_ptr<std::vector<std::unique_ptr<mesh_type>>>& meshElements() const
+    {
+        if constexpr (std::is_same<mesh_type, Node>())
+        {
+            return _nodes;
+        }
+        else if constexpr  (std::is_same<mesh_type, Cell>())
+        {
+            return _cells;
+        }
+        else if constexpr (std::is_same<mesh_type, Face>())
+        {
+            return _faces;
+        }
+
+        
     }
     //void addFace(std::unique_ptr<Face>& node){}
 private:
@@ -71,6 +90,13 @@ private:
      * 
      */
     void buildMesh();
+
+    /**
+     * \brief Adds the boundary "fake" cells to the mesh.
+     * 
+     * \param face
+     */
+    void createBoundaryCell(Face* face);
 
     /**
      * @brief Create faces data from mesh cells and nodes. For >3 nodes faces are built following the index order
