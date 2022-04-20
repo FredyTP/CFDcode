@@ -19,9 +19,7 @@
 #include <math/var/system_submatrix.h>
 
 #include <field/field.h>
-namespace math
-{
-namespace convective
+namespace term
 {
 
 
@@ -33,7 +31,7 @@ public:
 
     }
 
-    virtual std::vector<FaceVariable> integrate(double coef, const mesh::Face* face) = 0;
+    virtual std::vector<math::FaceVariable> integrate(double coef, const mesh::Face* face) = 0;
 };
 
 class MidPoint : public SurfaceIntegral
@@ -43,12 +41,12 @@ public:
     {
 
     }
-    virtual std::vector<FaceVariable> integrate(double coef, const mesh::Face* face)
+    virtual std::vector<math::FaceVariable> integrate(double coef, const mesh::Face* face)
     {
-        FaceVariable centerFace(face->getCentroid(), face, face->cell1()->index(), coef);
+        math::FaceVariable centerFace(face->getCentroid(), face, face->cell1()->index(), coef);
         return {centerFace};
     }
 };
 
-}
+
 }

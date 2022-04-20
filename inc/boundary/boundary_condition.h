@@ -15,9 +15,9 @@
 #include <mesh/base/face.h>
 #include <mesh/manipulation/mesh_selection.h>
 #include <field/field.h>
-#include <math/convective/convective_term.h>
+#include <equation/convective/convective_term.h>
 #include <math/var/system_submatrix.h>
-#include <math/diffusive/diffusive_term.h>
+#include <equation/diffusive/diffusive_term.h>
 namespace bc
 {
 
@@ -42,11 +42,11 @@ public:
         boundary.copyInto(_boundary);
     }
     
-    void setConvetiveTerm(math::convective::ConvectiveTerm* _convectiveTerm_)
+    void setConvetiveTerm(term::ConvectiveTerm* _convectiveTerm_)
     {
         _convectiveTerm = _convectiveTerm_;
     }
-    void setDiffusiveTerm(math::diffusive::DiffusiveTerm* _diffusiveTerm_)
+    void setDiffusiveTerm(term::DiffusiveTerm* _diffusiveTerm_)
     {
         _diffusiveTerm = _diffusiveTerm_;
     }
@@ -55,8 +55,8 @@ protected:
     std::vector<mesh::Face*> _boundary;
     std::vector<mesh::Cell*> _boundaryCells;
 
-    math::convective::ConvectiveTerm* _convectiveTerm = nullptr;
-    math::diffusive::DiffusiveTerm* _diffusiveTerm = nullptr;
+    term ::ConvectiveTerm* _convectiveTerm = nullptr;
+    term::DiffusiveTerm* _diffusiveTerm = nullptr;
 };
 
 }

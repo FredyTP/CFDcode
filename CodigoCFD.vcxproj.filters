@@ -73,12 +73,6 @@
     <Filter Include="Include\math\var">
       <UniqueIdentifier>{85a773eb-38d8-4b38-a084-4a6e83ce844f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Include\math\convective">
-      <UniqueIdentifier>{5f05e997-505f-4e7d-9f1d-448d908a1d77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Include\math\diffusive">
-      <UniqueIdentifier>{920ed899-65d8-4113-8e82-5404204d503c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Include\time">
       <UniqueIdentifier>{fa3236d0-05d8-4c7a-a9e9-d7fbf3a7614b}</UniqueIdentifier>
     </Filter>
@@ -96,6 +90,18 @@
     </Filter>
     <Filter Include="Include\mesh\manipulation">
       <UniqueIdentifier>{c8f20cf8-e245-41cf-a0d7-80bf7137c688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\equation">
+      <UniqueIdentifier>{eb4f66dc-9201-4e82-9693-9c313d5fd094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\equation\diffusive">
+      <UniqueIdentifier>{173cf891-43c4-46ee-96ab-7f6cd8ced773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\equation\convective">
+      <UniqueIdentifier>{ebe6d2ac-ee62-4777-8b0d-6563a6addcac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\equation\source">
+      <UniqueIdentifier>{3c87431f-fb77-4cf3-a06f-68168a1c872f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -174,18 +180,6 @@
     <ClInclude Include="inc\math\var\system_submatrix.h">
       <Filter>Include\math\var</Filter>
     </ClInclude>
-    <ClInclude Include="inc\math\convective\convective_term.h">
-      <Filter>Include\math\convective</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\math\convective\face_interpolation.h">
-      <Filter>Include\math\convective</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\math\convective\surface_intergral.h">
-      <Filter>Include\math\convective</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\math\diffusive\diffusive_term.h">
-      <Filter>Include\math\diffusive</Filter>
-    </ClInclude>
     <ClInclude Include="inc\solver\stationary_solver.h">
       <Filter>Include\solver</Filter>
     </ClInclude>
@@ -194,9 +188,6 @@
     </ClInclude>
     <ClInclude Include="inc\mesh\base\vector.h">
       <Filter>Include\mesh\base</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\math\diffusive\gradient_flux.h">
-      <Filter>Include\math\diffusive</Filter>
     </ClInclude>
     <ClInclude Include="inc\time\time_step.h">
       <Filter>Include\time</Filter>
@@ -236,6 +227,27 @@
     </ClInclude>
     <ClInclude Include="inc\mesh\reader\mesh_reader.h">
       <Filter>Include\mesh\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\equation\convective\convective_term.h">
+      <Filter>Include\equation\convective</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\equation\convective\face_interpolation.h">
+      <Filter>Include\equation\convective</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\equation\convective\surface_intergral.h">
+      <Filter>Include\equation\convective</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\equation\diffusive\diffusive_term.h">
+      <Filter>Include\equation\diffusive</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\equation\diffusive\gradient_flux.h">
+      <Filter>Include\equation\diffusive</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\equation\equation_term.h">
+      <Filter>Include\equation</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\equation\source\source_term.h">
+      <Filter>Include\equation\source</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,13 @@
     <ClInclude Include="inc\boundary\constant_gradient.h" />
     <ClInclude Include="inc\boundary\constant_temperature.h" />
     <ClInclude Include="inc\core\environment.h" />
+    <ClInclude Include="inc\equation\convective\convective_term.h" />
+    <ClInclude Include="inc\equation\convective\face_interpolation.h" />
+    <ClInclude Include="inc\equation\convective\surface_intergral.h" />
+    <ClInclude Include="inc\equation\diffusive\diffusive_term.h" />
+    <ClInclude Include="inc\equation\diffusive\gradient_flux.h" />
+    <ClInclude Include="inc\equation\equation_term.h" />
+    <ClInclude Include="inc\equation\source\source_term.h" />
     <ClInclude Include="inc\field\field.h" />
     <ClInclude Include="inc\field\state_vector.h" />
     <ClInclude Include="inc\material\material.h" />
@@ -32,11 +39,6 @@
     <ClInclude Include="inc\material\properties\ideal_gas.h" />
     <ClInclude Include="inc\material\properties\properties_base.h" />
     <ClInclude Include="inc\math\adimensional.h" />
-    <ClInclude Include="inc\math\convective\convective_term.h" />
-    <ClInclude Include="inc\math\convective\face_interpolation.h" />
-    <ClInclude Include="inc\math\convective\surface_intergral.h" />
-    <ClInclude Include="inc\math\diffusive\diffusive_term.h" />
-    <ClInclude Include="inc\math\diffusive\gradient_flux.h" />
     <ClInclude Include="inc\math\interpolation\face_interpolation.h" />
     <ClInclude Include="inc\math\interpolation\gradient_flux.h" />
     <ClInclude Include="inc\math\interpolation\gradient_interpolation.h" />

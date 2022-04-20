@@ -18,14 +18,14 @@ namespace solver
 
         void solve(const mesh::Mesh* pMesh,
         const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
-        math::diffusive::DiffusiveTerm* pDiffusive, math::convective::ConvectiveTerm* pConvective,
+        term::DiffusiveTerm* pDiffusive, term::ConvectiveTerm* pConvective,
         const field::Fields* pField)
         {
             _builder->buildSystem(pMesh, _bConditions, pDiffusive, pConvective, pField);
 
             Eigen::SparseLU<Eigen::SparseMatrix<double>> chol(_builder->getMatrix());
             _solution = chol.solve(_builder->getVector());
-            std::string filename = "static_solutionSOUP";
+            std::string filename = "static_solutionUDS";
 
             initfile(filename+".txt");
             save(filename + ".txt", _solution, pMesh);

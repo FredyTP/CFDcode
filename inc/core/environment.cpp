@@ -44,10 +44,12 @@ void core::Environment::buildMaterials()
     matFactory.setSpecificHeatModel<prop::ConstantSpecificHeat>(1040);
 
     _fluidMaterial = matFactory.extractMaterial();
-    for (size_t cellid = 0; cellid < _mesh->cells()->size(); cellid++)
-    {
-        _mesh->cells()->at(cellid)->setMaterial(_fluidMaterial.get());
-    }
+
+    mesh::MeshSelection<mesh::Cell> all_cells;
+    all_cells.selectAll(_mesh.get());
+
+    all_cells.for_each([this](mesh::Cell* cell) {cell->setMaterial(_fluidMaterial.get());});
+
 }
 
 void core::Environment::createBoundary()
@@ -68,7 +70,7 @@ void core::Environment::createBoundary()
     sel4.selectWithReader(_mesh.get(), &faceReader4);
 
     std::unique_ptr<bc::BoundaryCondition> bc1 = std::make_unique<bc::ConstantTemperature>(300);
-    std::unique_ptr<bc::BoundaryCondition> bc2 = std::make_unique<bc::ConstantFlux>(0);
+    std::unique_ptr<bc::BoundaryCondition> bc2 = std::make_unique<bc::ConstantTemperature>(300);
     std::unique_ptr<bc::BoundaryCondition> bc3 = std::make_unique<bc::ConstantTemperature>(300);
     std::unique_ptr<bc::BoundaryCondition> bc4 = std::make_unique<bc::ConstantTemperature>(300);
 
@@ -101,8 +103,8 @@ void core::Environment::initializeFields()
             double y = pos.y();
             double px = center.x();
             double py = center.y();
-            double a = 0.005/3;
-            double b = 0.025;
+            double a = 0.005/10;
+            double b = 0.025/10;
             if (std::pow((x - px) / a, 2) + std::pow((y - py) / b, 2) <= 1)
             {
                 return true;
@@ -122,17 +124,16 @@ void core::Environment::initializeFields()
     for (size_t i = 0; i < velField.size(); i++)
     {        
         velField[i].x() = 0;
-        velField[i].y() = 10;
+        velField[i].y() = 100;
     }
 
-    selection.for_each([&tempField](mesh::Cell* cell) {tempField[cell->index()] = 600.0;});
+    //selection.for_each([&tempField](mesh::Cell* cell) {tempField[cell->index()] = 600.0;});
     
 }
 
 void core::Environment::solve()
 {
-    using namespace math::convective;
-    using namespace math::diffusive;
+    using namespace term;
 
 
     //Incluir esto en una lista de metodos de discretización para que se pueda elegir via terminal...
@@ -150,7 +151,7 @@ void core::Environment::solve()
     std::unique_ptr <GradientFlux> centralDiffGrad=std::make_unique<CentralDifferenceGradient>();
 
     //EQUATION TERMS
-    std::unique_ptr<ConvectiveTerm> convectiveTerm = std::make_unique<ConvectiveTerm>(midpoint.get(), secondOrderUpwind.get());
+    std::unique_ptr<ConvectiveTerm> convectiveTerm = std::make_unique<ConvectiveTerm>(midpoint.get(), uds.get());
     std::unique_ptr<DiffusiveTerm> diffusiveTerm = std::make_unique<DiffusiveTerm>(centralDiffGrad.get());
     
 
@@ -170,8 +171,8 @@ void core::Environment::solve()
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     for (int i = 0;i < 1; i++)
     {
-       //sSolver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
-        solver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
+       sSolver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
+        //solver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
         //matrix.solve();
         //matrix.save("Result.txt");
     }

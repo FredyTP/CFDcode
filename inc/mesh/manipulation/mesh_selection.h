@@ -60,6 +60,10 @@ namespace mesh
                 }
             }
         }
+        void selectAll(const Mesh* mesh)
+        {
+            this->selectFromMesh(mesh, [](base_mesh* element) {return true; });
+        }
         void selectWithReader(const Mesh* mesh, reader::MeshElementReader<base_mesh> *element_reader)
         {
             clearSelection();

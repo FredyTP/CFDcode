@@ -23,7 +23,7 @@ public:
 
     void buildSystem(const mesh::Mesh* pMesh, 
         const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
-        math::diffusive::DiffusiveTerm* pDiffusive, math::convective::ConvectiveTerm* pConvective, 
+        term::DiffusiveTerm* pDiffusive, term::ConvectiveTerm* pConvective,
         const field::Fields* pField);
 
 
@@ -35,7 +35,7 @@ public:
 private:
     void buildSubMatrix(math::SystemSubmatrix* submatrix,
         const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
-        math::diffusive::DiffusiveTerm* pDiffusive, math::convective::ConvectiveTerm* pConvective,
+        term::DiffusiveTerm* pDiffusive, term::ConvectiveTerm* pConvective,
         const field::Fields* pField);
 
     const mesh::Mesh* _mesh;

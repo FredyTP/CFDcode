@@ -29,7 +29,7 @@ namespace solver
         }
         void solve(const mesh::Mesh* pMesh,
         const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
-        math::diffusive::DiffusiveTerm* pDiffusive, math::convective::ConvectiveTerm* pConvective,
+        term::DiffusiveTerm* pDiffusive, term::ConvectiveTerm* pConvective,
         field::Fields* initialCondition)
         {
             _solution = std::make_unique<field::Fields>(pMesh);
