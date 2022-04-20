@@ -6,12 +6,13 @@ namespace mesh
 	
 
 
-Node::Node(size_t _index_, vector2d _pos_) : _index(_index_), _pos(_pos_)
+Node::Node(size_t _index_, vector2d _pos_) : _index(_index_)
 {
 	if (env::show_debug_print__)
 	{
 		std::cout << "Created Node" << std::endl;
 	}
+	_pos = _pos_;
 }
 
 void Node::modify(vector2d _newpos_)

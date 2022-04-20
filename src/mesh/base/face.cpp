@@ -53,7 +53,7 @@ vector2d Face::getNormal(const Cell* cell) const
 
 vector2d Face::getCentroid() const
 {
-    return _centroid;
+    return _pos;
 }
 
 Cell* Face::getOtherCell(const Cell* this_cell) const
@@ -93,7 +93,7 @@ void Face::_updateCentroid()
 {
     if (_node1 != nullptr && _node2 != nullptr)
     {
-        _centroid = (_node1->pos() + _node2->pos()) / 2;
+        _pos = (_node1->pos() + _node2->pos()) / 2;
     }
 }
 
@@ -119,7 +119,7 @@ vector2d Face::_calculateNormalVector(const Cell* cell)
 {
 
     double nx, ny;
-    vector2d cell_to_face = _centroid - cell->getCentroid();;
+    vector2d cell_to_face = _pos - cell->getCentroid();;
     vector2d pA = _node1->pos();
     vector2d pB = _node2->pos();
     nx = pA[1] - pB[1];
