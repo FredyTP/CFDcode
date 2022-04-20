@@ -9,6 +9,7 @@
 #include <solver/stationary_solver.h>
 #include <solver/temporal_solver.h>
 #include <boundary/constant_gradient.h>
+#include <mesh/manipulation/mesh_selection.h>
 
 core::Environment::Environment()
 {
@@ -51,15 +52,30 @@ void core::Environment::buildMaterials()
 
 void core::Environment::createBoundary()
 {
-    std::unique_ptr<bc::BoundaryCondition> bc1 = std::make_unique<bc::ConstantTemperature>(600);
-    std::unique_ptr<bc::BoundaryCondition> bc2 = std::make_unique<bc::ConstantTemperature>(300);
-    std::unique_ptr<bc::BoundaryCondition> bc3 = std::make_unique<bc::ConstantFlux>(10);
+    mesh::reader::FaceReader faceReader1("mesh//bc_1_4096.dat");
+    mesh::reader::FaceReader faceReader2("mesh//bc_2_4096.dat");
+    mesh::reader::FaceReader faceReader3("mesh//bc_3_4096.dat");
+    mesh::reader::FaceReader faceReader4("mesh//bc_4_4096.dat");
+
+    mesh::MeshSelection<mesh::Face> sel1;
+    mesh::MeshSelection<mesh::Face> sel2;
+    mesh::MeshSelection<mesh::Face> sel3;
+    mesh::MeshSelection<mesh::Face> sel4;
+
+    sel1.selectWithReader(_mesh.get(), &faceReader1);
+    sel2.selectWithReader(_mesh.get(), &faceReader2);
+    sel3.selectWithReader(_mesh.get(), &faceReader3);
+    sel4.selectWithReader(_mesh.get(), &faceReader4);
+
+    std::unique_ptr<bc::BoundaryCondition> bc1 = std::make_unique<bc::ConstantTemperature>(300);
+    std::unique_ptr<bc::BoundaryCondition> bc2 = std::make_unique<bc::ConstantFlux>(0);
+    std::unique_ptr<bc::BoundaryCondition> bc3 = std::make_unique<bc::ConstantTemperature>(300);
     std::unique_ptr<bc::BoundaryCondition> bc4 = std::make_unique<bc::ConstantTemperature>(300);
-    bc1->loadBoundaryCondition("mesh//bc_1_4096.dat", _mesh.get());
-    bc2->loadBoundaryCondition("mesh//bc_2_4096.dat", _mesh.get());
-    bc3->loadBoundaryCondition("mesh//bc_3_4096.dat", _mesh.get());
-    bc4->loadBoundaryCondition("mesh//bc_4_4096.dat", _mesh.get());
-    
+
+    bc1->setBoundary(sel1);
+    bc2->setBoundary(sel2);
+    bc3->setBoundary(sel3);
+    bc4->setBoundary(sel4);
 
     _boundaryConditions.push_back(std::move(bc1));
     _boundaryConditions.push_back(std::move(bc2));
@@ -75,11 +91,32 @@ void core::Environment::initializeFields()
     auto& tempField = _fields->rawTemperature();
     auto& pressField = _fields->rawPressure();
     auto& velField = _fields->rawVelocity();
+
+    mesh::MeshSelection<mesh::Cell> selection;
+    selection.selectFromMesh(_mesh.get(), [](mesh::Cell* cell)
+        {
+            vector2d pos = cell->position();
+            vector2d center(0.01/4,0.1/2);
+            double x = pos.x();
+            double y = pos.y();
+            double px = center.x();
+            double py = center.y();
+            double a = 0.005/3;
+            double b = 0.025;
+            if (std::pow((x - px) / a, 2) + std::pow((y - py) / b, 2) <= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }});
+
     for (size_t i = 0; i < densityField.size(); i++)
     {
         
         densityField[i] = 1.225; //_fluidMaterial->density((*escalarField)[i]);
-        pressField[i]  =101325;
+        pressField[i] = 101325;
         tempField[i] = 298.15;
     }
     for (size_t i = 0; i < velField.size(); i++)
@@ -87,6 +124,8 @@ void core::Environment::initializeFields()
         velField[i].x() = 0;
         velField[i].y() = 10;
     }
+
+    selection.for_each([&tempField](mesh::Cell* cell) {tempField[cell->index()] = 600.0;});
     
 }
 

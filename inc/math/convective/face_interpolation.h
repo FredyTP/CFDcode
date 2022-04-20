@@ -86,7 +86,7 @@ namespace math
 
                 //PECLET
                 double density = field->scalarField(cell).density;
-                double speed = vel.dot(cell2cell);;
+                double speed = vel.dot(cell2cell);
                 double conductivity = 10;//cell->material()->conductivity(field->scalarField(cell));
                 double peclet_number = math::Adimensional::PecletNumber(density, speed, L, conductivity);
              

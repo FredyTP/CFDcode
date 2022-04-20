@@ -94,6 +94,9 @@
     <Filter Include="Include\math\interpolation">
       <UniqueIdentifier>{9f888856-7795-450f-8085-e166a5cae541}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\mesh\manipulation">
+      <UniqueIdentifier>{c8f20cf8-e245-41cf-a0d7-80bf7137c688}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\mesh\base\cell.h">
@@ -227,6 +230,12 @@
     </ClInclude>
     <ClInclude Include="inc\math\interpolation\gradient_interpolation.h">
       <Filter>Include\math\interpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\manipulation\mesh_selection.h">
+      <Filter>Include\mesh\manipulation</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh\reader\mesh_reader.h">
+      <Filter>Include\mesh\reader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

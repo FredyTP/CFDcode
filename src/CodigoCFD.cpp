@@ -25,8 +25,6 @@ int main()
     simulation.createBoundary();
     simulation.initializeFields();
     simulation.solve();
-
-    return 0;
 }
 
 // Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
