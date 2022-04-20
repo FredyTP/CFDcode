@@ -38,7 +38,6 @@ public:
 	}
 private:
 	size_t _index;	//index that represents the node (UNIQUE)
-	vector2d _pos;		//node x and y coordinates in meters
 	std::vector<Cell*> _cells; //Cells this node is cointained in (for node interpolation)
 };
 

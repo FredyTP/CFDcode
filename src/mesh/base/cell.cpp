@@ -26,12 +26,12 @@ void Cell::setMaterial(material::Material* _material_)
 void Cell::_updateCentroid()
 {
     size_t n_nodes = _nodes.size();
-    _centroid.setZero();
+    _pos.setZero();
     for (size_t i = 0; i < n_nodes; i++)
     {
-        _centroid += _nodes[i]->pos();
+        _pos += _nodes[i]->pos();
     }
-    _centroid /= n_nodes;
+    _pos /= n_nodes;
 }
 
 void Cell::_updateVolume()

@@ -23,9 +23,13 @@ protected:
     BaseGeometry(size_t _index_) :_index(_index_) {}
     virtual void build() { _build = true; }
     virtual void modified() final { _build = false; }
+    const vector2d& position() const { return _pos; }
+
+    vector2d _pos;
 private:
     bool _build = false;
     size_t _index = -1;
+    
 
 };
 

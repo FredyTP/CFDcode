@@ -42,7 +42,7 @@ public:
     void setMaterial(material::Material* _material_);
 
     //-------GETTERS-------//
-    vector2d getCentroid() const { return _centroid; }
+    const vector2d getCentroid() const { return _pos; }
     const std::vector<Node*>& nodes() const { return _nodes; }
     const std::vector<Face*>& faces() const { return _faces; }
     double volume() const { return _volume; }
@@ -62,8 +62,6 @@ private:
 
     //----Geometric properties----//
 
-    //Points
-    vector2d _centroid;
     //Volume
     double _volume = 0; //Cell volume [m^3]: equals to cell area *1[m] in 2D
 
