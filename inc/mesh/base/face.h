@@ -108,8 +108,7 @@ private:
     //Vector
     vector2d _normal1;  //Normal vector of face element 1
     vector2d _normal2;  //Normal vector of face element 2
-    //Points
-    vector2d _centroid; //Face centroid coordinates (x[m],y[m])
+    
     //Distance
     double _cell_centroid_distance; //Distance [m] between cell centers connected by this face hi+1-hi;
     double _cell1_distance;
