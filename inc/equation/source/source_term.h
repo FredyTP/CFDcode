@@ -14,7 +14,7 @@
 
 namespace term
 {
-    class SourceTerm
+    class SourceTerm : public CellEquationTerm
     {
     public:
         SourceTerm(double _value_) : _value(_value_) {}
@@ -26,10 +26,10 @@ namespace term
         {
             for (auto cell : _cells)
             {
-                this->calculateOneCell(submatrix, cell, fields);
+                this->calculateCell(submatrix, cell, fields);
             }
         }
-        virtual void calculateOneCell(math::SystemSubmatrix* submatrix, const mesh::Cell* cell, const field::Fields* fields)
+        void calculateCell(math::SystemSubmatrix* submatrix, const mesh::Cell* cell, const field::Fields* fields)
         {
             double coef = _value * cell->volume();
             submatrix->addCellValues(cell, math::CellValue<double>(nullptr, coef));

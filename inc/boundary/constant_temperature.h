@@ -25,8 +25,8 @@ namespace bc
         
         virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field) const
         {            
-            submatrix->addConstant(math::SystemConstant(cell->index(), _temperature));
-            submatrix->addCellVar(math::CellVariable(cell->index(), cell->index(), 1));            
+            submatrix->addCellValues(cell,math::CellValue<double>(nullptr,_temperature));
+            submatrix->addCellValues(cell, math::CellValue<double>(cell, 1));
         }
 
     private:

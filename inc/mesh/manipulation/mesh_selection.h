@@ -40,6 +40,13 @@ namespace mesh
                 element_operation(element);
             }
         }
+        void for_each_const(std::function<void(const base_mesh*)> const_operation) const
+        {
+            for (auto element : _selection)
+            {
+                const_operation(element);
+            }
+        }
 
         //------TO CREATE SELECTION----//
         void selectFromMesh(const Mesh* mesh,std::function<bool(base_mesh*)> condition)

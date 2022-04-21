@@ -1,3 +1,4 @@
+#pragma once
 /*****************************************************************//**
  * \file   gradient_flux.h
  * \brief  
@@ -36,8 +37,7 @@ namespace math
             //flux se calcularia en una ecuacion separada
             double flux = face->area() * r21.dot(face->normal1()) / r21.squaredNorm();
             cellvalues.push_back(CellValue<double>(face->cell1(), flux * factor));
-            cellvalues.push_back(CellValue<double>(face->cell2(), -flux * factor));
-            
+            cellvalues.push_back(CellValue<double>(face->cell2(), -flux * factor));            
         }
 
 

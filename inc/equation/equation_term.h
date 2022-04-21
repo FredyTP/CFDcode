@@ -13,11 +13,19 @@
 
 namespace term
 {
-    class EquationTerm
+    
+    class FaceEquationTerm
     {
     public:
-        EquationTerm(){}
+        FaceEquationTerm(){}
         virtual void calculateBothCell(math::SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* field) const = 0;
         virtual void calculateOneCell(math::SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* field, bool isBoundaryCell = false) const = 0;
+    };
+    class CellEquationTerm
+    {
+    public:
+        CellEquationTerm() {}
+        virtual void calculateCell(math::SystemSubmatrix* submatrix, const mesh::Cell* cell, const field::Fields* field) const = 0;
+
     };
 }

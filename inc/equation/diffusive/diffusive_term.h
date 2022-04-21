@@ -9,6 +9,7 @@
 
 //CFD
 #include <equation/diffusive/gradient_flux.h>
+#include <equation/equation_term.h>
 #include <math/var/system_submatrix.h>
 #include <mesh/base/cell.h>
 #include <mesh/base/face.h>
@@ -17,7 +18,7 @@
 
 namespace term
 {
-    class DiffusiveTerm
+    class DiffusiveTerm : public FaceEquationTerm
     {
     public:
         DiffusiveTerm(term::GradientFlux* gradientScheme) {
@@ -27,7 +28,7 @@ namespace term
 
         void calculateBothCell(math::SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* field) const
         {
-            double diffusionCoef = 10;// DiffusiveTerm::GetDiffusionCoeficient(cell, face, field);
+            double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(face->cell1(), face, field);
             std::vector<math::CellValue<double>> cellvalues;
             _gradientFlux->integrateGradientFace(cellvalues, diffusionCoef, face);
             submatrix->addFaceValues(face, cellvalues);
@@ -37,7 +38,7 @@ namespace term
            
         void calculateOneCell(math::SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* field, bool isBoundaryCell = false) const
         {
-            double diffusionCoef = 10;// DiffusiveTerm::GetDiffusionCoeficient(cell, face, field);
+            double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(face->cell1(), face, field);
             std::vector<math::CellValue<double>> cellvalues;
             _gradientFlux->integrateGradientFace(cellvalues, diffusionCoef, face);
             submatrix->addCellValues(isBoundaryCell ? face->cell2() : face->cell1(), cellvalues, isBoundaryCell);
@@ -49,6 +50,11 @@ namespace term
         {
             //For generalization this could be get from a labda function or class
             return cell->material()->conductivity(field->scalarField(cell));
+        }
+
+        void setGradientFlux(term::GradientFlux* gradientFlux)
+        {
+            _gradientFlux = gradientFlux;
         }
     private:
         term::GradientFlux* _gradientFlux;

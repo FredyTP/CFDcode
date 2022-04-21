@@ -14,7 +14,7 @@
 #include <mesh/base/cell.h>
 #include <mesh/base/face.h>
 
-#include <math/var/face_variable.h>
+
 #include <math/var/system_submatrix.h>
 #include <math/interpolation/face_interpolation.h>
 #include <math/adimensional.h>
@@ -28,7 +28,7 @@ namespace term
     {
     public:
         FaceInterpolation(){}
-        virtual void interpolateFace(std::vector<math::CellValue<double>> &cellvalues, const math::FaceVariable& facevar,const field::Fields* field) = 0;
+        virtual void interpolateFace(std::vector<math::CellValue<double>> &cellvalues, const math::FaceValue<double>& faceval,const field::Fields* field) = 0;
             
     };
 
@@ -36,15 +36,15 @@ namespace term
     {
     public:
         UDS(){}
-        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceVariable& facevar,const field::Fields* field)
+        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval,const field::Fields* field)
         {             
                 
-            const mesh::Face* face=facevar.face;
+            const mesh::Face* face=faceval.face;
             vector2d normal = face->normal1();
             vector2d vel = field->velocityField(face);
             double u_v = normal.dot(vel);
                 
-            math::FaceInterpolation::UpwindDifferencingScheme(facevar.face, u_v, cellvalues, facevar.coef);
+            math::FaceInterpolation::UpwindDifferencingScheme(faceval.face, u_v, cellvalues, faceval.coef);
           
         }           
 
@@ -54,10 +54,10 @@ namespace term
     {
     public:
         CDS() {}
-        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceVariable& facevar, const field::Fields* field)
+        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* field)
         {                            
-            const mesh::Face* face = facevar.face;               
-            math::FaceInterpolation::CentralDifferencingScheme(face, face->lambda(), cellvalues, facevar.coef);               
+            const mesh::Face* face = faceval.face;               
+            math::FaceInterpolation::CentralDifferencingScheme(face, face->lambda(), cellvalues, faceval.coef);               
         }                       
     };
 
@@ -65,9 +65,9 @@ namespace term
     {
     public:
         PowerLaw() {}
-        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceVariable& facevar, const field::Fields* field)
+        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* field)
         {
-            const mesh::Face* face = facevar.face;
+            const mesh::Face* face = faceval.face;
             const mesh::Cell* cell = face->cell1();
             const mesh::Cell* othercell = face->cell2();
 
@@ -88,7 +88,7 @@ namespace term
             double conductivity = 10;//cell->material()->conductivity(field->scalarField(cell));
             double peclet_number = math::Adimensional::PecletNumber(density, speed, L, conductivity);
              
-            math::FaceInterpolation::PowerLaw(facevar.face,peclet_number, lambda, cellvalues, facevar.coef);
+            math::FaceInterpolation::PowerLaw(faceval.face,peclet_number, lambda, cellvalues, faceval.coef);
         }
             
            
@@ -98,9 +98,9 @@ namespace term
     {
     public:
         SecondOrderUpWind() {}
-        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceVariable& facevar, const field::Fields* field)
+        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* field)
         {
-            const mesh::Face* face = facevar.face;
+            const mesh::Face* face = faceval.face;
             const mesh::Cell* cell = face->cell1();
             const mesh::Cell* othercell = face->cell2();
             vector2d normal = face->getNormal(cell);
@@ -111,7 +111,7 @@ namespace term
             double x = rf.norm();
             double L = r.norm();
                
-            math::FaceInterpolation::SecondOrderUpwind(cell, face, vel_dot_normal, cellvalues, facevar.coef);        
+            math::FaceInterpolation::SecondOrderUpwind(cell, face, vel_dot_normal, cellvalues, faceval.coef);        
         }
             
     };

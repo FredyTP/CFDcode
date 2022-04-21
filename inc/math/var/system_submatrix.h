@@ -1,3 +1,4 @@
+#pragma once
 /*****************************************************************//**
  * \file   system_submatrix.h
  * \brief
@@ -13,9 +14,6 @@
 #include <vector>
 
 //CFD
-#include <math/var/cell_variable.h>
-#include <math/var/system_constant.h>
-
 #include <math/value/cell_value.h>
 
 namespace math
@@ -25,24 +23,21 @@ namespace math
     public:
         SystemSubmatrix(int size)
         {
-            constants.resize(size);
-            constants.setZero();
+            _coeficients.resize(size);
+            _coeficients.setZero();
         }
-        void addCellVar(CellVariable cellvar)
-        {
-            cellVars.push_back(Eigen::Triplet<double>(cellvar.i,cellvar.j,cellvar.coef));
-        }
+
         void addFaceValues(const mesh::Face* face, const CellValue<double>& cellvalue)
         {
             if (cellvalue.cell != nullptr)
             {
-                cellVars.push_back(Eigen::Triplet<double>(face->cell1()->index(), cellvalue.cell->index(), cellvalue.coef));
-                cellVars.push_back(Eigen::Triplet<double>(face->cell2()->index(), cellvalue.cell->index(), -cellvalue.coef));
+                _cellCoeficients.push_back(Eigen::Triplet<double>(face->cell1()->index(), cellvalue.cell->index(), cellvalue.coef));
+                _cellCoeficients.push_back(Eigen::Triplet<double>(face->cell2()->index(), cellvalue.cell->index(), -cellvalue.coef));
             }
             else
             {
-                constants(face->cell1()->index()) += cellvalue.coef;
-                constants(face->cell2()->index()) -= cellvalue.coef;
+                _coeficients(face->cell1()->index()) += cellvalue.coef;
+                _coeficients(face->cell2()->index()) -= cellvalue.coef;
             }
         }
         void addFaceValues(const mesh::Face* face, const std::vector<CellValue<double>>& cellvalues)
@@ -59,11 +54,24 @@ namespace math
             if (invert) coef *= -1;
             if (cellvalue.cell != nullptr)
             {
-                cellVars.push_back(Eigen::Triplet<double>(cell->index(), cellvalue.cell->index(), coef));
+                _cellCoeficients.push_back(Eigen::Triplet<double>(cell->index(), cellvalue.cell->index(), coef));
             }
             else
             {
-                constants(cell->index()) += coef;
+                _coeficients(cell->index()) += coef;
+            }
+        }
+        void addCellDotValues(const mesh::Cell* cell, const CellValue<double>& cellvalue, bool invert = false)
+        {
+            double coef = cellvalue.coef;
+            if (invert) coef *= -1;
+            if (cellvalue.cell != nullptr)
+            {
+                _cellDotCoeficients.push_back(Eigen::Triplet<double>(cell->index(), cellvalue.cell->index(), coef));
+            }
+            else
+            {
+                _coeficients(cell->index()) += coef;
             }
         }
         void addCellValues(const mesh::Cell* cell, const std::vector<CellValue<double>>& cellvalues, bool invert = false)
@@ -74,54 +82,30 @@ namespace math
             }
 
         }
+        void addCellDotValues(const mesh::Cell* cell, const std::vector<CellValue<double>>& cellvalues, bool invert = false)
+        {
+            for (auto& cellvalue : cellvalues)
+            {
+                addCellDotValues(cell, cellvalue, invert);
+            }
 
-        void addConstant(SystemConstant constant)
-        {
-            constants(constant.i) += constant.coef;
         }
-        /*void merge(SystemSubmatrix& other)
+
+        std::vector<Eigen::Triplet<double>>& cellCoeficients()
         {
-            for (auto cellvar : other.cellVars)
-            {
-                this->addCellVar(cellvar);
-            }
-            for (auto sysconst : other.constants)
-            {
-                this->addConstant(sysconst);
-            }
+            return _cellCoeficients;
         }
-        void merge(std::vector<SystemSubmatrix>& other)
+        std::vector<Eigen::Triplet<double>>& cellDotCoeficients()
         {
-            for (auto submatrix : other)
-            {
-                this->merge(submatrix);
-            }
-        }*/
-        std::vector<Eigen::Triplet<double>> toTriplets()
-        {
-            return cellVars;
-            /*
-            std::vector<Eigen::Triplet<double>> triplets;
-            triplets.reserve(cellVars.size());
-            for (auto& var : cellVars)
-            {
-                triplets.push_back(Eigen::Triplet<double>(var.i, var.j, var.coef));
-            }
-            return triplets;*/
+            return _cellDotCoeficients;
         }
-        Eigen::VectorXd toVector()
+        Eigen::VectorXd& coeficients()
         {
-            return constants;
-            /*Eigen::VectorXd vec(size);
-            vec.setZero();
-            for (auto con : constants)
-            {
-                vec(con.i) += con.coef;
-            }
-            return vec;*/
+            return _coeficients;
         }
     private:
-        std::vector<Eigen::Triplet<double>> cellVars;
-        Eigen::VectorXd constants;
+        std::vector<Eigen::Triplet<double>> _cellCoeficients;
+        std::vector<Eigen::Triplet<double>> _cellDotCoeficients;
+        Eigen::VectorXd _coeficients;
     };
 }

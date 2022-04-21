@@ -8,7 +8,6 @@
 #include <solver/matrix_builder.h>
 #include <field/field.h>
 #include <fstream>
-#include <math/volume/volume_integral.h>
 #include <equation/source/source_term.h>
 namespace solver
 {
@@ -16,30 +15,62 @@ namespace solver
     {
     }
 
-    void MatrixBuilder::buildSubMatrix(math::SystemSubmatrix* submatrix, 
-        const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
-        term::DiffusiveTerm* pDiffusive, term::ConvectiveTerm* pConvective,
-        const field::Fields* pField)
+    void MatrixBuilder::buildSystem(sys::Problem* problem)
     {
-        for(auto internal_face : _mesh->internalFaces())
+        size_t numb_equation = problem->mesh()->cells()->size();
+        math::SystemSubmatrix matrix(numb_equation);
+
+        buildSubMatrix(&matrix, problem);
+        auto matrix_triplets = matrix.cellCoeficients();
+
+        _independent = matrix.coeficients();
+        systemMatrix.data().clear();
+        systemMatrix.resize(numb_equation, numb_equation);
+        systemMatrix.setFromTriplets(matrix_triplets.begin(), matrix_triplets.end(),
+            [](double phi1, double phi2) {
+                return phi1 + phi2;
+        });       
+
+        auto volume_triplets = matrix.cellDotCoeficients();
+        _volumeMatrix.data().clear();
+        _volumeMatrix.resize(numb_equation, numb_equation);
+        _volumeMatrix.setFromTriplets(volume_triplets.begin(), volume_triplets.end(),
+            [](double phi1, double phi2) {
+                return phi1 + phi2;
+        });
+        //std::cout << systemMatrix << std::endl;
+        //std::cout << _independent << std::endl;
+    }
+
+    void MatrixBuilder::buildSubMatrix(math::SystemSubmatrix* submatrix, sys::Problem* problem)
+    {
+        auto mesh = problem->mesh();
+        for(auto internal_face : mesh->internalFaces())
         {
-            pDiffusive->calculateBothCell(submatrix, internal_face, pField);
-            pConvective->calculateBothCell(submatrix, internal_face, pField);
+            problem->for_each_faceTerm([submatrix, internal_face, problem] (term::FaceEquationTerm * term)
+                {
+                    term->calculateBothCell(submatrix, internal_face, problem->fields());
+                });
         }
-        for (auto boundary_face : _mesh->boundaryFaces())
+        for (auto boundary_face : mesh->boundaryFaces())
         {
-            pDiffusive->calculateOneCell(submatrix, boundary_face, pField);
-            pConvective->calculateOneCell(submatrix, boundary_face, pField);
+            problem->for_each_faceTerm([submatrix, boundary_face, problem](term::FaceEquationTerm* term)
+                {
+                    term->calculateOneCell(submatrix, boundary_face, problem->fields());
+                });
         }
-        for (size_t i = 0; i < _bConditions.size(); i++)
+        for (auto& cell : *mesh->cells())
         {
-            auto boundary = _bConditions[i].get();
-            boundary->calculateBoundaryCondition(submatrix, pField);
+            problem->termporalTerm()->calculateCell(submatrix, cell.get(), problem->fields());
         }
+        problem->for_each_boundary([submatrix,problem](bc::BoundaryCondition* boundaryCondition) 
+            {
+                boundaryCondition->calculateBoundaryCondition(submatrix, problem->fields());
+            });
     }
     
 
-    void MatrixBuilder::buildSystem(const mesh::Mesh* pMesh, 
+    /*void MatrixBuilder::buildSystem(const mesh::Mesh* pMesh,
         const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions, 
         term::DiffusiveTerm* pDiffusive, term::ConvectiveTerm* pConvective,
         const field::Fields* pField)
@@ -105,7 +136,7 @@ namespace solver
         //std::cout << systemMatrix << std::endl;
         //std::cout << _independent << std::endl;
         
-    }
+    }*/
 
     
     

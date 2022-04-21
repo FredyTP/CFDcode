@@ -1,3 +1,4 @@
+#pragma once
 /*****************************************************************//**
  * \file   stationary_solver.h
  * \brief  
@@ -16,20 +17,17 @@ namespace solver
     public:
         StationarySolver(MatrixBuilder* _builder_) : _builder(_builder_) {}
 
-        void solve(const mesh::Mesh* pMesh,
-        const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
-        term::DiffusiveTerm* pDiffusive, term::ConvectiveTerm* pConvective,
-        const field::Fields* pField)
+        void solve(sys::Problem* problem)
         {
-            _builder->buildSystem(pMesh, _bConditions, pDiffusive, pConvective, pField);
+            _builder->buildSystem(problem);
 
             Eigen::SparseLU<Eigen::SparseMatrix<double>> chol(_builder->getMatrix());
             _solution = chol.solve(_builder->getVector());
             std::string filename = "static_solutionUDS";
 
             initfile(filename+".txt");
-            save(filename + ".txt", _solution, pMesh);
-            save_contour(filename + ".txt", filename + ".jpg", 1920, 1080);
+            save(filename + ".txt", _solution, problem->mesh());
+           save_contour(filename + ".txt", filename + ".jpg", 1920, 1080);
                 
         }
         Eigen::VectorXd solution() { return _solution; }

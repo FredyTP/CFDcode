@@ -16,15 +16,71 @@
 #include <field/state_vector.h>
 #include <field/field.h>
 
-#include <core/environment.h>
+#include <system/problem.h>
+
+#include <solver/matrix_builder.h>
+#include <solver/stationary_solver.h>
+#include <solver/temporal_solver.h>
+
 int main()
 {
-    core::Environment simulation;
-    simulation.loadMesh();
+
+    sys::Problem problem;
+    int n_cell = 4096;
+
+    problem.loadProjectMesh(n_cell);
+
+    problem.addConstantMaterial(1.255, 1e-5, 10, 1200);
+    problem.assignMaterial();
+
+    problem.addConstTempBoundary(300);
+    problem.addConstTempBoundary(300);
+    problem.addConstTempBoundary(600);
+    problem.addConstTempBoundary(600);
+
+    problem.loadProjectFaceSelection(1, n_cell);
+    problem.loadProjectFaceSelection(2, n_cell);
+    problem.loadProjectFaceSelection(3, n_cell);
+    problem.loadProjectFaceSelection(4, n_cell);
+
+    problem.assignBoundaryCondition(0, 0);
+    problem.assignBoundaryCondition(1, 1);
+    problem.assignBoundaryCondition(2, 2);
+    problem.assignBoundaryCondition(3, 3);
+   
+    vector2d initialVelocity(0, 10);
+    field::ScalarStateVector initialScalars;
+    initialScalars.pressure = 101325; //Pa
+    initialScalars.temperature = 300; //K
+    problem.initializeFields(initialVelocity, initialScalars);
+
+
+    //DISCRETIZATION METHODS
+    //Face Intertpolation
+    std::unique_ptr<term::FaceInterpolation> uds = std::make_unique<term::UDS>();
+    std::unique_ptr<term::FaceInterpolation> cds = std::make_unique<term::CDS>();
+    std::unique_ptr<term::FaceInterpolation> powerLaw = std::make_unique<term::PowerLaw>();
+    std::unique_ptr<term::FaceInterpolation> secondOrderUpwind = std::make_unique<term::SecondOrderUpWind>();
+    //Gradient Flux
+    std::unique_ptr<term::GradientFlux> centralDiffGrad = std::make_unique<term::CentralDifferenceGradient>();
+
+    problem.initEquations();
+    problem.configConvectiveTerm(secondOrderUpwind.get());
+    problem.configDiffusiveTerm(centralDiffGrad.get());
+
+    problem.buildProblem();
+
+    solver::MatrixBuilder matrix;
+    solver::TemporalSolver solver(&matrix);
+    solver::StationarySolver sSolver(&matrix);
+
+    solver.solve(&problem);
+
+    /*simulation.loadMesh();
     simulation.buildMaterials();
     simulation.createBoundary();
     simulation.initializeFields();
-    simulation.solve();
+    simulation.solve();*/
 }
 
 // Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar

@@ -14,11 +14,11 @@ namespace math
     class FaceValue
     {
     public:
-        FaceValue(mesh::Face* _face_, _Ty _coef_) : face(_face_), coef(_coef_)
+        FaceValue(const mesh::Face* _face_, _Ty _coef_) : face(_face_), coef(_coef_)
         {
 
         }
-        mesh::Face* face;
+        const mesh::Face* face;
         _Ty coef;
 
     };

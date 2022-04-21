@@ -9,7 +9,7 @@
 #include <mesh/base/cell.h>
 #include <mesh/base/face.h>
 
-#include <math/var/face_variable.h>
+#include <math/value/face_value.h>
 #include <math/var/system_submatrix.h>
 #include <math/interpolation/gradient_flux.h>
 

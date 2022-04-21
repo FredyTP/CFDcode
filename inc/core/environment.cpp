@@ -19,11 +19,11 @@ void core::Environment::loadMesh()
 {
     using namespace mesh;
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
- 
-    LuisMiformatMeshReader meshReader("D://Alfredo//Academic//MASTER AERO//B//CFD//ProyectoCFD//CodigoCFD//mesh//nodes_4096.dat",
+
+        LuisMiformatMeshReader meshReader("D://Alfredo//Academic//MASTER AERO//B//CFD//ProyectoCFD//CodigoCFD//mesh//nodes_4096.dat",
     "D://Alfredo//Academic//MASTER AERO//B//CFD//ProyectoCFD//CodigoCFD//mesh//cells_4096.dat");
-    _mesh = std::make_unique<Mesh>();
-    _mesh->loadMesh(&meshReader);
+        _mesh = std::make_unique<Mesh>();
+        _mesh->loadMesh(&meshReader);
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::cout << "Time loading mesh = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
@@ -143,15 +143,15 @@ void core::Environment::solve()
     std::unique_ptr<FaceInterpolation> powerLaw = std::make_unique<PowerLaw>();
     std::unique_ptr<FaceInterpolation> secondOrderUpwind = std::make_unique<SecondOrderUpWind>();
 
-    //Surface Integral methods
-    std::unique_ptr<SurfaceIntegral> midpoint = std::make_unique<MidPoint>();
+
 
    
     //Gradient Flux methods
     std::unique_ptr <GradientFlux> centralDiffGrad=std::make_unique<CentralDifferenceGradient>();
 
     //EQUATION TERMS
-    std::unique_ptr<ConvectiveTerm> convectiveTerm = std::make_unique<ConvectiveTerm>(midpoint.get(), uds.get());
+    std::unique_ptr<ConvectiveTerm> convectiveTerm = std::make_unique<ConvectiveTerm>(secondOrderUpwind.get());
+
     std::unique_ptr<DiffusiveTerm> diffusiveTerm = std::make_unique<DiffusiveTerm>(centralDiffGrad.get());
     
 
@@ -171,7 +171,7 @@ void core::Environment::solve()
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     for (int i = 0;i < 1; i++)
     {
-       sSolver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
+       //sSolver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
         //solver.solve(_mesh.get(), _boundaryConditions, diffusiveTerm.get(), convectiveTerm.get(), _fields.get());
         //matrix.solve();
         //matrix.save("Result.txt");

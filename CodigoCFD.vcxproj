@@ -23,14 +23,13 @@
     <ClInclude Include="inc\boundary\boundary_condition.h" />
     <ClInclude Include="inc\boundary\constant_gradient.h" />
     <ClInclude Include="inc\boundary\constant_temperature.h" />
-    <ClInclude Include="inc\core\environment.h" />
     <ClInclude Include="inc\equation\convective\convective_term.h" />
     <ClInclude Include="inc\equation\convective\face_interpolation.h" />
-    <ClInclude Include="inc\equation\convective\surface_intergral.h" />
     <ClInclude Include="inc\equation\diffusive\diffusive_term.h" />
     <ClInclude Include="inc\equation\diffusive\gradient_flux.h" />
     <ClInclude Include="inc\equation\equation_term.h" />
     <ClInclude Include="inc\equation\source\source_term.h" />
+    <ClInclude Include="inc\equation\temporal\temporal_term.h" />
     <ClInclude Include="inc\field\field.h" />
     <ClInclude Include="inc\field\state_vector.h" />
     <ClInclude Include="inc\material\material.h" />
@@ -46,11 +45,7 @@
     <ClInclude Include="inc\math\value\cell_value.h" />
     <ClInclude Include="inc\math\value\face_value.h" />
     <ClInclude Include="inc\math\value\node_value.h" />
-    <ClInclude Include="inc\math\var\cell_variable.h" />
-    <ClInclude Include="inc\math\var\face_variable.h" />
-    <ClInclude Include="inc\math\var\system_constant.h" />
     <ClInclude Include="inc\math\var\system_submatrix.h" />
-    <ClInclude Include="inc\math\volume\volume_integral.h" />
     <ClInclude Include="inc\mesh\base\cell.h" />
     <ClInclude Include="inc\mesh\base\base_geometry.h" />
     <ClInclude Include="inc\mesh\base\face.h" />
@@ -66,10 +61,10 @@
     <ClInclude Include="inc\solver\propagator\eurler_explicit.h" />
     <ClInclude Include="inc\solver\stationary_solver.h" />
     <ClInclude Include="inc\solver\temporal_solver.h" />
+    <ClInclude Include="inc\system\problem.h" />
     <ClInclude Include="inc\time\time_step.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="inc\core\environment.cpp" />
     <ClCompile Include="src\boundary\boundary_condition.cpp" />
     <ClCompile Include="src\CodigoCFD.cpp" />
     <ClCompile Include="src\field\field.cpp" />
@@ -78,6 +73,7 @@
     <ClCompile Include="src\mesh\base\node.cpp" />
     <ClCompile Include="src\mesh\mesh.cpp" />
     <ClCompile Include="src\solver\matrix_builder.cpp" />
+    <ClCompile Include="src\system\problem.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

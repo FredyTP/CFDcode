@@ -1,3 +1,4 @@
+#pragma once
 /*****************************************************************//**
  * \file   temporal_solver.h
  * \brief  
@@ -27,19 +28,16 @@ namespace solver
         {
 
         }
-        void solve(const mesh::Mesh* pMesh,
-        const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
-        term::DiffusiveTerm* pDiffusive, term::ConvectiveTerm* pConvective,
-        field::Fields* initialCondition)
+        void solve(sys::Problem* problem)
         {
-            _solution = std::make_unique<field::Fields>(pMesh);
-            _solution->copy(initialCondition);
-            _builder->buildSystem(pMesh, _bConditions, pDiffusive, pConvective, _solution.get());
+            _solution = std::make_unique<field::Fields>(problem->mesh());
+            _solution->copy(problem->fields());
+            _builder->buildSystem(problem);
             Eigen::SparseMatrix<double> &matrix = _builder->getMatrix();
             Eigen::VectorXd &indep = _builder->getVector();
             Eigen::SparseMatrix<double> &volumeMatrix = _builder->getVolMatrix();
             
-            size_t size = pMesh->cells()->size();
+            size_t size = problem->mesh()->cells()->size();
 
             
             timestep::FixedTimeStep timeStep(0.0003);
@@ -48,7 +46,7 @@ namespace solver
             std::string savefile = "temp_int_file.txt";
             std::string imgfile = "temp_img_UDS" + std::to_string(_solution->rawVelocity()[0].y()) + ".jpg";
             initfile(savefile);
-            save(savefile, timeStep.currentTime(), _solution.get(), pMesh);
+            save(savefile, timeStep.currentTime(), _solution.get(), problem->mesh());
             while (timeStep.currentTime() < 10 * dt)
             {
                 dt = timeStep.timeStep();
@@ -61,7 +59,7 @@ namespace solver
                 EulerImplicit(volumeMatrix, matrix, indep, dt, _solution->rawTemperature(), newSolution);
                 timeStep.nextTimeStep(_solution.get());
                 _solution->rawTemperature() = newSolution;
-                save(savefile, timeStep.currentTime(), _solution.get(), pMesh);
+                save(savefile, timeStep.currentTime(), _solution.get(), problem->mesh());
             }
 
             save_contour(savefile, imgfile ,1920,1080);

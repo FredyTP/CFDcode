@@ -10,6 +10,7 @@
 
 #include <material/material.h>
 #include <material/properties/properties_base.h>
+#include <material/properties/constant_properties.h>
 #include <memory>
 
 
@@ -48,6 +49,15 @@ public:
         this->reset();
         return std::move(temp);
     };
+    void constantMaterial(double density,double viscosity,double conductivity,double specific_heat)
+    {
+        this->reset();
+        this->setDensityModel<prop::ConstantDensity>(density);
+        this->setViscosityModel<prop::ConstantViscosity>(viscosity);
+        this->setConductivityModel<prop::ConstantConductivity>(conductivity);
+        this->setSpecificHeatModel<prop::ConstantSpecificHeat>(specific_heat);
+    };
+    
 
 private:
     std::unique_ptr<Material> _material;

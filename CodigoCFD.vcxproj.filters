@@ -76,9 +76,6 @@
     <Filter Include="Include\time">
       <UniqueIdentifier>{fa3236d0-05d8-4c7a-a9e9-d7fbf3a7614b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Include\math\volume">
-      <UniqueIdentifier>{0293468a-5d13-4047-b779-53153611e55e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Include\solver\propagator">
       <UniqueIdentifier>{53030057-6f9e-46af-abe0-af1554509a2c}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,18 @@
     </Filter>
     <Filter Include="Include\equation\source">
       <UniqueIdentifier>{3c87431f-fb77-4cf3-a06f-68168a1c872f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\system">
+      <UniqueIdentifier>{5bb3f1d6-9740-44f3-b6a5-e995d1faaf78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\system">
+      <UniqueIdentifier>{b2167d02-561d-49e0-922d-f49a34549e5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\math\integral">
+      <UniqueIdentifier>{5cc27f6a-2adc-487c-9cc8-e70bc06622e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\equation\temporal">
+      <UniqueIdentifier>{30ade1f1-6fd4-483c-becc-dc5d8b511a80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +159,6 @@
     <ClInclude Include="inc\material\material_factory.h">
       <Filter>Include\material</Filter>
     </ClInclude>
-    <ClInclude Include="inc\core\environment.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="inc\field\field.h">
       <Filter>Include\field</Filter>
     </ClInclude>
@@ -168,15 +174,6 @@
     <ClInclude Include="inc\solver\matrix_builder.h">
       <Filter>Include\solver</Filter>
     </ClInclude>
-    <ClInclude Include="inc\math\var\face_variable.h">
-      <Filter>Include\math\var</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\math\var\cell_variable.h">
-      <Filter>Include\math\var</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\math\var\system_constant.h">
-      <Filter>Include\math\var</Filter>
-    </ClInclude>
     <ClInclude Include="inc\math\var\system_submatrix.h">
       <Filter>Include\math\var</Filter>
     </ClInclude>
@@ -191,9 +188,6 @@
     </ClInclude>
     <ClInclude Include="inc\time\time_step.h">
       <Filter>Include\time</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\math\volume\volume_integral.h">
-      <Filter>Include\math\volume</Filter>
     </ClInclude>
     <ClInclude Include="inc\solver\propagator\eurler_explicit.h">
       <Filter>Include\solver\propagator</Filter>
@@ -234,9 +228,6 @@
     <ClInclude Include="inc\equation\convective\face_interpolation.h">
       <Filter>Include\equation\convective</Filter>
     </ClInclude>
-    <ClInclude Include="inc\equation\convective\surface_intergral.h">
-      <Filter>Include\equation\convective</Filter>
-    </ClInclude>
     <ClInclude Include="inc\equation\diffusive\diffusive_term.h">
       <Filter>Include\equation\diffusive</Filter>
     </ClInclude>
@@ -248,6 +239,12 @@
     </ClInclude>
     <ClInclude Include="inc\equation\source\source_term.h">
       <Filter>Include\equation\source</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\system\problem.h">
+      <Filter>Include\system</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\equation\temporal\temporal_term.h">
+      <Filter>Include\equation\temporal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -269,14 +266,14 @@
     <ClCompile Include="src\field\field.cpp">
       <Filter>Source\field</Filter>
     </ClCompile>
-    <ClCompile Include="inc\core\environment.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="src\boundary\boundary_condition.cpp">
       <Filter>Source\boundary</Filter>
     </ClCompile>
     <ClCompile Include="src\solver\matrix_builder.cpp">
       <Filter>Source\solver</Filter>
+    </ClCompile>
+    <ClCompile Include="src\system\problem.cpp">
+      <Filter>Source\system</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

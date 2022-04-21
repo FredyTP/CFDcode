@@ -26,7 +26,7 @@ namespace bc
         virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field) const
         {
             _diffusiveTerm->calculateOneCell(submatrix, cell->faces()[0], field, true);
-            submatrix->addConstant(math::SystemConstant(cell->index(), _flux));                      
+            submatrix->addCellValues(cell,math::CellValue<double>(nullptr,_flux));                                           
         }
 
     private:

@@ -1,3 +1,4 @@
+#pragma once
 /*****************************************************************//**
  * \file   matrix_builder.h
  * \brief  
@@ -11,20 +12,17 @@
 #include <vector>
 #include <mesh/mesh.h>
 #include <boundary/boundary_condition.h>
+#include <system/problem.h>
+
 namespace solver
 {
 
 class MatrixBuilder
 {
 public:
-    MatrixBuilder();
+    MatrixBuilder(); 
 
-    
-
-    void buildSystem(const mesh::Mesh* pMesh, 
-        const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
-        term::DiffusiveTerm* pDiffusive, term::ConvectiveTerm* pConvective,
-        const field::Fields* pField);
+    void buildSystem(sys::Problem* problem);
 
 
     Eigen::SparseMatrix<double>& getMatrix() { return systemMatrix; }
@@ -33,12 +31,8 @@ public:
 
 
 private:
-    void buildSubMatrix(math::SystemSubmatrix* submatrix,
-        const std::vector<std::unique_ptr<bc::BoundaryCondition>>& _bConditions,
-        term::DiffusiveTerm* pDiffusive, term::ConvectiveTerm* pConvective,
-        const field::Fields* pField);
+    void buildSubMatrix(math::SystemSubmatrix* submatrix, sys::Problem* problem);
 
-    const mesh::Mesh* _mesh;
     Eigen::VectorXd _independent;
     Eigen::SparseMatrix<double> systemMatrix;
     Eigen::SparseMatrix<double> _volumeMatrix;
