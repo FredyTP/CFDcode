@@ -25,6 +25,12 @@
 
 namespace mesh {
 
+    struct BoundingBox
+    {
+        vector2d leftbot;
+        vector2d size;
+    };
+
 
 /**
  * @brief Mesh Container (Usually Big Size) managed internally with smart pointers.
@@ -71,6 +77,8 @@ public:
 
         
     }
+
+    const BoundingBox& boundingBox() const { return _boundingBox; }
     //void addFace(std::unique_ptr<Face>& node){}
 private:
     //TODO: create class containing 
@@ -83,8 +91,13 @@ private:
     std::vector<Face*> _internalFaces;
     std::vector<Face*> _boundaryFaces;
 
+    //GEOMETRIC INFORMATION
+
+
+
+    BoundingBox _boundingBox;
     /**
-     * @brief Builds the mesh with node and cell data, creates the faces and
+     * \brief Builds the mesh with node and cell data, creates the faces and
      * calculates internal geometry data of cells(centroid) and
      * faces(centroid and normals)
      * 
@@ -99,13 +112,19 @@ private:
     void createBoundaryCell(Face* face);
 
     /**
-     * @brief Create faces data from mesh cells and nodes. For >3 nodes faces are built following the index order
+     * \brief Create faces data from mesh cells and nodes. For >3 nodes faces are built following the index order
      * for example: cell:[0,1,2,3] faces:[0-1,1-2,2-3,3-0]
      * 
      */
     void createFaces();
-};
 
+    /**
+     * \brief Calculate mesh bounding box dimensions as size + leftbottom corner.
+     * 
+     */
+    void calculateBoundingBox();
+
+};
 
 
 }

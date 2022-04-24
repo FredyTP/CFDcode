@@ -1,0 +1,40 @@
+\hypertarget{classmath_1_1_system_submatrix}{}\doxysection{math\+::System\+Submatrix Class Reference}
+\label{classmath_1_1_system_submatrix}\index{math::SystemSubmatrix@{math::SystemSubmatrix}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmath_1_1_system_submatrix_aaab24a2b25c488819c942e9177b76d70}\label{classmath_1_1_system_submatrix_aaab24a2b25c488819c942e9177b76d70}} 
+{\bfseries System\+Submatrix} (int size)
+\item 
+\mbox{\Hypertarget{classmath_1_1_system_submatrix_a3a3180627ab09f2cfbcba3d8002df59c}\label{classmath_1_1_system_submatrix_a3a3180627ab09f2cfbcba3d8002df59c}} 
+void {\bfseries add\+Face\+Values} (const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$face, const \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ double $>$ \&cellvalue)
+\item 
+\mbox{\Hypertarget{classmath_1_1_system_submatrix_a6457cbecb46bb3eb21765ca51ad5694a}\label{classmath_1_1_system_submatrix_a6457cbecb46bb3eb21765ca51ad5694a}} 
+void {\bfseries add\+Face\+Values} (const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$face, const std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ double $>$$>$ \&cellvalues)
+\item 
+\mbox{\Hypertarget{classmath_1_1_system_submatrix_a0c0f8d0fb3fb3d68f248fd36cbcca3c3}\label{classmath_1_1_system_submatrix_a0c0f8d0fb3fb3d68f248fd36cbcca3c3}} 
+void {\bfseries add\+Cell\+Values} (const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell, const \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ double $>$ \&cellvalue, bool invert=false)
+\item 
+\mbox{\Hypertarget{classmath_1_1_system_submatrix_a775cab47713339f6d34227d885a4275b}\label{classmath_1_1_system_submatrix_a775cab47713339f6d34227d885a4275b}} 
+void {\bfseries add\+Cell\+Dot\+Values} (const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell, const \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ double $>$ \&cellvalue, bool invert=false)
+\item 
+\mbox{\Hypertarget{classmath_1_1_system_submatrix_a464ea03dc61ce37f4897d9fdf7d7486b}\label{classmath_1_1_system_submatrix_a464ea03dc61ce37f4897d9fdf7d7486b}} 
+void {\bfseries add\+Cell\+Values} (const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell, const std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ double $>$$>$ \&cellvalues, bool invert=false)
+\item 
+\mbox{\Hypertarget{classmath_1_1_system_submatrix_aee5729c6c9df19d042c40e1ee9194f5c}\label{classmath_1_1_system_submatrix_aee5729c6c9df19d042c40e1ee9194f5c}} 
+void {\bfseries add\+Cell\+Dot\+Values} (const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell, const std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ double $>$$>$ \&cellvalues, bool invert=false)
+\item 
+\mbox{\Hypertarget{classmath_1_1_system_submatrix_ae0414650c567624ec6bdc786ce0db2d2}\label{classmath_1_1_system_submatrix_ae0414650c567624ec6bdc786ce0db2d2}} 
+std\+::vector$<$ Eigen\+::\+Triplet$<$ double $>$ $>$ \& {\bfseries cell\+Coeficients} ()
+\item 
+\mbox{\Hypertarget{classmath_1_1_system_submatrix_a8c433d57d5a017adf9540e7dac3beec4}\label{classmath_1_1_system_submatrix_a8c433d57d5a017adf9540e7dac3beec4}} 
+std\+::vector$<$ Eigen\+::\+Triplet$<$ double $>$ $>$ \& {\bfseries cell\+Dot\+Coeficients} ()
+\item 
+\mbox{\Hypertarget{classmath_1_1_system_submatrix_af7acd5cbf3fe2988fdb68f0e79a219a2}\label{classmath_1_1_system_submatrix_af7acd5cbf3fe2988fdb68f0e79a219a2}} 
+Eigen\+::\+Vector\+Xd \& {\bfseries coeficients} ()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/math/var/\mbox{\hyperlink{system__submatrix_8h}{system\+\_\+submatrix.\+h}}\end{DoxyCompactItemize}

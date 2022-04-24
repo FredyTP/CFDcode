@@ -6,7 +6,7 @@
  * \date   March 2022
  *********************************************************************/
 #include <solver/matrix_builder.h>
-#include <field/field.h>
+#include <field/fields.h>
 #include <fstream>
 #include <equation/source/source_term.h>
 namespace solver

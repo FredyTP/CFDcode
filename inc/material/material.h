@@ -7,12 +7,14 @@
  *********************************************************************/
 #pragma once
 
-#include <field/state_vector.h>
 #include <material/properties/properties_base.h>
+#include <field/fields.h>
 namespace material
 {
 
 class MaterialFactory;
+class mesh::Cell;
+
 class Material
 {
     friend MaterialFactory;
@@ -24,10 +26,10 @@ public:
         _viscosity = std::move(viscosity);
         _conductivity = std::move(conductivity);
     }
-    double density(const field::ScalarStateVector& state) const { return _density->density(state); };
-    double viscosity(const field::ScalarStateVector& state) const { return _viscosity->viscosity(state); }
-    double conductivity(const field::ScalarStateVector& state) const { return _conductivity->conductivity(state); };
-    double specificHeat(const field::ScalarStateVector& state) const { return _specificHeat->specificHeat(state); };
+    double density(const mesh::Cell* cell, const field::Fields* fields) const { return _density->density(cell,fields); };
+    double viscosity(const mesh::Cell* cell, const field::Fields* fields) const { return _viscosity->viscosity(cell,fields); }
+    double conductivity(const mesh::Cell* cell, const field::Fields* fields) const { return _conductivity->conductivity(cell,fields); };
+    double specificHeat(const mesh::Cell* cell, const field::Fields* fields) const { return _specificHeat->specificHeat(cell,fields); };
 private:
     std::unique_ptr<prop::DensityBase> _density;
     std::unique_ptr<prop::ViscosityBase> _viscosity;

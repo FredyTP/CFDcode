@@ -1,0 +1,302 @@
+\hypertarget{classfield_1_1_fields}{}\doxysection{field\+::Fields Class Reference}
+\label{classfield_1_1_fields}\index{field::Fields@{field::Fields}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfield_1_1_fields_a1512828ed99087a1f2e5fa010bf1c993}{Fields}} (const \mbox{\hyperlink{classmesh_1_1_mesh}{mesh\+::\+Mesh}} $\ast$\+\_\+mesh\+\_\+)
+\item 
+void \mbox{\hyperlink{classfield_1_1_fields_ae4ff42716e9b8fb76c8d64e84199e4ad}{init}} ()
+\item 
+void \mbox{\hyperlink{classfield_1_1_fields_a5d17dcc4090056d01d9c00a6420e0139}{copy}} (const \mbox{\hyperlink{classfield_1_1_fields}{field\+::\+Fields}} $\ast$other)
+\item 
+void \mbox{\hyperlink{classfield_1_1_fields_a2c706430c5644ddd395ae8090352db68}{enable\+Scalar\+Field}} (scalar\+Type field, bool enable=true)
+\item 
+void \mbox{\hyperlink{classfield_1_1_fields_aa2f793307e4ed1a51e9fed63597bf8e7}{enable\+Vector\+Field}} (vectorial\+Type field, bool enable=true)
+\item 
+Eigen\+::\+VectorX$<$ double $>$ \& \mbox{\hyperlink{classfield_1_1_fields_a6488ca630354ec7c103e380dc4e5b002}{scalar\+Field}} (scalar\+Type field)
+\item 
+const Eigen\+::\+VectorX$<$ double $>$ \& \mbox{\hyperlink{classfield_1_1_fields_a22c8699e86e345542f06b8019dfcaff5}{scalar\+Field}} (scalar\+Type field) const
+\item 
+double \& \mbox{\hyperlink{classfield_1_1_fields_a118a157c77d48824d0651dc885a8bcda}{scalar\+Field}} (scalar\+Type field, const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell)
+\item 
+double \mbox{\hyperlink{classfield_1_1_fields_a0dc4ecd279b60cad7d6c5124e46110f2}{scalar\+Field}} (scalar\+Type field, const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell) const
+\item 
+Eigen\+::\+VectorX$<$ vector2d $>$ \& \mbox{\hyperlink{classfield_1_1_fields_a565faeedbd79e43cde7aa694d4d980d4}{vectorial\+Field}} (scalar\+Type field)
+\item 
+const Eigen\+::\+VectorX$<$ vector2d $>$ \& \mbox{\hyperlink{classfield_1_1_fields_a8574870bfcda8ada107aaeac2efe79e6}{vectorial\+Field}} (scalar\+Type field) const
+\item 
+vector2d \& \mbox{\hyperlink{classfield_1_1_fields_a12b4604af216fea2283f270e5109f461}{vectorial\+Field}} (scalar\+Type field, const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell)
+\item 
+const vector2d \& \mbox{\hyperlink{classfield_1_1_fields_ab9af1228f3f663dccbbd6b9e9379552f}{vectorial\+Field}} (scalar\+Type field, const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell) const
+\item 
+Eigen\+::\+VectorX$<$ vector2d $>$ \& \mbox{\hyperlink{classfield_1_1_fields_a3fbdfa3424c5c2827e25f5c8e5ed8d65}{velocity\+Field}} ()
+\item 
+const Eigen\+::\+VectorX$<$ vector2d $>$ \& \mbox{\hyperlink{classfield_1_1_fields_ad80632a1c5bded54a57fba4e19043d2a}{velocity\+Field}} () const
+\item 
+vector2d \& \mbox{\hyperlink{classfield_1_1_fields_a55ca3713ddbb3b496d2ab4f0704a5492}{velocity\+Field}} (const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$face)
+\item 
+const vector2d \& \mbox{\hyperlink{classfield_1_1_fields_ada3ff6dd8ed62ab0af35f9e649c5a9ee}{velocity\+Field}} (const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$face) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfield_1_1_fields_a1512828ed99087a1f2e5fa010bf1c993}\label{classfield_1_1_fields_a1512828ed99087a1f2e5fa010bf1c993}} 
+\index{field::Fields@{field::Fields}!Fields@{Fields}}
+\index{Fields@{Fields}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{Fields()}{Fields()}}
+{\footnotesize\ttfamily field\+::\+Fields\+::\+Fields (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmesh_1_1_mesh}{mesh\+::\+Mesh}} $\ast$}]{\+\_\+mesh\+\_\+ }\end{DoxyParamCaption})}
+
+Contructor\+: assigns the mesh and enables temperature, pressure and density fields.
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$em$>$mesh$<$/em$>$} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfield_1_1_fields_a5d17dcc4090056d01d9c00a6420e0139}\label{classfield_1_1_fields_a5d17dcc4090056d01d9c00a6420e0139}} 
+\index{field::Fields@{field::Fields}!copy@{copy}}
+\index{copy@{copy}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily void field\+::\+Fields\+::copy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfield_1_1_fields}{field\+::\+Fields}} $\ast$}]{other }\end{DoxyParamCaption})}
+
+Copy other fields values and enabled configuration.
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfield_1_1_fields_a2c706430c5644ddd395ae8090352db68}\label{classfield_1_1_fields_a2c706430c5644ddd395ae8090352db68}} 
+\index{field::Fields@{field::Fields}!enableScalarField@{enableScalarField}}
+\index{enableScalarField@{enableScalarField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{enableScalarField()}{enableScalarField()}}
+{\footnotesize\ttfamily void field\+::\+Fields\+::enable\+Scalar\+Field (\begin{DoxyParamCaption}\item[{scalar\+Type}]{field,  }\item[{bool}]{enable = {\ttfamily true} }\end{DoxyParamCaption})}
+
+Enable the selected scalar field to be used.
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+{\em enable} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfield_1_1_fields_aa2f793307e4ed1a51e9fed63597bf8e7}\label{classfield_1_1_fields_aa2f793307e4ed1a51e9fed63597bf8e7}} 
+\index{field::Fields@{field::Fields}!enableVectorField@{enableVectorField}}
+\index{enableVectorField@{enableVectorField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{enableVectorField()}{enableVectorField()}}
+{\footnotesize\ttfamily void field\+::\+Fields\+::enable\+Vector\+Field (\begin{DoxyParamCaption}\item[{vectorial\+Type}]{field,  }\item[{bool}]{enable = {\ttfamily true} }\end{DoxyParamCaption})}
+
+Enable the selected vector field to be used.
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+{\em enable} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfield_1_1_fields_ae4ff42716e9b8fb76c8d64e84199e4ad}\label{classfield_1_1_fields_ae4ff42716e9b8fb76c8d64e84199e4ad}} 
+\index{field::Fields@{field::Fields}!init@{init}}
+\index{init@{init}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void field\+::\+Fields\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Resize enabled fields to the mesh size and set values to 0. \mbox{\Hypertarget{classfield_1_1_fields_a6488ca630354ec7c103e380dc4e5b002}\label{classfield_1_1_fields_a6488ca630354ec7c103e380dc4e5b002}} 
+\index{field::Fields@{field::Fields}!scalarField@{scalarField}}
+\index{scalarField@{scalarField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{scalarField()}{scalarField()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Eigen\+::\+VectorX$<$double$>$\& field\+::\+Fields\+::scalar\+Field (\begin{DoxyParamCaption}\item[{scalar\+Type}]{field }\end{DoxyParamCaption})}
+
+Get a reference to the scalar field selected (should be enabled).
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_a22c8699e86e345542f06b8019dfcaff5}\label{classfield_1_1_fields_a22c8699e86e345542f06b8019dfcaff5}} 
+\index{field::Fields@{field::Fields}!scalarField@{scalarField}}
+\index{scalarField@{scalarField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{scalarField()}{scalarField()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily const Eigen\+::\+VectorX$<$double$>$\& field\+::\+Fields\+::scalar\+Field (\begin{DoxyParamCaption}\item[{scalar\+Type}]{field }\end{DoxyParamCaption}) const}
+
+Get a C\+O\+N\+ST reference to the scalar field selected (should be enabled).
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_a118a157c77d48824d0651dc885a8bcda}\label{classfield_1_1_fields_a118a157c77d48824d0651dc885a8bcda}} 
+\index{field::Fields@{field::Fields}!scalarField@{scalarField}}
+\index{scalarField@{scalarField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{scalarField()}{scalarField()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily double\& field\+::\+Fields\+::scalar\+Field (\begin{DoxyParamCaption}\item[{scalar\+Type}]{field,  }\item[{const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$}]{cell }\end{DoxyParamCaption})}
+
+Get a reference to scalar field value of a cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+{\em cell} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_a0dc4ecd279b60cad7d6c5124e46110f2}\label{classfield_1_1_fields_a0dc4ecd279b60cad7d6c5124e46110f2}} 
+\index{field::Fields@{field::Fields}!scalarField@{scalarField}}
+\index{scalarField@{scalarField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{scalarField()}{scalarField()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily double field\+::\+Fields\+::scalar\+Field (\begin{DoxyParamCaption}\item[{scalar\+Type}]{field,  }\item[{const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$}]{cell }\end{DoxyParamCaption}) const}
+
+Get the scalar field value of a cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+{\em cell} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_a565faeedbd79e43cde7aa694d4d980d4}\label{classfield_1_1_fields_a565faeedbd79e43cde7aa694d4d980d4}} 
+\index{field::Fields@{field::Fields}!vectorialField@{vectorialField}}
+\index{vectorialField@{vectorialField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{vectorialField()}{vectorialField()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Eigen\+::\+VectorX$<$vector2d$>$\& field\+::\+Fields\+::vectorial\+Field (\begin{DoxyParamCaption}\item[{scalar\+Type}]{field }\end{DoxyParamCaption})}
+
+Get a reference to the specified vectorial field.
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_a8574870bfcda8ada107aaeac2efe79e6}\label{classfield_1_1_fields_a8574870bfcda8ada107aaeac2efe79e6}} 
+\index{field::Fields@{field::Fields}!vectorialField@{vectorialField}}
+\index{vectorialField@{vectorialField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{vectorialField()}{vectorialField()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily const Eigen\+::\+VectorX$<$vector2d$>$\& field\+::\+Fields\+::vectorial\+Field (\begin{DoxyParamCaption}\item[{scalar\+Type}]{field }\end{DoxyParamCaption}) const}
+
+Get a C\+O\+N\+ST reference to the specified vectorial field.
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_a12b4604af216fea2283f270e5109f461}\label{classfield_1_1_fields_a12b4604af216fea2283f270e5109f461}} 
+\index{field::Fields@{field::Fields}!vectorialField@{vectorialField}}
+\index{vectorialField@{vectorialField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{vectorialField()}{vectorialField()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily vector2d\& field\+::\+Fields\+::vectorial\+Field (\begin{DoxyParamCaption}\item[{scalar\+Type}]{field,  }\item[{const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$}]{cell }\end{DoxyParamCaption})}
+
+Get a reference to vector field value of a cell..
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+{\em cell} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_ab9af1228f3f663dccbbd6b9e9379552f}\label{classfield_1_1_fields_ab9af1228f3f663dccbbd6b9e9379552f}} 
+\index{field::Fields@{field::Fields}!vectorialField@{vectorialField}}
+\index{vectorialField@{vectorialField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{vectorialField()}{vectorialField()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily const vector2d\& field\+::\+Fields\+::vectorial\+Field (\begin{DoxyParamCaption}\item[{scalar\+Type}]{field,  }\item[{const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$}]{cell }\end{DoxyParamCaption}) const}
+
+Get a C\+O\+N\+ST reference to vector field value of a cell..
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+{\em cell} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_a3fbdfa3424c5c2827e25f5c8e5ed8d65}\label{classfield_1_1_fields_a3fbdfa3424c5c2827e25f5c8e5ed8d65}} 
+\index{field::Fields@{field::Fields}!velocityField@{velocityField}}
+\index{velocityField@{velocityField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{velocityField()}{velocityField()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Eigen\+::\+VectorX$<$vector2d$>$\& field\+::\+Fields\+::velocity\+Field (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get a reference to the velocity field.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_ad80632a1c5bded54a57fba4e19043d2a}\label{classfield_1_1_fields_ad80632a1c5bded54a57fba4e19043d2a}} 
+\index{field::Fields@{field::Fields}!velocityField@{velocityField}}
+\index{velocityField@{velocityField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{velocityField()}{velocityField()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily const Eigen\+::\+VectorX$<$vector2d$>$\& field\+::\+Fields\+::velocity\+Field (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Get a C\+O\+S\+NT reference to the velocity field.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_a55ca3713ddbb3b496d2ab4f0704a5492}\label{classfield_1_1_fields_a55ca3713ddbb3b496d2ab4f0704a5492}} 
+\index{field::Fields@{field::Fields}!velocityField@{velocityField}}
+\index{velocityField@{velocityField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{velocityField()}{velocityField()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily vector2d\& field\+::\+Fields\+::velocity\+Field (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$}]{face }\end{DoxyParamCaption})}
+
+Get a reference to the veloicity field of a face.
+
+
+\begin{DoxyParams}{Parameters}
+{\em face} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfield_1_1_fields_ada3ff6dd8ed62ab0af35f9e649c5a9ee}\label{classfield_1_1_fields_ada3ff6dd8ed62ab0af35f9e649c5a9ee}} 
+\index{field::Fields@{field::Fields}!velocityField@{velocityField}}
+\index{velocityField@{velocityField}!field::Fields@{field::Fields}}
+\doxysubsubsection{\texorpdfstring{velocityField()}{velocityField()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily const vector2d\& field\+::\+Fields\+::velocity\+Field (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$}]{face }\end{DoxyParamCaption}) const}
+
+Get a C\+O\+N\+ST reference to the veloicity field of a face.
+
+
+\begin{DoxyParams}{Parameters}
+{\em face} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/field/fields.\+h\end{DoxyCompactItemize}

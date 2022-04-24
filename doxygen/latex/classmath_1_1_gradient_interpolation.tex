@@ -1,0 +1,34 @@
+\hypertarget{classmath_1_1_gradient_interpolation}{}\doxysection{math\+::Gradient\+Interpolation Class Reference}
+\label{classmath_1_1_gradient_interpolation}\index{math::GradientInterpolation@{math::GradientInterpolation}}
+
+
+Interpolates gradient center cell value based on cell values.  
+
+
+
+
+{\ttfamily \#include $<$gradient\+\_\+interpolation.\+h$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmath_1_1_gradient_interpolation_a42a4c7ec3c9bce8ea20c0eabfd09622b}\label{classmath_1_1_gradient_interpolation_a42a4c7ec3c9bce8ea20c0eabfd09622b}} 
+static void {\bfseries Finite\+Difference\+Gradient} (const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$face, std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ vector2d $>$$>$ \&cellvalues, double factor=1.\+0)
+\item 
+\mbox{\Hypertarget{classmath_1_1_gradient_interpolation_ab398468a72ba831f18f67baf0480ab61}\label{classmath_1_1_gradient_interpolation_ab398468a72ba831f18f67baf0480ab61}} 
+static void {\bfseries Green\+Gauss\+Gradient} (const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell, std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ vector2d $>$$>$ \&cellvalues, double factor=1.\+0)
+\item 
+\mbox{\Hypertarget{classmath_1_1_gradient_interpolation_ae8f99a4098fa6d7622be8f1cfc7ffc32}\label{classmath_1_1_gradient_interpolation_ae8f99a4098fa6d7622be8f1cfc7ffc32}} 
+static void {\bfseries Least\+Squares\+Gradient} (const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell, std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ vector2d $>$$>$ \&cellvalues, double factor=1.\+0)
+\item 
+\mbox{\Hypertarget{classmath_1_1_gradient_interpolation_a1c1bace0fcea952e674b7224ed29d81b}\label{classmath_1_1_gradient_interpolation_a1c1bace0fcea952e674b7224ed29d81b}} 
+static void {\bfseries Dot\+Product} (std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ double $>$$>$ \&result, std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ vector2d $>$$>$ \&cellvalues, vector2d vec)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interpolates gradient center cell value based on cell values. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/math/interpolation/\mbox{\hyperlink{gradient__interpolation_8h}{gradient\+\_\+interpolation.\+h}}\end{DoxyCompactItemize}

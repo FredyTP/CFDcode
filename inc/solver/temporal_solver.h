@@ -16,8 +16,10 @@
 
 //CFD
 #include <solver/matrix_builder.h>
-#include <time/time_step.h>
+#include <solver/time/time_step.h>
 #include <solver/propagator/eurler_explicit.h>
+#include <solver/activity/time_step_activity.h>
+#include <solver/stop/stopping_criteria.h>
 
 namespace solver
 {
@@ -28,93 +30,54 @@ namespace solver
         {
 
         }
-        void solve(sys::Problem* problem)
+        void solve(sys::Problem* problem,timestep::TimeStep* timeStep,stop::StoppingCriteria* stoppingCriteria)
         {
+            //RESET TIMER
+            timeStep->resetTime();
+
+            //CREATE NEW SOLUTION
             _solution = std::make_unique<field::Fields>(problem->mesh());
+
+            //SET INITIAL CONDITIONS
             _solution->copy(problem->fields());
+            
+            //CalculateMATRIX
             _builder->buildSystem(problem);
             Eigen::SparseMatrix<double> &matrix = _builder->getMatrix();
             Eigen::VectorXd &indep = _builder->getVector();
             Eigen::SparseMatrix<double> &volumeMatrix = _builder->getVolMatrix();
-            
-            size_t size = problem->mesh()->cells()->size();
-
-            
-            timestep::FixedTimeStep timeStep(0.0003);
-            double dt = timeStep.timeStep();
-            //FORWARD NEWTON
-            std::string savefile = "temp_int_file.txt";
-            std::string imgfile = "temp_img_UDS" + std::to_string(_solution->rawVelocity()[0].y()) + ".jpg";
-            initfile(savefile);
-            save(savefile, timeStep.currentTime(), _solution.get(), problem->mesh());
-            while (timeStep.currentTime() < 10 * dt)
+                  
+            double dt = 0.0; 
+            timeStep->nextTimeStep(_solution.get());
+          
+            while ( stoppingCriteria->shouldContinue(timeStep->currentTime(),problem,_solution.get()) )
             {
-                dt = timeStep.timeStep();
-                /*Eigen::SparseMatrix<double> coefMatrix = (volumeMatrix + matrix * dt);
-                Eigen::VectorXd vector = dt * indep +(volumeMatrix*_solution->rawTemperature());
-         
-                Eigen::SparseLU<Eigen::SparseMatrix<double>> chol(coefMatrix);
-                _solution->rawTemperature() = chol.solve(vector);*/
+                dt = timeStep->timeStep();
                 Eigen::VectorXd newSolution;
-                EulerImplicit(volumeMatrix, matrix, indep, dt, _solution->rawTemperature(), newSolution);
-                timeStep.nextTimeStep(_solution.get());
-                _solution->rawTemperature() = newSolution;
-                save(savefile, timeStep.currentTime(), _solution.get(), problem->mesh());
-            }
-
-            save_contour(savefile, imgfile ,1920,1080);
-
-            
-        }
-        void initfile(const std::string& filename)
-        {
-            std::ofstream file;
-            file.open(filename, std::ios::trunc);
-            if (file.is_open())
-            {
-                file << "X" << "," << "Y" << "," << "Value" << "," << "VX1" << "," << "VY1" << "," << "VX2" << "," << "VY2" << "," << "VX3" << "," << "VY3" << std::endl;
-                file.close();
-            }
-        }
-        void save(const std::string& filename, double time, field::Fields* _solution, const mesh::Mesh* pMesh)
-        {
-            std::ofstream file;
-            file.open(filename, std::ios::app);
-            if (file.is_open())
-            {
-                double deltax = static_cast<double>(100)/3.0 * time;
-                for (int i = 0; i < _solution->temperature().size(); i++)
+                EulerImplicit(volumeMatrix, matrix, indep, dt, _solution->scalarField(field::temperature), newSolution);
+                _solution->scalarField(field::temperature) = newSolution;
+                for (auto activity : _timeStepActivities)
                 {
-                    auto cell = pMesh->cells()->at(i).get();
-                    if (cell->nodes().size() < 3)
-                    {
-                        break;
-                    }
-                    auto n0 = cell->nodes().at(0);
-                    auto n1 = cell->nodes().at(1);
-                    auto n2 = cell->nodes().at(2);
-
-                    vector2d pos = pMesh->cells()->at(i)->getCentroid();
-
-                    file << pos.x() + deltax<< "," << pos.y() << "," << _solution->rawTemperature()(i)
-                        << "," << n0->pos().x() + deltax << "," << n1->pos().x() + deltax
-                        << "," << n2->pos().x() + deltax << "," << n0->pos().y()
-                        << "," << n1->pos().y() << "," << n2->pos().y() << std::endl;
+                    activity->timeStepAction(timeStep->currentTime(), dt, problem, _solution.get());
                 }
-                file.close();
+                timeStep->nextTimeStep(_solution.get());        
             }
+
+            //save_contour(savefile, imgfile ,1920,1080);           
         }
-        void save_contour(const std::string& filename, const std::string& contour_filename, size_t Rx, size_t Ry)
+
+        void addActivity(TimeStepActivity* activity)
         {
-            std::cout << "Saving: " << filename << " to: "<<contour_filename <<" ..." << std::endl;
-            std::string command = "matlab  -batch \"plot_result('"+filename+"','"+contour_filename+"',"+std::to_string(Rx)+","+ std::to_string(Ry)+")\"";
-            system(command.c_str());
-            std::cout << "saved" << std::endl;
-            std::string openimg = "\"" + contour_filename + "\"";
-            system(openimg.c_str());
+            _timeStepActivities.push_back(activity);
         }
+
+
+
+        
+
     private:
         MatrixBuilder* _builder;
         std::unique_ptr<field::Fields> _solution;
+        std::vector<TimeStepActivity*> _timeStepActivities;
     };
 }

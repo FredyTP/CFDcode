@@ -60,7 +60,7 @@ namespace math
          */
         template<class _Type>
         static void CentralDifferencingScheme(const mesh::Face* face,
-            const double lambda, std::vector<CellValue<_Type>>& cellvalues, double factor = 1.0)
+            const double lambda, std::vector<CellValue<_Type>>& cellvalues, _Type factor)
         {
             cellvalues.push_back(CellValue<_Type>(face->cell1(), (1 - lambda) * factor));
             cellvalues.push_back(CellValue<_Type>(face->cell2(), lambda * factor));
@@ -107,19 +107,23 @@ namespace math
             else
             {
                 //Provide this as parameter :)
-                std::vector<FaceValue<vector2d>> facevalues;
+                
                 const mesh::Cell* upstream_cell = _GetUpstreamCell(face, vel_dot_normal);
-                GradientInterpolation::GreenGaussGradient(upstream_cell, facevalues);
 
                 CellValue<double> center_cell(upstream_cell, factor);
                 cellvalues.push_back(center_cell);
+
                 vector2d celltoface = (face->getCentroid() - upstream_cell->getCentroid());
-                for (int i = 0; i < facevalues.size(); i++)
+                std::vector<CellValue<vector2d>> gradient;
+                GradientInterpolation::LeastSquaresGradient(upstream_cell, gradient,  factor);
+                GradientInterpolation::DotProduct(cellvalues, gradient, celltoface);
+
+                /*for (int i = 0; i < facevalues.size(); i++)
                 {
                     double dotprod = celltoface.dot(facevalues[i].coef);
                     FaceInterpolation::CentralDifferencingScheme(facevalues[i].face, face->lambda(), cellvalues, dotprod * factor);
                    
-                }
+                }*/
 
             }
 

@@ -1,0 +1,98 @@
+\hypertarget{classmesh_1_1_face}{}\doxysection{mesh\+::Face Class Reference}
+\label{classmesh_1_1_face}\index{mesh::Face@{mesh::Face}}
+
+
+Represents a boundary between Cells or between a \mbox{\hyperlink{classmesh_1_1_cell}{Cell}} and the boundary. For memory optimization only 1 copy of each \mbox{\hyperlink{classmesh_1_1_face}{Face}} is created, and a pointer is shared between adjacent Cells. Faces also store a reference to the cells that is boundary of. Further implementation of duplicated faces to increse speed over memory may take place. Only available for 2D cell. If face have only 1 cell when build funtion is called it is considered boundary. \mbox{\hyperlink{classmesh_1_1_cell}{Cell}} 1 can\textquotesingle{}t be null, only \mbox{\hyperlink{classmesh_1_1_cell}{Cell}} 2 can be null in case its boundary.  
+
+
+
+
+{\ttfamily \#include $<$face.\+h$>$}
+
+Inheritance diagram for mesh\+::Face\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmesh_1_1_face}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a60173f7c1462a395680c11fe67acae1b}\label{classmesh_1_1_face_a60173f7c1462a395680c11fe67acae1b}} 
+void {\bfseries set\+Nodes} (\mbox{\hyperlink{classmesh_1_1_node}{Node}} $\ast$\+\_\+node1\+\_\+, \mbox{\hyperlink{classmesh_1_1_node}{Node}} $\ast$\+\_\+node2\+\_\+)
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_accd9bfe1f9c49c5eb59ab67d9c587281}\label{classmesh_1_1_face_accd9bfe1f9c49c5eb59ab67d9c587281}} 
+void {\bfseries set\+Cells} (\mbox{\hyperlink{classmesh_1_1_cell}{Cell}} $\ast$\+\_\+cell1\+\_\+, \mbox{\hyperlink{classmesh_1_1_cell}{Cell}} $\ast$\+\_\+cell2\+\_\+)
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a1e4360b2fc01861e508fb26952f458f6}\label{classmesh_1_1_face_a1e4360b2fc01861e508fb26952f458f6}} 
+void {\bfseries set\+Cell1} (\mbox{\hyperlink{classmesh_1_1_cell}{Cell}} $\ast$\+\_\+cell1\+\_\+)
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a24955e74e094f3045677c19018d8139f}\label{classmesh_1_1_face_a24955e74e094f3045677c19018d8139f}} 
+void {\bfseries set\+Cell2} (\mbox{\hyperlink{classmesh_1_1_cell}{Cell}} $\ast$\+\_\+cell2\+\_\+)
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_ae56e7a992cca2b4d326308596295a85a}\label{classmesh_1_1_face_ae56e7a992cca2b4d326308596295a85a}} 
+vector2d {\bfseries get\+Normal} (const \mbox{\hyperlink{classmesh_1_1_cell}{Cell}} $\ast$cell) const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a9262c1f134754d6a86ea98f2dfa06b4c}\label{classmesh_1_1_face_a9262c1f134754d6a86ea98f2dfa06b4c}} 
+vector2d {\bfseries get\+Centroid} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_ae36b11dd938d9346977527fa8e45fd17}\label{classmesh_1_1_face_ae36b11dd938d9346977527fa8e45fd17}} 
+\mbox{\hyperlink{classmesh_1_1_cell}{Cell}} $\ast$ {\bfseries get\+Other\+Cell} (const \mbox{\hyperlink{classmesh_1_1_cell}{Cell}} $\ast$this\+\_\+cell) const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_ad2799312719ab6346aa9d060883e945c}\label{classmesh_1_1_face_ad2799312719ab6346aa9d060883e945c}} 
+bool {\bfseries has\+Cell1} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_aac9747a7b24e6dfcca9b3913ae9843ff}\label{classmesh_1_1_face_aac9747a7b24e6dfcca9b3913ae9843ff}} 
+bool {\bfseries has\+Cell2} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a6f99efd304805c2aa050262a92584a9f}\label{classmesh_1_1_face_a6f99efd304805c2aa050262a92584a9f}} 
+\mbox{\hyperlink{classmesh_1_1_cell}{Cell}} $\ast$ {\bfseries cell1} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a12c86cfcd23043df92e05c411a4f9fff}\label{classmesh_1_1_face_a12c86cfcd23043df92e05c411a4f9fff}} 
+\mbox{\hyperlink{classmesh_1_1_cell}{Cell}} $\ast$ {\bfseries cell2} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a278095edcdbb3af4de0b07a9ba0b5c69}\label{classmesh_1_1_face_a278095edcdbb3af4de0b07a9ba0b5c69}} 
+vector2d {\bfseries normal1} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a21aab1b8e8ac7bc026c7b404d74c0f39}\label{classmesh_1_1_face_a21aab1b8e8ac7bc026c7b404d74c0f39}} 
+vector2d {\bfseries normal2} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a8732ce833dd320ddc6db81631a180908}\label{classmesh_1_1_face_a8732ce833dd320ddc6db81631a180908}} 
+\mbox{\hyperlink{classmesh_1_1_node}{Node}} $\ast$ {\bfseries node1} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a3f4a753cfc8d0dc92d651bfc3c6245af}\label{classmesh_1_1_face_a3f4a753cfc8d0dc92d651bfc3c6245af}} 
+\mbox{\hyperlink{classmesh_1_1_node}{Node}} $\ast$ {\bfseries node2} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a6a4d512b90d0517b0f02eeaf5df6e5dc}\label{classmesh_1_1_face_a6a4d512b90d0517b0f02eeaf5df6e5dc}} 
+bool {\bfseries is\+Boundary} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_abb8ec88b7f47372ab22987c063327c6e}\label{classmesh_1_1_face_abb8ec88b7f47372ab22987c063327c6e}} 
+double {\bfseries area} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a879dd74c0387b62ab351a2487aadf364}\label{classmesh_1_1_face_a879dd74c0387b62ab351a2487aadf364}} 
+double {\bfseries distance\+Cell2\+Cell} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a6f5400c0764cd6cf4135bda914703b0e}\label{classmesh_1_1_face_a6f5400c0764cd6cf4135bda914703b0e}} 
+double {\bfseries distance\+To\+Cell1} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_ad632c39ab6b10cb0393cd5e11c90f59b}\label{classmesh_1_1_face_ad632c39ab6b10cb0393cd5e11c90f59b}} 
+double {\bfseries lambda} () const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a726be98a72a5aa1966618bb1062bbf79}\label{classmesh_1_1_face_a726be98a72a5aa1966618bb1062bbf79}} 
+void {\bfseries build} ()
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_ac9355963e073e54a06afe461fcb0bf5b}\label{classmesh_1_1_face_ac9355963e073e54a06afe461fcb0bf5b}} 
+void {\bfseries rebuild} ()
+\item 
+\mbox{\Hypertarget{classmesh_1_1_face_a39928a2ff0704b773c93c8b2e2f79af2}\label{classmesh_1_1_face_a39928a2ff0704b773c93c8b2e2f79af2}} 
+bool {\bfseries is\+Equal} (\mbox{\hyperlink{classmesh_1_1_face}{Face}} $\ast$other)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Represents a boundary between Cells or between a \mbox{\hyperlink{classmesh_1_1_cell}{Cell}} and the boundary. For memory optimization only 1 copy of each \mbox{\hyperlink{classmesh_1_1_face}{Face}} is created, and a pointer is shared between adjacent Cells. Faces also store a reference to the cells that is boundary of. Further implementation of duplicated faces to increse speed over memory may take place. Only available for 2D cell. If face have only 1 cell when build funtion is called it is considered boundary. \mbox{\hyperlink{classmesh_1_1_cell}{Cell}} 1 can\textquotesingle{}t be null, only \mbox{\hyperlink{classmesh_1_1_cell}{Cell}} 2 can be null in case its boundary. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/mesh/base/face.\+h\end{DoxyCompactItemize}

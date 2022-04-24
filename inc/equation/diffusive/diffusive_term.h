@@ -13,7 +13,7 @@
 #include <math/var/system_submatrix.h>
 #include <mesh/base/cell.h>
 #include <mesh/base/face.h>
-#include <field/field.h>
+#include <field/fields.h>
 
 
 namespace term
@@ -26,30 +26,30 @@ namespace term
         }
 
 
-        void calculateBothCell(math::SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* field) const
+        void calculateBothCell(math::SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* fields) const
         {
-            double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(face->cell1(), face, field);
+            double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(face->cell1(), face, fields);
             std::vector<math::CellValue<double>> cellvalues;
-            _gradientFlux->integrateGradientFace(cellvalues, diffusionCoef, face);
+            _gradientFlux->integrateGradientFace(cellvalues, -diffusionCoef, face);
             submatrix->addFaceValues(face, cellvalues);
 
                 
         }
            
-        void calculateOneCell(math::SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* field, bool isBoundaryCell = false) const
+        void calculateOneCell(math::SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* fields, bool isBoundaryCell = false) const
         {
-            double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(face->cell1(), face, field);
+            double diffusionCoef = DiffusiveTerm::GetDiffusionCoeficient(face->cell1(), face, fields);
             std::vector<math::CellValue<double>> cellvalues;
-            _gradientFlux->integrateGradientFace(cellvalues, diffusionCoef, face);
+            _gradientFlux->integrateGradientFace(cellvalues, -diffusionCoef, face);
             submatrix->addCellValues(isBoundaryCell ? face->cell2() : face->cell1(), cellvalues, isBoundaryCell);
 
         }
 
 
-        double static GetDiffusionCoeficient(const mesh::Cell* cell, const mesh::Face* face, const field::Fields* field)
+        double static GetDiffusionCoeficient(const mesh::Cell* cell, const mesh::Face* face, const field::Fields* fields)
         {
             //For generalization this could be get from a labda function or class
-            return cell->material()->conductivity(field->scalarField(cell));
+            return cell->material()->conductivity(cell,fields);
         }
 
         void setGradientFlux(term::GradientFlux* gradientFlux)

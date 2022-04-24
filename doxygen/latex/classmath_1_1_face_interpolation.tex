@@ -1,0 +1,99 @@
+\hypertarget{classmath_1_1_face_interpolation}{}\doxysection{math\+::Face\+Interpolation Class Reference}
+\label{classmath_1_1_face_interpolation}\index{math::FaceInterpolation@{math::FaceInterpolation}}
+
+
+{\ttfamily \#include $<$face\+\_\+interpolation.\+h$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class \+\_\+\+Type $>$ }\\static void \mbox{\hyperlink{classmath_1_1_face_interpolation_abc6549627210f729c0448cbc5aef7106}{Upwind\+Differencing\+Scheme}} (const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$face, const double vel\+\_\+dot\+\_\+normal, std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ \+\_\+\+Type $>$$>$ \&cellvalues, double factor=1.\+0)
+\begin{DoxyCompactList}\small\item\em Computes the Upwind Differencing Scheme(\+U\+D\+S) interpolation on the cell\textquotesingle{}s face. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \+\_\+\+Type $>$ }\\static void \mbox{\hyperlink{classmath_1_1_face_interpolation_ae94ee521a9e8b0d8f3faf5e100187034}{Central\+Differencing\+Scheme}} (const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$face, const double lambda, std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ \+\_\+\+Type $>$$>$ \&cellvalues, \+\_\+\+Type factor)
+\begin{DoxyCompactList}\small\item\em Computes the Central Differencing Scheme (C\+DS) interpolation on the cell\textquotesingle{}s face. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \+\_\+\+Type $>$ }\\static void \mbox{\hyperlink{classmath_1_1_face_interpolation_a91fe4bc5ae7b95776c1c01b9236e2498}{Power\+Law}} (const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$face, const double peclet\+\_\+number, const double lambda, std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ \+\_\+\+Type $>$$>$ \&cellvalues, double factor=1.\+0)
+\item 
+\mbox{\Hypertarget{classmath_1_1_face_interpolation_a730fc8c0ce2a7616ea5669791b1b4511}\label{classmath_1_1_face_interpolation_a730fc8c0ce2a7616ea5669791b1b4511}} 
+static void {\bfseries Second\+Order\+Upwind} (const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell, const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$face, double vel\+\_\+dot\+\_\+normal, std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ double $>$$>$ \&cellvalues, double factor=1.\+0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class containing different interpolation schemes to interpolate field values in the cell face 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmath_1_1_face_interpolation_ae94ee521a9e8b0d8f3faf5e100187034}\label{classmath_1_1_face_interpolation_ae94ee521a9e8b0d8f3faf5e100187034}} 
+\index{math::FaceInterpolation@{math::FaceInterpolation}!CentralDifferencingScheme@{CentralDifferencingScheme}}
+\index{CentralDifferencingScheme@{CentralDifferencingScheme}!math::FaceInterpolation@{math::FaceInterpolation}}
+\doxysubsubsection{\texorpdfstring{CentralDifferencingScheme()}{CentralDifferencingScheme()}}
+{\footnotesize\ttfamily template$<$class \+\_\+\+Type $>$ \\
+static void math\+::\+Face\+Interpolation\+::\+Central\+Differencing\+Scheme (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$}]{face,  }\item[{const double}]{lambda,  }\item[{std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ \+\_\+\+Type $>$$>$ \&}]{cellvalues,  }\item[{\+\_\+\+Type}]{factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Computes the Central Differencing Scheme (C\+DS) interpolation on the cell\textquotesingle{}s face. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lamba} & relation of cell distance to face divided to distance of centroid\textquotesingle{}s cells connected bu the face \\
+\hline
+{\em phi\+\_\+cell} & value of phi of the cell \\
+\hline
+{\em phi\+\_\+neig} & value of phi of neightbour cell \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmath_1_1_face_interpolation_a91fe4bc5ae7b95776c1c01b9236e2498}\label{classmath_1_1_face_interpolation_a91fe4bc5ae7b95776c1c01b9236e2498}} 
+\index{math::FaceInterpolation@{math::FaceInterpolation}!PowerLaw@{PowerLaw}}
+\index{PowerLaw@{PowerLaw}!math::FaceInterpolation@{math::FaceInterpolation}}
+\doxysubsubsection{\texorpdfstring{PowerLaw()}{PowerLaw()}}
+{\footnotesize\ttfamily template$<$class \+\_\+\+Type $>$ \\
+static void math\+::\+Face\+Interpolation\+::\+Power\+Law (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$}]{face,  }\item[{const double}]{peclet\+\_\+number,  }\item[{const double}]{lambda,  }\item[{std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ \+\_\+\+Type $>$$>$ \&}]{cellvalues,  }\item[{double}]{factor = {\ttfamily 1.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & \\
+\hline
+{\em face} & \\
+\hline
+{\em peclet\+\_\+number} & \\
+\hline
+{\em lambda} & \\
+\hline
+{\em cellvalues} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmath_1_1_face_interpolation_abc6549627210f729c0448cbc5aef7106}\label{classmath_1_1_face_interpolation_abc6549627210f729c0448cbc5aef7106}} 
+\index{math::FaceInterpolation@{math::FaceInterpolation}!UpwindDifferencingScheme@{UpwindDifferencingScheme}}
+\index{UpwindDifferencingScheme@{UpwindDifferencingScheme}!math::FaceInterpolation@{math::FaceInterpolation}}
+\doxysubsubsection{\texorpdfstring{UpwindDifferencingScheme()}{UpwindDifferencingScheme()}}
+{\footnotesize\ttfamily template$<$class \+\_\+\+Type $>$ \\
+static void math\+::\+Face\+Interpolation\+::\+Upwind\+Differencing\+Scheme (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$}]{face,  }\item[{const double}]{vel\+\_\+dot\+\_\+normal,  }\item[{std\+::vector$<$ \mbox{\hyperlink{classmath_1_1_cell_value}{Cell\+Value}}$<$ \+\_\+\+Type $>$$>$ \&}]{cellvalues,  }\item[{double}]{factor = {\ttfamily 1.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Computes the Upwind Differencing Scheme(\+U\+D\+S) interpolation on the cell\textquotesingle{}s face. 
+
+Properties\+:
+\begin{DoxyItemize}
+\item First order
+\item Unconditionallly stable(no oscillations)
+\item Numerically diffusive
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em vel\+\_\+dot\+\_\+normal} & Dot product of vel on face with normal vector to the face (pointing outside the cell) \\
+\hline
+{\em cell\+\_\+coef} & Value at the cell center \\
+\hline
+{\em cell\+\_\+neig\+\_\+coef} & Value at the cell neighbour connected by the face \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/math/interpolation/\mbox{\hyperlink{math_2interpolation_2face__interpolation_8h}{face\+\_\+interpolation.\+h}}\end{DoxyCompactItemize}

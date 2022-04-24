@@ -26,16 +26,10 @@ namespace solver
     {
         using namespace Eigen;
         VectorXd ind = (M - F * dt) * lastStep + S * dt;
-        if (simmetry)
-        {
-            SimplicialLLT<SparseMatrix<double>> linearSolver(M);
-            newStep = linearSolver.solve(ind);
-        }
-        else
-        {
-            SparseLU<SparseMatrix<double>> linearSolver(M);
-            newStep = linearSolver.solve(ind);
-        }
+
+        SparseLU<SparseMatrix<double>> linearSolver(M);
+        newStep = linearSolver.solve(ind);
+        
 
     }
     void EulerImplicit(const Eigen::SparseMatrix<double>& M, const Eigen::SparseMatrix<double>& F, const Eigen::VectorXd& S, double dt,
@@ -46,8 +40,6 @@ namespace solver
         VectorXd ind = M * lastStep + S * dt;
 
         SparseLU<SparseMatrix<double>> linearSolver(dep);
-        newStep = linearSolver.solve(ind);
-        
-
+        newStep = linearSolver.solve(ind);        
     }
 }

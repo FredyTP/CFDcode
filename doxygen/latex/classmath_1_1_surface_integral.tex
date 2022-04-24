@@ -1,0 +1,88 @@
+\hypertarget{classmath_1_1_surface_integral}{}\doxysection{math\+::Surface\+Integral Class Reference}
+\label{classmath_1_1_surface_integral}\index{math::SurfaceIntegral@{math::SurfaceIntegral}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class type $>$ }\\static type \mbox{\hyperlink{classmath_1_1_surface_integral_aa934bf104682eb5ec7351728ec9ec3b4}{midpoint}} (double area, type f\+\_\+mid)
+\begin{DoxyCompactList}\small\item\em Calculates the numeric integral O(Δx$^\wedge$2) with midpoint value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class type $>$ }\\static type \mbox{\hyperlink{classmath_1_1_surface_integral_a0b44b3a7e37247ae67071674e3cbf063}{trapezoidal}} (double area, type f\+\_\+vert1, type f\+\_\+vert2)
+\begin{DoxyCompactList}\small\item\em Calculates the numeric integral O(Δx$^\wedge$2) with vertex values. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class type $>$ }\\static type \mbox{\hyperlink{classmath_1_1_surface_integral_a781c9e761f09115ec566170974ff7f34}{simpsons}} (double area, type f\+\_\+mid, type f\+\_\+vert1, type f\+\_\+vert2)
+\begin{DoxyCompactList}\small\item\em Calculates the numeric integral O(Δx$^\wedge$4) with midpoint and vertex values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmath_1_1_surface_integral_aa934bf104682eb5ec7351728ec9ec3b4}\label{classmath_1_1_surface_integral_aa934bf104682eb5ec7351728ec9ec3b4}} 
+\index{math::SurfaceIntegral@{math::SurfaceIntegral}!midpoint@{midpoint}}
+\index{midpoint@{midpoint}!math::SurfaceIntegral@{math::SurfaceIntegral}}
+\doxysubsubsection{\texorpdfstring{midpoint()}{midpoint()}}
+{\footnotesize\ttfamily template$<$class type $>$ \\
+static type math\+::\+Surface\+Integral\+::midpoint (\begin{DoxyParamCaption}\item[{double}]{area,  }\item[{type}]{f\+\_\+mid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculates the numeric integral O(Δx$^\wedge$2) with midpoint value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em area} & Area of the face on surface integral is done \\
+\hline
+{\em f\+\_\+mid} & Value of the integrand in the face centroid \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of the numeric midpoint integral 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmath_1_1_surface_integral_a781c9e761f09115ec566170974ff7f34}\label{classmath_1_1_surface_integral_a781c9e761f09115ec566170974ff7f34}} 
+\index{math::SurfaceIntegral@{math::SurfaceIntegral}!simpsons@{simpsons}}
+\index{simpsons@{simpsons}!math::SurfaceIntegral@{math::SurfaceIntegral}}
+\doxysubsubsection{\texorpdfstring{simpsons()}{simpsons()}}
+{\footnotesize\ttfamily template$<$class type $>$ \\
+static type math\+::\+Surface\+Integral\+::simpsons (\begin{DoxyParamCaption}\item[{double}]{area,  }\item[{type}]{f\+\_\+mid,  }\item[{type}]{f\+\_\+vert1,  }\item[{type}]{f\+\_\+vert2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculates the numeric integral O(Δx$^\wedge$4) with midpoint and vertex values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em area} & Area of the face on surface integral is done \\
+\hline
+{\em f\+\_\+mid} & \\
+\hline
+{\em f\+\_\+vert1} & Value of the integrand in the vertex 1 \\
+\hline
+{\em f\+\_\+vert2} & Value of the integrand in the vertex 2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of the numeric simpsons integral 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmath_1_1_surface_integral_a0b44b3a7e37247ae67071674e3cbf063}\label{classmath_1_1_surface_integral_a0b44b3a7e37247ae67071674e3cbf063}} 
+\index{math::SurfaceIntegral@{math::SurfaceIntegral}!trapezoidal@{trapezoidal}}
+\index{trapezoidal@{trapezoidal}!math::SurfaceIntegral@{math::SurfaceIntegral}}
+\doxysubsubsection{\texorpdfstring{trapezoidal()}{trapezoidal()}}
+{\footnotesize\ttfamily template$<$class type $>$ \\
+static type math\+::\+Surface\+Integral\+::trapezoidal (\begin{DoxyParamCaption}\item[{double}]{area,  }\item[{type}]{f\+\_\+vert1,  }\item[{type}]{f\+\_\+vert2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculates the numeric integral O(Δx$^\wedge$2) with vertex values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em area} & Area of the face on surface integral is done \\
+\hline
+{\em f\+\_\+vert1} & Value of the integrand in the vertex 1 \\
+\hline
+{\em f\+\_\+vert2} & Value of the integrand in the vertex 2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of the numeric trapezoidal integral 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/math/surface\+\_\+integral.\+h\end{DoxyCompactItemize}

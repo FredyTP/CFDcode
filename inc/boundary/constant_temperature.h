@@ -10,7 +10,7 @@
 #include <boundary/boundary_condition.h>
 #include <mesh/base/cell.h>
 #include <mesh/base/face.h>
-#include <field/field.h>
+#include <field/fields.h>
 #include <math/var/system_submatrix.h>
 
 namespace bc

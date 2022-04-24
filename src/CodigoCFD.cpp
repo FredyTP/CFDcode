@@ -14,34 +14,41 @@
 #include <material/material_factory.h>
 
 #include <field/state_vector.h>
-#include <field/field.h>
+#include <field/fields.h>
 
 #include <system/problem.h>
 
 #include <solver/matrix_builder.h>
 #include <solver/stationary_solver.h>
 #include <solver/temporal_solver.h>
+#include <solver/stop/stopping_criteria.h>
+
+#include <post/contour.h>
+#include <post/time_solution_saver.h>
 
 int main()
 {
 
     sys::Problem problem;
-    int n_cell = 4096;
+    int n_mesh = 6; //1-6
+    int n_cell = pow(4,n_mesh);
 
     problem.loadProjectMesh(n_cell);
 
     problem.addConstantMaterial(1.255, 1e-5, 10, 1200);
     problem.assignMaterial();
 
-    problem.addConstTempBoundary(300);
-    problem.addConstTempBoundary(300);
-    problem.addConstTempBoundary(600);
-    problem.addConstTempBoundary(600);
+    problem.addConstTempBoundary(600);    //BOTTOM
+    problem.addConstFluxBoundary(0);    //TOP
+    problem.addConstTempBoundary(100);    //LEFT
+    problem.addConstTempBoundary(100);   //RIGHT
 
-    problem.loadProjectFaceSelection(1, n_cell);
-    problem.loadProjectFaceSelection(2, n_cell);
-    problem.loadProjectFaceSelection(3, n_cell);
-    problem.loadProjectFaceSelection(4, n_cell);
+
+
+    problem.loadProjectFaceSelection(1, n_cell); //BOTTOM
+    problem.loadProjectFaceSelection(2, n_cell); //TOP
+    problem.loadProjectFaceSelection(3, n_cell); //LEFT
+    problem.loadProjectFaceSelection(4, n_cell); //RIGHT
 
     problem.assignBoundaryCondition(0, 0);
     problem.assignBoundaryCondition(1, 1);
@@ -63,6 +70,7 @@ int main()
     std::unique_ptr<term::FaceInterpolation> secondOrderUpwind = std::make_unique<term::SecondOrderUpWind>();
     //Gradient Flux
     std::unique_ptr<term::GradientFlux> centralDiffGrad = std::make_unique<term::CentralDifferenceGradient>();
+    std::unique_ptr<term::GradientFlux> orthogonalCorrected = std::make_unique<term::OrthogonalCorrectedGradient>();
 
     problem.initEquations();
     problem.configConvectiveTerm(secondOrderUpwind.get());
@@ -74,21 +82,35 @@ int main()
     solver::TemporalSolver solver(&matrix);
     solver::StationarySolver sSolver(&matrix);
 
-    solver.solve(&problem);
+    /*sSolver.solve(&problem);
+    post::Contour contour;
+    contour.setProblem(&problem);
+    contour.setSolution(sSolver.solution());
+    contour.saveContourFile("SOUP", true);*/
 
-    /*simulation.loadMesh();
-    simulation.buildMaterials();
-    simulation.createBoundary();
-    simulation.initializeFields();
-    simulation.solve();*/
+    timestep::FixedTimeStep timeStep(0.00001);
+    solver::stop::StopAtStep stoppingCriteria(100);
+
+    solver::FixedStepActivity printTimeStep(0);
+    solver::FixedStepActivity* pPrint = &printTimeStep;
+    printTimeStep.setAction([&](double time, double dt, sys::Problem* problem, field::Fields* field)
+        {
+            std::cout <<"Step number: " << pPrint->step()<<", actual time: "<<time << std::endl;
+        });
+    solver.addActivity(&printTimeStep);
+
+
+    post::TimeSolutionSaver solutionSaver;
+    solutionSaver.initFile("newsol", 0.05);
+    solver::FixedStepActivity saveContour(10);
+    solutionSaver.saveSnapshot(problem.fields(), 0.0);
+    saveContour.setAction([&](double time, double dt, sys::Problem* problem, field::Fields* field) {
+        solutionSaver.saveSnapshot(field, time);
+        });
+    solver.addActivity(&saveContour);
+    //SOLVER
+    solver.solve(&problem, &timeStep, &stoppingCriteria);
+
+    solutionSaver.save_contour(1080, 720);
+
 }
-
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
-
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln

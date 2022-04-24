@@ -19,7 +19,7 @@
 #include <math/interpolation/face_interpolation.h>
 #include <math/adimensional.h>
 
-#include <field/field.h>
+#include <field/fields.h>
 
 
 namespace term
@@ -65,7 +65,7 @@ namespace term
     {
     public:
         PowerLaw() {}
-        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* field)
+        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* fields)
         {
             const mesh::Face* face = faceval.face;
             const mesh::Cell* cell = face->cell1();
@@ -73,7 +73,7 @@ namespace term
 
             //GEOMETRY
             vector2d normal = face->getNormal(cell);
-            vector2d vel = field->velocityField(face);
+            vector2d vel = fields->velocityField(face);
             vector2d cell2cell = othercell->getCentroid() - cell->getCentroid();
             vector2d cell2face = face->getCentroid() - cell->getCentroid();
             double x = cell2face.norm();
@@ -83,7 +83,7 @@ namespace term
             double lambda = math::Adimensional::Lambda(x, L);
 
             //PECLET
-            double density = field->scalarField(cell).density;
+            double density = fields->scalarField(field::density,cell);
             double speed = vel.dot(cell2cell);
             double conductivity = 10;//cell->material()->conductivity(field->scalarField(cell));
             double peclet_number = math::Adimensional::PecletNumber(density, speed, L, conductivity);
@@ -98,13 +98,13 @@ namespace term
     {
     public:
         SecondOrderUpWind() {}
-        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* field)
+        virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* fields)
         {
             const mesh::Face* face = faceval.face;
             const mesh::Cell* cell = face->cell1();
             const mesh::Cell* othercell = face->cell2();
             vector2d normal = face->getNormal(cell);
-            vector2d vel = field->velocityField(face);
+            vector2d vel = fields->velocityField(face);
             double vel_dot_normal = vel.dot(normal);
             vector2d r = othercell->getCentroid() - cell->getCentroid();
             vector2d rf = face->getCentroid() - cell->getCentroid();

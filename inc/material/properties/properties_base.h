@@ -7,7 +7,7 @@
  *********************************************************************/
 #pragma once
 
-#include <field/state_vector.h>
+#include <field/fields.h>
 
 namespace material
 {
@@ -17,26 +17,26 @@ namespace prop
 class DensityBase
 {
 public:
-    virtual double density(const field::ScalarStateVector& state) = 0;
+    virtual double density(const mesh::Cell* cell, const field::Fields* fields) = 0;
     virtual ~DensityBase() {};
 
 };
 class ViscosityBase
 {
 public:
-    virtual double viscosity(const field::ScalarStateVector& state) = 0;
+    virtual double viscosity(const mesh::Cell* cell, const field::Fields* fields) = 0;
     virtual ~ViscosityBase()  {};
 };
 class ConductivityBase
 {
 public:
-    virtual double conductivity(const field::ScalarStateVector& state) = 0;
+    virtual double conductivity(const mesh::Cell* cell, const field::Fields* fields) = 0;
     virtual ~ConductivityBase() {};
 };
 class SpecificHeatBase
 {
 public:
-    virtual double specificHeat(const field::ScalarStateVector& state) = 0;
+    virtual double specificHeat(const mesh::Cell* cell, const field::Fields* fields) = 0;
     virtual ~SpecificHeatBase() {};
 };
 

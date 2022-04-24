@@ -1,0 +1,49 @@
+\hypertarget{classbc_1_1_boundary_condition}{}\doxysection{bc\+::Boundary\+Condition Class Reference}
+\label{classbc_1_1_boundary_condition}\index{bc::BoundaryCondition@{bc::BoundaryCondition}}
+Inheritance diagram for bc\+::Boundary\+Condition\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbc_1_1_boundary_condition}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classbc_1_1_boundary_condition_a1043da61a1bacc6b5f8ac0c7dbd3d3f8}\label{classbc_1_1_boundary_condition_a1043da61a1bacc6b5f8ac0c7dbd3d3f8}} 
+virtual void {\bfseries calculate\+Boundary\+Condition} (\mbox{\hyperlink{classmath_1_1_system_submatrix}{math\+::\+System\+Submatrix}} $\ast$submatrix, const \mbox{\hyperlink{classfield_1_1_fields}{field\+::\+Fields}} $\ast$field) const
+\item 
+\mbox{\Hypertarget{classbc_1_1_boundary_condition_a7ee5f3872f8dbef97480e4de397c39d3}\label{classbc_1_1_boundary_condition_a7ee5f3872f8dbef97480e4de397c39d3}} 
+virtual void {\bfseries get\+Boundary\+Condition} (\mbox{\hyperlink{classmath_1_1_system_submatrix}{math\+::\+System\+Submatrix}} $\ast$submatrix, const \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$cell, const \mbox{\hyperlink{classfield_1_1_fields}{field\+::\+Fields}} $\ast$field) const =0
+\item 
+\mbox{\Hypertarget{classbc_1_1_boundary_condition_a26e1b9388ea5e15338ee569896e876c4}\label{classbc_1_1_boundary_condition_a26e1b9388ea5e15338ee569896e876c4}} 
+void {\bfseries add\+Face} (\mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$\+\_\+face\+\_\+)
+\item 
+\mbox{\Hypertarget{classbc_1_1_boundary_condition_a26f4d05a4fea90df8a292e3dde8da698}\label{classbc_1_1_boundary_condition_a26f4d05a4fea90df8a292e3dde8da698}} 
+void {\bfseries set\+Boundary} (const \mbox{\hyperlink{classmesh_1_1_mesh_selection}{mesh\+::\+Mesh\+Selection}}$<$ \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $>$ \&boundary)
+\item 
+\mbox{\Hypertarget{classbc_1_1_boundary_condition_a91859278952c233eec76cc36bb975b20}\label{classbc_1_1_boundary_condition_a91859278952c233eec76cc36bb975b20}} 
+void {\bfseries set\+Convetive\+Term} (\mbox{\hyperlink{classterm_1_1_convective_term}{term\+::\+Convective\+Term}} $\ast$\+\_\+convective\+Term\+\_\+)
+\item 
+\mbox{\Hypertarget{classbc_1_1_boundary_condition_a0a8f38d7b2a496af026f54933dd30a7c}\label{classbc_1_1_boundary_condition_a0a8f38d7b2a496af026f54933dd30a7c}} 
+void {\bfseries set\+Diffusive\+Term} (\mbox{\hyperlink{classterm_1_1_diffusive_term}{term\+::\+Diffusive\+Term}} $\ast$\+\_\+diffusive\+Term\+\_\+)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classbc_1_1_boundary_condition_a009df501ec661e795645c53d301f7534}\label{classbc_1_1_boundary_condition_a009df501ec661e795645c53d301f7534}} 
+std\+::vector$<$ \mbox{\hyperlink{classmesh_1_1_face}{mesh\+::\+Face}} $\ast$ $>$ {\bfseries \+\_\+boundary}
+\item 
+\mbox{\Hypertarget{classbc_1_1_boundary_condition_af22cb8affc6fd052dd7c19a109a7d27e}\label{classbc_1_1_boundary_condition_af22cb8affc6fd052dd7c19a109a7d27e}} 
+std\+::vector$<$ \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $\ast$ $>$ {\bfseries \+\_\+boundary\+Cells}
+\item 
+\mbox{\Hypertarget{classbc_1_1_boundary_condition_ae483e090aa11106061ce1a9d92a16356}\label{classbc_1_1_boundary_condition_ae483e090aa11106061ce1a9d92a16356}} 
+term \+::Convective\+Term $\ast$ {\bfseries \+\_\+convective\+Term} = nullptr
+\item 
+\mbox{\Hypertarget{classbc_1_1_boundary_condition_a20c813272bd4b75aadbaf64958b034ab}\label{classbc_1_1_boundary_condition_a20c813272bd4b75aadbaf64958b034ab}} 
+\mbox{\hyperlink{classterm_1_1_diffusive_term}{term\+::\+Diffusive\+Term}} $\ast$ {\bfseries \+\_\+diffusive\+Term} = nullptr
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/boundary/\mbox{\hyperlink{boundary__condition_8h}{boundary\+\_\+condition.\+h}}\end{DoxyCompactItemize}

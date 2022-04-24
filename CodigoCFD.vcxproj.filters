@@ -73,9 +73,6 @@
     <Filter Include="Include\math\var">
       <UniqueIdentifier>{85a773eb-38d8-4b38-a084-4a6e83ce844f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Include\time">
-      <UniqueIdentifier>{fa3236d0-05d8-4c7a-a9e9-d7fbf3a7614b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Include\solver\propagator">
       <UniqueIdentifier>{53030057-6f9e-46af-abe0-af1554509a2c}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,21 @@
     </Filter>
     <Filter Include="Include\equation\temporal">
       <UniqueIdentifier>{30ade1f1-6fd4-483c-becc-dc5d8b511a80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\math\interpolation">
+      <UniqueIdentifier>{343b8fa1-5b71-4972-aa4d-d31e37f6323a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\solver\time">
+      <UniqueIdentifier>{fa3236d0-05d8-4c7a-a9e9-d7fbf3a7614b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\post">
+      <UniqueIdentifier>{d2debd59-e174-4eb6-805a-d81142c9422b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\solver\activity">
+      <UniqueIdentifier>{1c674fa8-51cb-4dd6-bf69-7cc3b4eb1d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\solver\stop">
+      <UniqueIdentifier>{4335029a-eda0-4a31-a573-6478f43df917}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -159,7 +171,7 @@
     <ClInclude Include="inc\material\material_factory.h">
       <Filter>Include\material</Filter>
     </ClInclude>
-    <ClInclude Include="inc\field\field.h">
+    <ClInclude Include="inc\field\fields.h">
       <Filter>Include\field</Filter>
     </ClInclude>
     <ClInclude Include="inc\field\state_vector.h">
@@ -185,9 +197,6 @@
     </ClInclude>
     <ClInclude Include="inc\mesh\base\vector.h">
       <Filter>Include\mesh\base</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\time\time_step.h">
-      <Filter>Include\time</Filter>
     </ClInclude>
     <ClInclude Include="inc\solver\propagator\eurler_explicit.h">
       <Filter>Include\solver\propagator</Filter>
@@ -246,6 +255,24 @@
     <ClInclude Include="inc\equation\temporal\temporal_term.h">
       <Filter>Include\equation\temporal</Filter>
     </ClInclude>
+    <ClInclude Include="inc\solver\time\time_step.h">
+      <Filter>Include\solver\time</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\post\contour.h">
+      <Filter>Include\post</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\solver\activity\time_step_activity.h">
+      <Filter>Include\solver\activity</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\solver\activity\iteration_activity.h">
+      <Filter>Include\solver\activity</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\solver\stop\stopping_criteria.h">
+      <Filter>Include\solver\stop</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\post\time_solution_saver.h">
+      <Filter>Include\post</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mesh\mesh.cpp">
@@ -263,7 +290,7 @@
     <ClCompile Include="src\CodigoCFD.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\field\field.cpp">
+    <ClCompile Include="src\field\fields.cpp">
       <Filter>Source\field</Filter>
     </ClCompile>
     <ClCompile Include="src\boundary\boundary_condition.cpp">
@@ -274,6 +301,9 @@
     </ClCompile>
     <ClCompile Include="src\system\problem.cpp">
       <Filter>Source\system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\interpolation\gradient_interpolation.cpp">
+      <Filter>Source\math\interpolation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

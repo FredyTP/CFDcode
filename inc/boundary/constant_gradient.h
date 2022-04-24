@@ -10,7 +10,7 @@
 #include <boundary/boundary_condition.h>
 #include <mesh/base/cell.h>
 #include <mesh/base/face.h>
-#include <field/field.h>
+#include <field/fields.h>
 #include <math/var/system_submatrix.h>
 
 namespace bc
@@ -18,7 +18,7 @@ namespace bc
     class ConstantFlux : public BoundaryCondition
     {
     public:
-        ConstantFlux(double _flux_) :_flux(_flux_) {
+        ConstantFlux(double _flux_) : _flux(_flux_) {
             _convectiveTerm = nullptr;
             _diffusiveTerm = nullptr;
         };
@@ -26,7 +26,7 @@ namespace bc
         virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field) const
         {
             _diffusiveTerm->calculateOneCell(submatrix, cell->faces()[0], field, true);
-            submatrix->addCellValues(cell,math::CellValue<double>(nullptr,_flux));                                           
+            submatrix->addCellValues(cell, math::CellValue<double>(nullptr, _flux));
         }
 
     private:

@@ -24,8 +24,8 @@ public:
         _gasConstant = _refDensity * _refTemperature / _refPressure;
 
     }
-    virtual double density(const field::ScalarStateVector& state) final {
-        return _gasConstant * state.pressure / state.temperature;
+    virtual double density(const mesh::Cell* cell, const field::Fields* fields) final {
+        return _gasConstant * fields->scalarField(field::pressure, cell) / fields->scalarField(field::temperature, cell);
     }
     ~IdealGasDensity() override {}
 private:

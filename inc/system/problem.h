@@ -24,7 +24,8 @@
 #include <boundary/constant_gradient.h>
 
 //----------FIELD----------//
-#include <field/field.h>
+#include <field/fields.h>
+#include <field/state_vector.h>
 
 //----------EQUATION----------//
 #include <equation/equation_term.h>

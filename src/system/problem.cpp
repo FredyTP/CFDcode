@@ -97,10 +97,11 @@ namespace sys
         using namespace field;
 
         _fields = std::make_unique<Fields>(_mesh.get());
-        auto& densityField = _fields->rawDensity();
-        auto& tempField = _fields->rawTemperature();
-        auto& pressField = _fields->rawPressure();
-        auto& velField = _fields->rawVelocity();
+        _fields->init();
+        auto& densityField = _fields->scalarField(field::density);
+        auto& tempField = _fields->scalarField(field::temperature);
+        auto& pressField = _fields->scalarField(field::pressure);
+        auto& velField = _fields->velocityField();
 
         for (size_t i = 0; i < densityField.size(); i++)
         {
@@ -108,7 +109,7 @@ namespace sys
             pressField[i] = 101325;
             tempField[i] = 298.15;
             //THIS IS A DERIVED FIELD SO... CHANGE THAT
-            densityField[i] = _mesh->cells()->at(i)->material()->density(_fields->scalarField(_mesh->cells()->at(i).get()));
+            densityField[i] = _mesh->cells()->at(i)->material()->density(_mesh->cells()->at(i).get(), _fields.get());
         }
         for (size_t i = 0; i < velField.size(); i++)
         {

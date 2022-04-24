@@ -23,19 +23,18 @@ namespace math
     class GradientInterpolation
     {
     public:
-        static void GreenGaussGradient(const mesh::Cell* cell, std::vector<FaceValue<vector2d>>& facevalues)
-        {
-            double volume = cell->volume();
-            for (auto face : cell->faces())
-            {
-                facevalues.push_back(FaceValue<vector2d>(face, face->area() / volume * face->getNormal(cell)));
-            }
-        }
+
+
+        static void FiniteDifferenceGradient(const mesh::Face* face, std::vector<CellValue<vector2d>>& cellvalues, double factor = 1.0);
+
+        //Green-Gauss Gradient interpolation
+        static void GreenGaussGradient(const mesh::Cell* cell, std::vector<CellValue<vector2d>>& cellvalues, double factor = 1.0);
+
 
         //Least Squares Gradient
-        static void LeastSquaresGradient(const mesh::Cell* cell, std::vector<FaceValue<vector2d>>& facevalues)
-        {
-            //TODO: implement
-        }
+        static void LeastSquaresGradient(const mesh::Cell* cell, std::vector<CellValue<vector2d>>& cellvalues, double factor = 1.0);
+
+        static void DotProduct(std::vector<CellValue<double>>& result, std::vector<CellValue<vector2d>>& cellvalues, vector2d vec);
     };
+
 }

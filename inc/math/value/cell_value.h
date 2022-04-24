@@ -21,6 +21,7 @@ namespace math
             coef *= -1;
             return *this;
         }
+
         const mesh::Cell* cell;
         _Ty coef;
 

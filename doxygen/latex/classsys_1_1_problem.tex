@@ -1,0 +1,285 @@
+\hypertarget{classsys_1_1_problem}{}\doxysection{sys\+::Problem Class Reference}
+\label{classsys_1_1_problem}\index{sys::Problem@{sys::Problem}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classsys_1_1_problem_a08ac9a5a7c16419c90d62e2420fff68f}{load\+Mesh}} (std\+::string node\+\_\+path, std\+::string cell\+\_\+path)
+\item 
+void \mbox{\hyperlink{classsys_1_1_problem_ae643587ee4c791a6b2c75dc5a3772ba1}{load\+Project\+Mesh}} (int n\+\_\+cell)
+\item 
+int \mbox{\hyperlink{classsys_1_1_problem_a77d72256a865d29b85366f7834190fbe}{add\+Constant\+Material}} (double density, double viscosity, double conductivity, double specific\+\_\+heat)
+\item 
+int \mbox{\hyperlink{classsys_1_1_problem_aaf51825541222a305f1df3ed8ff35580}{add\+Material}} (\mbox{\hyperlink{classmaterial_1_1_material_factory}{material\+::\+Material\+Factory}} \&material\+Factory)
+\item 
+void \mbox{\hyperlink{classsys_1_1_problem_ab2e177b3cdf2e169d60bf29fdca2471f}{assign\+Material}} (int index, \mbox{\hyperlink{classmesh_1_1_mesh_selection}{mesh\+::\+Mesh\+Selection}}$<$ \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $>$ \&selection)
+\item 
+void \mbox{\hyperlink{classsys_1_1_problem_a81c54e11baf22e196fac249b4276d5be}{assign\+Material}} (int index=0)
+\item 
+int \mbox{\hyperlink{classsys_1_1_problem_a1c85c2b1e28d3f641f566d593005d2ef}{load\+Face\+Selection}} (const std\+::string path)
+\item 
+int \mbox{\hyperlink{classsys_1_1_problem_a15582770a19fafabb9ec3111a22610bb}{load\+Project\+Face\+Selection}} (int index, int n\+\_\+cell)
+\item 
+int \mbox{\hyperlink{classsys_1_1_problem_a083b9e7a274bbe5c19cb11afe468ea8f}{add\+Const\+Temp\+Boundary}} (double temperature)
+\item 
+int \mbox{\hyperlink{classsys_1_1_problem_a25ba57828410226d53b4cc1daa7e94bb}{add\+Const\+Flux\+Boundary}} (double flux)
+\item 
+void \mbox{\hyperlink{classsys_1_1_problem_a807be50475588f30f168dfd326702616}{assign\+Boundary\+Condition}} (int bc, int selection)
+\item 
+void \mbox{\hyperlink{classsys_1_1_problem_ac10137251f65c5b5178d93f27ad40e1d}{initialize\+Fields}} (vector2d velocity, \mbox{\hyperlink{structfield_1_1_scalar_state_vector}{field\+::\+Scalar\+State\+Vector}} scalar)
+\item 
+void \mbox{\hyperlink{classsys_1_1_problem_a4a01921e97ad7f815b728758354c9574}{init\+Equations}} ()
+\item 
+void \mbox{\hyperlink{classsys_1_1_problem_acefee339e189389fdad6daa8f183668e}{config\+Convective\+Term}} (\mbox{\hyperlink{classterm_1_1_face_interpolation}{term\+::\+Face\+Interpolation}} $\ast$face\+Interpolation)
+\item 
+void \mbox{\hyperlink{classsys_1_1_problem_a6410de8aa2ca00b172ce3f7bf264f48e}{config\+Diffusive\+Term}} (\mbox{\hyperlink{classterm_1_1_gradient_flux}{term\+::\+Gradient\+Flux}} $\ast$gradient\+Flux)
+\item 
+void \mbox{\hyperlink{classsys_1_1_problem_ac122c377bd760fe4d6f4f1f9a7158629}{build\+Problem}} ()
+\item 
+\mbox{\Hypertarget{classsys_1_1_problem_a06ce525e6a088b0b4403f4cc60a3ff44}\label{classsys_1_1_problem_a06ce525e6a088b0b4403f4cc60a3ff44}} 
+\mbox{\hyperlink{classmesh_1_1_mesh}{mesh\+::\+Mesh}} $\ast$ {\bfseries mesh} ()
+\item 
+\mbox{\Hypertarget{classsys_1_1_problem_ae37a1ce7a53b6998a20d7a80adfacd39}\label{classsys_1_1_problem_ae37a1ce7a53b6998a20d7a80adfacd39}} 
+\mbox{\hyperlink{classfield_1_1_fields}{field\+::\+Fields}} $\ast$ {\bfseries fields} ()
+\item 
+\mbox{\Hypertarget{classsys_1_1_problem_a73ccc6dd4a29b864c0a3ea2f21d13e9e}\label{classsys_1_1_problem_a73ccc6dd4a29b864c0a3ea2f21d13e9e}} 
+void {\bfseries for\+\_\+each\+\_\+boundary} (std\+::function$<$ void(\mbox{\hyperlink{classbc_1_1_boundary_condition}{bc\+::\+Boundary\+Condition}} $\ast$)$>$ on\+\_\+boundary)
+\item 
+\mbox{\Hypertarget{classsys_1_1_problem_ac7dbc4315e07fcc2e2f37176fad5f961}\label{classsys_1_1_problem_ac7dbc4315e07fcc2e2f37176fad5f961}} 
+void {\bfseries for\+\_\+each\+\_\+face\+Term} (std\+::function$<$ void(\mbox{\hyperlink{classterm_1_1_face_equation_term}{term\+::\+Face\+Equation\+Term}} $\ast$)$>$ on\+\_\+face\+\_\+term)
+\item 
+\mbox{\Hypertarget{classsys_1_1_problem_aea625fe3dfce2a314e8298221db99d98}\label{classsys_1_1_problem_aea625fe3dfce2a314e8298221db99d98}} 
+\mbox{\hyperlink{classterm_1_1_cell_equation_term}{term\+::\+Cell\+Equation\+Term}} $\ast$ {\bfseries termporal\+Term} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsys_1_1_problem_a77d72256a865d29b85366f7834190fbe}\label{classsys_1_1_problem_a77d72256a865d29b85366f7834190fbe}} 
+\index{sys::Problem@{sys::Problem}!addConstantMaterial@{addConstantMaterial}}
+\index{addConstantMaterial@{addConstantMaterial}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{addConstantMaterial()}{addConstantMaterial()}}
+{\footnotesize\ttfamily int sys\+::\+Problem\+::add\+Constant\+Material (\begin{DoxyParamCaption}\item[{double}]{density,  }\item[{double}]{viscosity,  }\item[{double}]{conductivity,  }\item[{double}]{specific\+\_\+heat }\end{DoxyParamCaption})}
+
+Add Material to material list with specified constant value properties
+
+
+\begin{DoxyParams}{Parameters}
+{\em density} & \\
+\hline
+{\em viscosity} & \\
+\hline
+{\em conductivity} & \\
+\hline
+{\em specific\+\_\+heat} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsys_1_1_problem_a25ba57828410226d53b4cc1daa7e94bb}\label{classsys_1_1_problem_a25ba57828410226d53b4cc1daa7e94bb}} 
+\index{sys::Problem@{sys::Problem}!addConstFluxBoundary@{addConstFluxBoundary}}
+\index{addConstFluxBoundary@{addConstFluxBoundary}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{addConstFluxBoundary()}{addConstFluxBoundary()}}
+{\footnotesize\ttfamily int sys\+::\+Problem\+::add\+Const\+Flux\+Boundary (\begin{DoxyParamCaption}\item[{double}]{flux }\end{DoxyParamCaption})}
+
+Adds new constant temperature boundary condition to the list. A mesh selection should be assigned to the bc.
+
+
+\begin{DoxyParams}{Parameters}
+{\em flux} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+index 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsys_1_1_problem_a083b9e7a274bbe5c19cb11afe468ea8f}\label{classsys_1_1_problem_a083b9e7a274bbe5c19cb11afe468ea8f}} 
+\index{sys::Problem@{sys::Problem}!addConstTempBoundary@{addConstTempBoundary}}
+\index{addConstTempBoundary@{addConstTempBoundary}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{addConstTempBoundary()}{addConstTempBoundary()}}
+{\footnotesize\ttfamily int sys\+::\+Problem\+::add\+Const\+Temp\+Boundary (\begin{DoxyParamCaption}\item[{double}]{temperature }\end{DoxyParamCaption})}
+
+Adds new constant temperature boundary condition to the list. A mesh selection should be assigned to the bc.
+
+
+\begin{DoxyParams}{Parameters}
+{\em temperature} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+index 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsys_1_1_problem_aaf51825541222a305f1df3ed8ff35580}\label{classsys_1_1_problem_aaf51825541222a305f1df3ed8ff35580}} 
+\index{sys::Problem@{sys::Problem}!addMaterial@{addMaterial}}
+\index{addMaterial@{addMaterial}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{addMaterial()}{addMaterial()}}
+{\footnotesize\ttfamily int sys\+::\+Problem\+::add\+Material (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmaterial_1_1_material_factory}{material\+::\+Material\+Factory}} \&}]{material\+Factory }\end{DoxyParamCaption})}
+
+Add Material to material list from a material factory. The material\+Factory must be configured first in order to correctly import the material.
+
+
+\begin{DoxyParams}{Parameters}
+{\em material\+Factory} & contains the material to be imported \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the index of the material. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsys_1_1_problem_a807be50475588f30f168dfd326702616}\label{classsys_1_1_problem_a807be50475588f30f168dfd326702616}} 
+\index{sys::Problem@{sys::Problem}!assignBoundaryCondition@{assignBoundaryCondition}}
+\index{assignBoundaryCondition@{assignBoundaryCondition}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{assignBoundaryCondition()}{assignBoundaryCondition()}}
+{\footnotesize\ttfamily void sys\+::\+Problem\+::assign\+Boundary\+Condition (\begin{DoxyParamCaption}\item[{int}]{bc,  }\item[{int}]{selection }\end{DoxyParamCaption})}
+
+Assigns a boundary selection to a face selection(\+M\+U\+S\+T be made up O\+N\+L\+Y by boundary faces).
+
+
+\begin{DoxyParams}{Parameters}
+{\em bc} & boundary condition index \\
+\hline
+{\em selection} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsys_1_1_problem_ab2e177b3cdf2e169d60bf29fdca2471f}\label{classsys_1_1_problem_ab2e177b3cdf2e169d60bf29fdca2471f}} 
+\index{sys::Problem@{sys::Problem}!assignMaterial@{assignMaterial}}
+\index{assignMaterial@{assignMaterial}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{assignMaterial()}{assignMaterial()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void sys\+::\+Problem\+::assign\+Material (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{\mbox{\hyperlink{classmesh_1_1_mesh_selection}{mesh\+::\+Mesh\+Selection}}$<$ \mbox{\hyperlink{classmesh_1_1_cell}{mesh\+::\+Cell}} $>$ \&}]{selection }\end{DoxyParamCaption})}
+
+Assign a Material from material list at position index to the mesh selection.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & 0 based index of the material \\
+\hline
+{\em selection} & selection of cells from the problem mesh \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsys_1_1_problem_a81c54e11baf22e196fac249b4276d5be}\label{classsys_1_1_problem_a81c54e11baf22e196fac249b4276d5be}} 
+\index{sys::Problem@{sys::Problem}!assignMaterial@{assignMaterial}}
+\index{assignMaterial@{assignMaterial}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{assignMaterial()}{assignMaterial()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void sys\+::\+Problem\+::assign\+Material (\begin{DoxyParamCaption}\item[{int}]{index = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Assign material at index to all the mesh cells
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & 0 based index of the material (defaults to 0) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsys_1_1_problem_ac122c377bd760fe4d6f4f1f9a7158629}\label{classsys_1_1_problem_ac122c377bd760fe4d6f4f1f9a7158629}} 
+\index{sys::Problem@{sys::Problem}!buildProblem@{buildProblem}}
+\index{buildProblem@{buildProblem}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{buildProblem()}{buildProblem()}}
+{\footnotesize\ttfamily void sys\+::\+Problem\+::build\+Problem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Configures all missing things that need to be done. \mbox{\Hypertarget{classsys_1_1_problem_acefee339e189389fdad6daa8f183668e}\label{classsys_1_1_problem_acefee339e189389fdad6daa8f183668e}} 
+\index{sys::Problem@{sys::Problem}!configConvectiveTerm@{configConvectiveTerm}}
+\index{configConvectiveTerm@{configConvectiveTerm}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{configConvectiveTerm()}{configConvectiveTerm()}}
+{\footnotesize\ttfamily void sys\+::\+Problem\+::config\+Convective\+Term (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classterm_1_1_face_interpolation}{term\+::\+Face\+Interpolation}} $\ast$}]{face\+Interpolation }\end{DoxyParamCaption})}
+
+Changes the face interpolation method with the one specified
+
+
+\begin{DoxyParams}{Parameters}
+{\em face\+Interpolation} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsys_1_1_problem_a6410de8aa2ca00b172ce3f7bf264f48e}\label{classsys_1_1_problem_a6410de8aa2ca00b172ce3f7bf264f48e}} 
+\index{sys::Problem@{sys::Problem}!configDiffusiveTerm@{configDiffusiveTerm}}
+\index{configDiffusiveTerm@{configDiffusiveTerm}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{configDiffusiveTerm()}{configDiffusiveTerm()}}
+{\footnotesize\ttfamily void sys\+::\+Problem\+::config\+Diffusive\+Term (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classterm_1_1_gradient_flux}{term\+::\+Gradient\+Flux}} $\ast$}]{gradient\+Flux }\end{DoxyParamCaption})}
+
+Changes the gradient flux method with the one specified.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gradient\+Flux} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsys_1_1_problem_a4a01921e97ad7f815b728758354c9574}\label{classsys_1_1_problem_a4a01921e97ad7f815b728758354c9574}} 
+\index{sys::Problem@{sys::Problem}!initEquations@{initEquations}}
+\index{initEquations@{initEquations}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{initEquations()}{initEquations()}}
+{\footnotesize\ttfamily void sys\+::\+Problem\+::init\+Equations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Init Basic equation terms. \mbox{\Hypertarget{classsys_1_1_problem_ac10137251f65c5b5178d93f27ad40e1d}\label{classsys_1_1_problem_ac10137251f65c5b5178d93f27ad40e1d}} 
+\index{sys::Problem@{sys::Problem}!initializeFields@{initializeFields}}
+\index{initializeFields@{initializeFields}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{initializeFields()}{initializeFields()}}
+{\footnotesize\ttfamily void sys\+::\+Problem\+::initialize\+Fields (\begin{DoxyParamCaption}\item[{vector2d}]{velocity,  }\item[{\mbox{\hyperlink{structfield_1_1_scalar_state_vector}{field\+::\+Scalar\+State\+Vector}}}]{scalar }\end{DoxyParamCaption})}
+
+Initialize fields based on the parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em velocity} & \\
+\hline
+{\em scalar} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsys_1_1_problem_a1c85c2b1e28d3f641f566d593005d2ef}\label{classsys_1_1_problem_a1c85c2b1e28d3f641f566d593005d2ef}} 
+\index{sys::Problem@{sys::Problem}!loadFaceSelection@{loadFaceSelection}}
+\index{loadFaceSelection@{loadFaceSelection}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{loadFaceSelection()}{loadFaceSelection()}}
+{\footnotesize\ttfamily int sys\+::\+Problem\+::load\+Face\+Selection (\begin{DoxyParamCaption}\item[{const std\+::string}]{path }\end{DoxyParamCaption})}
+
+Adds and loads a new face selection from the specified file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the index of the selection in the list 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsys_1_1_problem_a08ac9a5a7c16419c90d62e2420fff68f}\label{classsys_1_1_problem_a08ac9a5a7c16419c90d62e2420fff68f}} 
+\index{sys::Problem@{sys::Problem}!loadMesh@{loadMesh}}
+\index{loadMesh@{loadMesh}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{loadMesh()}{loadMesh()}}
+{\footnotesize\ttfamily void sys\+::\+Problem\+::load\+Mesh (\begin{DoxyParamCaption}\item[{std\+::string}]{node\+\_\+path,  }\item[{std\+::string}]{cell\+\_\+path }\end{DoxyParamCaption})}
+
+Loads Mesh from file data\+: node\+\_\+path and cell\+\_\+path. With the Luismi format loader
+
+
+\begin{DoxyParams}{Parameters}
+{\em node\+\_\+path} & path to node file \\
+\hline
+{\em cell\+\_\+path} & path to cell file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsys_1_1_problem_a15582770a19fafabb9ec3111a22610bb}\label{classsys_1_1_problem_a15582770a19fafabb9ec3111a22610bb}} 
+\index{sys::Problem@{sys::Problem}!loadProjectFaceSelection@{loadProjectFaceSelection}}
+\index{loadProjectFaceSelection@{loadProjectFaceSelection}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{loadProjectFaceSelection()}{loadProjectFaceSelection()}}
+{\footnotesize\ttfamily int sys\+::\+Problem\+::load\+Project\+Face\+Selection (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{int}]{n\+\_\+cell }\end{DoxyParamCaption})}
+
+Loads the project face selection for boundary coundition.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & number of the selection \\
+\hline
+{\em n\+\_\+cell} & number of cells \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the index of the selection in the list 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsys_1_1_problem_ae643587ee4c791a6b2c75dc5a3772ba1}\label{classsys_1_1_problem_ae643587ee4c791a6b2c75dc5a3772ba1}} 
+\index{sys::Problem@{sys::Problem}!loadProjectMesh@{loadProjectMesh}}
+\index{loadProjectMesh@{loadProjectMesh}!sys::Problem@{sys::Problem}}
+\doxysubsubsection{\texorpdfstring{loadProjectMesh()}{loadProjectMesh()}}
+{\footnotesize\ttfamily void sys\+::\+Problem\+::load\+Project\+Mesh (\begin{DoxyParamCaption}\item[{int}]{n\+\_\+cell }\end{DoxyParamCaption})}
+
+Loads the correct project mesh based on the specified number of cells.
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+\_\+cell} & number of cells of the mesh to be importets \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/system/\mbox{\hyperlink{problem_8h}{problem.\+h}}\end{DoxyCompactItemize}

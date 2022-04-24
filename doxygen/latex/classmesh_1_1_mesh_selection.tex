@@ -1,0 +1,46 @@
+\hypertarget{classmesh_1_1_mesh_selection}{}\doxysection{mesh\+::Mesh\+Selection$<$ base\+\_\+mesh $>$ Class Template Reference}
+\label{classmesh_1_1_mesh_selection}\index{mesh::MeshSelection$<$ base\_mesh $>$@{mesh::MeshSelection$<$ base\_mesh $>$}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_a0b05fea77f0cd5ad13b8be478c380292}\label{classmesh_1_1_mesh_selection_a0b05fea77f0cd5ad13b8be478c380292}} 
+void {\bfseries clear\+Selection} ()
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_ab96777ed1f394f044269e6d465914902}\label{classmesh_1_1_mesh_selection_ab96777ed1f394f044269e6d465914902}} 
+void {\bfseries copy\+Into} (std\+::vector$<$ base\+\_\+mesh $\ast$ $>$ \&to\+\_\+copy) const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_a10c8624442a5fd8e0f1a562f65532c03}\label{classmesh_1_1_mesh_selection_a10c8624442a5fd8e0f1a562f65532c03}} 
+void {\bfseries for\+\_\+each} (std\+::function$<$ void(base\+\_\+mesh $\ast$)$>$ element\+\_\+operation)
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_a0f0cacbe3a3a21f03d29187535672ec7}\label{classmesh_1_1_mesh_selection_a0f0cacbe3a3a21f03d29187535672ec7}} 
+void {\bfseries for\+\_\+each\+\_\+const} (std\+::function$<$ void(const base\+\_\+mesh $\ast$)$>$ const\+\_\+operation) const
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_a3f4a35263057b480dee6200998adc1ea}\label{classmesh_1_1_mesh_selection_a3f4a35263057b480dee6200998adc1ea}} 
+void {\bfseries select\+From\+Mesh} (const \mbox{\hyperlink{classmesh_1_1_mesh}{Mesh}} $\ast$mesh, std\+::function$<$ bool(base\+\_\+mesh $\ast$)$>$ condition)
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_a877155684b45a201a919568346848443}\label{classmesh_1_1_mesh_selection_a877155684b45a201a919568346848443}} 
+void {\bfseries select\+All} (const \mbox{\hyperlink{classmesh_1_1_mesh}{Mesh}} $\ast$mesh)
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_af01f426b7334fa5fe50813a2c0604a4c}\label{classmesh_1_1_mesh_selection_af01f426b7334fa5fe50813a2c0604a4c}} 
+void {\bfseries select\+With\+Reader} (const \mbox{\hyperlink{classmesh_1_1_mesh}{Mesh}} $\ast$mesh, \mbox{\hyperlink{classmesh_1_1reader_1_1_mesh_element_reader}{reader\+::\+Mesh\+Element\+Reader}}$<$ base\+\_\+mesh $>$ $\ast$element\+\_\+reader)
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_a0e8f8201db835cc45cfb46a5a91f5583}\label{classmesh_1_1_mesh_selection_a0e8f8201db835cc45cfb46a5a91f5583}} 
+const \mbox{\hyperlink{classmesh_1_1_mesh}{Mesh}} $\ast$ {\bfseries mesh} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_a363b683a57054d80f33b23c1b5c3d26a}\label{classmesh_1_1_mesh_selection_a363b683a57054d80f33b23c1b5c3d26a}} 
+static std\+::function$<$ bool(base\+\_\+mesh $\ast$)$>$ {\bfseries x\+Greater\+Than} (double value, bool greater=true)
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_ac9d7d755e930bc44fa150bc7b541396c}\label{classmesh_1_1_mesh_selection_ac9d7d755e930bc44fa150bc7b541396c}} 
+static std\+::function$<$ bool(base\+\_\+mesh $\ast$)$>$ {\bfseries y\+Greater\+Than} (double value, bool greater=true)
+\item 
+\mbox{\Hypertarget{classmesh_1_1_mesh_selection_a8b63bcf4dd4f86f0a199cde94c17b6bc}\label{classmesh_1_1_mesh_selection_a8b63bcf4dd4f86f0a199cde94c17b6bc}} 
+static std\+::function$<$ bool(base\+\_\+mesh $\ast$)$>$ {\bfseries circle\+Selection} (vector2d center, double radius, bool inside=true)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+inc/mesh/manipulation/\mbox{\hyperlink{mesh__selection_8h}{mesh\+\_\+selection.\+h}}\end{DoxyCompactItemize}

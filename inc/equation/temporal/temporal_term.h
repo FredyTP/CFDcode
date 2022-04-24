@@ -11,7 +11,7 @@
 #include <equation/equation_term.h>
 #include <mesh/base/cell.h>
 #include <mesh/mesh.h>
-#include <field/field.h>
+#include <field/fields.h>
 namespace term
 {
 
@@ -28,7 +28,7 @@ namespace term
 
         static double GetVolumeCoef(const mesh::Cell* cell, const field::Fields* fields)
         {
-            return cell->material()->specificHeat(fields->scalarField(cell)) * fields->scalarField(cell).density;
+            return cell->material()->specificHeat(cell,fields) * fields->scalarField(field::density,cell);
         }
     };
    

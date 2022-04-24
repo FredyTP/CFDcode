@@ -9,7 +9,7 @@
 
 #include <mesh/base/face.h>
 #include <math/var/system_submatrix.h>
-#include <field/field.h>
+#include <field/fields.h>
 #include <mesh/manipulation/mesh_selection.h>
 
 namespace term

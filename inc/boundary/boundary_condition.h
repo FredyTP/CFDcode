@@ -14,7 +14,7 @@
 //CFD
 #include <mesh/base/face.h>
 #include <mesh/manipulation/mesh_selection.h>
-#include <field/field.h>
+#include <field/fields.h>
 #include <equation/convective/convective_term.h>
 #include <math/var/system_submatrix.h>
 #include <equation/diffusive/diffusive_term.h>

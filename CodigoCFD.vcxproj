@@ -30,7 +30,7 @@
     <ClInclude Include="inc\equation\equation_term.h" />
     <ClInclude Include="inc\equation\source\source_term.h" />
     <ClInclude Include="inc\equation\temporal\temporal_term.h" />
-    <ClInclude Include="inc\field\field.h" />
+    <ClInclude Include="inc\field\fields.h" />
     <ClInclude Include="inc\field\state_vector.h" />
     <ClInclude Include="inc\material\material.h" />
     <ClInclude Include="inc\material\material_factory.h" />
@@ -57,17 +57,23 @@
     <ClInclude Include="inc\mesh\reader\luismi_format_mesh_reader.h" />
     <ClInclude Include="inc\mesh\reader\mesh_loader.h" />
     <ClInclude Include="inc\mesh\reader\mesh_reader.h" />
+    <ClInclude Include="inc\post\contour.h" />
+    <ClInclude Include="inc\post\time_solution_saver.h" />
+    <ClInclude Include="inc\solver\activity\iteration_activity.h" />
+    <ClInclude Include="inc\solver\activity\time_step_activity.h" />
     <ClInclude Include="inc\solver\matrix_builder.h" />
     <ClInclude Include="inc\solver\propagator\eurler_explicit.h" />
     <ClInclude Include="inc\solver\stationary_solver.h" />
+    <ClInclude Include="inc\solver\stop\stopping_criteria.h" />
     <ClInclude Include="inc\solver\temporal_solver.h" />
+    <ClInclude Include="inc\solver\time\time_step.h" />
     <ClInclude Include="inc\system\problem.h" />
-    <ClInclude Include="inc\time\time_step.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\boundary\boundary_condition.cpp" />
     <ClCompile Include="src\CodigoCFD.cpp" />
-    <ClCompile Include="src\field\field.cpp" />
+    <ClCompile Include="src\field\fields.cpp" />
+    <ClCompile Include="src\math\interpolation\gradient_interpolation.cpp" />
     <ClCompile Include="src\mesh\base\cell.cpp" />
     <ClCompile Include="src\mesh\base\face.cpp" />
     <ClCompile Include="src\mesh\base\node.cpp" />

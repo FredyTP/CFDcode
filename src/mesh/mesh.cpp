@@ -97,6 +97,35 @@ void Mesh::createFaces() {
     }
 }
 
+void Mesh::calculateBoundingBox()
+{
+    vector2d minpos(1e30,1e30);
+    vector2d maxpos(-1e30, -1e30);
+
+    for(auto& node : *_nodes)
+    {
+        auto pos = node->position();
+        if(pos.x() < minpos.x())
+        {
+            minpos.x() = pos.x();
+        }
+        if(pos.y() < minpos.y())
+        {
+            minpos.y() = pos.y();
+        }
+        if(pos.x() > minpos.x())
+        {
+            maxpos.x() = pos.x();
+        }
+        if(pos.y() > minpos.y())
+        {
+            maxpos.y() = pos.y();
+        }
+    }
+    _boundingBox.leftbot = minpos;
+    _boundingBox.size = maxpos - minpos;
+}
+
 void Mesh::buildMesh()
 {
     this->createFaces();
@@ -119,6 +148,8 @@ void Mesh::buildMesh()
             _internalFaces.push_back(face.get());
         }
     }
+
+    this->calculateBoundingBox();
 }
 
 void Mesh::createBoundaryCell(Face* face)

@@ -26,7 +26,7 @@ patch(xv,yv,colors,'EdgeColor','none');
 xlabel("X")
 ylabel("Y")
 h = colorbar;
-set(h, 'ylim', [mint maxt])
+set(h, 'ylim', [mint-0.01 maxt+0.01])
 saveas(f,imagepath)
 
 end
