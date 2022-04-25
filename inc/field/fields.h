@@ -189,10 +189,19 @@ public:
     const vector2d& velocityField(const mesh::Face* face) const;
 
     const mesh::Mesh* mesh() const { return _mesh; }
+
+    Eigen::VectorX<double>& velocityX() { return _velocityX; }
+    const Eigen::VectorX<double>& velocityX() const { return _velocityX; }
+    Eigen::VectorX<double>& velocityY() { return _velocityY; }
+    const Eigen::VectorX<double>& velocityY() const { return _velocityY; }
+    
 private:
 
     //VELOCITY FIELD (special)
-    Eigen::VectorX<vector2d> _velocity;         //Face centroids
+    Eigen::VectorX<vector2d> _velocity;    //Face centroids
+    
+    Eigen::VectorX<double> _velocityX;         //Face centroids
+    Eigen::VectorX<double> _velocityY;         //Face centroids
 
 
     //----VECTORIAL FIELDS----//

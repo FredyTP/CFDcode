@@ -46,6 +46,7 @@
     <ClInclude Include="inc\math\value\face_value.h" />
     <ClInclude Include="inc\math\value\node_value.h" />
     <ClInclude Include="inc\math\var\system_submatrix.h" />
+    <ClInclude Include="inc\math\var\system_submatrix_coupled.h" />
     <ClInclude Include="inc\mesh\base\cell.h" />
     <ClInclude Include="inc\mesh\base\base_geometry.h" />
     <ClInclude Include="inc\mesh\base\face.h" />

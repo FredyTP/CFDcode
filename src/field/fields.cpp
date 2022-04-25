@@ -31,6 +31,8 @@ namespace field
         size_t n_face = _mesh->faces()->size();
 
         _velocity.resize(n_face);
+        _velocityX.resize(n_face);
+        _velocityY.resize(n_face);
         _velocity.setConstant(vector2d(0, 0));
 
         for (int i = 0; i < _activeScalarFields.size(); i++)

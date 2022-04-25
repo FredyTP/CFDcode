@@ -273,6 +273,9 @@
     <ClInclude Include="inc\post\time_solution_saver.h">
       <Filter>Include\post</Filter>
     </ClInclude>
+    <ClInclude Include="inc\math\var\system_submatrix_coupled.h">
+      <Filter>Include\math\var</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mesh\mesh.cpp">
