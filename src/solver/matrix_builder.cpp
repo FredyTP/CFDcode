@@ -9,18 +9,19 @@
 #include <field/fields.h>
 #include <fstream>
 #include <equation/source/source_term.h>
+#include <math/interpolation/gradient_interpolation.h>
 namespace solver
 {
     MatrixBuilder::MatrixBuilder()
     {
     }
 
-    void MatrixBuilder::buildSystem(sys::Problem* problem)
+    void MatrixBuilder::buildSystem(sys::Problem* problem, field::scalarType equation)
     {
         size_t numb_equation = problem->mesh()->cells()->size();
         math::SystemSubmatrix matrix(numb_equation);
 
-        buildSubMatrix(&matrix, problem);
+        buildSubMatrix(&matrix, problem, equation);
         auto matrix_triplets = matrix.cellCoeficients();
 
         _independent = matrix.coeficients();
@@ -38,34 +39,34 @@ namespace solver
             [](double phi1, double phi2) {
                 return phi1 + phi2;
         });
+
+        
         //std::cout << systemMatrix << std::endl;
         //std::cout << _independent << std::endl;
     }
 
-    void MatrixBuilder::buildSubMatrix(math::SystemSubmatrix* submatrix, sys::Problem* problem)
+    void MatrixBuilder::buildSubMatrix(math::SystemSubmatrix* submatrix, sys::Problem* problem, field::scalarType equation)
     {
         auto mesh = problem->mesh();
+        auto equation_ptr = problem->equations()->at(equation).get();
         for(auto internal_face : mesh->internalFaces())
         {
-            problem->for_each_faceTerm([submatrix, internal_face, problem] (term::FaceEquationTerm * term)
-                {
-                    term->calculateBothCell(submatrix, internal_face, problem->fields());
-                });
+            equation_ptr->convective()->calculateBothCell(submatrix, internal_face, problem->fields());
+            equation_ptr->diffusive()->calculateBothCell(submatrix, internal_face, problem->fields());
+
         }
         for (auto boundary_face : mesh->boundaryFaces())
         {
-            problem->for_each_faceTerm([submatrix, boundary_face, problem](term::FaceEquationTerm* term)
-                {
-                    term->calculateOneCell(submatrix, boundary_face, problem->fields());
-                });
+            equation_ptr->convective()->calculateOneCell(submatrix, boundary_face, problem->fields());
+            equation_ptr->diffusive()->calculateOneCell(submatrix, boundary_face, problem->fields());
         }
         for (auto& cell : *mesh->cells())
         {
-            problem->termporalTerm()->calculateCell(submatrix, cell.get(), problem->fields());
+            //problem->termporalTerm()->calculateCell(submatrix, cell.get(), problem->fields());
         }
-        problem->for_each_boundary([submatrix,problem](bc::BoundaryCondition* boundaryCondition) 
+        problem->for_each_boundary([submatrix,problem, equation](bc::BoundaryCondition* boundaryCondition)
             {
-                boundaryCondition->calculateBoundaryCondition(submatrix, problem->fields());
+                boundaryCondition->calculateBoundaryCondition(submatrix, problem->fields(),equation);
             });
     }
     

@@ -27,6 +27,7 @@
     <ClInclude Include="inc\equation\convective\face_interpolation.h" />
     <ClInclude Include="inc\equation\diffusive\diffusive_term.h" />
     <ClInclude Include="inc\equation\diffusive\gradient_flux.h" />
+    <ClInclude Include="inc\equation\equation.h" />
     <ClInclude Include="inc\equation\equation_term.h" />
     <ClInclude Include="inc\equation\source\source_term.h" />
     <ClInclude Include="inc\equation\temporal\temporal_term.h" />

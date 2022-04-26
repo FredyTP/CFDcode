@@ -22,7 +22,7 @@ class MatrixBuilder
 public:
     MatrixBuilder(); 
 
-    void buildSystem(sys::Problem* problem);
+    void buildSystem(sys::Problem* problem,field::scalarType equation);
 
 
     Eigen::SparseMatrix<double>& getMatrix() { return systemMatrix; }
@@ -31,7 +31,7 @@ public:
 
 
 private:
-    void buildSubMatrix(math::SystemSubmatrix* submatrix, sys::Problem* problem);
+    void buildSubMatrix(math::SystemSubmatrix* submatrix, sys::Problem* problem, field::scalarType equation);
 
     Eigen::VectorXd _independent;
     Eigen::SparseMatrix<double> systemMatrix;

@@ -30,7 +30,7 @@ int main()
 {
 
     sys::Problem problem;
-    int n_mesh = 6; //1-6
+    int n_mesh = 1; //1-6
     int n_cell = pow(4,n_mesh);
 
     problem.loadProjectMesh(n_cell);
@@ -38,10 +38,10 @@ int main()
     problem.addConstantMaterial(1.255, 1e-5, 10, 1200);
     problem.assignMaterial();
 
-    problem.addConstTempBoundary(600);    //BOTTOM
-    problem.addConstFluxBoundary(0);    //TOP
-    problem.addConstTempBoundary(100);    //LEFT
-    problem.addConstTempBoundary(100);   //RIGHT
+    problem.addConstTempBoundary(100);    //BOTTOM
+    problem.addConstTempBoundary(100);    //TOP
+    problem.addConstTempBoundary(0);    //LEFT
+    problem.addConstTempBoundary(0);   //RIGHT
 
 
 
@@ -55,7 +55,7 @@ int main()
     problem.assignBoundaryCondition(2, 2);
     problem.assignBoundaryCondition(3, 3);
    
-    vector2d initialVelocity(0, 10);
+    vector2d initialVelocity(10, 10);
     field::ScalarStateVector initialScalars;
     initialScalars.pressure = 101325; //Pa
     initialScalars.temperature = 300; //K
@@ -72,9 +72,11 @@ int main()
     std::unique_ptr<term::GradientFlux> centralDiffGrad = std::make_unique<term::CentralDifferenceGradient>();
     std::unique_ptr<term::GradientFlux> orthogonalCorrected = std::make_unique<term::OrthogonalCorrectedGradient>();
 
-    problem.initEquations();
-    problem.configConvectiveTerm(secondOrderUpwind.get());
-    problem.configDiffusiveTerm(centralDiffGrad.get());
+    //problem.initEquation(field::temperature, secondOrderUpwind.get(), centralDiffGrad.get());
+    problem.initEquation(field::velocity_x, uds.get(), centralDiffGrad.get());
+    problem.initEquation(field::velocity_y, uds.get(), centralDiffGrad.get());
+    problem.initEquation(field::continuity_x, uds.get(), centralDiffGrad.get());
+    problem.initEquation(field::continuity_y, uds.get(), centralDiffGrad.get());
 
     problem.buildProblem();
 
@@ -82,13 +84,13 @@ int main()
     solver::TemporalSolver solver(&matrix);
     solver::StationarySolver sSolver(&matrix);
 
-    /*sSolver.solve(&problem);
+    sSolver.solve(&problem);
     post::Contour contour;
     contour.setProblem(&problem);
-    contour.setSolution(sSolver.solution());
-    contour.saveContourFile("SOUP", true);*/
+    contour.setSolution(sSolver.solution(field::pressure));
+    contour.saveContourFile("SOUP", true);
 
-    timestep::FixedTimeStep timeStep(0.00001);
+    /*timestep::FixedTimeStep timeStep(0.00001);
     solver::stop::StopAtStep stoppingCriteria(100);
 
     solver::FixedStepActivity printTimeStep(0);
@@ -111,6 +113,6 @@ int main()
     //SOLVER
     solver.solve(&problem, &timeStep, &stoppingCriteria);
 
-    solutionSaver.save_contour(1080, 720);
+    solutionSaver.save_contour(1080, 720);*/
 
 }

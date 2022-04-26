@@ -17,9 +17,13 @@ namespace term
     class FaceEquationTerm
     {
     public:
-        FaceEquationTerm(){}
+        FaceEquationTerm(field::scalarType _scalar_) : _scalar(_scalar_) {}
         virtual void calculateBothCell(math::SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* fields) const = 0;
         virtual void calculateOneCell(math::SystemSubmatrix* submatrix, const mesh::Face* face, const field::Fields* fields, bool isBoundaryCell = false) const = 0;
+
+        field::scalarType scalar() const { return _scalar; }
+    private:
+        field::scalarType _scalar;
     };
     class CellEquationTerm
     {

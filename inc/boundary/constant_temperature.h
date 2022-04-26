@@ -19,17 +19,34 @@ namespace bc
     {
     public:
         ConstantTemperature(double _temperature_) :_temperature(_temperature_) {
-            _convectiveTerm = nullptr;
-            _diffusiveTerm = nullptr;
         };
         
-        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field) const
+        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field, field::scalarType equation) const
         {            
-            submatrix->addCellValues(cell,math::CellValue<double>(nullptr,_temperature));
-            submatrix->addCellValues(cell, math::CellValue<double>(cell, 1));
+            if (equation == field::velocity_y)
+            {
+               submatrix->addCellValues(cell,math::CellValue<double>(nullptr,_temperature));
+
+            }
+               submatrix->addCellValues(cell, math::CellValue<double>(cell, 1));
         }
 
     private:
         double _temperature;
+    };
+    class VelocityInlet : public BoundaryCondition
+    {
+    public:
+        VelocityInlet(double _vy_) :_vy(_vy_) {
+        };
+
+        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix, const mesh::Cell* cell, const field::Fields* field,field::scalarType equation) const
+        {
+            submatrix->addCellValues(cell, math::CellValue<double>(nullptr, _vy));
+            submatrix->addCellValues(cell, math::CellValue<double>(cell, 1));
+        }
+
+    private:
+        double _vy;
     };
 }

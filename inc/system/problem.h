@@ -31,7 +31,7 @@
 #include <equation/equation_term.h>
 #include <equation/source/source_term.h>
 #include <equation/temporal/temporal_term.h>
-
+#include <equation/equation.h>
 
 namespace sys
 {
@@ -160,7 +160,7 @@ namespace sys
          * Init Basic equation terms.
          * 
          */
-        void initEquations();
+        void initEquation(field::scalarType scalar, term::FaceInterpolation* faceInterpolation, term::GradientFlux* gradientFlux);
 
         /**
          * Changes the face interpolation method with the one specified
@@ -193,11 +193,13 @@ namespace sys
         mesh::Mesh* mesh() { return _mesh.get(); }
         
         field::Fields* fields() { return _fields.get(); }
+
         void for_each_boundary(std::function<void(bc::BoundaryCondition*)> on_boundary);
 
-        void for_each_faceTerm(std::function<void(term::FaceEquationTerm*)> on_face_term);
+        void for_each_equation(std::function<void(eq::Equation*)> on_equation);
 
-        term::CellEquationTerm* termporalTerm() { return _temporalTerm.get(); }
+        std::array<std::unique_ptr<eq::Equation>, field::scalar_field_number>* equations() { return &_equations; }
+        //term::CellEquationTerm* termporalTerm() { return _temporalTerm.get(); }
         
     private:
         std::unique_ptr<mesh::Mesh> _mesh;
@@ -206,11 +208,13 @@ namespace sys
         std::unique_ptr<field::Fields> _fields;
         std::vector<std::unique_ptr<mesh::MeshSelection<mesh::Face>>> _faceSelections;
 
-        std::vector<std::unique_ptr<term::FaceEquationTerm>> _faceTerms;
+        std::array<std::unique_ptr<eq::Equation>, field::scalar_field_number> _equations;
+
+        /*std::vector<std::unique_ptr<term::FaceEquationTerm>> _faceTerms;
         term::ConvectiveTerm* _convectiveTerm;
         term::DiffusiveTerm* _diffusiveTerm;
         std::vector<std::unique_ptr<term::SourceTerm>> _sourceTerms;
-        std::unique_ptr<term::TemporalTerm> _temporalTerm;
+        std::unique_ptr<term::TemporalTerm> _temporalTerm;*/
 
 
     };

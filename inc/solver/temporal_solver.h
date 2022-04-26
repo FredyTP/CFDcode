@@ -42,7 +42,7 @@ namespace solver
             _solution->copy(problem->fields());
             
             //CalculateMATRIX
-            _builder->buildSystem(problem);
+            _builder->buildSystem(problem,field::temperature);
             Eigen::SparseMatrix<double> &matrix = _builder->getMatrix();
             Eigen::VectorXd &indep = _builder->getVector();
             Eigen::SparseMatrix<double> &volumeMatrix = _builder->getVolMatrix();

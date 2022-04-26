@@ -101,7 +101,8 @@ namespace sys
         auto& densityField = _fields->scalarField(field::density);
         auto& tempField = _fields->scalarField(field::temperature);
         auto& pressField = _fields->scalarField(field::pressure);
-        auto& velField = _fields->velocityField();
+        auto& velFieldx = _fields->scalarField(field::velocity_x);
+        auto& velFieldy = _fields->scalarField(field::velocity_y);
 
         for (size_t i = 0; i < densityField.size(); i++)
         {
@@ -110,41 +111,26 @@ namespace sys
             tempField[i] = 298.15;
             //THIS IS A DERIVED FIELD SO... CHANGE THAT
             densityField[i] = _mesh->cells()->at(i)->material()->density(_mesh->cells()->at(i).get(), _fields.get());
+            velFieldx[i] = velocity.x();
+            velFieldy[i] = velocity.y();
         }
-        for (size_t i = 0; i < velField.size(); i++)
-        {
-            velField[i] = velocity;
-        }
-    }
-    void Problem::initEquations()
-    {
-        using namespace term;
-        auto conv = std::make_unique<ConvectiveTerm>(nullptr);
-        _convectiveTerm = conv.get();
 
-        auto diff = std::make_unique<DiffusiveTerm>(nullptr);
-        _diffusiveTerm = diff.get();
+            
+    
+    }
 
-        _faceTerms.push_back(std::move(conv));
-        _faceTerms.push_back(std::move(diff));
+    void Problem::initEquation(field::scalarType scalar, term::FaceInterpolation* faceInterpolation, term::GradientFlux* gradientFlux)
+    {
+        _equations[scalar] = std::make_unique<eq::Equation>(scalar);
+        _equations[scalar]->initTerms(faceInterpolation, gradientFlux);
+    }
 
-        _temporalTerm = std::make_unique<term::TemporalTerm>();
-    }
-    void Problem::configConvectiveTerm(term::FaceInterpolation* faceInterpolation)
-    {
-        _convectiveTerm->setFaceInterpolation(faceInterpolation);
-    }
-    void Problem::configDiffusiveTerm(term::GradientFlux* gradientFlux)
-    {
-        _diffusiveTerm->setGradientFlux(gradientFlux);
-    }
     void Problem::buildProblem()
     {
         //FIND MORE ELEGANT WAY
         for (auto& boundary : _boundaryConditions)
         {
-            boundary->setConvetiveTerm(_convectiveTerm);
-            boundary->setDiffusiveTerm(_diffusiveTerm);
+            boundary->setEquations(&_equations);
         }
     }
     void Problem::for_each_boundary(std::function<void(bc::BoundaryCondition*)> on_boundary)
@@ -154,11 +140,11 @@ namespace sys
             on_boundary(boundary.get());
         }
     }
-    void Problem::for_each_faceTerm(std::function<void(term::FaceEquationTerm*)> on_face_term)
+    void Problem::for_each_equation(std::function<void(eq::Equation*)> on_equation)
     {
-        for (auto& faceterm : _faceTerms)
+        for(auto& equation : _equations)
         {
-            on_face_term(faceterm.get());
+            on_equation(equation.get());
         }
     }
 }

@@ -18,6 +18,7 @@
 #include <equation/convective/convective_term.h>
 #include <math/var/system_submatrix.h>
 #include <equation/diffusive/diffusive_term.h>
+#include <equation/equation.h>
 namespace bc
 {
 
@@ -25,14 +26,14 @@ class BoundaryCondition
 {
 public:
     BoundaryCondition() {}
-    virtual void calculateBoundaryCondition(math::SystemSubmatrix *submatrix,const field::Fields* field) const
+    virtual void calculateBoundaryCondition(math::SystemSubmatrix *submatrix,const field::Fields* field, field::scalarType equation) const
     {     
         for (auto& face : _boundary)
         {
-            this->getBoundaryCondition(submatrix, face->cell2(), field);
+            this->getBoundaryCondition(submatrix, face->cell2(), field, equation);
         }
     };
-    virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell,const field::Fields* field) const = 0;
+    virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell,const field::Fields* field, field::scalarType equation) const = 0;
     void addFace(mesh::Face* _face_)
     {
         _boundary.push_back(_face_);
@@ -42,21 +43,16 @@ public:
         boundary.copyInto(_boundary);
     }
     
-    void setConvetiveTerm(term::ConvectiveTerm* _convectiveTerm_)
+    void setEquations(std::array<std::unique_ptr<eq::Equation>, field::scalar_field_number>* _equations_)
     {
-        _convectiveTerm = _convectiveTerm_;
+        _equations = _equations_;
     }
-    void setDiffusiveTerm(term::DiffusiveTerm* _diffusiveTerm_)
-    {
-        _diffusiveTerm = _diffusiveTerm_;
-    }
+
 protected:
 
     std::vector<mesh::Face*> _boundary;
     std::vector<mesh::Cell*> _boundaryCells;
-
-    term ::ConvectiveTerm* _convectiveTerm = nullptr;
-    term::DiffusiveTerm* _diffusiveTerm = nullptr;
+    std::array<std::unique_ptr<eq::Equation>,field::scalar_field_number>* _equations;
 };
 
 }

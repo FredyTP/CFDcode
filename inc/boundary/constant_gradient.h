@@ -19,13 +19,12 @@ namespace bc
     {
     public:
         ConstantFlux(double _flux_) : _flux(_flux_) {
-            _convectiveTerm = nullptr;
-            _diffusiveTerm = nullptr;
+
         };
         
-        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field) const
+        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field, field::scalarType equation) const
         {
-            _diffusiveTerm->calculateOneCell(submatrix, cell->faces()[0], field, true);
+            _equations->at(field::temperature)->diffusive()->calculateOneCell(submatrix, cell->faces()[0], field, true);
             submatrix->addCellValues(cell, math::CellValue<double>(nullptr, _flux));
         }
 
