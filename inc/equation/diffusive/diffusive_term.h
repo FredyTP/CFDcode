@@ -28,7 +28,15 @@ namespace term
                 _GetDiffusiveCoeficient = DiffusiveTerm::GetTemperatureDiffusionCoeficient;
 
             }
-            else
+            else if (scalarField == field::velocity_x)
+            {
+                _GetDiffusiveCoeficient = DiffusiveTerm::GetTemperatureDiffusionCoeficient;
+            }
+            else if (scalarField == field::velocity_y)
+            {
+                _GetDiffusiveCoeficient = DiffusiveTerm::GetTemperatureDiffusionCoeficient;
+            }
+            else 
             {
                 _GetDiffusiveCoeficient = DiffusiveTerm::GetNullCoeficient;
             }
@@ -66,6 +74,13 @@ namespace term
 
             return (k1 + k2) / 2;
         } 
+        double static GetContinuityDiffusionCoeficient(const mesh::Face* face, const field::Fields* fields)
+        {
+            //For generalization this could be get from a labda function or class
+
+
+            return 1;
+        }
 
         void setGradientFlux(term::GradientFlux* gradientFlux)
         {

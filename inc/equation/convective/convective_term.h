@@ -158,9 +158,11 @@ namespace term
             double v1 = fields->scalarField(field::velocity_y, cell1);
             double v2 = fields->scalarField(field::velocity_y, cell2);
 
+            if (face->normal1().x() == 0) return 0;
             vector2d velocity((u1 + u2) / 2, (v1 + v2) / 2);
-
-            return (density1 + density2) * face->normal1().x() / (2 * velocity.dot(face->normal1()));
+            double vel_dot_normal = velocity.dot(face->normal1());
+            if (vel_dot_normal == 0) return 0;
+            return (density1 + density2) * face->normal1().x() / (2 * vel_dot_normal);
         }
         static double GetContinuityYConvectionCoeficient(const mesh::Face* face, const field::Fields* fields)
         {
@@ -174,9 +176,11 @@ namespace term
             double v1 = fields->scalarField(field::velocity_y, cell1);
             double v2 = fields->scalarField(field::velocity_y, cell2);
 
+            if (face->normal1().y() == 0) return 0;
             vector2d velocity((u1 + u2) / 2, (v1 + v2) / 2);
-
-            return (density1 + density2) * face->normal1().y() / (2 * velocity.dot(face->normal1()));
+            double vel_dot_normal = velocity.dot(face->normal1());
+            if (vel_dot_normal == 0) return 0;
+            return (density1 + density2) * face->normal1().y() / (2 * vel_dot_normal);
         }
 
     private:

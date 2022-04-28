@@ -88,6 +88,22 @@ namespace sys
 
         return _boundaryConditions.size() - 1;
     }
+    int Problem::addVelocityInlet(vector2d velocity)
+    {
+        std::unique_ptr<bc::BoundaryCondition> bc = std::make_unique<bc::VelocityInlet>(velocity);
+
+        _boundaryConditions.push_back(std::move(bc));
+
+        return _boundaryConditions.size() - 1;
+    }
+    int Problem::addVelocityOutlet()
+    {
+        std::unique_ptr<bc::BoundaryCondition> bc = std::make_unique<bc::VelocityOutlet>();
+
+        _boundaryConditions.push_back(std::move(bc));
+
+        return _boundaryConditions.size() - 1;
+    }
     void Problem::assignBoundaryCondition(int bc, int selection)
     {
         _boundaryConditions[bc]->setBoundary(*_faceSelections[selection].get());

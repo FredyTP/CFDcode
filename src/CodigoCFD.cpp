@@ -38,10 +38,10 @@ int main()
     problem.addConstantMaterial(1.255, 1e-5, 10, 1200);
     problem.assignMaterial();
 
-    problem.addConstTempBoundary(100);    //BOTTOM
-    problem.addConstTempBoundary(100);    //TOP
-    problem.addConstTempBoundary(0);    //LEFT
-    problem.addConstTempBoundary(0);   //RIGHT
+    problem.addVelocityInlet(vector2d(0, 10));   //BOTTOM
+    problem.addVelocityOutlet();   //TOP
+    problem.addVelocityInlet(vector2d(0, 0));   //LEFT
+    problem.addVelocityInlet(vector2d(0, 0));   //RIGHT
 
 
 
@@ -55,7 +55,7 @@ int main()
     problem.assignBoundaryCondition(2, 2);
     problem.assignBoundaryCondition(3, 3);
    
-    vector2d initialVelocity(10, 10);
+    vector2d initialVelocity(5, 5);
     field::ScalarStateVector initialScalars;
     initialScalars.pressure = 101325; //Pa
     initialScalars.temperature = 300; //K

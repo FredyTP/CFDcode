@@ -135,6 +135,24 @@ namespace sys
         int addConstFluxBoundary(double flux);
 
         /**
+         * Adds new constant temperature boundary condition to the list.
+         * A mesh selection should be assigned to the bc.
+         *
+         * \param flux
+         * \return index
+         */
+        int addVelocityInlet(vector2d velocity);
+
+        /**
+         * Adds new constant temperature boundary condition to the list.
+         * A mesh selection should be assigned to the bc.
+         *
+         * \param flux
+         * \return index
+         */
+        int addVelocityOutlet();
+
+        /**
          * Assigns a boundary selection to a face selection(MUST be made up ONLY by boundary faces).
          * 
          * \param bc boundary condition index

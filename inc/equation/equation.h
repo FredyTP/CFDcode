@@ -19,7 +19,10 @@ namespace eq
         Equation(field::scalarType _scalar_) : _scalar(_scalar_) {}
         void initTerms(term::FaceInterpolation* faceInterpolation, term::GradientFlux* gradientFlux)
         {
+            if(faceInterpolation !=nullptr)
             _convectiveTerm = std::make_unique<term::ConvectiveTerm>(faceInterpolation, _scalar);
+
+            if (gradientFlux != nullptr)
             _diffusiveTerm = std::make_unique<term::DiffusiveTerm>(gradientFlux, _scalar);
         }
         term::ConvectiveTerm* convective() { return _convectiveTerm.get(); }
