@@ -124,6 +124,9 @@
     <Filter Include="Include\solver\stop">
       <UniqueIdentifier>{4335029a-eda0-4a31-a573-6478f43df917}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\tool">
+      <UniqueIdentifier>{aa29fa9c-a8e1-455c-b2d4-d4409b2c584e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\mesh\base\cell.h">
@@ -275,6 +278,9 @@
     </ClInclude>
     <ClInclude Include="inc\mesh\reader\rect_mesh_creator.h">
       <Filter>Include\mesh\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\tool\chronometer.h">
+      <Filter>Include\tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

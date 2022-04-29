@@ -26,6 +26,9 @@
 #include <post/contour.h>
 #include <post/time_solution_saver.h>
 
+
+#include <tool/chronometer.h>
+
 int main()
 {
 
@@ -36,8 +39,10 @@ int main()
     //problem.loadProjectMesh(n_cell);
     double w = 0.1;
     double h = 1;
-    problem.createRectMesh(w, h, 100, 100);
-
+    tool::Chronometer timer;
+    timer.tic();
+    problem.createRectMesh(w, h, 1000, 1000);
+    timer.tac(true, "building mesh");
     problem.addConstantMaterial(1.255, 1e-5, 10, 1200);
     problem.assignMaterial();
 
