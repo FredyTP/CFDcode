@@ -118,12 +118,6 @@ namespace math
                 GradientInterpolation::LeastSquaresGradient(upstream_cell, gradient,  factor);
                 GradientInterpolation::DotProduct(cellvalues, gradient, celltoface);
 
-                /*for (int i = 0; i < facevalues.size(); i++)
-                {
-                    double dotprod = celltoface.dot(facevalues[i].coef);
-                    FaceInterpolation::CentralDifferencingScheme(facevalues[i].face, face->lambda(), cellvalues, dotprod * factor);
-                   
-                }*/
 
             }
 

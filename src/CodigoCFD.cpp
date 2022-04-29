@@ -38,12 +38,11 @@ int main()
     problem.addConstantMaterial(1.255, 1e-5, 10, 1200);
     problem.assignMaterial();
 
+    //Add Boundary Conditions
     problem.addConstTempBoundary(600);    //BOTTOM
-    problem.addConstFluxBoundary(0);    //TOP
+    problem.addConstFluxBoundary(0);      //TOP
     problem.addConstTempBoundary(100);    //LEFT
-    problem.addConstTempBoundary(100);   //RIGHT
-
-
+    problem.addConstTempBoundary(100);    //RIGHT
 
     problem.loadProjectFaceSelection(1, n_cell); //BOTTOM
     problem.loadProjectFaceSelection(2, n_cell); //TOP
@@ -55,6 +54,8 @@ int main()
     problem.assignBoundaryCondition(2, 2);
     problem.assignBoundaryCondition(3, 3);
    
+
+    //Initialize Fields
     vector2d initialVelocity(0, 10);
     field::ScalarStateVector initialScalars;
     initialScalars.pressure = 101325; //Pa
@@ -64,10 +65,12 @@ int main()
 
     //DISCRETIZATION METHODS
     //Face Intertpolation
+
     std::unique_ptr<term::FaceInterpolation> uds = std::make_unique<term::UDS>();
     std::unique_ptr<term::FaceInterpolation> cds = std::make_unique<term::CDS>();
     std::unique_ptr<term::FaceInterpolation> powerLaw = std::make_unique<term::PowerLaw>();
     std::unique_ptr<term::FaceInterpolation> secondOrderUpwind = std::make_unique<term::SecondOrderUpWind>();
+
     //Gradient Flux
     std::unique_ptr<term::GradientFlux> centralDiffGrad = std::make_unique<term::CentralDifferenceGradient>();
     std::unique_ptr<term::GradientFlux> orthogonalCorrected = std::make_unique<term::OrthogonalCorrectedGradient>();
@@ -82,12 +85,15 @@ int main()
     solver::TemporalSolver solver(&matrix);
     solver::StationarySolver sSolver(&matrix);
 
-    /*sSolver.solve(&problem);
+    //STATIONARY SOLVER
+    sSolver.solve(&problem);
     post::Contour contour;
     contour.setProblem(&problem);
     contour.setSolution(sSolver.solution());
-    contour.saveContourFile("SOUP", true);*/
+    contour.saveContourFile("SOUP", true);
 
+
+    // TEMPORAL SOLVER
     timestep::FixedTimeStep timeStep(0.00001);
     solver::stop::StopAtStep stoppingCriteria(100);
 
@@ -110,7 +116,6 @@ int main()
     solver.addActivity(&saveContour);
     //SOLVER
     solver.solve(&problem, &timeStep, &stoppingCriteria);
-
     solutionSaver.save_contour(1080, 720);
-
+    
 }
