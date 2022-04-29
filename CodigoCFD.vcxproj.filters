@@ -273,6 +273,9 @@
     <ClInclude Include="inc\post\time_solution_saver.h">
       <Filter>Include\post</Filter>
     </ClInclude>
+    <ClInclude Include="inc\mesh\reader\rect_mesh_creator.h">
+      <Filter>Include\mesh\reader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mesh\mesh.cpp">

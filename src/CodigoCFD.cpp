@@ -34,9 +34,9 @@ int main()
     int n_cell = pow(4,n_mesh);
 
     //problem.loadProjectMesh(n_cell);
-    int w = 0.1;
-    int h = 1;
-    problem.createRectMesh(w, h, 100, 1000);
+    double w = 0.1;
+    double h = 1;
+    problem.createRectMesh(w, h, 100, 100);
 
     problem.addConstantMaterial(1.255, 1e-5, 10, 1200);
     problem.assignMaterial();
@@ -141,8 +141,9 @@ int main()
     post::Contour contour;
     contour.setProblem(&problem);
     contour.setSolution(sSolver.solution());
-    contour.saveContourFile("SQUARE", false);
+    contour.saveContourFile("SQUARE", true);
 
+    /* 
     timestep::FixedTimeStep timeStep(0.00001);
     solver::stop::StopAtStep stoppingCriteria(100);
 
@@ -166,6 +167,6 @@ int main()
     //SOLVER
     solver.solve(&problem, &timeStep, &stoppingCriteria);
 
-    solutionSaver.save_contour(1080, 720);
+    solutionSaver.save_contour(1080, 720);*/
 
 }
