@@ -8,6 +8,7 @@
 #include <system/problem.h>
 
 #include <mesh/reader/luismi_format_mesh_reader.h>
+#include <mesh/reader/rect_mesh_creator.h>
 
 
 namespace sys
@@ -28,6 +29,13 @@ namespace sys
         std::string cell_path = base_mesh_path + "cells_" + std::to_string(n_cell) + format;
         this->loadMesh(node_path, cell_path);
 
+    }
+    void Problem::createRectMesh(double w, double h, int n_w, int n_h)
+    {
+        using namespace mesh;
+        RectMeshCreator meshReader(w, h, n_w, n_h);
+        _mesh = std::make_unique<Mesh>();
+        _mesh->loadMesh(&meshReader);
     }
     int Problem::addConstantMaterial(double density, double viscosity, double conductivity, double specific_heat)
     {
@@ -55,6 +63,11 @@ namespace sys
         all.selectAll(_mesh.get());
 
         assignMaterial(index, all);
+    }
+    int Problem::addFaceSelection(std::unique_ptr<mesh::MeshSelection<mesh::Face>>& face_selection)
+    {
+        _faceSelections.push_back(std::move(face_selection));
+        return _faceSelections.size() - 1;
     }
     int Problem::loadFaceSelection(const std::string path)
     {

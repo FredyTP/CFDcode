@@ -57,6 +57,17 @@ namespace sys
          * \param n_cell number of cells of the mesh to be importets
          */
         void loadProjectMesh(int n_cell);
+
+        /**
+         * Creates a rectangular mesh.
+         * 
+         * \param w width of the mesh [m]
+         * \param h height of the mesh [m]
+         * \param n_w number of horizontal divisions (Cells)
+         * \param n_h number of verticarl divisions (Cells)
+         */
+        void createRectMesh(double w, double h, int n_w, int n_h);
+
         //--------------------//
        
         //----------MATERIAL----------//
@@ -96,6 +107,15 @@ namespace sys
         //--------------------//
 
         //----------SELECTIONS----------//
+
+        /**
+         * Add a face selection to the list.
+         * 
+         * \param face_selection 
+         * \return index in the list
+         */
+        int addFaceSelection(std::unique_ptr<mesh::MeshSelection<mesh::Face>>& face_selection);
+
         /**
          * Adds and loads a new face selection from the specified file.
          * 
