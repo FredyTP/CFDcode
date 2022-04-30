@@ -167,7 +167,21 @@ namespace sys
             on_boundary(boundary.get());
         }
     }
+    void Problem::for_each_boundary(std::function<void(const bc::BoundaryCondition*)> on_boundary) const
+    {
+        for (auto& boundary : _boundaryConditions)
+        {
+            on_boundary(boundary.get());
+        }
+    }
     void Problem::for_each_faceTerm(std::function<void(term::FaceEquationTerm*)> on_face_term)
+    {
+        for (auto& faceterm : _faceTerms)
+        {
+            on_face_term(faceterm.get());
+        }
+    }
+    void Problem::for_each_faceTerm(std::function<void(const term::FaceEquationTerm*)> on_face_term) const
     {
         for (auto& faceterm : _faceTerms)
         {

@@ -127,6 +127,9 @@
     <Filter Include="Include\tool">
       <UniqueIdentifier>{aa29fa9c-a8e1-455c-b2d4-d4409b2c584e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\solver\matrix">
+      <UniqueIdentifier>{f02bc034-67a8-4a61-ad72-2f4f55134830}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\mesh\base\cell.h">
@@ -185,9 +188,6 @@
     </ClInclude>
     <ClInclude Include="inc\boundary\constant_temperature.h">
       <Filter>Include\boundary</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\solver\matrix_builder.h">
-      <Filter>Include\solver</Filter>
     </ClInclude>
     <ClInclude Include="inc\math\var\system_submatrix.h">
       <Filter>Include\math\var</Filter>
@@ -282,6 +282,12 @@
     <ClInclude Include="inc\tool\chronometer.h">
       <Filter>Include\tool</Filter>
     </ClInclude>
+    <ClInclude Include="inc\solver\matrix\matrix_builder.h">
+      <Filter>Include\solver\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\solver\matrix\paralel_matrix_builder.h">
+      <Filter>Include\solver\matrix</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mesh\mesh.cpp">
@@ -313,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="src\math\interpolation\gradient_interpolation.cpp">
       <Filter>Source\math\interpolation</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\solver\matrix\paralel_matrix_builder.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -211,13 +211,18 @@ namespace sys
 
         //----------GETTERS-----------//
         mesh::Mesh* mesh() { return _mesh.get(); }
+        const mesh::Mesh* mesh() const { return _mesh.get(); }
         
         field::Fields* fields() { return _fields.get(); }
+        const field::Fields* fields() const { return _fields.get(); }
         void for_each_boundary(std::function<void(bc::BoundaryCondition*)> on_boundary);
+        void for_each_boundary(std::function<void(const bc::BoundaryCondition*)> on_boundary)const;
 
         void for_each_faceTerm(std::function<void(term::FaceEquationTerm*)> on_face_term);
+        void for_each_faceTerm(std::function<void(const term::FaceEquationTerm*)> on_face_term)const;
 
         term::CellEquationTerm* termporalTerm() { return _temporalTerm.get(); }
+        const term::CellEquationTerm* termporalTerm() const { return _temporalTerm.get(); }
         
     private:
         std::unique_ptr<mesh::Mesh> _mesh;

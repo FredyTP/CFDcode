@@ -18,7 +18,8 @@
 
 #include <system/problem.h>
 
-#include <solver/matrix_builder.h>
+#include <solver/matrix/matrix_builder.h>
+#include <solver/matrix/paralel_matrix_builder.h>
 #include <solver/stationary_solver.h>
 #include <solver/temporal_solver.h>
 #include <solver/stop/stopping_criteria.h>
@@ -37,13 +38,13 @@ int main()
     int n_cell = pow(4,n_mesh);
     tool::Chronometer timer;
     timer.tic();
-    problem.loadProjectMesh(n_cell);
+    //problem.loadProjectMesh(n_cell);
     
-    double w = 0.2;
+    double w = 0.1;
     double h = 1;
     
     
-    //problem.createRectMesh(w, h, 256, 256);
+    problem.createRectMesh(w, h, 100, 1000);
     
     problem.addConstantMaterial(1.255, 1e-5, 100, 1200);
     problem.assignMaterial();
@@ -53,7 +54,7 @@ int main()
     problem.addConstTempBoundary(100);    //LEFT
     problem.addConstTempBoundary(100);   //RIGHT
 
-    /*std::unique_ptr<mesh::MeshSelection<mesh::Face>> bot_bc = std::make_unique<mesh::MeshSelection<mesh::Face>>();
+    std::unique_ptr<mesh::MeshSelection<mesh::Face>> bot_bc = std::make_unique<mesh::MeshSelection<mesh::Face>>();
     bot_bc->selectFromMesh(problem.mesh(), 
         [](mesh::Face* face) {
             if (face->position().y() < 1e-7 && face->isBoundary())
@@ -105,12 +106,12 @@ int main()
     problem.addFaceSelection(bot_bc);
     problem.addFaceSelection(top_bc);
     problem.addFaceSelection(left_bc);
-    problem.addFaceSelection(right_bc);*/
+    problem.addFaceSelection(right_bc);
 
-    problem.loadProjectFaceSelection(1, n_cell); //BOTTOM
-    problem.loadProjectFaceSelection(2, n_cell); //TOP
-    problem.loadProjectFaceSelection(3, n_cell); //LEFT
-    problem.loadProjectFaceSelection(4, n_cell); //RIGHT
+    //problem.loadProjectFaceSelection(1, n_cell); //BOTTOM
+    //problem.loadProjectFaceSelection(2, n_cell); //TOP
+    //problem.loadProjectFaceSelection(3, n_cell); //LEFT
+    //problem.loadProjectFaceSelection(4, n_cell); //RIGHT
     
 
     problem.assignBoundaryCondition(0, 0);
@@ -141,24 +142,35 @@ int main()
 
     problem.buildProblem();
     timer.tac(true, "building mesh");
-    solver::MatrixBuilder matrix;
-    solver::TemporalSolver solver(&matrix);
-    solver::StationarySolver sSolver(&matrix);
 
-    timer.tic();
-    sSolver.solve(&problem);
-    timer.tac(true, "Solving problem");
-    post::Contour contour;
+    //STATIC SOLVER
+    for (int i = 1; i < 15; i++)
+    {
+        std::cout << "SOLVING N_CORE= " << i << std::endl;
+        solver::ParalelMatrixBuilder paralel(i);
+        solver::StationarySolver sSolver(&paralel);
+        //STATIC SOLVER
+        timer.tic();
+        sSolver.solve(&problem);
+        timer.tac(true, "Solving problem");
+    }
+
+        
+   
+   
+    /*post::Contour contour;
     contour.setProblem(&problem);
     contour.setSolution(sSolver.solution());
     timer.tic();
-    //contour.saveContourFile("SQUARE", true);
-    timer.tac(true, "Saving Results");
+    contour.saveContourFile("SQUARE" + std::to_string(i), true);
+    timer.tac(true, "Saving Results");*/
     
     
-    timestep::FixedTimeStep timeStep(0.00001);
+    
+    //TEMPORAL SOLVER
+   /* timestep::FixedTimeStep timeStep(0.00001);
     solver::stop::StopAtStep stoppingCriteria(100);
-
+     //solver::TemporalSolver solver(&matrix);
     solver::FixedStepActivity printTimeStep(0);
     solver::FixedStepActivity* pPrint = &printTimeStep;
     printTimeStep.setAction([&](double time, double dt, sys::Problem* problem, field::Fields* field)
@@ -179,6 +191,6 @@ int main()
     //SOLVER
     solver.solve(&problem, &timeStep, &stoppingCriteria);
 
-    solutionSaver.save_contour(1080, 720);
+    solutionSaver.save_contour(1080, 720);*/
 
 }

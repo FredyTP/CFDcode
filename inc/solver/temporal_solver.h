@@ -15,7 +15,7 @@
 #include <Eigen/SparseLU>
 
 //CFD
-#include <solver/matrix_builder.h>
+#include <solver/matrix/matrix_builder.h>
 #include <solver/time/time_step.h>
 #include <solver/propagator/eurler_explicit.h>
 #include <solver/activity/time_step_activity.h>

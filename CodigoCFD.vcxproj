@@ -62,7 +62,8 @@
     <ClInclude Include="inc\post\time_solution_saver.h" />
     <ClInclude Include="inc\solver\activity\iteration_activity.h" />
     <ClInclude Include="inc\solver\activity\time_step_activity.h" />
-    <ClInclude Include="inc\solver\matrix_builder.h" />
+    <ClInclude Include="inc\solver\matrix\matrix_builder.h" />
+    <ClInclude Include="inc\solver\matrix\paralel_matrix_builder.h" />
     <ClInclude Include="inc\solver\propagator\eurler_explicit.h" />
     <ClInclude Include="inc\solver\stationary_solver.h" />
     <ClInclude Include="inc\solver\stop\stopping_criteria.h" />
@@ -72,6 +73,7 @@
     <ClInclude Include="inc\tool\chronometer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="inc\solver\matrix\paralel_matrix_builder.cpp" />
     <ClCompile Include="src\boundary\boundary_condition.cpp" />
     <ClCompile Include="src\CodigoCFD.cpp" />
     <ClCompile Include="src\field\fields.cpp" />
