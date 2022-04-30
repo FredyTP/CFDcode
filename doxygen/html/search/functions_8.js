@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['powerlaw_242',['PowerLaw',['../classmath_1_1_face_interpolation.html#a91fe4bc5ae7b95776c1c01b9236e2498',1,'math::FaceInterpolation']]]
+  ['midpoint_276',['midpoint',['../classmath_1_1_surface_integral.html#aa934bf104682eb5ec7351728ec9ec3b4',1,'math::SurfaceIntegral']]]
 ];

@@ -24,14 +24,30 @@
 
 namespace term
 {
+    /**
+     * Abstract class for face interpolation method.
+     */
     class FaceInterpolation
     {
     public:
         FaceInterpolation(){}
+
+        /**
+         * Pure virtual function representing how to interpolate the values on a face.
+         * 
+         * \param cellvalues
+         * \param faceval
+         * \param field
+         */
         virtual void interpolateFace(std::vector<math::CellValue<double>> &cellvalues, const math::FaceValue<double>& faceval,const field::Fields* field) = 0;
             
     };
 
+    /**
+     * Upwind Differencing Scheme.
+     * It's a first order scheme, based on the upstream cell of the face.
+     * It is unconditionally stable.
+     */
     class UDS : public FaceInterpolation
     {
     public:
@@ -50,6 +66,12 @@ namespace term
 
     };
 
+    /**
+     * Central Differencing Scheme.
+     * It's a second order scheme based on a linear interpolation
+     * between the cells conected by the face.
+     * Can lead to oscilations.
+     */
     class CDS : public FaceInterpolation
     {
     public:
@@ -61,6 +83,11 @@ namespace term
         }                       
     };
 
+    /**
+     * Power Law Scheme.
+     * It's a second order scheme based on the 1D convection-diffusion equation.
+     * On the extreme cases is done by UDS or CDS.
+     */
     class PowerLaw : public FaceInterpolation
     {
     public:
@@ -94,6 +121,10 @@ namespace term
            
     };
 
+    /**
+     * Second Order Upwind Differencing Scheme.
+     * It's a second order based on the upwind cell and the gradient.
+     */
     class SecondOrderUpWind : public FaceInterpolation
     {
     public:

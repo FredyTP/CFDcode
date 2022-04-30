@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: inc/equation/source/source_term.h Source File</title>
+<title>My Project: D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/equation/source/source_term.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -94,42 +94,42 @@ $(document).ready(function(){initNavTree('source__term_8h_source.html',''); init
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>term</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classterm_1_1_source_term.html">   17</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classterm_1_1_source_term.html">SourceTerm</a> : <span class="keyword">public</span> <a class="code" href="classterm_1_1_cell_equation_term.html">CellEquationTerm</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classterm_1_1_source_term.html">SourceTerm</a>(<span class="keywordtype">double</span> _value_) : _value(_value_) {}</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">void</span> setCells(<span class="keyword">const</span> <a class="code" href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection&lt;mesh::Cell&gt;</a>&amp; selection)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            selection.copyInto(_cells);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        }</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">void</span> calculate(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix, <span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* fields)</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classterm_1_1_source_term.html">   21</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classterm_1_1_source_term.html">SourceTerm</a> : <span class="keyword">public</span> <a class="code" href="classterm_1_1_cell_equation_term.html">CellEquationTerm</a></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classterm_1_1_source_term.html">SourceTerm</a>(<span class="keywordtype">double</span> _value_) : _value(_value_) {}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">void</span> setCells(<span class="keyword">const</span> <a class="code" href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection&lt;mesh::Cell&gt;</a>&amp; selection)</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> cell : _cells)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                this-&gt;calculateCell(submatrix, cell, fields);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordtype">void</span> calculateCell(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix, <span class="keyword">const</span> <a class="code" href="classmesh_1_1_cell.html">mesh::Cell</a>* cell, <span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* fields)</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordtype">double</span> coef = _value * cell-&gt;volume();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            submatrix-&gt;addCellValues(cell, <a class="code" href="classmath_1_1_cell_value.html">math::CellValue&lt;double&gt;</a>(<span class="keyword">nullptr</span>, coef));</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">double</span> _value;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        std::vector&lt;mesh::Cell*&gt; _cells;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    };</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            selection.copyInto(_cells);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">void</span> calculate(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix, <span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* fields)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> cell : _cells)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                this-&gt;calculateCell(submatrix, cell, fields);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">void</span> calculateCell(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix, <span class="keyword">const</span> <a class="code" href="classmesh_1_1_cell.html">mesh::Cell</a>* cell, <span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* fields)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordtype">double</span> coef = _value * cell-&gt;volume();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            submatrix-&gt;addCellValues(cell, <a class="code" href="classmath_1_1_cell_value.html">math::CellValue&lt;double&gt;</a>(<span class="keyword">nullptr</span>, coef));</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">double</span> _value;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        std::vector&lt;mesh::Cell*&gt; _cells;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassterm_1_1_cell_equation_term_html"><div class="ttname"><a href="classterm_1_1_cell_equation_term.html">term::CellEquationTerm</a></div><div class="ttdef"><b>Definition:</b> equation_term.h:25</div></div>
-<div class="ttc" id="aclassterm_1_1_source_term_html"><div class="ttname"><a href="classterm_1_1_source_term.html">term::SourceTerm</a></div><div class="ttdef"><b>Definition:</b> source_term.h:18</div></div>
-<div class="ttc" id="aclassmesh_1_1_cell_html"><div class="ttname"><a href="classmesh_1_1_cell.html">mesh::Cell</a></div><div class="ttdoc">This class represents 2D Cells, other types may be implemented further.</div><div class="ttdef"><b>Definition:</b> cell.h:33</div></div>
-<div class="ttc" id="aclassfield_1_1_fields_html"><div class="ttname"><a href="classfield_1_1_fields.html">field::Fields</a></div><div class="ttdef"><b>Definition:</b> fields.h:53</div></div>
+<div class="ttc" id="aclassterm_1_1_cell_equation_term_html"><div class="ttname"><a href="classterm_1_1_cell_equation_term.html">term::CellEquationTerm</a></div><div class="ttdef"><b>Definition:</b> <a href="equation__term_8h_source.html#l00048">equation_term.h:49</a></div></div>
+<div class="ttc" id="aclassterm_1_1_source_term_html"><div class="ttname"><a href="classterm_1_1_source_term.html">term::SourceTerm</a></div><div class="ttdef"><b>Definition:</b> <a href="source__term_8h_source.html#l00021">source_term.h:22</a></div></div>
+<div class="ttc" id="aclassmesh_1_1_cell_html"><div class="ttname"><a href="classmesh_1_1_cell.html">mesh::Cell</a></div><div class="ttdoc">This class represents 2D Cells, other types may be implemented further.</div><div class="ttdef"><b>Definition:</b> <a href="cell_8h_source.html#l00032">cell.h:33</a></div></div>
+<div class="ttc" id="aclassfield_1_1_fields_html"><div class="ttname"><a href="classfield_1_1_fields.html">field::Fields</a></div><div class="ttdef"><b>Definition:</b> <a href="fields_8h_source.html#l00052">fields.h:53</a></div></div>
 <div class="ttc" id="asystem__submatrix_8h_html"><div class="ttname"><a href="system__submatrix_8h.html">system_submatrix.h</a></div></div>
-<div class="ttc" id="aclassmath_1_1_cell_value_html"><div class="ttname"><a href="classmath_1_1_cell_value.html">math::CellValue</a></div><div class="ttdef"><b>Definition:</b> cell_value.h:14</div></div>
-<div class="ttc" id="aclassmath_1_1_system_submatrix_html"><div class="ttname"><a href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a></div><div class="ttdef"><b>Definition:</b> system_submatrix.h:22</div></div>
+<div class="ttc" id="aclassmath_1_1_cell_value_html"><div class="ttname"><a href="classmath_1_1_cell_value.html">math::CellValue</a></div><div class="ttdef"><b>Definition:</b> <a href="cell__value_8h_source.html#l00013">cell_value.h:14</a></div></div>
+<div class="ttc" id="aclassmath_1_1_system_submatrix_html"><div class="ttname"><a href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a></div><div class="ttdef"><b>Definition:</b> <a href="system__submatrix_8h_source.html#l00021">system_submatrix.h:22</a></div></div>
 <div class="ttc" id="amesh__selection_8h_html"><div class="ttname"><a href="mesh__selection_8h.html">mesh_selection.h</a></div></div>
-<div class="ttc" id="aclassmesh_1_1_mesh_selection_html"><div class="ttname"><a href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection</a></div><div class="ttdef"><b>Definition:</b> mesh_selection.h:21</div></div>
+<div class="ttc" id="aclassmesh_1_1_mesh_selection_html"><div class="ttname"><a href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection</a></div><div class="ttdef"><b>Definition:</b> <a href="mesh__selection_8h_source.html#l00020">mesh_selection.h:21</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

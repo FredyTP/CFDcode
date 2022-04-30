@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: field::Fields Class Reference</title>
+<title>My Project: field::Fields Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -125,8 +125,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a55ca3713ddbb3b496d2ab4f0704a5492"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada3ff6dd8ed62ab0af35f9e649c5a9ee"><td class="memItemLeft" align="right" valign="top">const vector2d &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfield_1_1_fields.html#ada3ff6dd8ed62ab0af35f9e649c5a9ee">velocityField</a> (const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face) const</td></tr>
 <tr class="separator:ada3ff6dd8ed62ab0af35f9e649c5a9ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a749ace6bb282c65721d0bb400c2437cb"><td class="memItemLeft" align="right" valign="top"><a id="a749ace6bb282c65721d0bb400c2437cb"></a>
+const <a class="el" href="classmesh_1_1_mesh.html">mesh::Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mesh</b> () const</td></tr>
+<tr class="separator:a749ace6bb282c65721d0bb400c2437cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="fields_8h_source.html#l00052">52</a> of file <a class="el" href="fields_8h_source.html">fields.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1512828ed99087a1f2e5fa010bf1c993"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1512828ed99087a1f2e5fa010bf1c993">&#9670;&nbsp;</a></span>Fields()</h2>
 
@@ -145,7 +151,7 @@ Public Member Functions</h2></td></tr>
 <p>Contructor: assigns the mesh and enables temperature, pressure and density fields.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">&lt;em&gt;mesh&lt;/em&gt;</td><td></td></tr>
+    <tr><td class="paramname">&lt;em&gt;mesh&lt;/em&gt;</td><td>the mesh over the field is created </td></tr>
   </table>
   </dd>
 </dl>
@@ -171,7 +177,7 @@ Public Member Functions</h2></td></tr>
 <p>Copy other fields values and enabled configuration.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">other</td><td></td></tr>
+    <tr><td class="paramname">other</td><td>field to copy data from </td></tr>
   </table>
   </dd>
 </dl>
@@ -206,8 +212,8 @@ Public Member Functions</h2></td></tr>
 <p>Enable the selected scalar field to be used.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field</td><td></td></tr>
-    <tr><td class="paramname">enable</td><td></td></tr>
+    <tr><td class="paramname">field</td><td>scalar field to be enabled </td></tr>
+    <tr><td class="paramname">enable</td><td>if true enables the field, if false disables </td></tr>
   </table>
   </dd>
 </dl>
@@ -242,7 +248,7 @@ Public Member Functions</h2></td></tr>
 <p>Enable the selected vector field to be used.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field</td><td></td></tr>
+    <tr><td class="paramname">field</td><td>vector field to be enabled </td></tr>
     <tr><td class="paramname">enable</td><td></td></tr>
   </table>
   </dd>
@@ -286,11 +292,11 @@ Public Member Functions</h2></td></tr>
 <p>Get a reference to the scalar field selected (should be enabled).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field</td><td></td></tr>
+    <tr><td class="paramname">field</td><td>field selected </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to the scalar field selected </dd></dl>
 
 </div>
 </div>
@@ -312,7 +318,7 @@ Public Member Functions</h2></td></tr>
 <p>Get a CONST reference to the scalar field selected (should be enabled).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field</td><td></td></tr>
+    <tr><td class="paramname">field</td><td>field selected </td></tr>
   </table>
   </dd>
 </dl>
@@ -348,7 +354,7 @@ Public Member Functions</h2></td></tr>
 <p>Get a reference to scalar field value of a cell.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field</td><td></td></tr>
+    <tr><td class="paramname">field</td><td>field selected </td></tr>
     <tr><td class="paramname">cell</td><td></td></tr>
   </table>
   </dd>
@@ -385,7 +391,7 @@ Public Member Functions</h2></td></tr>
 <p>Get the scalar field value of a cell.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field</td><td></td></tr>
+    <tr><td class="paramname">field</td><td>field selected </td></tr>
     <tr><td class="paramname">cell</td><td></td></tr>
   </table>
   </dd>
@@ -412,7 +418,7 @@ Public Member Functions</h2></td></tr>
 <p>Get a reference to the specified vectorial field.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field</td><td></td></tr>
+    <tr><td class="paramname">field</td><td>field selected </td></tr>
   </table>
   </dd>
 </dl>
@@ -438,7 +444,7 @@ Public Member Functions</h2></td></tr>
 <p>Get a CONST reference to the specified vectorial field.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field</td><td></td></tr>
+    <tr><td class="paramname">field</td><td>field selected </td></tr>
   </table>
   </dd>
 </dl>
@@ -474,7 +480,7 @@ Public Member Functions</h2></td></tr>
 <p>Get a reference to vector field value of a cell..</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field</td><td></td></tr>
+    <tr><td class="paramname">field</td><td>field selected </td></tr>
     <tr><td class="paramname">cell</td><td></td></tr>
   </table>
   </dd>
@@ -511,7 +517,7 @@ Public Member Functions</h2></td></tr>
 <p>Get a CONST reference to vector field value of a cell..</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">field</td><td></td></tr>
+    <tr><td class="paramname">field</td><td>field selected </td></tr>
     <tr><td class="paramname">cell</td><td></td></tr>
   </table>
   </dd>
@@ -554,7 +560,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Get a COSNT reference to the velocity field.</p>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to velocity field </dd></dl>
 
 </div>
 </div>
@@ -576,11 +582,11 @@ Public Member Functions</h2></td></tr>
 <p>Get a reference to the veloicity field of a face.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">face</td><td></td></tr>
+    <tr><td class="paramname">face</td><td>selected face </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>reference to velocity at face </dd></dl>
 
 </div>
 </div>
@@ -602,16 +608,16 @@ Public Member Functions</h2></td></tr>
 <p>Get a CONST reference to the veloicity field of a face.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">face</td><td></td></tr>
+    <tr><td class="paramname">face</td><td>selected face </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const reference to velocity at face </dd></dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>inc/field/<a class="el" href="fields_8h_source.html">fields.h</a></li>
+<li>D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/field/<a class="el" href="fields_8h_source.html">fields.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

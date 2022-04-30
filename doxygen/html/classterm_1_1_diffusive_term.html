@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: term::DiffusiveTerm Class Reference</title>
+<title>My Project: term::DiffusiveTerm Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -89,6 +89,8 @@ $(document).ready(function(){initNavTree('classterm_1_1_diffusive_term.html','')
 <div class="title">term::DiffusiveTerm Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="diffusive__term_8h_source.html">diffusive_term.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for term::DiffusiveTerm:</div>
 <div class="dyncontent">
@@ -104,11 +106,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa75757ab3c9649e8035d229efa2a9e84"><td class="memItemLeft" align="right" valign="top"><a id="aa75757ab3c9649e8035d229efa2a9e84"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>DiffusiveTerm</b> (<a class="el" href="classterm_1_1_gradient_flux.html">term::GradientFlux</a> *gradientScheme)</td></tr>
 <tr class="separator:aa75757ab3c9649e8035d229efa2a9e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adeaec859111cec9329c04902afea4964"><td class="memItemLeft" align="right" valign="top"><a id="adeaec859111cec9329c04902afea4964"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateBothCell</b> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields) const</td></tr>
+<tr class="memitem:adeaec859111cec9329c04902afea4964"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classterm_1_1_diffusive_term.html#adeaec859111cec9329c04902afea4964">calculateBothCell</a> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields) const</td></tr>
 <tr class="separator:adeaec859111cec9329c04902afea4964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac25d5f0bfadbbe22dd3826eab81ef111"><td class="memItemLeft" align="right" valign="top"><a id="ac25d5f0bfadbbe22dd3826eab81ef111"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateOneCell</b> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields, bool isBoundaryCell=false) const</td></tr>
+<tr class="memitem:ac25d5f0bfadbbe22dd3826eab81ef111"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classterm_1_1_diffusive_term.html#ac25d5f0bfadbbe22dd3826eab81ef111">calculateOneCell</a> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields, bool isBoundaryCell=false) const</td></tr>
 <tr class="separator:ac25d5f0bfadbbe22dd3826eab81ef111"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade9a4fefaab80f5a5f3dac6b0d26cba9"><td class="memItemLeft" align="right" valign="top"><a id="ade9a4fefaab80f5a5f3dac6b0d26cba9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setGradientFlux</b> (<a class="el" href="classterm_1_1_gradient_flux.html">term::GradientFlux</a> *gradientFlux)</td></tr>
@@ -120,8 +120,130 @@ Static Public Member Functions</h2></td></tr>
 static double&#160;</td><td class="memItemRight" valign="bottom"><b>GetDiffusionCoeficient</b> (const <a class="el" href="classmesh_1_1_cell.html">mesh::Cell</a> *cell, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields)</td></tr>
 <tr class="separator:aab0d1943524e07c2488e6acb5405b0c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Face term for diffusive fluxes. </p>
+
+<p class="definition">Definition at line <a class="el" href="diffusive__term_8h_source.html#l00024">24</a> of file <a class="el" href="diffusive__term_8h_source.html">diffusive_term.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="adeaec859111cec9329c04902afea4964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adeaec859111cec9329c04902afea4964">&#9670;&nbsp;</a></span>calculateBothCell()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void term::DiffusiveTerm::calculateBothCell </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *&#160;</td>
+          <td class="paramname"><em>submatrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *&#160;</td>
+          <td class="paramname"><em>face</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *&#160;</td>
+          <td class="paramname"><em>fields</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Pure virtual function that is used to calculate equation term over a face. It calculates the coefficients for cell1 and obtains the cell2 coeficient applying -1 factor.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">submatrix</td><td></td></tr>
+    <tr><td class="paramname">face</td><td></td></tr>
+    <tr><td class="paramname">fields</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classterm_1_1_face_equation_term.html#a096a43a0961ebed4d2187fbfdf668a78">term::FaceEquationTerm</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="diffusive__term_8h_source.html#l00032">32</a> of file <a class="el" href="diffusive__term_8h_source.html">diffusive_term.h</a>.</p>
+
+</div>
+</div>
+<a id="ac25d5f0bfadbbe22dd3826eab81ef111"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac25d5f0bfadbbe22dd3826eab81ef111">&#9670;&nbsp;</a></span>calculateOneCell()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void term::DiffusiveTerm::calculateOneCell </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *&#160;</td>
+          <td class="paramname"><em>submatrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *&#160;</td>
+          <td class="paramname"><em>face</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *&#160;</td>
+          <td class="paramname"><em>fields</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isBoundaryCell</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Pure virtual function that is used to calculate equation term over a face. It calculates the coefficients for cell1 if isBoundary cell is false, otherwise calculates for cell2.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">submatrix</td><td></td></tr>
+    <tr><td class="paramname">face</td><td></td></tr>
+    <tr><td class="paramname">fields</td><td></td></tr>
+    <tr><td class="paramname">isBoundaryCell</td><td>if the cell you want to compute the term is a boundary cell or not. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classterm_1_1_face_equation_term.html#a8364e715ed4bebb6db00460bba519ee2">term::FaceEquationTerm</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="diffusive__term_8h_source.html#l00042">42</a> of file <a class="el" href="diffusive__term_8h_source.html">diffusive_term.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>inc/equation/diffusive/<a class="el" href="diffusive__term_8h_source.html">diffusive_term.h</a></li>
+<li>D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/equation/diffusive/<a class="el" href="diffusive__term_8h_source.html">diffusive_term.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

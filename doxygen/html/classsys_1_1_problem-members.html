@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: Member List</title>
+<title>My Project: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -91,13 +91,15 @@ $(document).ready(function(){initNavTree('classsys_1_1_problem.html',''); initRe
   <tr class="even"><td class="entry"><a class="el" href="classsys_1_1_problem.html#a77d72256a865d29b85366f7834190fbe">addConstantMaterial</a>(double density, double viscosity, double conductivity, double specific_heat)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classsys_1_1_problem.html#a25ba57828410226d53b4cc1daa7e94bb">addConstFluxBoundary</a>(double flux)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classsys_1_1_problem.html#a083b9e7a274bbe5c19cb11afe468ea8f">addConstTempBoundary</a>(double temperature)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classsys_1_1_problem.html#aaf51825541222a305f1df3ed8ff35580">addMaterial</a>(material::MaterialFactory &amp;materialFactory)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classsys_1_1_problem.html#a807be50475588f30f168dfd326702616">assignBoundaryCondition</a>(int bc, int selection)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classsys_1_1_problem.html#ab2e177b3cdf2e169d60bf29fdca2471f">assignMaterial</a>(int index, mesh::MeshSelection&lt; mesh::Cell &gt; &amp;selection)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classsys_1_1_problem.html#a81c54e11baf22e196fac249b4276d5be">assignMaterial</a>(int index=0)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classsys_1_1_problem.html#ac122c377bd760fe4d6f4f1f9a7158629">buildProblem</a>()</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classsys_1_1_problem.html#acefee339e189389fdad6daa8f183668e">configConvectiveTerm</a>(term::FaceInterpolation *faceInterpolation)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classsys_1_1_problem.html#a6410de8aa2ca00b172ce3f7bf264f48e">configDiffusiveTerm</a>(term::GradientFlux *gradientFlux)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classsys_1_1_problem.html#a82a86d251c582aed3e80965a25bf7604">addFaceSelection</a>(std::unique_ptr&lt; mesh::MeshSelection&lt; mesh::Face &gt;&gt; &amp;face_selection)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classsys_1_1_problem.html#aaf51825541222a305f1df3ed8ff35580">addMaterial</a>(material::MaterialFactory &amp;materialFactory)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classsys_1_1_problem.html#a807be50475588f30f168dfd326702616">assignBoundaryCondition</a>(int bc, int selection)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classsys_1_1_problem.html#ab2e177b3cdf2e169d60bf29fdca2471f">assignMaterial</a>(int index, mesh::MeshSelection&lt; mesh::Cell &gt; &amp;selection)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classsys_1_1_problem.html#a81c54e11baf22e196fac249b4276d5be">assignMaterial</a>(int index=0)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classsys_1_1_problem.html#ac122c377bd760fe4d6f4f1f9a7158629">buildProblem</a>()</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classsys_1_1_problem.html#acefee339e189389fdad6daa8f183668e">configConvectiveTerm</a>(term::FaceInterpolation *faceInterpolation)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classsys_1_1_problem.html#a6410de8aa2ca00b172ce3f7bf264f48e">configDiffusiveTerm</a>(term::GradientFlux *gradientFlux)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classsys_1_1_problem.html#ae9fcd591b98a57ed80547cf7d3a5d146">createRectMesh</a>(double w, double h, int n_w, int n_h)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>fields</b>() (defined in <a class="el" href="classsys_1_1_problem.html">sys::Problem</a>)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>for_each_boundary</b>(std::function&lt; void(bc::BoundaryCondition *)&gt; on_boundary) (defined in <a class="el" href="classsys_1_1_problem.html">sys::Problem</a>)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>for_each_faceTerm</b>(std::function&lt; void(term::FaceEquationTerm *)&gt; on_face_term) (defined in <a class="el" href="classsys_1_1_problem.html">sys::Problem</a>)</td><td class="entry"><a class="el" href="classsys_1_1_problem.html">sys::Problem</a></td><td class="entry"></td></tr>

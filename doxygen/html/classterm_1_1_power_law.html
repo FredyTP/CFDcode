@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: term::PowerLaw Class Reference</title>
+<title>My Project: term::PowerLaw Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -88,6 +88,8 @@ $(document).ready(function(){initNavTree('classterm_1_1_power_law.html',''); ini
 <div class="title">term::PowerLaw Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="equation_2convective_2face__interpolation_8h_source.html">face_interpolation.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for term::PowerLaw:</div>
 <div class="dyncontent">
@@ -100,12 +102,71 @@ Inheritance diagram for term::PowerLaw:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa13938a60b6894192f70aac1f04fb18f"><td class="memItemLeft" align="right" valign="top"><a id="aa13938a60b6894192f70aac1f04fb18f"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>interpolateFace</b> (std::vector&lt; <a class="el" href="classmath_1_1_cell_value.html">math::CellValue</a>&lt; double &gt;&gt; &amp;cellvalues, const <a class="el" href="classmath_1_1_face_value.html">math::FaceValue</a>&lt; double &gt; &amp;faceval, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields)</td></tr>
+<tr class="memitem:aa13938a60b6894192f70aac1f04fb18f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classterm_1_1_power_law.html#aa13938a60b6894192f70aac1f04fb18f">interpolateFace</a> (std::vector&lt; <a class="el" href="classmath_1_1_cell_value.html">math::CellValue</a>&lt; double &gt;&gt; &amp;cellvalues, const <a class="el" href="classmath_1_1_face_value.html">math::FaceValue</a>&lt; double &gt; &amp;faceval, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields)</td></tr>
 <tr class="separator:aa13938a60b6894192f70aac1f04fb18f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Power Law Scheme. It's a second order scheme based on the 1D convection-diffusion equation. On the extreme cases is done by <a class="el" href="classterm_1_1_u_d_s.html">UDS</a> or <a class="el" href="classterm_1_1_c_d_s.html">CDS</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="equation_2convective_2face__interpolation_8h_source.html#l00091">91</a> of file <a class="el" href="equation_2convective_2face__interpolation_8h_source.html">face_interpolation.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa13938a60b6894192f70aac1f04fb18f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa13938a60b6894192f70aac1f04fb18f">&#9670;&nbsp;</a></span>interpolateFace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void term::PowerLaw::interpolateFace </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classmath_1_1_cell_value.html">math::CellValue</a>&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>cellvalues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classmath_1_1_face_value.html">math::FaceValue</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>faceval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *&#160;</td>
+          <td class="paramname"><em>field</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Pure virtual function representing how to interpolate the values on a face.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cellvalues</td><td></td></tr>
+    <tr><td class="paramname">faceval</td><td></td></tr>
+    <tr><td class="paramname">field</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classterm_1_1_face_interpolation.html#a64ca62900895674e46f9dc01f6127eca">term::FaceInterpolation</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="equation_2convective_2face__interpolation_8h_source.html#l00095">95</a> of file <a class="el" href="equation_2convective_2face__interpolation_8h_source.html">face_interpolation.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>inc/equation/convective/<a class="el" href="equation_2convective_2face__interpolation_8h_source.html">face_interpolation.h</a></li>
+<li>D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/equation/convective/<a class="el" href="equation_2convective_2face__interpolation_8h_source.html">face_interpolation.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

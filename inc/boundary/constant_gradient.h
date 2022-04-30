@@ -15,6 +15,9 @@
 
 namespace bc
 {
+    /**
+     * \brief Boundary condition of constant heat flux [W/m^2].
+     */
     class ConstantFlux : public BoundaryCondition
     {
     public:
@@ -23,7 +26,15 @@ namespace bc
             _diffusiveTerm = nullptr;
         };
         
-        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field) const
+        /**
+         * Overriden function to apply constant heat flux boundary condition.
+         * 
+         * \param submatrix
+         * \param cell
+         * \param field
+         * \param actualTime current simulation Time [s]
+         */
+        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field, double actualTime) const
         {
             _diffusiveTerm->calculateOneCell(submatrix, cell->faces()[0], field, true);
             submatrix->addCellValues(cell, math::CellValue<double>(nullptr, _flux));

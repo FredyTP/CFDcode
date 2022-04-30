@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: term::GradientFlux Class Reference</title>
+<title>My Project: term::GradientFlux Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -88,6 +88,8 @@ $(document).ready(function(){initNavTree('classterm_1_1_gradient_flux.html','');
 <div class="title">term::GradientFlux Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="equation_2diffusive_2gradient__flux_8h_source.html">gradient_flux.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for term::GradientFlux:</div>
 <div class="dyncontent">
@@ -101,12 +103,69 @@ Inheritance diagram for term::GradientFlux:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4beaec922b2cde0eb66e6247943117a4"><td class="memItemLeft" align="right" valign="top"><a id="a4beaec922b2cde0eb66e6247943117a4"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>integrateGradientFace</b> (std::vector&lt; <a class="el" href="classmath_1_1_cell_value.html">math::CellValue</a>&lt; double &gt;&gt; &amp;cellvalues, double coef, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face)=0</td></tr>
+<tr class="memitem:a4beaec922b2cde0eb66e6247943117a4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classterm_1_1_gradient_flux.html#a4beaec922b2cde0eb66e6247943117a4">integrateGradientFace</a> (std::vector&lt; <a class="el" href="classmath_1_1_cell_value.html">math::CellValue</a>&lt; double &gt;&gt; &amp;cellvalues, double coef, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face)=0</td></tr>
 <tr class="separator:a4beaec922b2cde0eb66e6247943117a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract class representing a gradient flux calculation method. </p>
+
+<p class="definition">Definition at line <a class="el" href="equation_2diffusive_2gradient__flux_8h_source.html#l00022">22</a> of file <a class="el" href="equation_2diffusive_2gradient__flux_8h_source.html">gradient_flux.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4beaec922b2cde0eb66e6247943117a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4beaec922b2cde0eb66e6247943117a4">&#9670;&nbsp;</a></span>integrateGradientFace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void term::GradientFlux::integrateGradientFace </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classmath_1_1_cell_value.html">math::CellValue</a>&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>cellvalues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>coef</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *&#160;</td>
+          <td class="paramname"><em>face</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Pure virtual function representing how to interpolate the gradient on a face.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cellvalues</td><td></td></tr>
+    <tr><td class="paramname">coef</td><td></td></tr>
+    <tr><td class="paramname">face</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classterm_1_1_orthogonal_corrected_gradient.html#af839baae337bf1ebbb7641e7b5814dfa">term::OrthogonalCorrectedGradient</a>, and <a class="el" href="classterm_1_1_central_difference_gradient.html#a9fed782c90a4f8e84ca98ad66842f460">term::CentralDifferenceGradient</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>inc/equation/diffusive/<a class="el" href="equation_2diffusive_2gradient__flux_8h_source.html">gradient_flux.h</a></li>
+<li>D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/equation/diffusive/<a class="el" href="equation_2diffusive_2gradient__flux_8h_source.html">gradient_flux.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

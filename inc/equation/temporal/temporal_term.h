@@ -14,7 +14,10 @@
 #include <field/fields.h>
 namespace term
 {
-
+    /**
+     * Cell equation term that represents the temporal term.
+     * Its basically a diagonal matrix that contains the cell thermic inertia.
+     */
     class TemporalTerm : public CellEquationTerm
     {
     public:

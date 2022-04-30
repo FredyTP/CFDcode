@@ -21,7 +21,9 @@
 namespace term
 {
 
-    //Generalize this concept in equation terms
+    /**
+     * Face term for convective fluxes.
+     */
     class ConvectiveTerm : public FaceEquationTerm
     {
     public:

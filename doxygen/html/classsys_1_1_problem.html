@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: sys::Problem Class Reference</title>
+<title>My Project: sys::Problem Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -95,6 +95,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a08ac9a5a7c16419c90d62e2420fff68f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae643587ee4c791a6b2c75dc5a3772ba1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_problem.html#ae643587ee4c791a6b2c75dc5a3772ba1">loadProjectMesh</a> (int n_cell)</td></tr>
 <tr class="separator:ae643587ee4c791a6b2c75dc5a3772ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9fcd591b98a57ed80547cf7d3a5d146"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_problem.html#ae9fcd591b98a57ed80547cf7d3a5d146">createRectMesh</a> (double w, double h, int n_w, int n_h)</td></tr>
+<tr class="separator:ae9fcd591b98a57ed80547cf7d3a5d146"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77d72256a865d29b85366f7834190fbe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_problem.html#a77d72256a865d29b85366f7834190fbe">addConstantMaterial</a> (double density, double viscosity, double conductivity, double specific_heat)</td></tr>
 <tr class="separator:a77d72256a865d29b85366f7834190fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf51825541222a305f1df3ed8ff35580"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_problem.html#aaf51825541222a305f1df3ed8ff35580">addMaterial</a> (<a class="el" href="classmaterial_1_1_material_factory.html">material::MaterialFactory</a> &amp;materialFactory)</td></tr>
@@ -103,6 +105,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab2e177b3cdf2e169d60bf29fdca2471f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81c54e11baf22e196fac249b4276d5be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_problem.html#a81c54e11baf22e196fac249b4276d5be">assignMaterial</a> (int index=0)</td></tr>
 <tr class="separator:a81c54e11baf22e196fac249b4276d5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82a86d251c582aed3e80965a25bf7604"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_problem.html#a82a86d251c582aed3e80965a25bf7604">addFaceSelection</a> (std::unique_ptr&lt; <a class="el" href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection</a>&lt; <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> &gt;&gt; &amp;face_selection)</td></tr>
+<tr class="separator:a82a86d251c582aed3e80965a25bf7604"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c85c2b1e28d3f641f566d593005d2ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_problem.html#a1c85c2b1e28d3f641f566d593005d2ef">loadFaceSelection</a> (const std::string path)</td></tr>
 <tr class="separator:a1c85c2b1e28d3f641f566d593005d2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15582770a19fafabb9ec3111a22610bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsys_1_1_problem.html#a15582770a19fafabb9ec3111a22610bb">loadProjectFaceSelection</a> (int index, int n_cell)</td></tr>
@@ -139,7 +143,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>for_each_faceTerm</b>
 <a class="el" href="classterm_1_1_cell_equation_term.html">term::CellEquationTerm</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>termporalTerm</b> ()</td></tr>
 <tr class="separator:aea625fe3dfce2a314e8298221db99d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="problem_8h_source.html#l00038">38</a> of file <a class="el" href="problem_8h_source.html">problem.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a77d72256a865d29b85366f7834190fbe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77d72256a865d29b85366f7834190fbe">&#9670;&nbsp;</a></span>addConstantMaterial()</h2>
 
@@ -239,6 +246,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>for_each_faceTerm</b>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>index </dd></dl>
+
+</div>
+</div>
+<a id="a82a86d251c582aed3e80965a25bf7604"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82a86d251c582aed3e80965a25bf7604">&#9670;&nbsp;</a></span>addFaceSelection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sys::Problem::addFaceSelection </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection</a>&lt; <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>face_selection</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Add a face selection to the list.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">face_selection</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>index in the list </dd></dl>
 
 </div>
 </div>
@@ -433,6 +466,56 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>for_each_faceTerm</b>
 
 </div>
 </div>
+<a id="ae9fcd591b98a57ed80547cf7d3a5d146"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9fcd591b98a57ed80547cf7d3a5d146">&#9670;&nbsp;</a></span>createRectMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sys::Problem::createRectMesh </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Creates a rectangular mesh.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">w</td><td>width of the mesh [m] </td></tr>
+    <tr><td class="paramname">h</td><td>height of the mesh [m] </td></tr>
+    <tr><td class="paramname">n_w</td><td>number of horizontal divisions (Cells) </td></tr>
+    <tr><td class="paramname">n_h</td><td>number of verticarl divisions (Cells) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a4a01921e97ad7f815b728758354c9574"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a01921e97ad7f815b728758354c9574">&#9670;&nbsp;</a></span>initEquations()</h2>
 
@@ -612,7 +695,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>for_each_faceTerm</b>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>inc/system/<a class="el" href="problem_8h_source.html">problem.h</a></li>
+<li>D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/system/<a class="el" href="problem_8h_source.html">problem.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

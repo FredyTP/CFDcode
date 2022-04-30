@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "CFDCode", "index.html", [
+  [ "My Project", "index.html", [
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -43,7 +43,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classsolver_1_1_fixed_time_activity.html#ad23e3d12e341813626b26a177669a07f"
+"classpost_1_1_contour.html#acb7608866a85727260805b599ac1f011",
+"structfield_1_1_scalar_state_vector.html#a51404146fff2fd4b271ea0dcc8b4a64c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -15,6 +15,9 @@
 
 namespace bc
 {
+    /**
+     * Boundary condition of constant temperature [K].
+     */
     class ConstantTemperature : public BoundaryCondition
     {
     public:
@@ -23,7 +26,15 @@ namespace bc
             _diffusiveTerm = nullptr;
         };
         
-        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field) const
+        /**
+         * Calculate constant temperature boundary condition
+         * 
+         * \param submatrix
+         * \param cell
+         * \param field
+         * \param actualTime current simulation Time [s]
+         */
+        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix,const mesh::Cell* cell, const field::Fields* field, double actualTime) const
         {            
             submatrix->addCellValues(cell,math::CellValue<double>(nullptr,_temperature));
             submatrix->addCellValues(cell, math::CellValue<double>(cell, 1));

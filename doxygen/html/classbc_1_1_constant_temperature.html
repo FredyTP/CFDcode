@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: bc::ConstantTemperature Class Reference</title>
+<title>My Project: bc::ConstantTemperature Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -88,13 +88,15 @@ $(document).ready(function(){initNavTree('classbc_1_1_constant_temperature.html'
 <div class="title">bc::ConstantTemperature Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="constant__temperature_8h_source.html">constant_temperature.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for bc::ConstantTemperature:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classbc_1_1_constant_temperature.png" usemap="#bc::ConstantTemperature_map" alt=""/>
   <map id="bc::ConstantTemperature_map" name="bc::ConstantTemperature_map">
-<area href="classbc_1_1_boundary_condition.html" alt="bc::BoundaryCondition" shape="rect" coords="0,0,152,24"/>
+<area href="classbc_1_1_boundary_condition.html" title="Abstract class representing boundary condition." alt="bc::BoundaryCondition" shape="rect" coords="0,0,152,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -103,24 +105,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a178ade0598a427c73e1859cedfc5e13f"><td class="memItemLeft" align="right" valign="top"><a id="a178ade0598a427c73e1859cedfc5e13f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ConstantTemperature</b> (double _temperature_)</td></tr>
 <tr class="separator:a178ade0598a427c73e1859cedfc5e13f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67d1622ce92cea461d4fc917994dff6b"><td class="memItemLeft" align="right" valign="top"><a id="a67d1622ce92cea461d4fc917994dff6b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>getBoundaryCondition</b> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classmesh_1_1_cell.html">mesh::Cell</a> *cell, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *field) const</td></tr>
-<tr class="separator:a67d1622ce92cea461d4fc917994dff6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42d28dc998b196971d58d2bf6cd73366"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbc_1_1_constant_temperature.html#a42d28dc998b196971d58d2bf6cd73366">getBoundaryCondition</a> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classmesh_1_1_cell.html">mesh::Cell</a> *cell, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *field, double actualTime) const</td></tr>
+<tr class="separator:a42d28dc998b196971d58d2bf6cd73366"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classbc_1_1_boundary_condition"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classbc_1_1_boundary_condition')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classbc_1_1_boundary_condition.html">bc::BoundaryCondition</a></td></tr>
-<tr class="memitem:a1043da61a1bacc6b5f8ac0c7dbd3d3f8 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top"><a id="a1043da61a1bacc6b5f8ac0c7dbd3d3f8"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateBoundaryCondition</b> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *field) const</td></tr>
-<tr class="separator:a1043da61a1bacc6b5f8ac0c7dbd3d3f8 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26e1b9388ea5e15338ee569896e876c4 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top"><a id="a26e1b9388ea5e15338ee569896e876c4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addFace</b> (<a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *_face_)</td></tr>
+<tr class="memitem:af172dcda0f0f56077cd27dc0b88aac7e inherit pub_methods_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbc_1_1_boundary_condition.html#af172dcda0f0f56077cd27dc0b88aac7e">calculateBoundaryCondition</a> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *field, double actualTime) const</td></tr>
+<tr class="memdesc:af172dcda0f0f56077cd27dc0b88aac7e inherit pub_methods_classbc_1_1_boundary_condition"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the boundary condition terms for every boundary face.  <a href="classbc_1_1_boundary_condition.html#af172dcda0f0f56077cd27dc0b88aac7e">More...</a><br /></td></tr>
+<tr class="separator:af172dcda0f0f56077cd27dc0b88aac7e inherit pub_methods_classbc_1_1_boundary_condition"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e1b9388ea5e15338ee569896e876c4 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbc_1_1_boundary_condition.html#a26e1b9388ea5e15338ee569896e876c4">addFace</a> (<a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *_face_)</td></tr>
 <tr class="separator:a26e1b9388ea5e15338ee569896e876c4 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26f4d05a4fea90df8a292e3dde8da698 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top"><a id="a26f4d05a4fea90df8a292e3dde8da698"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setBoundary</b> (const <a class="el" href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection</a>&lt; <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> &gt; &amp;boundary)</td></tr>
+<tr class="memitem:a26f4d05a4fea90df8a292e3dde8da698 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbc_1_1_boundary_condition.html#a26f4d05a4fea90df8a292e3dde8da698">setBoundary</a> (const <a class="el" href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection</a>&lt; <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> &gt; &amp;boundary)</td></tr>
 <tr class="separator:a26f4d05a4fea90df8a292e3dde8da698 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91859278952c233eec76cc36bb975b20 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top"><a id="a91859278952c233eec76cc36bb975b20"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setConvetiveTerm</b> (<a class="el" href="classterm_1_1_convective_term.html">term::ConvectiveTerm</a> *_convectiveTerm_)</td></tr>
+<tr class="memitem:a91859278952c233eec76cc36bb975b20 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbc_1_1_boundary_condition.html#a91859278952c233eec76cc36bb975b20">setConvetiveTerm</a> (<a class="el" href="classterm_1_1_convective_term.html">term::ConvectiveTerm</a> *_convectiveTerm_)</td></tr>
 <tr class="separator:a91859278952c233eec76cc36bb975b20 inherit pub_methods_classbc_1_1_boundary_condition"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a8f38d7b2a496af026f54933dd30a7c inherit pub_methods_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top"><a id="a0a8f38d7b2a496af026f54933dd30a7c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDiffusiveTerm</b> (<a class="el" href="classterm_1_1_diffusive_term.html">term::DiffusiveTerm</a> *_diffusiveTerm_)</td></tr>
+<tr class="memitem:a0a8f38d7b2a496af026f54933dd30a7c inherit pub_methods_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbc_1_1_boundary_condition.html#a0a8f38d7b2a496af026f54933dd30a7c">setDiffusiveTerm</a> (<a class="el" href="classterm_1_1_diffusive_term.html">term::DiffusiveTerm</a> *_diffusiveTerm_)</td></tr>
 <tr class="separator:a0a8f38d7b2a496af026f54933dd30a7c inherit pub_methods_classbc_1_1_boundary_condition"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -129,9 +126,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a009df501ec661e795645c53d301f7534 inherit pro_attribs_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top"><a id="a009df501ec661e795645c53d301f7534"></a>
 std::vector&lt; <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_boundary</b></td></tr>
 <tr class="separator:a009df501ec661e795645c53d301f7534 inherit pro_attribs_classbc_1_1_boundary_condition"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af22cb8affc6fd052dd7c19a109a7d27e inherit pro_attribs_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top"><a id="af22cb8affc6fd052dd7c19a109a7d27e"></a>
-std::vector&lt; <a class="el" href="classmesh_1_1_cell.html">mesh::Cell</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_boundaryCells</b></td></tr>
-<tr class="separator:af22cb8affc6fd052dd7c19a109a7d27e inherit pro_attribs_classbc_1_1_boundary_condition"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae483e090aa11106061ce1a9d92a16356 inherit pro_attribs_classbc_1_1_boundary_condition"><td class="memItemLeft" align="right" valign="top"><a id="ae483e090aa11106061ce1a9d92a16356"></a>
 term ::ConvectiveTerm *&#160;</td><td class="memItemRight" valign="bottom"><b>_convectiveTerm</b> = nullptr</td></tr>
 <tr class="separator:ae483e090aa11106061ce1a9d92a16356 inherit pro_attribs_classbc_1_1_boundary_condition"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,8 +133,75 @@ term ::ConvectiveTerm *&#160;</td><td class="memItemRight" valign="bottom"><b>_c
 <a class="el" href="classterm_1_1_diffusive_term.html">term::DiffusiveTerm</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_diffusiveTerm</b> = nullptr</td></tr>
 <tr class="separator:a20c813272bd4b75aadbaf64958b034ab inherit pro_attribs_classbc_1_1_boundary_condition"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Boundary condition of constant temperature [K]. </p>
+
+<p class="definition">Definition at line <a class="el" href="constant__temperature_8h_source.html#l00021">21</a> of file <a class="el" href="constant__temperature_8h_source.html">constant_temperature.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a42d28dc998b196971d58d2bf6cd73366"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42d28dc998b196971d58d2bf6cd73366">&#9670;&nbsp;</a></span>getBoundaryCondition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void bc::ConstantTemperature::getBoundaryCondition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *&#160;</td>
+          <td class="paramname"><em>submatrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classmesh_1_1_cell.html">mesh::Cell</a> *&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *&#160;</td>
+          <td class="paramname"><em>field</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>actualTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Calculate constant temperature boundary condition</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">submatrix</td><td></td></tr>
+    <tr><td class="paramname">cell</td><td></td></tr>
+    <tr><td class="paramname">field</td><td></td></tr>
+    <tr><td class="paramname">actualTime</td><td>current simulation Time [s] </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classbc_1_1_boundary_condition.html#a99e51422f80b2e54bd23afd20643f381">bc::BoundaryCondition</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="constant__temperature_8h_source.html#l00037">37</a> of file <a class="el" href="constant__temperature_8h_source.html">constant_temperature.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>inc/boundary/<a class="el" href="constant__temperature_8h_source.html">constant_temperature.h</a></li>
+<li>D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/boundary/<a class="el" href="constant__temperature_8h_source.html">constant_temperature.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

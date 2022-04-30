@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: inc/boundary/constant_gradient.h Source File</title>
+<title>My Project: D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/boundary/constant_gradient.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -95,35 +95,37 @@ $(document).ready(function(){initNavTree('constant__gradient_8h_source.html','')
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>bc</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classbc_1_1_constant_flux.html">   18</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classbc_1_1_constant_flux.html">ConstantFlux</a> : <span class="keyword">public</span> <a class="code" href="classbc_1_1_boundary_condition.html">BoundaryCondition</a></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="classbc_1_1_constant_flux.html">ConstantFlux</a>(<span class="keywordtype">double</span> _flux_) :_flux(_flux_) {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            _convectiveTerm = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            _diffusiveTerm = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        };</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> getBoundaryCondition(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix,<span class="keyword">const</span> <a class="code" href="classmesh_1_1_cell.html">mesh::Cell</a>* cell, <span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* field)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            _diffusiveTerm-&gt;calculateOneCell(submatrix, cell-&gt;faces()[0], field, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            submatrix-&gt;addCellValues(cell,<a class="code" href="classmath_1_1_cell_value.html">math::CellValue&lt;double&gt;</a>(<span class="keyword">nullptr</span>,_flux));                                           </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">double</span> _flux;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classbc_1_1_constant_flux.html">   21</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classbc_1_1_constant_flux.html">ConstantFlux</a> : <span class="keyword">public</span> <a class="code" href="classbc_1_1_boundary_condition.html">BoundaryCondition</a></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classbc_1_1_constant_flux.html">ConstantFlux</a>(<span class="keywordtype">double</span> _flux_) : _flux(_flux_) {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            _convectiveTerm = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            _diffusiveTerm = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        };</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classbc_1_1_constant_flux.html#a9d160cec6aaac23e6b2d242a37b9aac2">   37</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classbc_1_1_constant_flux.html#a9d160cec6aaac23e6b2d242a37b9aac2">getBoundaryCondition</a>(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix,<span class="keyword">const</span> <a class="code" href="classmesh_1_1_cell.html">mesh::Cell</a>* cell, <span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* field, <span class="keywordtype">double</span> actualTime)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            _diffusiveTerm-&gt;<a class="code" href="classterm_1_1_diffusive_term.html#ac25d5f0bfadbbe22dd3826eab81ef111">calculateOneCell</a>(submatrix, cell-&gt;faces()[0], field, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            submatrix-&gt;addCellValues(cell, <a class="code" href="classmath_1_1_cell_value.html">math::CellValue&lt;double&gt;</a>(<span class="keyword">nullptr</span>, _flux));</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">double</span> _flux;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    };</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassmesh_1_1_cell_html"><div class="ttname"><a href="classmesh_1_1_cell.html">mesh::Cell</a></div><div class="ttdoc">This class represents 2D Cells, other types may be implemented further.</div><div class="ttdef"><b>Definition:</b> cell.h:33</div></div>
-<div class="ttc" id="aclassbc_1_1_constant_flux_html"><div class="ttname"><a href="classbc_1_1_constant_flux.html">bc::ConstantFlux</a></div><div class="ttdef"><b>Definition:</b> constant_gradient.h:19</div></div>
-<div class="ttc" id="aclassbc_1_1_boundary_condition_html"><div class="ttname"><a href="classbc_1_1_boundary_condition.html">bc::BoundaryCondition</a></div><div class="ttdef"><b>Definition:</b> boundary_condition.h:25</div></div>
-<div class="ttc" id="aclassfield_1_1_fields_html"><div class="ttname"><a href="classfield_1_1_fields.html">field::Fields</a></div><div class="ttdef"><b>Definition:</b> fields.h:53</div></div>
+<div class="ttc" id="aclassmesh_1_1_cell_html"><div class="ttname"><a href="classmesh_1_1_cell.html">mesh::Cell</a></div><div class="ttdoc">This class represents 2D Cells, other types may be implemented further.</div><div class="ttdef"><b>Definition:</b> <a href="cell_8h_source.html#l00032">cell.h:33</a></div></div>
+<div class="ttc" id="aclassbc_1_1_constant_flux_html"><div class="ttname"><a href="classbc_1_1_constant_flux.html">bc::ConstantFlux</a></div><div class="ttdoc">Boundary condition of constant heat flux [W/m^2].</div><div class="ttdef"><b>Definition:</b> <a href="constant__gradient_8h_source.html#l00021">constant_gradient.h:22</a></div></div>
+<div class="ttc" id="aclassbc_1_1_boundary_condition_html"><div class="ttname"><a href="classbc_1_1_boundary_condition.html">bc::BoundaryCondition</a></div><div class="ttdoc">Abstract class representing boundary condition.</div><div class="ttdef"><b>Definition:</b> <a href="boundary__condition_8h_source.html#l00026">boundary_condition.h:27</a></div></div>
+<div class="ttc" id="aclassfield_1_1_fields_html"><div class="ttname"><a href="classfield_1_1_fields.html">field::Fields</a></div><div class="ttdef"><b>Definition:</b> <a href="fields_8h_source.html#l00052">fields.h:53</a></div></div>
 <div class="ttc" id="asystem__submatrix_8h_html"><div class="ttname"><a href="system__submatrix_8h.html">system_submatrix.h</a></div></div>
-<div class="ttc" id="aclassmath_1_1_cell_value_html"><div class="ttname"><a href="classmath_1_1_cell_value.html">math::CellValue</a></div><div class="ttdef"><b>Definition:</b> cell_value.h:14</div></div>
+<div class="ttc" id="aclassmath_1_1_cell_value_html"><div class="ttname"><a href="classmath_1_1_cell_value.html">math::CellValue</a></div><div class="ttdef"><b>Definition:</b> <a href="cell__value_8h_source.html#l00013">cell_value.h:14</a></div></div>
+<div class="ttc" id="aclassterm_1_1_diffusive_term_html_ac25d5f0bfadbbe22dd3826eab81ef111"><div class="ttname"><a href="classterm_1_1_diffusive_term.html#ac25d5f0bfadbbe22dd3826eab81ef111">term::DiffusiveTerm::calculateOneCell</a></div><div class="ttdeci">void calculateOneCell(math::SystemSubmatrix *submatrix, const mesh::Face *face, const field::Fields *fields, bool isBoundaryCell=false) const</div><div class="ttdef"><b>Definition:</b> <a href="diffusive__term_8h_source.html#l00042">diffusive_term.h:42</a></div></div>
 <div class="ttc" id="aboundary__condition_8h_html"><div class="ttname"><a href="boundary__condition_8h.html">boundary_condition.h</a></div></div>
-<div class="ttc" id="aclassmath_1_1_system_submatrix_html"><div class="ttname"><a href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a></div><div class="ttdef"><b>Definition:</b> system_submatrix.h:22</div></div>
+<div class="ttc" id="aclassmath_1_1_system_submatrix_html"><div class="ttname"><a href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a></div><div class="ttdef"><b>Definition:</b> <a href="system__submatrix_8h_source.html#l00021">system_submatrix.h:22</a></div></div>
+<div class="ttc" id="aclassbc_1_1_constant_flux_html_a9d160cec6aaac23e6b2d242a37b9aac2"><div class="ttname"><a href="classbc_1_1_constant_flux.html#a9d160cec6aaac23e6b2d242a37b9aac2">bc::ConstantFlux::getBoundaryCondition</a></div><div class="ttdeci">virtual void getBoundaryCondition(math::SystemSubmatrix *submatrix, const mesh::Cell *cell, const field::Fields *field, double actualTime) const</div><div class="ttdef"><b>Definition:</b> <a href="constant__gradient_8h_source.html#l00037">constant_gradient.h:37</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

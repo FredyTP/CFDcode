@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: inc/boundary/boundary_condition.h Source File</title>
+<title>My Project: D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/boundary/boundary_condition.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -100,60 +100,68 @@ $(document).ready(function(){initNavTree('boundary__condition_8h_source.html',''
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="diffusive__term_8h.html">equation/diffusive/diffusive_term.h</a>&gt;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>bc</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classbc_1_1_boundary_condition.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="classbc_1_1_boundary_condition.html">BoundaryCondition</a></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classbc_1_1_boundary_condition.html">BoundaryCondition</a>() {}</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> calculateBoundaryCondition(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix,<span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* field)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">    </span>{     </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; face : _boundary)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            this-&gt;getBoundaryCondition(submatrix, face-&gt;cell2(), field);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> getBoundaryCondition(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix,<span class="keyword">const</span> <a class="code" href="classmesh_1_1_cell.html">mesh::Cell</a>* cell,<span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* field) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> addFace(<a class="code" href="classmesh_1_1_face.html">mesh::Face</a>* _face_)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        _boundary.push_back(_face_);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> setBoundary(<span class="keyword">const</span> <a class="code" href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection&lt;mesh::Face&gt;</a>&amp; boundary)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        boundary.copyInto(_boundary);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> setConvetiveTerm(<a class="code" href="classterm_1_1_convective_term.html">term::ConvectiveTerm</a>* _convectiveTerm_)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        _convectiveTerm = _convectiveTerm_;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> setDiffusiveTerm(<a class="code" href="classterm_1_1_diffusive_term.html">term::DiffusiveTerm</a>* _diffusiveTerm_)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        _diffusiveTerm = _diffusiveTerm_;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::vector&lt;mesh::Face*&gt; _boundary;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::vector&lt;mesh::Cell*&gt; _boundaryCells;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    term ::ConvectiveTerm* _convectiveTerm = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="classterm_1_1_diffusive_term.html">term::DiffusiveTerm</a>* _diffusiveTerm = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classbc_1_1_boundary_condition.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="classbc_1_1_boundary_condition.html">BoundaryCondition</a></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="classbc_1_1_boundary_condition.html">BoundaryCondition</a>() {}</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classbc_1_1_boundary_condition.html#af172dcda0f0f56077cd27dc0b88aac7e">   37</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classbc_1_1_boundary_condition.html#af172dcda0f0f56077cd27dc0b88aac7e">calculateBoundaryCondition</a>(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix,<span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* field, <span class="keywordtype">double</span> actualTime)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">    </span>{     </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; face : _boundary)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="comment">//Boundary cells are the face2 of the boundary faces</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            this-&gt;<a class="code" href="classbc_1_1_boundary_condition.html#a99e51422f80b2e54bd23afd20643f381">getBoundaryCondition</a>(submatrix, face-&gt;cell2(), field, actualTime);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classbc_1_1_boundary_condition.html#a99e51422f80b2e54bd23afd20643f381">   54</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classbc_1_1_boundary_condition.html#a99e51422f80b2e54bd23afd20643f381">getBoundaryCondition</a>(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix,<span class="keyword">const</span> <a class="code" href="classmesh_1_1_cell.html">mesh::Cell</a>* cell,<span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* field, <span class="keywordtype">double</span> actualTime) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classbc_1_1_boundary_condition.html#a26e1b9388ea5e15338ee569896e876c4">   61</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classbc_1_1_boundary_condition.html#a26e1b9388ea5e15338ee569896e876c4">addFace</a>(<a class="code" href="classmesh_1_1_face.html">mesh::Face</a>* _face_)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        _boundary.push_back(_face_);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classbc_1_1_boundary_condition.html#a26f4d05a4fea90df8a292e3dde8da698">   71</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classbc_1_1_boundary_condition.html#a26f4d05a4fea90df8a292e3dde8da698">setBoundary</a>(<span class="keyword">const</span> <a class="code" href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection&lt;mesh::Face&gt;</a>&amp; boundary)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        boundary.copyInto(_boundary);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classbc_1_1_boundary_condition.html#a91859278952c233eec76cc36bb975b20">   81</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classbc_1_1_boundary_condition.html#a91859278952c233eec76cc36bb975b20">setConvetiveTerm</a>(<a class="code" href="classterm_1_1_convective_term.html">term::ConvectiveTerm</a>* _convectiveTerm_)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        _convectiveTerm = _convectiveTerm_;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classbc_1_1_boundary_condition.html#a0a8f38d7b2a496af026f54933dd30a7c">   91</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classbc_1_1_boundary_condition.html#a0a8f38d7b2a496af026f54933dd30a7c">setDiffusiveTerm</a>(<a class="code" href="classterm_1_1_diffusive_term.html">term::DiffusiveTerm</a>* _diffusiveTerm_)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        _diffusiveTerm = _diffusiveTerm_;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    std::vector&lt;mesh::Face*&gt; _boundary;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    term ::ConvectiveTerm* _convectiveTerm = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="classterm_1_1_diffusive_term.html">term::DiffusiveTerm</a>* _diffusiveTerm = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclassbc_1_1_boundary_condition_html_a0a8f38d7b2a496af026f54933dd30a7c"><div class="ttname"><a href="classbc_1_1_boundary_condition.html#a0a8f38d7b2a496af026f54933dd30a7c">bc::BoundaryCondition::setDiffusiveTerm</a></div><div class="ttdeci">void setDiffusiveTerm(term::DiffusiveTerm *_diffusiveTerm_)</div><div class="ttdef"><b>Definition:</b> <a href="boundary__condition_8h_source.html#l00091">boundary_condition.h:91</a></div></div>
+<div class="ttc" id="aclassbc_1_1_boundary_condition_html_a91859278952c233eec76cc36bb975b20"><div class="ttname"><a href="classbc_1_1_boundary_condition.html#a91859278952c233eec76cc36bb975b20">bc::BoundaryCondition::setConvetiveTerm</a></div><div class="ttdeci">void setConvetiveTerm(term::ConvectiveTerm *_convectiveTerm_)</div><div class="ttdef"><b>Definition:</b> <a href="boundary__condition_8h_source.html#l00081">boundary_condition.h:81</a></div></div>
 <div class="ttc" id="aconvective__term_8h_html"><div class="ttname"><a href="convective__term_8h.html">convective_term.h</a></div></div>
-<div class="ttc" id="aclassterm_1_1_convective_term_html"><div class="ttname"><a href="classterm_1_1_convective_term.html">term::ConvectiveTerm</a></div><div class="ttdef"><b>Definition:</b> convective_term.h:26</div></div>
-<div class="ttc" id="aclassterm_1_1_diffusive_term_html"><div class="ttname"><a href="classterm_1_1_diffusive_term.html">term::DiffusiveTerm</a></div><div class="ttdef"><b>Definition:</b> diffusive_term.h:22</div></div>
-<div class="ttc" id="aclassmesh_1_1_cell_html"><div class="ttname"><a href="classmesh_1_1_cell.html">mesh::Cell</a></div><div class="ttdoc">This class represents 2D Cells, other types may be implemented further.</div><div class="ttdef"><b>Definition:</b> cell.h:33</div></div>
-<div class="ttc" id="aclassbc_1_1_boundary_condition_html"><div class="ttname"><a href="classbc_1_1_boundary_condition.html">bc::BoundaryCondition</a></div><div class="ttdef"><b>Definition:</b> boundary_condition.h:25</div></div>
-<div class="ttc" id="aclassfield_1_1_fields_html"><div class="ttname"><a href="classfield_1_1_fields.html">field::Fields</a></div><div class="ttdef"><b>Definition:</b> fields.h:53</div></div>
+<div class="ttc" id="aclassbc_1_1_boundary_condition_html_a26f4d05a4fea90df8a292e3dde8da698"><div class="ttname"><a href="classbc_1_1_boundary_condition.html#a26f4d05a4fea90df8a292e3dde8da698">bc::BoundaryCondition::setBoundary</a></div><div class="ttdeci">void setBoundary(const mesh::MeshSelection&lt; mesh::Face &gt; &amp;boundary)</div><div class="ttdef"><b>Definition:</b> <a href="boundary__condition_8h_source.html#l00071">boundary_condition.h:71</a></div></div>
+<div class="ttc" id="aclassterm_1_1_convective_term_html"><div class="ttname"><a href="classterm_1_1_convective_term.html">term::ConvectiveTerm</a></div><div class="ttdef"><b>Definition:</b> <a href="convective__term_8h_source.html#l00027">convective_term.h:28</a></div></div>
+<div class="ttc" id="aclassterm_1_1_diffusive_term_html"><div class="ttname"><a href="classterm_1_1_diffusive_term.html">term::DiffusiveTerm</a></div><div class="ttdef"><b>Definition:</b> <a href="diffusive__term_8h_source.html#l00024">diffusive_term.h:25</a></div></div>
+<div class="ttc" id="aclassbc_1_1_boundary_condition_html_af172dcda0f0f56077cd27dc0b88aac7e"><div class="ttname"><a href="classbc_1_1_boundary_condition.html#af172dcda0f0f56077cd27dc0b88aac7e">bc::BoundaryCondition::calculateBoundaryCondition</a></div><div class="ttdeci">virtual void calculateBoundaryCondition(math::SystemSubmatrix *submatrix, const field::Fields *field, double actualTime) const</div><div class="ttdoc">Calculate the boundary condition terms for every boundary face.</div><div class="ttdef"><b>Definition:</b> <a href="boundary__condition_8h_source.html#l00037">boundary_condition.h:37</a></div></div>
+<div class="ttc" id="aclassmesh_1_1_cell_html"><div class="ttname"><a href="classmesh_1_1_cell.html">mesh::Cell</a></div><div class="ttdoc">This class represents 2D Cells, other types may be implemented further.</div><div class="ttdef"><b>Definition:</b> <a href="cell_8h_source.html#l00032">cell.h:33</a></div></div>
+<div class="ttc" id="aclassbc_1_1_boundary_condition_html_a99e51422f80b2e54bd23afd20643f381"><div class="ttname"><a href="classbc_1_1_boundary_condition.html#a99e51422f80b2e54bd23afd20643f381">bc::BoundaryCondition::getBoundaryCondition</a></div><div class="ttdeci">virtual void getBoundaryCondition(math::SystemSubmatrix *submatrix, const mesh::Cell *cell, const field::Fields *field, double actualTime) const =0</div><div class="ttdoc">Function to be overriden by derived classes that contains how to calculate the boundary condition for...</div></div>
+<div class="ttc" id="aclassbc_1_1_boundary_condition_html"><div class="ttname"><a href="classbc_1_1_boundary_condition.html">bc::BoundaryCondition</a></div><div class="ttdoc">Abstract class representing boundary condition.</div><div class="ttdef"><b>Definition:</b> <a href="boundary__condition_8h_source.html#l00026">boundary_condition.h:27</a></div></div>
+<div class="ttc" id="aclassfield_1_1_fields_html"><div class="ttname"><a href="classfield_1_1_fields.html">field::Fields</a></div><div class="ttdef"><b>Definition:</b> <a href="fields_8h_source.html#l00052">fields.h:53</a></div></div>
 <div class="ttc" id="adiffusive__term_8h_html"><div class="ttname"><a href="diffusive__term_8h.html">diffusive_term.h</a></div></div>
 <div class="ttc" id="asystem__submatrix_8h_html"><div class="ttname"><a href="system__submatrix_8h.html">system_submatrix.h</a></div></div>
-<div class="ttc" id="aclassmesh_1_1_face_html"><div class="ttname"><a href="classmesh_1_1_face.html">mesh::Face</a></div><div class="ttdoc">Represents a boundary between Cells or between a Cell and the boundary. For memory optimization only ...</div><div class="ttdef"><b>Definition:</b> face.h:33</div></div>
-<div class="ttc" id="aclassmath_1_1_system_submatrix_html"><div class="ttname"><a href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a></div><div class="ttdef"><b>Definition:</b> system_submatrix.h:22</div></div>
+<div class="ttc" id="aclassmesh_1_1_face_html"><div class="ttname"><a href="classmesh_1_1_face.html">mesh::Face</a></div><div class="ttdoc">Represents a boundary between Cells or between a Cell and the boundary. For memory optimization only ...</div><div class="ttdef"><b>Definition:</b> <a href="face_8h_source.html#l00032">face.h:33</a></div></div>
+<div class="ttc" id="aclassmath_1_1_system_submatrix_html"><div class="ttname"><a href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a></div><div class="ttdef"><b>Definition:</b> <a href="system__submatrix_8h_source.html#l00021">system_submatrix.h:22</a></div></div>
 <div class="ttc" id="amesh__selection_8h_html"><div class="ttname"><a href="mesh__selection_8h.html">mesh_selection.h</a></div></div>
-<div class="ttc" id="aclassmesh_1_1_mesh_selection_html"><div class="ttname"><a href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection</a></div><div class="ttdef"><b>Definition:</b> mesh_selection.h:21</div></div>
+<div class="ttc" id="aclassmesh_1_1_mesh_selection_html"><div class="ttname"><a href="classmesh_1_1_mesh_selection.html">mesh::MeshSelection</a></div><div class="ttdef"><b>Definition:</b> <a href="mesh__selection_8h_source.html#l00020">mesh_selection.h:21</a></div></div>
+<div class="ttc" id="aclassbc_1_1_boundary_condition_html_a26e1b9388ea5e15338ee569896e876c4"><div class="ttname"><a href="classbc_1_1_boundary_condition.html#a26e1b9388ea5e15338ee569896e876c4">bc::BoundaryCondition::addFace</a></div><div class="ttdeci">void addFace(mesh::Face *_face_)</div><div class="ttdef"><b>Definition:</b> <a href="boundary__condition_8h_source.html#l00061">boundary_condition.h:61</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

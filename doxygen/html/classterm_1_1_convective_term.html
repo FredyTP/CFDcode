@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: term::ConvectiveTerm Class Reference</title>
+<title>My Project: term::ConvectiveTerm Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -89,6 +89,8 @@ $(document).ready(function(){initNavTree('classterm_1_1_convective_term.html',''
 <div class="title">term::ConvectiveTerm Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="convective__term_8h_source.html">convective_term.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for term::ConvectiveTerm:</div>
 <div class="dyncontent">
@@ -104,11 +106,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a42aa49dfb47819c81d72d14f9364fa9d"><td class="memItemLeft" align="right" valign="top"><a id="a42aa49dfb47819c81d72d14f9364fa9d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ConvectiveTerm</b> (<a class="el" href="classterm_1_1_face_interpolation.html">FaceInterpolation</a> *faceInterpolation)</td></tr>
 <tr class="separator:a42aa49dfb47819c81d72d14f9364fa9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaf400dc5fdca8c7b213fe506939eb21"><td class="memItemLeft" align="right" valign="top"><a id="aaaf400dc5fdca8c7b213fe506939eb21"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateBothCell</b> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields) const</td></tr>
+<tr class="memitem:aaaf400dc5fdca8c7b213fe506939eb21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classterm_1_1_convective_term.html#aaaf400dc5fdca8c7b213fe506939eb21">calculateBothCell</a> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields) const</td></tr>
 <tr class="separator:aaaf400dc5fdca8c7b213fe506939eb21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04adcc2917046c8f84f8aaadf7fa84f4"><td class="memItemLeft" align="right" valign="top"><a id="a04adcc2917046c8f84f8aaadf7fa84f4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateOneCell</b> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields, bool isBoundaryCell=false) const</td></tr>
+<tr class="memitem:a04adcc2917046c8f84f8aaadf7fa84f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classterm_1_1_convective_term.html#a04adcc2917046c8f84f8aaadf7fa84f4">calculateOneCell</a> (<a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *submatrix, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields, bool isBoundaryCell=false) const</td></tr>
 <tr class="separator:a04adcc2917046c8f84f8aaadf7fa84f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0108c225a382beecb96670393d39f068"><td class="memItemLeft" align="right" valign="top"><a id="a0108c225a382beecb96670393d39f068"></a>
 <a class="el" href="classterm_1_1_face_interpolation.html">FaceInterpolation</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getFaceInterpolation</b> ()</td></tr>
@@ -123,8 +123,130 @@ Static Public Member Functions</h2></td></tr>
 static double&#160;</td><td class="memItemRight" valign="bottom"><b>GetConvectionCoeficient</b> (const <a class="el" href="classmesh_1_1_cell.html">mesh::Cell</a> *cell, const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *face, const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *fields)</td></tr>
 <tr class="separator:aa693bb4171d9726b17218731a52fbc63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Face term for convective fluxes. </p>
+
+<p class="definition">Definition at line <a class="el" href="convective__term_8h_source.html#l00027">27</a> of file <a class="el" href="convective__term_8h_source.html">convective_term.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaaf400dc5fdca8c7b213fe506939eb21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaf400dc5fdca8c7b213fe506939eb21">&#9670;&nbsp;</a></span>calculateBothCell()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void term::ConvectiveTerm::calculateBothCell </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *&#160;</td>
+          <td class="paramname"><em>submatrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *&#160;</td>
+          <td class="paramname"><em>face</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *&#160;</td>
+          <td class="paramname"><em>fields</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Pure virtual function that is used to calculate equation term over a face. It calculates the coefficients for cell1 and obtains the cell2 coeficient applying -1 factor.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">submatrix</td><td></td></tr>
+    <tr><td class="paramname">face</td><td></td></tr>
+    <tr><td class="paramname">fields</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classterm_1_1_face_equation_term.html#a096a43a0961ebed4d2187fbfdf668a78">term::FaceEquationTerm</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="convective__term_8h_source.html#l00046">46</a> of file <a class="el" href="convective__term_8h_source.html">convective_term.h</a>.</p>
+
+</div>
+</div>
+<a id="a04adcc2917046c8f84f8aaadf7fa84f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04adcc2917046c8f84f8aaadf7fa84f4">&#9670;&nbsp;</a></span>calculateOneCell()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void term::ConvectiveTerm::calculateOneCell </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a> *&#160;</td>
+          <td class="paramname"><em>submatrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classmesh_1_1_face.html">mesh::Face</a> *&#160;</td>
+          <td class="paramname"><em>face</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classfield_1_1_fields.html">field::Fields</a> *&#160;</td>
+          <td class="paramname"><em>fields</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isBoundaryCell</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Pure virtual function that is used to calculate equation term over a face. It calculates the coefficients for cell1 if isBoundary cell is false, otherwise calculates for cell2.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">submatrix</td><td></td></tr>
+    <tr><td class="paramname">face</td><td></td></tr>
+    <tr><td class="paramname">fields</td><td></td></tr>
+    <tr><td class="paramname">isBoundaryCell</td><td>if the cell you want to compute the term is a boundary cell or not. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classterm_1_1_face_equation_term.html#a8364e715ed4bebb6db00460bba519ee2">term::FaceEquationTerm</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="convective__term_8h_source.html#l00056">56</a> of file <a class="el" href="convective__term_8h_source.html">convective_term.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>inc/equation/convective/<a class="el" href="convective__term_8h_source.html">convective_term.h</a></li>
+<li>D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/equation/convective/<a class="el" href="convective__term_8h_source.html">convective_term.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: inc/solver/propagator/eurler_explicit.h Source File</title>
+<title>My Project: D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/solver/propagator/eurler_explicit.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -96,33 +96,26 @@ $(document).ready(function(){initNavTree('eurler__explicit_8h_source.html',''); 
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">using namespace </span>Eigen;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        VectorXd ind = (M - F * dt) * lastStep + S * dt;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">if</span> (simmetry)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            SimplicialLLT&lt;SparseMatrix&lt;double&gt;&gt; linearSolver(M);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            newStep = linearSolver.solve(ind);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            SparseLU&lt;SparseMatrix&lt;double&gt;&gt; linearSolver(M);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            newStep = linearSolver.solve(ind);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> EulerImplicit(<span class="keyword">const</span> Eigen::SparseMatrix&lt;double&gt;&amp; M, <span class="keyword">const</span> Eigen::SparseMatrix&lt;double&gt;&amp; F, <span class="keyword">const</span> Eigen::VectorXd&amp; S, <span class="keywordtype">double</span> dt,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">const</span> Eigen::VectorXd&amp; lastStep, Eigen::VectorXd&amp; newStep)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">using namespace </span>Eigen;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        SparseMatrix&lt;double&gt; dep = M + F * dt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        VectorXd ind = M * lastStep + S * dt;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        SparseLU&lt;SparseMatrix&lt;double&gt;&gt; linearSolver(dep);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        newStep = linearSolver.solve(ind);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        SparseLU&lt;SparseMatrix&lt;double&gt;&gt; linearSolver(M);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        newStep = linearSolver.solve(ind);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> EulerImplicit(<span class="keyword">const</span> Eigen::SparseMatrix&lt;double&gt;&amp; M, <span class="keyword">const</span> Eigen::SparseMatrix&lt;double&gt;&amp; F, <span class="keyword">const</span> Eigen::VectorXd&amp; S, <span class="keywordtype">double</span> dt,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">const</span> Eigen::VectorXd&amp; lastStep, Eigen::VectorXd&amp; newStep)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">using namespace </span>Eigen;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        SparseMatrix&lt;double&gt; dep = M + F * dt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        VectorXd ind = M * lastStep + S * dt;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        SparseLU&lt;SparseMatrix&lt;double&gt;&gt; linearSolver(dep);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        newStep = linearSolver.solve(ind);        </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aeurler__explicit_8h_html_a38530e0aa47cc80854d6b5a48d739942"><div class="ttname"><a href="eurler__explicit_8h.html#a38530e0aa47cc80854d6b5a48d739942">solver::EulerExplicit</a></div><div class="ttdeci">void EulerExplicit(const Eigen::SparseMatrix&lt; double &gt; &amp;M, const Eigen::SparseMatrix&lt; double &gt; &amp;F, const Eigen::VectorXd &amp;S, double dt, const Eigen::VectorXd &amp;lastStep, Eigen::VectorXd &amp;newStep, bool simmetry=false)</div><div class="ttdef"><b>Definition:</b> eurler_explicit.h:24</div></div>
+<div class="ttc" id="aeurler__explicit_8h_html_a38530e0aa47cc80854d6b5a48d739942"><div class="ttname"><a href="eurler__explicit_8h.html#a38530e0aa47cc80854d6b5a48d739942">solver::EulerExplicit</a></div><div class="ttdeci">void EulerExplicit(const Eigen::SparseMatrix&lt; double &gt; &amp;M, const Eigen::SparseMatrix&lt; double &gt; &amp;F, const Eigen::VectorXd &amp;S, double dt, const Eigen::VectorXd &amp;lastStep, Eigen::VectorXd &amp;newStep, bool simmetry=false)</div><div class="ttdef"><b>Definition:</b> <a href="eurler__explicit_8h_source.html#l00024">eurler_explicit.h:24</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

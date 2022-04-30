@@ -16,14 +16,31 @@
 #include <field/fields.h>
 namespace term
 {
+    /**
+     * Abstract class representing a gradient flux calculation method.
+     */
     class GradientFlux
     {
     public:
         GradientFlux() {}
+        /**
+         * Pure virtual function representing how to interpolate the gradient on a face.
+         *
+         * \param cellvalues
+         * \param coef
+         * \param face
+         */
         virtual void integrateGradientFace(std::vector<math::CellValue<double>>& cellvalues, double coef, const mesh::Face* face) = 0;
 
     };
 
+    /**
+     * Central Difference Gradient.
+     * Aproximate the grandient flux by the partial derivative
+     * in the direction of the vector that links both cells of the face.
+     * It's a second order scheme but can lead to some error when the
+     * mesh non-orthogonality is high.
+     */
     class CentralDifferenceGradient : public GradientFlux
     {
     public:
@@ -46,6 +63,14 @@ namespace term
         }
     };
 
+    /**
+     * Orthogonal Corrected Gradient.
+     * Aproximate the grandient flux by the partial derivative
+     * in the direction of the vector that links both cells of the face.
+     * And in the perpendicular direction as the projection of the linear
+     * interpolation both cell centroid gradients.
+     * It's a second order scheme.
+     */
     class OrthogonalCorrectedGradient : public GradientFlux
     {
     public:

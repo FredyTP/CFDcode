@@ -14,6 +14,10 @@
 
 namespace term
 {
+    /**
+     * Cell equation term for constant 
+     * source terms in a subregion of the mesh.
+     */
     class SourceTerm : public CellEquationTerm
     {
     public:

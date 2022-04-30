@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: inc/equation/convective/convective_term.h Source File</title>
+<title>My Project: D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/equation/convective/convective_term.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -101,75 +101,77 @@ $(document).ready(function(){initNavTree('convective__term_8h_source.html',''); 
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>term</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">//Generalize this concept in equation terms</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classterm_1_1_convective_term.html">   25</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classterm_1_1_convective_term.html">ConvectiveTerm</a> : <span class="keyword">public</span> <a class="code" href="classterm_1_1_face_equation_term.html">FaceEquationTerm</a></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="classterm_1_1_convective_term.html">ConvectiveTerm</a>(<a class="code" href="classterm_1_1_face_interpolation.html">FaceInterpolation</a>* faceInterpolation) {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            faceInterpolationScheme = faceInterpolation;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;   </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">double</span> GetConvectionCoeficient(<span class="keyword">const</span> <a class="code" href="classmesh_1_1_cell.html">mesh::Cell</a>* cell,<span class="keyword">const</span> <a class="code" href="classmesh_1_1_face.html">mesh::Face</a>* face,<span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* fields)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keywordtype">double</span> density = fields-&gt;<a class="code" href="classfield_1_1_fields.html#a6488ca630354ec7c103e380dc4e5b002">scalarField</a>(field::density, cell);;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordtype">double</span> cv = cell-&gt;material()-&gt;specificHeat(cell,fields);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordtype">double</span> area = face-&gt;area();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            vector2d normal = face-&gt;getNormal(cell);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keyword">const</span> vector2d&amp; velocity = fields-&gt;<a class="code" href="classfield_1_1_fields.html#a3fbdfa3424c5c2827e25f5c8e5ed8d65">velocityField</a>(face);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">return</span> density * cv * area * normal.dot(velocity);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">void</span> calculateBothCell(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix, <span class="keyword">const</span> <a class="code" href="classmesh_1_1_face.html">mesh::Face</a>* face, <span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* fields)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keyword">auto</span> cell = face-&gt;cell1();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordtype">double</span> coef = ConvectiveTerm::GetConvectionCoeficient(cell, face, fields);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <a class="code" href="classmath_1_1_face_value.html">math::FaceValue&lt;double&gt;</a> facevar(face, coef);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            std::vector&lt;math::CellValue&lt;double&gt;&gt; cellvalues;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            faceInterpolationScheme-&gt;interpolateFace(cellvalues,facevar, fields);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            submatrix-&gt;addFaceValues(face, cellvalues);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">void</span> calculateOneCell(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix, <span class="keyword">const</span> <a class="code" href="classmesh_1_1_face.html">mesh::Face</a>* face, <span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* fields, <span class="keywordtype">bool</span> isBoundaryCell = <span class="keyword">false</span>)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keyword">auto</span> cell = face-&gt;cell1();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordtype">double</span> coef = ConvectiveTerm::GetConvectionCoeficient(cell, face, fields);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <a class="code" href="classmath_1_1_face_value.html">math::FaceValue&lt;double&gt;</a> facevar(face, coef);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            std::vector&lt;math::CellValue&lt;double&gt;&gt; cellvalues;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            faceInterpolationScheme-&gt;interpolateFace(cellvalues, facevar, fields);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            submatrix-&gt;addCellValues(isBoundaryCell ? face-&gt;cell2() : face-&gt;cell1(), cellvalues, isBoundaryCell);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="classterm_1_1_face_interpolation.html">FaceInterpolation</a>* getFaceInterpolation() { <span class="keywordflow">return</span> faceInterpolationScheme; }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">void</span> setFaceInterpolation(<a class="code" href="classterm_1_1_face_interpolation.html">FaceInterpolation</a>* faceInterpolation)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            faceInterpolationScheme = faceInterpolation;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;       </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <a class="code" href="classterm_1_1_face_interpolation.html">FaceInterpolation</a>* faceInterpolationScheme;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    };</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classterm_1_1_convective_term.html">   27</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classterm_1_1_convective_term.html">ConvectiveTerm</a> : <span class="keyword">public</span> <a class="code" href="classterm_1_1_face_equation_term.html">FaceEquationTerm</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="classterm_1_1_convective_term.html">ConvectiveTerm</a>(<a class="code" href="classterm_1_1_face_interpolation.html">FaceInterpolation</a>* faceInterpolation) {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            faceInterpolationScheme = faceInterpolation;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;   </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">double</span> GetConvectionCoeficient(<span class="keyword">const</span> <a class="code" href="classmesh_1_1_cell.html">mesh::Cell</a>* cell,<span class="keyword">const</span> <a class="code" href="classmesh_1_1_face.html">mesh::Face</a>* face,<span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* fields)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordtype">double</span> density = fields-&gt;<a class="code" href="classfield_1_1_fields.html#a6488ca630354ec7c103e380dc4e5b002">scalarField</a>(field::density, cell);;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordtype">double</span> cv = cell-&gt;material()-&gt;specificHeat(cell,fields);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keywordtype">double</span> area = face-&gt;area();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            vector2d normal = face-&gt;getNormal(cell);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keyword">const</span> vector2d&amp; velocity = fields-&gt;<a class="code" href="classfield_1_1_fields.html#a3fbdfa3424c5c2827e25f5c8e5ed8d65">velocityField</a>(face);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">return</span> density * cv * area * normal.dot(velocity);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classterm_1_1_convective_term.html#aaaf400dc5fdca8c7b213fe506939eb21">   46</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classterm_1_1_convective_term.html#aaaf400dc5fdca8c7b213fe506939eb21">calculateBothCell</a>(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix, <span class="keyword">const</span> <a class="code" href="classmesh_1_1_face.html">mesh::Face</a>* face, <span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* fields)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keyword">auto</span> cell = face-&gt;cell1();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordtype">double</span> coef = ConvectiveTerm::GetConvectionCoeficient(cell, face, fields);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <a class="code" href="classmath_1_1_face_value.html">math::FaceValue&lt;double&gt;</a> facevar(face, coef);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            std::vector&lt;math::CellValue&lt;double&gt;&gt; cellvalues;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            faceInterpolationScheme-&gt;<a class="code" href="classterm_1_1_face_interpolation.html#a64ca62900895674e46f9dc01f6127eca">interpolateFace</a>(cellvalues,facevar, fields);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            submatrix-&gt;addFaceValues(face, cellvalues);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classterm_1_1_convective_term.html#a04adcc2917046c8f84f8aaadf7fa84f4">   56</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classterm_1_1_convective_term.html#a04adcc2917046c8f84f8aaadf7fa84f4">calculateOneCell</a>(<a class="code" href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a>* submatrix, <span class="keyword">const</span> <a class="code" href="classmesh_1_1_face.html">mesh::Face</a>* face, <span class="keyword">const</span> <a class="code" href="classfield_1_1_fields.html">field::Fields</a>* fields, <span class="keywordtype">bool</span> isBoundaryCell = <span class="keyword">false</span>)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">auto</span> cell = face-&gt;cell1();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordtype">double</span> coef = ConvectiveTerm::GetConvectionCoeficient(cell, face, fields);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <a class="code" href="classmath_1_1_face_value.html">math::FaceValue&lt;double&gt;</a> facevar(face, coef);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            std::vector&lt;math::CellValue&lt;double&gt;&gt; cellvalues;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            faceInterpolationScheme-&gt;<a class="code" href="classterm_1_1_face_interpolation.html#a64ca62900895674e46f9dc01f6127eca">interpolateFace</a>(cellvalues, facevar, fields);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            submatrix-&gt;addCellValues(isBoundaryCell ? face-&gt;cell2() : face-&gt;cell1(), cellvalues, isBoundaryCell);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="classterm_1_1_face_interpolation.html">FaceInterpolation</a>* getFaceInterpolation() { <span class="keywordflow">return</span> faceInterpolationScheme; }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">void</span> setFaceInterpolation(FaceInterpolation* faceInterpolation)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            faceInterpolationScheme = faceInterpolation;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;       </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        FaceInterpolation* faceInterpolationScheme;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    };</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassmath_1_1_face_value_html"><div class="ttname"><a href="classmath_1_1_face_value.html">math::FaceValue</a></div><div class="ttdef"><b>Definition:</b> face_value.h:15</div></div>
+<div class="ttc" id="aclassterm_1_1_convective_term_html_a04adcc2917046c8f84f8aaadf7fa84f4"><div class="ttname"><a href="classterm_1_1_convective_term.html#a04adcc2917046c8f84f8aaadf7fa84f4">term::ConvectiveTerm::calculateOneCell</a></div><div class="ttdeci">void calculateOneCell(math::SystemSubmatrix *submatrix, const mesh::Face *face, const field::Fields *fields, bool isBoundaryCell=false) const</div><div class="ttdef"><b>Definition:</b> <a href="convective__term_8h_source.html#l00056">convective_term.h:56</a></div></div>
+<div class="ttc" id="aclassmath_1_1_face_value_html"><div class="ttname"><a href="classmath_1_1_face_value.html">math::FaceValue</a></div><div class="ttdef"><b>Definition:</b> <a href="face__value_8h_source.html#l00014">face_value.h:15</a></div></div>
 <div class="ttc" id="aequation__term_8h_html"><div class="ttname"><a href="equation__term_8h.html">equation_term.h</a></div></div>
-<div class="ttc" id="aclassterm_1_1_face_interpolation_html"><div class="ttname"><a href="classterm_1_1_face_interpolation.html">term::FaceInterpolation</a></div><div class="ttdef"><b>Definition:</b> face_interpolation.h:28</div></div>
-<div class="ttc" id="aclassterm_1_1_convective_term_html"><div class="ttname"><a href="classterm_1_1_convective_term.html">term::ConvectiveTerm</a></div><div class="ttdef"><b>Definition:</b> convective_term.h:26</div></div>
-<div class="ttc" id="aclassmesh_1_1_cell_html"><div class="ttname"><a href="classmesh_1_1_cell.html">mesh::Cell</a></div><div class="ttdoc">This class represents 2D Cells, other types may be implemented further.</div><div class="ttdef"><b>Definition:</b> cell.h:33</div></div>
-<div class="ttc" id="aclassfield_1_1_fields_html"><div class="ttname"><a href="classfield_1_1_fields.html">field::Fields</a></div><div class="ttdef"><b>Definition:</b> fields.h:53</div></div>
-<div class="ttc" id="aclassterm_1_1_face_equation_term_html"><div class="ttname"><a href="classterm_1_1_face_equation_term.html">term::FaceEquationTerm</a></div><div class="ttdef"><b>Definition:</b> equation_term.h:18</div></div>
+<div class="ttc" id="aclassterm_1_1_face_interpolation_html"><div class="ttname"><a href="classterm_1_1_face_interpolation.html">term::FaceInterpolation</a></div><div class="ttdef"><b>Definition:</b> <a href="equation_2convective_2face__interpolation_8h_source.html#l00030">face_interpolation.h:31</a></div></div>
+<div class="ttc" id="aclassterm_1_1_convective_term_html"><div class="ttname"><a href="classterm_1_1_convective_term.html">term::ConvectiveTerm</a></div><div class="ttdef"><b>Definition:</b> <a href="convective__term_8h_source.html#l00027">convective_term.h:28</a></div></div>
+<div class="ttc" id="aclassmesh_1_1_cell_html"><div class="ttname"><a href="classmesh_1_1_cell.html">mesh::Cell</a></div><div class="ttdoc">This class represents 2D Cells, other types may be implemented further.</div><div class="ttdef"><b>Definition:</b> <a href="cell_8h_source.html#l00032">cell.h:33</a></div></div>
+<div class="ttc" id="aclassfield_1_1_fields_html"><div class="ttname"><a href="classfield_1_1_fields.html">field::Fields</a></div><div class="ttdef"><b>Definition:</b> <a href="fields_8h_source.html#l00052">fields.h:53</a></div></div>
+<div class="ttc" id="aclassterm_1_1_face_equation_term_html"><div class="ttname"><a href="classterm_1_1_face_equation_term.html">term::FaceEquationTerm</a></div><div class="ttdef"><b>Definition:</b> <a href="equation__term_8h_source.html#l00020">equation_term.h:21</a></div></div>
+<div class="ttc" id="aclassterm_1_1_convective_term_html_aaaf400dc5fdca8c7b213fe506939eb21"><div class="ttname"><a href="classterm_1_1_convective_term.html#aaaf400dc5fdca8c7b213fe506939eb21">term::ConvectiveTerm::calculateBothCell</a></div><div class="ttdeci">void calculateBothCell(math::SystemSubmatrix *submatrix, const mesh::Face *face, const field::Fields *fields) const</div><div class="ttdef"><b>Definition:</b> <a href="convective__term_8h_source.html#l00046">convective_term.h:46</a></div></div>
 <div class="ttc" id="asystem__submatrix_8h_html"><div class="ttname"><a href="system__submatrix_8h.html">system_submatrix.h</a></div></div>
-<div class="ttc" id="aclassmesh_1_1_face_html"><div class="ttname"><a href="classmesh_1_1_face.html">mesh::Face</a></div><div class="ttdoc">Represents a boundary between Cells or between a Cell and the boundary. For memory optimization only ...</div><div class="ttdef"><b>Definition:</b> face.h:33</div></div>
+<div class="ttc" id="aclassmesh_1_1_face_html"><div class="ttname"><a href="classmesh_1_1_face.html">mesh::Face</a></div><div class="ttdoc">Represents a boundary between Cells or between a Cell and the boundary. For memory optimization only ...</div><div class="ttdef"><b>Definition:</b> <a href="face_8h_source.html#l00032">face.h:33</a></div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_a3fbdfa3424c5c2827e25f5c8e5ed8d65"><div class="ttname"><a href="classfield_1_1_fields.html#a3fbdfa3424c5c2827e25f5c8e5ed8d65">field::Fields::velocityField</a></div><div class="ttdeci">Eigen::VectorX&lt; vector2d &gt; &amp; velocityField()</div></div>
 <div class="ttc" id="aequation_2convective_2face__interpolation_8h_html"><div class="ttname"><a href="equation_2convective_2face__interpolation_8h.html">face_interpolation.h</a></div></div>
-<div class="ttc" id="aclassmath_1_1_system_submatrix_html"><div class="ttname"><a href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a></div><div class="ttdef"><b>Definition:</b> system_submatrix.h:22</div></div>
+<div class="ttc" id="aclassmath_1_1_system_submatrix_html"><div class="ttname"><a href="classmath_1_1_system_submatrix.html">math::SystemSubmatrix</a></div><div class="ttdef"><b>Definition:</b> <a href="system__submatrix_8h_source.html#l00021">system_submatrix.h:22</a></div></div>
+<div class="ttc" id="aclassterm_1_1_face_interpolation_html_a64ca62900895674e46f9dc01f6127eca"><div class="ttname"><a href="classterm_1_1_face_interpolation.html#a64ca62900895674e46f9dc01f6127eca">term::FaceInterpolation::interpolateFace</a></div><div class="ttdeci">virtual void interpolateFace(std::vector&lt; math::CellValue&lt; double &gt;&gt; &amp;cellvalues, const math::FaceValue&lt; double &gt; &amp;faceval, const field::Fields *field)=0</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_a6488ca630354ec7c103e380dc4e5b002"><div class="ttname"><a href="classfield_1_1_fields.html#a6488ca630354ec7c103e380dc4e5b002">field::Fields::scalarField</a></div><div class="ttdeci">Eigen::VectorX&lt; double &gt; &amp; scalarField(scalarType field)</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CFDCode: inc/field/fields.h Source File</title>
+<title>My Project: D:/Alfredo/Academic/MASTER AERO/B/CFD/ProyectoCFD/CodigoCFD/inc/field/fields.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CFDCode
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('fields_8h_source.html',''); initResiza
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//CFD</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;base/global_typedef.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="global__typedef_8h.html">base/global_typedef.h</a>&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>mesh</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('fields_8h_source.html',''); initResiza
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
 <div class="line"><a name="l00189"></a><span class="lineno"><a class="line" href="classfield_1_1_fields.html#ada3ff6dd8ed62ab0af35f9e649c5a9ee">  189</a></span>&#160;    <span class="keyword">const</span> vector2d&amp; <a class="code" href="classfield_1_1_fields.html#ada3ff6dd8ed62ab0af35f9e649c5a9ee">velocityField</a>(<span class="keyword">const</span> <a class="code" href="classmesh_1_1_face.html">mesh::Face</a>* face) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keyword">const</span> <a class="code" href="classmesh_1_1_mesh.html">mesh::Mesh</a>* mesh()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _mesh; }</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="comment">//VELOCITY FIELD (special)</span></div>
@@ -209,19 +209,20 @@ $(document).ready(function(){initNavTree('fields_8h_source.html',''); initResiza
 </div><!-- doc-content -->
 <div class="ttc" id="aclassfield_1_1_fields_html_a118a157c77d48824d0651dc885a8bcda"><div class="ttname"><a href="classfield_1_1_fields.html#a118a157c77d48824d0651dc885a8bcda">field::Fields::scalarField</a></div><div class="ttdeci">double &amp; scalarField(scalarType field, const mesh::Cell *cell)</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_a2c706430c5644ddd395ae8090352db68"><div class="ttname"><a href="classfield_1_1_fields.html#a2c706430c5644ddd395ae8090352db68">field::Fields::enableScalarField</a></div><div class="ttdeci">void enableScalarField(scalarType field, bool enable=true)</div></div>
+<div class="ttc" id="aglobal__typedef_8h_html"><div class="ttname"><a href="global__typedef_8h.html">global_typedef.h</a></div><div class="ttdoc">Global type definition and constants.</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_a55ca3713ddbb3b496d2ab4f0704a5492"><div class="ttname"><a href="classfield_1_1_fields.html#a55ca3713ddbb3b496d2ab4f0704a5492">field::Fields::velocityField</a></div><div class="ttdeci">vector2d &amp; velocityField(const mesh::Face *face)</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_a8574870bfcda8ada107aaeac2efe79e6"><div class="ttname"><a href="classfield_1_1_fields.html#a8574870bfcda8ada107aaeac2efe79e6">field::Fields::vectorialField</a></div><div class="ttdeci">const Eigen::VectorX&lt; vector2d &gt; &amp; vectorialField(scalarType field) const</div></div>
-<div class="ttc" id="aclassmesh_1_1_cell_html"><div class="ttname"><a href="classmesh_1_1_cell.html">mesh::Cell</a></div><div class="ttdoc">This class represents 2D Cells, other types may be implemented further.</div><div class="ttdef"><b>Definition:</b> cell.h:33</div></div>
-<div class="ttc" id="aclassfield_1_1_fields_html"><div class="ttname"><a href="classfield_1_1_fields.html">field::Fields</a></div><div class="ttdef"><b>Definition:</b> fields.h:53</div></div>
+<div class="ttc" id="aclassmesh_1_1_cell_html"><div class="ttname"><a href="classmesh_1_1_cell.html">mesh::Cell</a></div><div class="ttdoc">This class represents 2D Cells, other types may be implemented further.</div><div class="ttdef"><b>Definition:</b> <a href="cell_8h_source.html#l00032">cell.h:33</a></div></div>
+<div class="ttc" id="aclassfield_1_1_fields_html"><div class="ttname"><a href="classfield_1_1_fields.html">field::Fields</a></div><div class="ttdef"><b>Definition:</b> <a href="fields_8h_source.html#l00052">fields.h:53</a></div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_a0dc4ecd279b60cad7d6c5124e46110f2"><div class="ttname"><a href="classfield_1_1_fields.html#a0dc4ecd279b60cad7d6c5124e46110f2">field::Fields::scalarField</a></div><div class="ttdeci">double scalarField(scalarType field, const mesh::Cell *cell) const</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_ae4ff42716e9b8fb76c8d64e84199e4ad"><div class="ttname"><a href="classfield_1_1_fields.html#ae4ff42716e9b8fb76c8d64e84199e4ad">field::Fields::init</a></div><div class="ttdeci">void init()</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_ada3ff6dd8ed62ab0af35f9e649c5a9ee"><div class="ttname"><a href="classfield_1_1_fields.html#ada3ff6dd8ed62ab0af35f9e649c5a9ee">field::Fields::velocityField</a></div><div class="ttdeci">const vector2d &amp; velocityField(const mesh::Face *face) const</div></div>
-<div class="ttc" id="aclassmesh_1_1_face_html"><div class="ttname"><a href="classmesh_1_1_face.html">mesh::Face</a></div><div class="ttdoc">Represents a boundary between Cells or between a Cell and the boundary. For memory optimization only ...</div><div class="ttdef"><b>Definition:</b> face.h:33</div></div>
+<div class="ttc" id="aclassmesh_1_1_face_html"><div class="ttname"><a href="classmesh_1_1_face.html">mesh::Face</a></div><div class="ttdoc">Represents a boundary between Cells or between a Cell and the boundary. For memory optimization only ...</div><div class="ttdef"><b>Definition:</b> <a href="face_8h_source.html#l00032">face.h:33</a></div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_a1512828ed99087a1f2e5fa010bf1c993"><div class="ttname"><a href="classfield_1_1_fields.html#a1512828ed99087a1f2e5fa010bf1c993">field::Fields::Fields</a></div><div class="ttdeci">Fields(const mesh::Mesh *_mesh_)</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_a3fbdfa3424c5c2827e25f5c8e5ed8d65"><div class="ttname"><a href="classfield_1_1_fields.html#a3fbdfa3424c5c2827e25f5c8e5ed8d65">field::Fields::velocityField</a></div><div class="ttdeci">Eigen::VectorX&lt; vector2d &gt; &amp; velocityField()</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_aa2f793307e4ed1a51e9fed63597bf8e7"><div class="ttname"><a href="classfield_1_1_fields.html#aa2f793307e4ed1a51e9fed63597bf8e7">field::Fields::enableVectorField</a></div><div class="ttdeci">void enableVectorField(vectorialType field, bool enable=true)</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_ab9af1228f3f663dccbbd6b9e9379552f"><div class="ttname"><a href="classfield_1_1_fields.html#ab9af1228f3f663dccbbd6b9e9379552f">field::Fields::vectorialField</a></div><div class="ttdeci">const vector2d &amp; vectorialField(scalarType field, const mesh::Cell *cell) const</div></div>
-<div class="ttc" id="aclassmesh_1_1_mesh_html"><div class="ttname"><a href="classmesh_1_1_mesh.html">mesh::Mesh</a></div><div class="ttdoc">Mesh Container (Usually Big Size) managed internally with smart pointers. Mesh needs to be loaded usi...</div><div class="ttdef"><b>Definition:</b> mesh.h:36</div></div>
+<div class="ttc" id="aclassmesh_1_1_mesh_html"><div class="ttname"><a href="classmesh_1_1_mesh.html">mesh::Mesh</a></div><div class="ttdoc">Mesh Container (Usually Big Size) managed internally with smart pointers. Mesh needs to be loaded usi...</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8h_source.html#l00041">mesh.h:42</a></div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_a5d17dcc4090056d01d9c00a6420e0139"><div class="ttname"><a href="classfield_1_1_fields.html#a5d17dcc4090056d01d9c00a6420e0139">field::Fields::copy</a></div><div class="ttdeci">void copy(const field::Fields *other)</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_ad80632a1c5bded54a57fba4e19043d2a"><div class="ttname"><a href="classfield_1_1_fields.html#ad80632a1c5bded54a57fba4e19043d2a">field::Fields::velocityField</a></div><div class="ttdeci">const Eigen::VectorX&lt; vector2d &gt; &amp; velocityField() const</div></div>
 <div class="ttc" id="aclassfield_1_1_fields_html_a22c8699e86e345542f06b8019dfcaff5"><div class="ttname"><a href="classfield_1_1_fields.html#a22c8699e86e345542f06b8019dfcaff5">field::Fields::scalarField</a></div><div class="ttdeci">const Eigen::VectorX&lt; double &gt; &amp; scalarField(scalarType field) const</div></div>

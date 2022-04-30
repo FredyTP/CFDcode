@@ -18,6 +18,9 @@
 
 namespace term
 {
+    /**
+     * Face term for diffusive fluxes.
+     */
     class DiffusiveTerm : public FaceEquationTerm
     {
     public:

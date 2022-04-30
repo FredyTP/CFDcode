@@ -1,6 +1,6 @@
 /*****************************************************************//**
- * \file   geometry.h
- * \brief  
+ * \file   global_typedef.h
+ * \brief  Global type definition and constants
  * 
  * \author alfre
  * \date   March 2022

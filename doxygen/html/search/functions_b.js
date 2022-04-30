@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['upwinddifferencingscheme_247',['UpwindDifferencingScheme',['../classmath_1_1_face_interpolation.html#abc6549627210f729c0448cbc5aef7106',1,'math::FaceInterpolation']]]
+  ['trapezoidal_284',['trapezoidal',['../classmath_1_1_surface_integral.html#a0b44b3a7e37247ae67071674e3cbf063',1,'math::SurfaceIntegral']]]
 ];
