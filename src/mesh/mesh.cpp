@@ -155,6 +155,18 @@ void Mesh::calculateBoundingBox()
     _boundingBox.size = maxpos - minpos;
 }
 
+void Mesh::calculateMaxCellFaces()
+{
+    _maxCellFaces = 0;
+    for (auto& cell : *_cells)
+    {
+        if (cell->faces().size() > _maxCellFaces)
+        {
+            _maxCellFaces = cell->faces().size();
+        }
+    }
+}
+
 void Mesh::buildMesh()
 {
     this->createFaces();
@@ -179,6 +191,7 @@ void Mesh::buildMesh()
     }
 
     this->calculateBoundingBox();
+    this->calculateMaxCellFaces();
 }
 
 void Mesh::createBoundaryCell(Face* face)
