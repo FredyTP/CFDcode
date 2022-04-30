@@ -53,7 +53,7 @@ public:
 
     const std::vector<Face*>& internalFaces() const { return _internalFaces; }
     const std::vector<Face*>& boundaryFaces() const { return _boundaryFaces; }
-    //void addNode(std::unique_ptr<Node>& node){}
+    
     void addCell(std::unique_ptr<Cell>& cell) const { 
         cell->setIndex(_cells->size());
         _cells->push_back(std::move(cell));
@@ -78,6 +78,8 @@ public:
         
     }
 
+    uint8_t maxCellFaces() const { return _maxCellFaces; }
+
     const BoundingBox& boundingBox() const { return _boundingBox; }
     //void addFace(std::unique_ptr<Face>& node){}
 private:
@@ -91,7 +93,8 @@ private:
     std::vector<Face*> _internalFaces;
     std::vector<Face*> _boundaryFaces;
 
-    //GEOMETRIC INFORMATION
+    //MESH INFO
+    uint8_t _maxCellFaces;
 
 
 
@@ -123,6 +126,12 @@ private:
      * 
      */
     void calculateBoundingBox();
+
+    /**
+     * \brief Calculate the maximum number of faces that any cell have.
+     * 
+     */
+    void calculateMaxCellFaces();
 
 };
 
