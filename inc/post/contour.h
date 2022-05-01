@@ -21,28 +21,12 @@ namespace post
         {
             _problem = _problem_;
         }
-        void setSolution(Eigen::VectorXd& _solution_)
-        {
-            _solution = &_solution_;
-        }
-
-        void saveContourFile(const std::string name, bool saveJPG)
-        {
-            std::string file_name = name + _extension;
-            std::string img_name = name + ".png";
-            this->initfile(file_name);
-            this->save(file_name, *_solution, _problem->mesh());
-            if(saveJPG) this->save_contour(file_name, img_name,7, 1920, 1080);            
-        }
-    private:
-        const std::string _extension = ".datctr";
-        sys::Problem* _problem = nullptr;
-        Eigen::VectorXd* _solution = nullptr;
-
         void initfile(const std::string& filename)
         {
             std::ofstream file;
-            file.open(filename, std::ios::trunc);
+            _filename = filename + _extension;
+            _contour_filename = filename + _imgExtension;
+            file.open(_filename, std::ios::trunc);
             if (file.is_open())
             {
                 file << "X" << "," << "Y" << "," << "Value";
@@ -55,25 +39,25 @@ namespace post
                 file.close();
             }
         }
-        void save(const std::string& filename, const Eigen::VectorXd& _solution, const mesh::Mesh* pMesh)
+        void saveSnapshot(const Eigen::VectorXd& _snapshot, vector2d offset = vector2d(0, 0))
         {
             std::ofstream file;
-            file.open(filename, std::ios::app);
+            file.open(_filename, std::ios::app);
             if (file.is_open())
             {
-                for (int i = 0; i < _solution.size(); i++)
+                for (int i = 0; i < _snapshot.size(); i++)
                 {
-                    auto cell = pMesh->cells()->at(i).get();
+                    auto cell = _problem->mesh()->cells()->at(i).get();
                     if (cell->nodes().size() < 3)
                     {
                         break;
                     }
-                    vector2d pos = pMesh->cells()->at(i)->getCentroid();
+                    vector2d pos = _problem->mesh()->cells()->at(i)->getCentroid() + offset;
 
-                    file << pos.x() << "," << pos.y() << "," << _solution(i);
-                    int maxFace = pMesh->maxCellFaces();
+                    file << pos.x() << "," << pos.y() << "," << _snapshot(i);
+                    int maxFace = _problem->mesh()->maxCellFaces();
                     int facenum = cell->nodes().size();
-                    for (int i =0; i<maxFace ;i++)
+                    for (int i = 0; i < maxFace; i++)
                     {
                         mesh::Node* node;
                         if (i >= facenum)
@@ -84,7 +68,7 @@ namespace post
                         {
                             node = cell->nodes()[i];
                         }
-                        file << "," << node->pos().x();
+                        file << "," << node->pos().x() + offset.x();
                     }
                     for (int i = 0; i < maxFace; i++)
                     {
@@ -97,22 +81,34 @@ namespace post
                         {
                             node = cell->nodes()[i];
                         }
-                        file << "," << node->pos().y();
+                        file << "," << node->pos().y() + offset.y();
                     }
-                    file<< std::endl;
+                    file << std::endl;
                 }
                 file.close();
             }
         }
-        void save_contour(const std::string& filename, const std::string& contour_filename, size_t colorbar_div, size_t Rx, size_t Ry)
+        void save_contour(size_t colorbar_div, size_t Rx, size_t Ry)
         {
-            std::cout << "Saving: " << filename << " to: " << contour_filename << " ..." << std::endl;
-            std::string command = "matlab  -batch \"plot_result('" + filename + "','" + contour_filename + "'," + std::to_string(colorbar_div) + "'," + std::to_string(Rx) + "," + std::to_string(Ry) + ")\"";
+            std::cout << "Saving contour: " << _filename << " to: " << _contour_filename << " ..." << std::endl;
+            std::string command = "matlab  -batch \"plot_result('" + _filename + "','" + _contour_filename + "'," + std::to_string(colorbar_div) + "'," + std::to_string(Rx) + "," + std::to_string(Ry) + ")\"";
             system(command.c_str());
-            std::cout << "saved" << std::endl;
-            std::string openimg = "\"" + contour_filename + "\"";
+            std::cout << "Saved contour" << std::endl;
+            std::string openimg = "\"" + _contour_filename + "\"";
             system(openimg.c_str());
         }
-
+        void saveContourFile(std::string filename,Eigen::VectorXd* solution, bool saveJPG)
+        {
+            this->initfile(filename);
+            this->saveSnapshot(*solution);
+            if(saveJPG) this->save_contour(7, 1920, 1080);
+      }
+    private:
+        std::string _filename;
+        std::string _contour_filename;
+        const std::string _extension = ".datctr";
+        const std::string _imgExtension = ".png";
+        sys::Problem* _problem = nullptr;
+       
     };
 }

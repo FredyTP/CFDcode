@@ -26,7 +26,7 @@ namespace solver
     class TemporalSolver
     {
     public:
-        TemporalSolver(MatrixBuilder* _builder_) : _builder(_builder_)
+        TemporalSolver(BaseMatrixBuilder* _builder_) : _builder(_builder_)
         {
 
         }
@@ -74,9 +74,10 @@ namespace solver
 
 
         
+        field::Fields* solution() { return _solution.get(); }
 
     private:
-        MatrixBuilder* _builder;
+        BaseMatrixBuilder* _builder;
         std::unique_ptr<field::Fields> _solution;
         std::vector<TimeStepActivity*> _timeStepActivities;
     };

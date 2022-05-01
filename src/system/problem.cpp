@@ -120,7 +120,7 @@ namespace sys
         {
 
             pressField[i] = 101325;
-            tempField[i] = 298.15;
+            tempField[i] = scalar.temperature;
             //THIS IS A DERIVED FIELD SO... CHANGE THAT
             densityField[i] = _mesh->cells()->at(i)->material()->density(_mesh->cells()->at(i).get(), _fields.get());
         }

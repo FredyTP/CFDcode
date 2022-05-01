@@ -24,7 +24,8 @@ maxt = max(T);
 mint = min(T);
 diff = max(maxt-mint,1);
 colors=round((T-mint)/diff*255);
-
+Tmin=mint;
+Tmax=maxt;
 %% OBTAIN VERTEX DATA
 dim = size(data);
 n_col = dim(2);

@@ -288,6 +288,9 @@
     <ClInclude Include="inc\solver\matrix\paralel_matrix_builder.h">
       <Filter>Include\solver\matrix</Filter>
     </ClInclude>
+    <ClInclude Include="inc\post\sampled_line.h">
+      <Filter>Include\post</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mesh\mesh.cpp">

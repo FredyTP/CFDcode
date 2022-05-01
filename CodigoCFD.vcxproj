@@ -59,6 +59,7 @@
     <ClInclude Include="inc\mesh\reader\mesh_reader.h" />
     <ClInclude Include="inc\mesh\reader\rect_mesh_creator.h" />
     <ClInclude Include="inc\post\contour.h" />
+    <ClInclude Include="inc\post\sampled_line.h" />
     <ClInclude Include="inc\post\time_solution_saver.h" />
     <ClInclude Include="inc\solver\activity\iteration_activity.h" />
     <ClInclude Include="inc\solver\activity\time_step_activity.h" />
