@@ -130,6 +130,9 @@
     <Filter Include="Include\solver\matrix">
       <UniqueIdentifier>{f02bc034-67a8-4a61-ad72-2f4f55134830}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\terminal">
+      <UniqueIdentifier>{8303de76-c7fc-4099-a91f-c14343fff87e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\mesh\base\cell.h">
@@ -290,6 +293,12 @@
     </ClInclude>
     <ClInclude Include="inc\post\sampled_line.h">
       <Filter>Include\post</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\terminal\named_object.h">
+      <Filter>Include\terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\math\interpolation\node_interpolation.h">
+      <Filter>Include\math\interpolation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

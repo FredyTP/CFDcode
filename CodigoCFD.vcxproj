@@ -41,6 +41,7 @@
     <ClInclude Include="inc\math\interpolation\face_interpolation.h" />
     <ClInclude Include="inc\math\interpolation\gradient_flux.h" />
     <ClInclude Include="inc\math\interpolation\gradient_interpolation.h" />
+    <ClInclude Include="inc\math\interpolation\node_interpolation.h" />
     <ClInclude Include="inc\math\surface_integral.h" />
     <ClInclude Include="inc\math\value\cell_value.h" />
     <ClInclude Include="inc\math\value\face_value.h" />
@@ -71,6 +72,7 @@
     <ClInclude Include="inc\solver\temporal_solver.h" />
     <ClInclude Include="inc\solver\time\time_step.h" />
     <ClInclude Include="inc\system\problem.h" />
+    <ClInclude Include="inc\terminal\named_object.h" />
     <ClInclude Include="inc\tool\chronometer.h" />
   </ItemGroup>
   <ItemGroup>

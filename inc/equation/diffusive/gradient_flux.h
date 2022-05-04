@@ -14,15 +14,17 @@
 #include <math/interpolation/gradient_flux.h>
 
 #include <field/fields.h>
+
+#include <terminal/named_object.h>
 namespace term
 {
     /**
      * Abstract class representing a gradient flux calculation method.
      */
-    class GradientFlux
+    class GradientFlux : public terminal::NamedObject
     {
     public:
-        GradientFlux() {}
+        GradientFlux(const std::string name) : NamedObject(name) {}
         /**
          * Pure virtual function representing how to interpolate the gradient on a face.
          *
@@ -44,7 +46,7 @@ namespace term
     class CentralDifferenceGradient : public GradientFlux
     {
     public:
-        CentralDifferenceGradient()
+        CentralDifferenceGradient() : GradientFlux("Central_Difference_Gradient")
         {
 
         }
@@ -74,7 +76,7 @@ namespace term
     class OrthogonalCorrectedGradient : public GradientFlux
     {
     public:
-        OrthogonalCorrectedGradient()
+        OrthogonalCorrectedGradient() : GradientFlux("Orthogonal_Corrected_Gradient")
         {
 
         }
@@ -86,7 +88,7 @@ namespace term
             }
             else
             {
-                math::GradientFlux::OrthogonalCorrectedFlux(face, cellvalues, coef);
+                math::GradientFlux::OrthogonalCorrection2(face, cellvalues, coef);
 
             }
         }
