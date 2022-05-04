@@ -14,6 +14,8 @@
 #include <math/value/node_value.h>
 
 #include <mesh/base/face.h>
+#include <math/interpolation/node_interpolation.h>
+
 
 namespace math
 {
@@ -88,13 +90,30 @@ namespace math
 
             vector2d grad2_vec = factor * face->area() * norm.dot(face->normal1()) * norm;
             GradientInterpolation::DotProduct(cellvalues, gradient2, grad2_vec);
+        }
+        static void OrthogonalCorrection2(const mesh::Face* face, std::vector<CellValue<double>>& cellvalues, double factor = 1.0f)
+        {
+            vector2d n = face->normal1();
+            vector2d eta = face->node2()->position() - face->node1()->position();
+            vector2d xi = face->cell2()->position() - face->cell1()->position();
+            vector2d e_eta = eta.normalized();
+            vector2d e_xi = (xi).normalized();
+
+            double coef_xi = face->area()*(face->normal1().dot(face->normal1())) / (xi.norm() * face->normal1().dot(e_xi));
+            double coef_eta = -face->area()*(e_xi.dot(e_eta)) / (eta.norm() * n.dot(e_xi));
+
+            cellvalues.push_back(CellValue<double>(face->cell2(), factor * coef_xi));
+            cellvalues.push_back(CellValue<double>(face->cell1(), -factor * coef_xi));
+
+
+            NodeValue<double> node2(face->node2(), coef_eta);
+            NodeValue<double> node1(face->node1(), -coef_eta);
+            NodeInterpolation::CellMeanInterpolation(node2, cellvalues, factor);
+            NodeInterpolation::CellMeanInterpolation(node1, cellvalues, factor);
+
 
             
-           
-   
-
         }
-
 
         // add gradient flux with non-orthogonal correction
     };
