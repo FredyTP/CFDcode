@@ -21,7 +21,7 @@ namespace post
             
         }
 
-        void sampleSolution(const sys::Problem* problem, Eigen::VectorXd& solution)
+        void sampleSolution(const sys::Problem* problem, Eigen::VectorXd& solution, bool gradientCorrection = false)
         {
             vector2d dr = (_end - _origin) / (_samples - 1);
             for (int i = 0; i < _samples; i++)
@@ -35,17 +35,21 @@ namespace post
 
                     //USE GRADIENT CORRECTION
                     double temp = solution(cell->index());
-                    vector2d vect = pos - cell->position();
-                    std::vector<math::CellValue<vector2d>> gradient;
-                    std::vector<math::CellValue<double>> cellvalues;
-                    math::GradientInterpolation::GreenGaussGradient(cell, gradient);
-                    math::GradientInterpolation::DotProduct(cellvalues, gradient, vect);               
-                    double deltaT = 0;
-                    for (auto& val : cellvalues)
+                    if (gradientCorrection)
                     {
-                        deltaT += val.coef * solution(val.cell->index());
+                        vector2d vect = pos - cell->position();
+                        std::vector<math::CellValue<vector2d>> gradient;
+                        std::vector<math::CellValue<double>> cellvalues;
+                        math::GradientInterpolation::GreenGaussGradient(cell, gradient);
+                        math::GradientInterpolation::DotProduct(cellvalues, gradient, vect);
+                        double deltaT = 0;
+                        for (auto& val : cellvalues)
+                        {
+                            deltaT += val.coef * solution(val.cell->index());
+                        }
+                        temp += deltaT;
                     }
-                    temp += deltaT;
+
                     _value.push_back(temp);
                 }
             }
