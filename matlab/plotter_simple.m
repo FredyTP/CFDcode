@@ -3,6 +3,7 @@ close all
 
 data = csvread("C:\Users\alfre\Desktop\100\Temperature_at_0.05s.csv",1);
 dataf = csvread("D:\Alfredo\Academic\MASTER AERO\B\CFD\ProyectoCFD\CodigoCFD\temperature_100_at0.05s.datctr",1);
+
 %%
 x=data(:,2);
 y=data(:,3);
