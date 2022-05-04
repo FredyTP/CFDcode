@@ -21,16 +21,17 @@
 
 #include <field/fields.h>
 
+#include <terminal/named_object.h>
 
 namespace term
 {
     /**
      * Abstract class for face interpolation method.
      */
-    class FaceInterpolation
+    class FaceInterpolation: public terminal::NamedObject
     {
     public:
-        FaceInterpolation(){}
+        FaceInterpolation(const std::string name) : NamedObject(name) {}
 
         /**
          * Pure virtual function representing how to interpolate the values on a face.
@@ -51,7 +52,7 @@ namespace term
     class UDS : public FaceInterpolation
     {
     public:
-        UDS(){}
+        UDS(): FaceInterpolation("Upwind_Diffencing_Scheme") {}
         virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval,const field::Fields* field)
         {             
                 
@@ -75,7 +76,7 @@ namespace term
     class CDS : public FaceInterpolation
     {
     public:
-        CDS() {}
+        CDS() : FaceInterpolation("Central_Diffencing_Scheme") {}
         virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* field)
         {                            
             const mesh::Face* face = faceval.face;               
@@ -91,7 +92,7 @@ namespace term
     class PowerLaw : public FaceInterpolation
     {
     public:
-        PowerLaw() {}
+        PowerLaw() : FaceInterpolation("Powerlaw_Diffencing_Scheme") {}
         virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* fields)
         {
             const mesh::Face* face = faceval.face;
@@ -112,7 +113,7 @@ namespace term
             //PECLET
             double density = fields->scalarField(field::density,cell);
             double speed = vel.dot(cell2cell);
-            double conductivity = 10;//cell->material()->conductivity(field->scalarField(cell));
+            double conductivity = cell->material()->conductivity(cell,fields);
             double peclet_number = math::Adimensional::PecletNumber(density, speed, L, conductivity);
              
             math::FaceInterpolation::PowerLaw(faceval.face,peclet_number, lambda, cellvalues, faceval.coef);
@@ -128,7 +129,7 @@ namespace term
     class SecondOrderUpWind : public FaceInterpolation
     {
     public:
-        SecondOrderUpWind() {}
+        SecondOrderUpWind() : FaceInterpolation("Second_Order_Upwind") {}
         virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* fields)
         {
             const mesh::Face* face = faceval.face;
