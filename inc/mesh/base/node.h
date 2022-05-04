@@ -36,6 +36,8 @@ public:
 		}*/
 
 	}
+	const std::vector<Cell*>& cells() const { return _cells; }
+	std::vector<Cell*>& cells() { return _cells; }
 private:
 	size_t _index;	//index that represents the node (UNIQUE)
 	std::vector<Cell*> _cells; //Cells this node is cointained in (for node interpolation)
