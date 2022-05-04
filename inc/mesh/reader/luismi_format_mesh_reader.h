@@ -162,7 +162,9 @@ private:
                     for (size_t i=0;i<node_ids.size();i++)
                     {
                         size_t node_index = *(node_ids.at(i).get());
-                        nodes.push_back(_nodes->at(node_index).get());
+                        auto node = _nodes->at(node_index).get();
+                        nodes.push_back(node);
+                        node->cells().push_back(cell.get());
                     }
 
                     cell->setNodes(nodes);
