@@ -23,7 +23,6 @@ namespace math
         double volume = cell->volume();
         for (auto face : cell->faces())
         {    
-
             FaceInterpolation::CentralDifferencingScheme<vector2d>(face, face->lambda(), cellvalues, face->area() * factor / volume * face->getNormal(cell));
         }
 

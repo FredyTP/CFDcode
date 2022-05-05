@@ -22,8 +22,8 @@ namespace solver
         {
             _builder->buildSystem(problem);
 
-            Eigen::SparseLU<Eigen::SparseMatrix<double>> chol(_builder->getMatrix());
-            _solution = chol.solve(_builder->getVector());                
+            Eigen::SparseLU<Eigen::SparseMatrix<double>> solver(_builder->getMatrix());
+            _solution = solver.solve(_builder->getVector());
         }
         Eigen::VectorXd& solution() { return _solution; }
         
