@@ -21,13 +21,14 @@ namespace tool
         {
             _begin = std::chrono::steady_clock::now();
         }
-        void tac(bool print = false, const std::string action = "")
+        double tac(bool print = false, const std::string action = "")
         {
             _end = std::chrono::steady_clock::now();
             if (print)
             {
                 std::cout << "Elapsed time " << action << ": " << this->getElapsedMS() << "[ms]" << std::endl;
             }
+            return this->getElapsedMS();
         }
         double getElapsedMS()
         {
