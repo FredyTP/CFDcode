@@ -17,9 +17,9 @@ namespace math
         {
             return speed / soundSpeed;
         }
-        static double PecletNumber(double density, double speed, double longitude, double thermal_conductivity)
+        static double PecletNumber(double cp,double density, double speed, double longitude, double thermal_conductivity)
         {
-            return density * speed * longitude / thermal_conductivity;            
+            return cp*density * speed * longitude / thermal_conductivity;            
         }
         static double Lambda(double cell2face, double cell2cell)
         {
