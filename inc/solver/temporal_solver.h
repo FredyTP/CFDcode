@@ -41,11 +41,7 @@ namespace solver
             //SET INITIAL CONDITIONS
             _solution->copy(problem->fields());
             
-            //CalculateMATRIX
-            _builder->buildSystem(problem);
-            Eigen::SparseMatrix<double> &matrix = _builder->getMatrix();
-            Eigen::VectorXd &indep = _builder->getVector();
-            Eigen::SparseMatrix<double> &volumeMatrix = _builder->getVolMatrix();
+
                   
             double dt = 0.0; 
             timeStep->nextTimeStep(_solution.get());
@@ -53,9 +49,13 @@ namespace solver
             while ( stoppingCriteria->shouldContinue(timeStep->currentTime(),problem,_solution.get()) )
             {
                 dt = timeStep->timeStep();
+                //CalculateMATRIX
+                _builder->buildSystem(problem);
+                Eigen::SparseMatrix<double>& matrix = _builder->getMatrix();
+                Eigen::VectorXd& indep = _builder->getVector();
+                Eigen::SparseMatrix<double>& volumeMatrix = _builder->getVolMatrix();
                 Eigen::VectorXd newSolution;
-                EulerImplicit(volumeMatrix, matrix, indep, dt, _solution->scalarField(field::temperature), newSolution);
-                _solution->scalarField(field::temperature) = newSolution;
+                EulerImplicit(volumeMatrix, matrix, indep, dt, _solution->scalarField(field::temperature), _solution->scalarField(field::temperature));
                 for (auto activity : _timeStepActivities)
                 {
                     activity->timeStepAction(timeStep->currentTime(), dt, problem, _solution.get());
