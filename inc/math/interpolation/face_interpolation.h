@@ -77,20 +77,20 @@ namespace math
          */
         template<class _Type>
         static void PowerLaw(const mesh::Face* face,
-            const double peclet_number, const double lambda, std::vector<CellValue<_Type>>& cellvalues, double factor = 1.0)
+            const double peclet_number, const double x, const double L, std::vector<CellValue<_Type>>& cellvalues, double factor = 1.0)
         {
             double peclet_abs = abs(peclet_number);
-            if (isinf(peclet_number) || isnan(peclet_number))
+            if (isinf(peclet_number) || isnan(peclet_number) || peclet_abs > 10)
             {
                 FaceInterpolation::UpwindDifferencingScheme(face, peclet_number, cellvalues, factor);
             }
             else if (peclet_abs < 1e-5)
             {
-                FaceInterpolation::CentralDifferencingScheme(face, lambda, cellvalues, factor);
+                FaceInterpolation::CentralDifferencingScheme(face, x/L, cellvalues, factor);
             }
             else
             {
-                double peclet_val = (exp(peclet_number * lambda) - 1) / (exp(peclet_number) - 1);
+                double peclet_val = (exp(peclet_number* x/ L) - 1) / (exp(peclet_number) - 1);
                 FaceInterpolation::CentralDifferencingScheme(face, peclet_val, cellvalues, factor);
             }
         }
@@ -115,7 +115,7 @@ namespace math
 
                 vector2d celltoface = (face->getCentroid() - upstream_cell->getCentroid());
                 std::vector<CellValue<vector2d>> gradient;
-                GradientInterpolation::LeastSquaresGradient(upstream_cell, gradient,  factor);
+                GradientInterpolation::GreenGaussGradient(upstream_cell, gradient,  factor);
                 GradientInterpolation::DotProduct(cellvalues, gradient, celltoface);
 
 

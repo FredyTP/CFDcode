@@ -19,7 +19,7 @@ data = csvread(filepath,1);
 
 %% CONFIG COLORMAP AND LIMITS
 T=data(:,3);
-color = colormap;
+color = viridis(255);
 maxt = max(T);
 mint = min(T);
 diff = max(maxt-mint,1);
@@ -34,9 +34,9 @@ xv=data(:,n_col-2*max_node+1:n_col-max_node)';%x coordinates of vertices
 yv=data(:,n_col-max_node+1:n_col)';%y coordinates of vertices
 
 %% PLOT CONTOUR
-f = figure('Position',[0 0 Rx Ry],'visible','off');
+f = figure('Position',[0 0 Rx Ry],'visible','on');
 patch(xv,yv,colors,'EdgeColor','none');
-
+colormap(viridis)
 xlabel("X")
 ylabel("Y")
 %% Configure Colorbar

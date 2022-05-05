@@ -96,27 +96,28 @@ namespace term
         virtual void interpolateFace(std::vector<math::CellValue<double>>& cellvalues, const math::FaceValue<double>& faceval, const field::Fields* fields)
         {
             const mesh::Face* face = faceval.face;
-            const mesh::Cell* cell = face->cell1();
-            const mesh::Cell* othercell = face->cell2();
+            const mesh::Cell* cell1 = face->cell1();
+            const mesh::Cell* cell2 = face->cell2();
 
             //GEOMETRY
-            vector2d normal = face->getNormal(cell);
+            vector2d normal = face->normal1();
             vector2d vel = fields->velocityField(face);
-            vector2d cell2cell = othercell->getCentroid() - cell->getCentroid();
-            vector2d cell2face = face->getCentroid() - cell->getCentroid();
-            double x = cell2face.norm();
+            vector2d cell2cell = cell2->getCentroid() - cell1->getCentroid();
+            vector2d cell2face = face->getCentroid() - cell1->getCentroid();
             double L = cell2cell.norm();
+            double x = cell2face.dot(cell2cell.normalized());
 
             //LAMBDA
             double lambda = math::Adimensional::Lambda(x, L);
 
             //PECLET
-            double density = fields->scalarField(field::density,cell);
-            double speed = vel.dot(cell2cell);
-            double conductivity = cell->material()->conductivity(cell,fields);
-            double peclet_number = math::Adimensional::PecletNumber(density, speed, L, conductivity);
+            double density = fields->scalarField(field::density,cell1);
+            double speed = vel.dot(cell2cell.normalized());
+            double conductivity = cell1->material()->conductivity(cell1,fields);
+            double cp = cell1->material()->specificHeat(cell1, fields);
+            double peclet_number = math::Adimensional::PecletNumber(cp, density, speed, L, conductivity);
              
-            math::FaceInterpolation::PowerLaw(faceval.face,peclet_number, lambda, cellvalues, faceval.coef);
+            math::FaceInterpolation::PowerLaw(faceval.face, peclet_number, x, L, cellvalues, faceval.coef);
         }
             
            
