@@ -99,7 +99,7 @@ namespace math
             vector2d e_eta = eta.normalized();
             vector2d e_xi = (xi).normalized();
 
-            double coef_xi = face->area()*(face->normal1().dot(face->normal1())) / (xi.norm() * face->normal1().dot(e_xi));
+            double coef_xi = face->area() / (xi.norm() * face->normal1().dot(e_xi));
             double coef_eta = -face->area()*(e_xi.dot(e_eta)) / (eta.norm() * n.dot(e_xi));
 
             cellvalues.push_back(CellValue<double>(face->cell2(), factor * coef_xi));

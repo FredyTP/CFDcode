@@ -82,15 +82,7 @@ namespace term
         }
         virtual void integrateGradientFace(std::vector<math::CellValue<double>>& cellvalues, double coef, const mesh::Face* face)
         {
-            if (face->isBoundary())
-            {
-                math::GradientFlux::SimpleGradientFlux(face, cellvalues, coef);
-            }
-            else
-            {
-                math::GradientFlux::OrthogonalCorrection2(face, cellvalues, coef);
-
-            }
+            math::GradientFlux::OrthogonalCorrection2(face, cellvalues, coef);
         }
 
     private:
