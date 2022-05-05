@@ -10,11 +10,11 @@ figure
 hold on
 for i=1:6
     n_cell = 4^i;
-    name = strcat("Center_Line_Temperature_Stationary_Box_Central_Diffencing_Scheme_",num2str(n_cell),".csv");
-    cds(:,:,i)=csvread(name,1);
+    name = strcat("Center_Line_Temperature_Stationary_Central_Diffencing_Scheme_QUAD_",num2str(n_cell),".csv");
+    cds=csvread(name,1);
     legend_name{i}=num2str(n_cell);
-    x=cds(:,1,i);
-    T=cds(:,2,i);
+    x=cds(:,1);
+    T=cds(:,2);
     plot(x,T)
 end
 legend(legend_name)
@@ -24,10 +24,10 @@ figure
 hold on
 for i=1:6
     n_cell = 4^i;
-    name = strcat("Center_Line_Temperature_Stationary_Box_Upwind_Diffencing_Scheme_",num2str(n_cell),".csv");
-    uds(:,:,i)=csvread(name,1);
-    x=uds(:,1,i);
-    T=uds(:,2,i);
+    name = strcat("Center_Line_Temperature_Stationary_Upwind_Diffencing_Scheme_QUAD_",num2str(n_cell),".csv");
+    uds=csvread(name,1);
+    x=uds(:,1);
+    T=uds(:,2);
     plot(x,T)
 end
 title("UPWIND DIFFERENCING SCHEME")
@@ -38,10 +38,10 @@ figure
 hold on
 for i=1:6
     n_cell = 4^i;
-    name = strcat("Center_Line_Temperature_Stationary_Box_Second_Order_Upwind_",num2str(n_cell),".csv");
-    soup(:,:,i)=csvread(name,1);
-    x=soup(:,1,i);
-    T=soup(:,2,i);
+    name = strcat("Center_Line_Temperature_Stationary_Second_Order_Upwind_QUAD_",num2str(n_cell),".csv");
+    soup=csvread(name,1);
+    x=soup(:,1);
+    T=soup(:,2);
     plot(x,T)
 end
 title("SECOND ORDER UPWIND")
@@ -55,10 +55,10 @@ figure
 hold on
 for i=1:6
     n_cell = 4^i;
-    name = strcat("Center_Line_Temperature_Stationary_Box_Powerlaw_Diffencing_Scheme_",num2str(n_cell),".csv");
-    powerlaw(:,:,i)=csvread(name,1);
-    x=powerlaw(:,1,i);
-    T=powerlaw(:,2,i);
+    name = strcat("Center_Line_Temperature_Stationary_Powerlaw_Diffencing_Scheme_QUAD_",num2str(n_cell),".csv");
+    powerlaw=csvread(name,1);
+    x=powerlaw(:,1);
+    T=powerlaw(:,2);
     plot(x,T)
 end
 title("POWERLAW")
@@ -66,11 +66,15 @@ legend(legend_name)
 
 %%
 
+analitic = csvread("Center_Line_Temperature_Stationary_Second_Order_Upwind_QUAD_262144.csv",1);
+%%
+
 figure
 hold on
 title("Comparativa para 4096 elementos")
-plot(uds(:,1,i),uds(:,2,i));
-plot(cds(:,1,i),cds(:,2,i));
-plot(soup(:,1,i),soup(:,2,i));
-plot(powerlaw(:,1,i),powerlaw(:,2,i));
-legend("UDS","CDS","SOUP","POWER LAW")
+plot(uds(:,1),uds(:,2));
+%%plot(cds(:,1),cds(:,2));
+plot(soup(:,1),soup(:,2));
+plot(powerlaw(:,1),powerlaw(:,2));
+%%plot(analitic(:,1),analitic(:,2));
+legend("UDS","SOUP","POWER-LAW")%%,"QUAD MESH")

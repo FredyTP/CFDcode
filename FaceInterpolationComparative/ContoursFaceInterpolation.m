@@ -12,7 +12,7 @@ figure
 hold on
 for i=1:6
     n_cell = 4^i;
-    name = strcat("Contour_Temperature_Stationary_Box_Central_Diffencing_Scheme_",num2str(n_cell),".datctr");
+    name = strcat("Contour_Temperature_Stationary_Central_Diffencing_Scheme_QUAD_",num2str(n_cell),".datctr");
     cds=csvread(name,1);
     legend_name{i}=num2str(n_cell);
     x=cds(:,1);

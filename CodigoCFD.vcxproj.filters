@@ -133,6 +133,9 @@
     <Filter Include="Include\terminal">
       <UniqueIdentifier>{8303de76-c7fc-4099-a91f-c14343fff87e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\mesh\quality">
+      <UniqueIdentifier>{43e2a54d-6f6a-40ba-b4c8-154df0c6a7a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\mesh\base\cell.h">
