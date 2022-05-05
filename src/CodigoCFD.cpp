@@ -30,12 +30,12 @@
 
 #include <tool/chronometer.h>
 
-void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* faceInterpolation, term::GradientFlux* gradientFlux,double density,double conductivity,double specificHeat,vector2d velocity,double temperature)
+void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* faceInterpolation, term::GradientFlux* gradientFlux,double density,double conductivity,double specificHeat,vector2d velocity,double temperature,int times,double *timeSimulation)
 {
     sys::Problem problem;
     int n_cell = pow(4, n_mesh);
 
-    std::cout << "SOLVING PROBLEM FOR: N_CELL = " + std::to_string(n_cell) + " FACE INTERPOLATION = " + faceInterpolation->name() + " & GRADIENT: " + gradientFlux->name() << std::endl;;
+    std::cout << "SOLVING PROBLEM FOR: N_CELL = " + std::to_string(n_cell) + " FACE INTERPOLATION = " + faceInterpolation->name() + " & GRADIENT: " + gradientFlux->name() << std::endl;
     tool::Chronometer timer;
     timer.tic();
     std::string mesh_name;
@@ -54,6 +54,16 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
         mesh_name = "QUAD";
         double w = 0.005;
         double h = 0.1;
+        if (n_mesh == 9)
+        {
+            problem.createRectMesh(w, h, 200, 1000);
+        }
+        else
+        {
+            int n_w = ceil(sqrt(pow(4, n_mesh) / 10));
+            int n_h = floor(10 * sqrt(pow(4, n_mesh) / 10));
+            problem.createRectMesh(w, h, n_w, n_h);
+        }
         problem.createRectMesh(w, h, pow(2, n_mesh), pow(2, n_mesh));
         std::unique_ptr<mesh::MeshSelection<mesh::Face>> bot_bc = std::make_unique<mesh::MeshSelection<mesh::Face>>();
         bot_bc->selectFromMesh(problem.mesh(),
@@ -109,7 +119,7 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
         problem.addFaceSelection(left_bc);
         problem.addFaceSelection(right_bc);
     }
-    timer.tac(true, "building mesh");
+   timer.tac(true, "building mesh");
     //______MATERIAL PROPERTIES_____//
     problem.addConstantMaterial(density, 1e-5, conductivity, specificHeat);
     problem.assignMaterial();
@@ -117,8 +127,8 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
     //______BOUNDARY CONDITIONS_____//
     problem.addConstTempBoundary(600);    //BOTTOM
     problem.addConstTempBoundary(300);       //TOP
-    problem.addConstTempBoundary(300);    //LEFT
-    problem.addConstTempBoundary(300);   //RIGHT
+    problem.addConstTempBoundary(200);    //LEFT
+    problem.addConstTempBoundary(400);   //RIGHT
 
     problem.assignBoundaryCondition(0, 0);
     problem.assignBoundaryCondition(1, 1);
@@ -147,26 +157,34 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
 
     //______STATIC SOLVER_____//
     solver::StationarySolver sSolver(&serialBuilder);
-    
-    timer.tic();
-    sSolver.solve(&problem);
-    timer.tac(true, "Solving problem");
+    double meanSolverTime = 0;
+    for (int i = 0; i < times; i++)
+    {
+        timer.tic();
+        sSolver.solve(&problem);
+        meanSolverTime += timer.tac(true, "Solving problem");
+    }
+    meanSolverTime /= times;
+    *timeSimulation = meanSolverTime;
+
 
     //______SAVE CONTOUR_____//
-    post::Contour contour;
-    contour.setProblem(&problem);
-    timer.tic();
-    contour.saveContourFile("Contour_Temperature_Stationary_" + gradientFlux->name() + "_" + mesh_name + "_" + std::to_string(n_cell), &sSolver.solution(), true);
-    timer.tac(true, "Saving Results");
+    //post::Contour contour;
+    //contour.setProblem(&problem);
+    //timer.tic();
+    //contour.saveContourFile("Contour_Temperature_Stationary_" + gradientFlux->name() + "_" + mesh_name + "_" + std::to_string(n_cell), &sSolver.solution(), true);
     
-    return;
+    //timer.tac(true, "Saving Results");
+    
+    //return;
 
     timer.tic();
     mesh::BoundingBox boundingBox = problem.mesh()->boundingBox();
     std::cout << boundingBox.size << std::endl;
-    post::SampledLine plot_line(vector2d(boundingBox.size.x() / 2, 0), vector2d(boundingBox.size.x() / 2, boundingBox.size.y()), 1000);
-    plot_line.sampleSolution(&problem, sSolver.solution(),true);
-    plot_line.saveResults("FaceInterpolationComparative//Center_Line_Temperature_Stationary_"+faceInterpolation->name()+"_"+std::to_string(n_cell));
+    post::CellSampledLine plot_line(vector2d(boundingBox.size.x() / 2 - 1e-10, 0), vector2d(boundingBox.size.x() / 2 - 1e-10, boundingBox.size.y()), 1e-5);
+    //post::CellSampledLine plot_line(vector2d(0, boundingBox.size.y() / 2), vector2d(boundingBox.size.x(), boundingBox.size.y() / 2), 1e-5);
+    plot_line.sampleSolution(&problem, sSolver.solution(),false);
+    plot_line.saveResults("FaceInterpolationComparative//Center_Line_Temperature_Stationary_" + faceInterpolation->name() + "_" + mesh_name + "_" + std::to_string(n_cell));
     timer.tac(true, "SAVING LINE");
     return;
 
@@ -174,7 +192,7 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
 
     //TEMPORAL SOLVER
     timestep::FixedTimeStep timeStep(0.1);
-    solver::stop::StopAtStep stoppingCriteria(2);
+    solver::stop::StopAtStep stoppingCriteria(100);
     solver::TemporalSolver solver(&serialBuilder);
     solver::FixedStepActivity printTimeStep(1);
     solver::FixedStepActivity* pPrint = &printTimeStep;
@@ -192,7 +210,7 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
     solutionSaver.initfile(file_name);
     int currentIteration = 0;
     double spacingFactor = 0.03;
-    solver::FixedStepActivity saveContour(0);
+    solver::FixedStepActivity saveContour(10);
     solutionSaver.saveSnapshot(problem.fields()->scalarField(field::temperature));
     saveContour.setAction([&](double time, double dt, sys::Problem* problem, field::Fields* field) {
         currentIteration++;
@@ -200,17 +218,17 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
         double x_offset = problem->mesh()->boundingBox().size.x() * (1 + spacingFactor) * currentIteration;
         solutionSaver.saveSnapshot(field->scalarField(field::temperature), vector2d(x_offset, 0));
         });
-    //solver.addActivity(&saveContour);
+    solver.addActivity(&saveContour);
 
     timer.tic();
     //SOLVER
     solver.solve(&problem, &timeStep, &stoppingCriteria);
-    timer.tac(true, "SIMULATION");
+    *timeSimulation = timer.tac(true, "SIMULATION") / 100;
     solutionSaver.save_contour(10, 1080, 720);
 
-    solutionSaver.initfile("temperature_at1s");
-    solutionSaver.saveSnapshot(solver.solution()->scalarField(field::temperature));
-    solutionSaver.save_contour(10, 1080, 720);
+    //solutionSaver.initfile("temperature_at1s");
+    //solutionSaver.saveSnapshot(solver.solution()->scalarField(field::temperature));
+    //solutionSaver.save_contour(10, 1080, 720);
 
 }
 
@@ -228,25 +246,86 @@ int main()
     double conductivity = 0.025;
     double specificHeat = 1004.5;
     double initialTemperature = 500;
-    vector2d velocity(0, 0.1);
-    for (int i = 6;i <= 6; i++)
-    {
-        solveProjectProblem(true, i, uds.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity, initialTemperature);
-        solveProjectProblem(true, i, uds.get(), orthogonalCorrected.get(), density, conductivity, specificHeat, velocity, initialTemperature);
-        solveProjectProblem(false, i, uds.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity, initialTemperature);
-        //solveProjectProblem(i, powerLaw.get(), centralDiffGrad.get(),density,conductivity,specificHeat,velocity);
-        //solveProjectProblem(i, secondOrderUpwind.get(), centralDiffGrad.get(),density,conductivity,specificHeat,velocity);
+    vector2d velocity(0, 0.3);
 
-        //solveRectangularProblem(i, uds.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity);
-        //solveRectangularProblem(i, cds.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity);
-        //solveRectangularProblem(i, powerLaw.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity);
-        //solveRectangularProblem(i, secondOrderUpwind.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity);
+    std::vector<double> timeTriUDS;
+    std::vector<double> timeTriCDS;
+    std::vector<double> timeTriPL;
+    std::vector<double> timeTriSOUP;
+
+    std::vector<double> timeQuadUDS;
+    std::vector<double> timeQuadCDS;
+    std::vector<double> timeQuadPL;
+    std::vector<double> timeQuadSOUP;
+    
+    double timeMesh;
+    double timeSimulation;
+    int times = 1;
+    tool::Chronometer timer;
+    timer.tic();
+
+
+    for (int i = 1;i <= 6; i++)
+    {
+
+        solveProjectProblem(true, i, uds.get(), orthogonalCorrected.get(), density, conductivity, specificHeat, velocity, initialTemperature, times, &timeSimulation);
+        timeTriUDS.push_back(timeSimulation);
+        solveProjectProblem(true, i, cds.get(), orthogonalCorrected.get(), density, conductivity, specificHeat, velocity, initialTemperature, times, &timeSimulation);
+        timeTriCDS.push_back(timeSimulation);
+        solveProjectProblem(true, i, powerLaw.get(), orthogonalCorrected.get(), density, conductivity, specificHeat, velocity, initialTemperature, times, &timeSimulation);
+
+        timeTriPL.push_back(timeSimulation);
+        solveProjectProblem(true, i, secondOrderUpwind.get(), orthogonalCorrected.get(), density, conductivity, specificHeat, velocity, initialTemperature, times, &timeSimulation);
+        timeTriSOUP.push_back(timeSimulation);
+        solveProjectProblem(false, i, powerLaw.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity, initialTemperature, times, &timeSimulation);
+        solveProjectProblem(false, i, uds.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity, initialTemperature, times, &timeSimulation);
+        timeQuadUDS.push_back(timeSimulation);
+        solveProjectProblem(false, i, cds.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity, initialTemperature, times, &timeSimulation);
+        timeQuadCDS.push_back(timeSimulation);
+        
+        timeQuadPL.push_back(timeSimulation);
+        solveProjectProblem(false, i, secondOrderUpwind.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity, initialTemperature, times, &timeSimulation);
+        timeQuadSOUP.push_back(timeSimulation);
+
     }
 
- 
+    //solveProjectProblem(false, 9, secondOrderUpwind.get(), centralDiffGrad.get(), density, conductivity, specificHeat, velocity, initialTemperature, times, &timeSimulation);
+    timer.tac(true, "TIME ALL SIMULATIONS");
+    std::ofstream meshfile;
+    meshfile.open("MeshFileTemporal.csv", std::ios::trunc);
+    if (false)
+    {
+        meshfile
+            << "MESH Cell "
+            << ",Tri UDS   "
+            << ",Tri CDS   "
+            << ",Tri PL    "
+            << ",Tri SOUP  "
+            << ",Quad UDS  "
+            << ",Quad CDS  "
+            << ",Quad PL   "
+            << ",Quad SOU  " << std::endl;
+        for (int i = 0; i < 6; i++)
+        {
+            meshfile
+                << std::to_string(pow(4, i + 1)) << " ,"
+                << std::to_string(timeTriUDS[std::min(i,6)]) << " ,"
+                << std::to_string(timeTriCDS[std::min(i, 6)]) << " ,"
+                << std::to_string(timeTriPL[std::min(i, 6)]) << " ,"
+                << std::to_string(timeTriSOUP[std::min(i, 6)]) << " ,"
+                << std::to_string(timeQuadUDS[i]) << " ,"
+                << std::to_string(timeQuadCDS[i]) << " ,"
+                << std::to_string(timeQuadPL[i]) << " ,"
+                << std::to_string(timeQuadSOUP[i]) << std::endl;
+        }
+        meshfile.close();
+    }
+
     
     
     
+
+
 
 }
 
