@@ -15,6 +15,9 @@ namespace material
 class MaterialFactory;
 class mesh::Cell;
 
+/**
+ * Represents a Fluid or Solid Material.
+ */
 class Material
 {
     friend MaterialFactory;

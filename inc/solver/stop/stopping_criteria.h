@@ -15,14 +15,28 @@ namespace solver
 {
     namespace stop
     {
+        /**
+         * Class abstraction of the stopping criteria.
+         */
         class StoppingCriteria
         {
         public:
             StoppingCriteria() {}
 
+            /**
+             * Return if should continue iterating.
+             * 
+             * \param actualTime
+             * \param problem
+             * \param solution
+             * \return 
+             */
             virtual bool shouldContinue(double actualTime, sys::Problem* problem, field::Fields* solution) = 0;
         };
 
+        /**
+         * Stops after the specified number of steps.
+         */
         class StopAtStep : public StoppingCriteria
         {
 
@@ -41,6 +55,9 @@ namespace solver
             uint32_t _time_steps;
         };
 
+        /**
+         * Stops after a specified elapsed simulation time.
+         */
         class StopAtTime : public StoppingCriteria
         {
 

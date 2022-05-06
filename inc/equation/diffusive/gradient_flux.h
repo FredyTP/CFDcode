@@ -69,8 +69,7 @@ namespace term
      * Orthogonal Corrected Gradient.
      * Aproximate the grandient flux by the partial derivative
      * in the direction of the vector that links both cells of the face.
-     * And in the perpendicular direction as the projection of the linear
-     * interpolation both cell centroid gradients.
+     * And in the perpendicular direction with node based gradient.
      * It's a second order scheme.
      */
     class OrthogonalCorrectedGradient : public GradientFlux
@@ -82,7 +81,7 @@ namespace term
         }
         virtual void integrateGradientFace(std::vector<math::CellValue<double>>& cellvalues, double coef, const mesh::Face* face)
         {
-            math::GradientFlux::OrthogonalCorrection2(face, cellvalues, coef);
+            math::GradientFlux::OrthogonalCorrection(face, cellvalues, coef);
         }
 
     private:

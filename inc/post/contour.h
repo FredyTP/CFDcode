@@ -12,6 +12,9 @@
 
 namespace post
 {
+    /**
+     * Class for contour creations.
+     */
     class Contour
     {
     public:

@@ -14,7 +14,9 @@ namespace material
 namespace prop
 {
 
-
+/**
+* Constant Density [kg/m^3] Property.
+*/
 class ConstantDensity : public DensityBase
 {
 public:
@@ -28,7 +30,9 @@ private:
     double _refDensity;
 
 };
-
+/**
+ * Constant Viscosity Property.
+ */
 class ConstantViscosity : public ViscosityBase
 {
 public:
@@ -42,7 +46,9 @@ private:
     double _refViscosity;
 
 };
-
+/**
+ * Constant Conductivity [W/mK] Property.
+ */
 class ConstantConductivity : public ConductivityBase
 {
 public:
@@ -57,6 +63,9 @@ private:
 
 };
 
+/**
+ * Constant SpecificHeat [J/kgK] Property.
+ */
 class ConstantSpecificHeat : public SpecificHeatBase
 {
 public:

@@ -30,6 +30,9 @@ protected:
     Eigen::SparseMatrix<double> _volumeMatrix;
 };
 
+/**
+ * Builds matrix in a serial Way.
+ */
 class MatrixBuilder : public BaseMatrixBuilder
 {
 public:

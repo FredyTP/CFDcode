@@ -10,6 +10,9 @@
 #include <mesh/base/node.h>
 namespace math
 {
+    /**
+     * This class represents a nodal value to be interpolated.
+     */
     template<typename _Ty>
     class NodeValue
     {

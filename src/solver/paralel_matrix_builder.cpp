@@ -1,4 +1,4 @@
-#include "paralel_matrix_builder.h"
+#include <solver/matrix/paralel_matrix_builder.h>
 
 #include <thread>
 void solver::ParalelMatrixBuilder::buildSystem(const sys::Problem* problem)

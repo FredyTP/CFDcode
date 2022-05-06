@@ -17,12 +17,16 @@
 //CFD
 #include <solver/matrix/matrix_builder.h>
 #include <solver/time/time_step.h>
-#include <solver/propagator/eurler_explicit.h>
+#include <solver/propagator/propagator.h>
 #include <solver/activity/time_step_activity.h>
 #include <solver/stop/stopping_criteria.h>
 
 namespace solver
 {
+
+    /**
+     * Solves the time evolution case.
+     */
     class TemporalSolver
     {
     public:
@@ -30,7 +34,7 @@ namespace solver
         {
 
         }
-        void solve(sys::Problem* problem,timestep::TimeStep* timeStep,stop::StoppingCriteria* stoppingCriteria)
+        void solve(sys::Problem* problem,timestep::TimeStep* timeStep,stop::StoppingCriteria* stoppingCriteria,solver::Propagator* propagator)
         {
             //RESET TIMER
             timeStep->resetTime();
@@ -55,7 +59,7 @@ namespace solver
                 Eigen::VectorXd& indep = _builder->getVector();
                 Eigen::SparseMatrix<double>& volumeMatrix = _builder->getVolMatrix();
                 Eigen::VectorXd newSolution;
-                EulerImplicit(volumeMatrix, matrix, indep, dt, _solution->scalarField(field::temperature), _solution->scalarField(field::temperature));
+                propagator->propagate(volumeMatrix, matrix, indep, dt, _solution->scalarField(field::temperature), _solution->scalarField(field::temperature));
                 for (auto activity : _timeStepActivities)
                 {
                     activity->timeStepAction(timeStep->currentTime(), dt, problem, _solution.get());

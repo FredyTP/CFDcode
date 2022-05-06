@@ -34,7 +34,7 @@ xv=data(:,n_col-2*max_node+1:n_col-max_node)';%x coordinates of vertices
 yv=data(:,n_col-max_node+1:n_col)';%y coordinates of vertices
 
 %% PLOT CONTOUR
-f = figure('Position',[0 0 Rx Ry],'visible','on');
+f = figure('Position',[0 0 Rx Ry],'visible','off');
 patch(xv,yv,colors,'EdgeColor','none');
 colormap(viridis)
 xlabel("X")

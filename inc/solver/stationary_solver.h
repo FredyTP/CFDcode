@@ -13,6 +13,9 @@
 #include <tool/chronometer.h>
 namespace solver
 {
+    /**
+     * Resolves the stationary case.
+     */
     class StationarySolver
     {
     public:

@@ -61,12 +61,11 @@
     <ClInclude Include="inc\mesh\reader\rect_mesh_creator.h" />
     <ClInclude Include="inc\post\contour.h" />
     <ClInclude Include="inc\post\sampled_line.h" />
-    <ClInclude Include="inc\post\time_solution_saver.h" />
     <ClInclude Include="inc\solver\activity\iteration_activity.h" />
     <ClInclude Include="inc\solver\activity\time_step_activity.h" />
     <ClInclude Include="inc\solver\matrix\matrix_builder.h" />
     <ClInclude Include="inc\solver\matrix\paralel_matrix_builder.h" />
-    <ClInclude Include="inc\solver\propagator\eurler_explicit.h" />
+    <ClInclude Include="inc\solver\propagator\propagator.h" />
     <ClInclude Include="inc\solver\stationary_solver.h" />
     <ClInclude Include="inc\solver\stop\stopping_criteria.h" />
     <ClInclude Include="inc\solver\temporal_solver.h" />
@@ -76,8 +75,6 @@
     <ClInclude Include="inc\tool\chronometer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="inc\solver\matrix\paralel_matrix_builder.cpp" />
-    <ClCompile Include="src\boundary\boundary_condition.cpp" />
     <ClCompile Include="src\CodigoCFD.cpp" />
     <ClCompile Include="src\field\fields.cpp" />
     <ClCompile Include="src\math\interpolation\gradient_interpolation.cpp" />
@@ -86,6 +83,7 @@
     <ClCompile Include="src\mesh\base\node.cpp" />
     <ClCompile Include="src\mesh\mesh.cpp" />
     <ClCompile Include="src\solver\matrix_builder.cpp" />
+    <ClCompile Include="src\solver\paralel_matrix_builder.cpp" />
     <ClCompile Include="src\system\problem.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

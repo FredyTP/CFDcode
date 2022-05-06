@@ -13,16 +13,13 @@ namespace math
     class NodeInterpolation
     {
     public:
-        /**
-         * \brief Computes the Central Differencing Scheme (CDS) interpolation
-         * on the cell's face.
-         *
-         * \param lamba relation of cell distance to face divided to distance
-         * of centroid's cells connected bu the face
-         * \param phi_cell value of phi of the cell
-         * \param phi_neig value of phi of neightbour cell
-         * \return
-         */
+       /**
+        * Interpolates a nodal value base on the mean of the surrounding cells values.
+        * 
+        * \param nodevalue
+        * \param cellvalues
+        * \param factor
+        */
             template<class _Type>
         static void CellMeanInterpolation(const NodeValue<_Type>& nodevalue, std::vector<CellValue<_Type>>& cellvalues, _Type factor)
         {

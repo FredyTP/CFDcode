@@ -9,6 +9,9 @@
 #include <mesh/base/cell.h>
 namespace math
 {
+    /**
+     * This class represents a matrix variable.
+     */
     template<typename _Ty>
     class CellValue
     {

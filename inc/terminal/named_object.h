@@ -11,6 +11,9 @@
 #include <string>
 namespace terminal
 {
+    /**
+     * Abstraction for classes that can print its name.
+     */
     class NamedObject
     {
     public:

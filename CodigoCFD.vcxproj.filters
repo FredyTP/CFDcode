@@ -186,9 +186,6 @@
     <ClInclude Include="inc\field\fields.h">
       <Filter>Include\field</Filter>
     </ClInclude>
-    <ClInclude Include="inc\field\state_vector.h">
-      <Filter>Include\field</Filter>
-    </ClInclude>
     <ClInclude Include="inc\boundary\boundary_condition.h">
       <Filter>Include\boundary</Filter>
     </ClInclude>
@@ -207,7 +204,7 @@
     <ClInclude Include="inc\mesh\base\vector.h">
       <Filter>Include\mesh\base</Filter>
     </ClInclude>
-    <ClInclude Include="inc\solver\propagator\eurler_explicit.h">
+    <ClInclude Include="inc\solver\propagator\propagator.h">
       <Filter>Include\solver\propagator</Filter>
     </ClInclude>
     <ClInclude Include="inc\boundary\constant_gradient.h">
@@ -279,9 +276,6 @@
     <ClInclude Include="inc\solver\stop\stopping_criteria.h">
       <Filter>Include\solver\stop</Filter>
     </ClInclude>
-    <ClInclude Include="inc\post\time_solution_saver.h">
-      <Filter>Include\post</Filter>
-    </ClInclude>
     <ClInclude Include="inc\mesh\reader\rect_mesh_creator.h">
       <Filter>Include\mesh\reader</Filter>
     </ClInclude>
@@ -303,6 +297,9 @@
     <ClInclude Include="inc\math\interpolation\node_interpolation.h">
       <Filter>Include\math\interpolation</Filter>
     </ClInclude>
+    <ClInclude Include="inc\field\state_vector.h">
+      <Filter>Include\field</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mesh\mesh.cpp">
@@ -323,9 +320,6 @@
     <ClCompile Include="src\field\fields.cpp">
       <Filter>Source\field</Filter>
     </ClCompile>
-    <ClCompile Include="src\boundary\boundary_condition.cpp">
-      <Filter>Source\boundary</Filter>
-    </ClCompile>
     <ClCompile Include="src\solver\matrix_builder.cpp">
       <Filter>Source\solver</Filter>
     </ClCompile>
@@ -335,8 +329,8 @@
     <ClCompile Include="src\math\interpolation\gradient_interpolation.cpp">
       <Filter>Source\math\interpolation</Filter>
     </ClCompile>
-    <ClCompile Include="inc\solver\matrix\paralel_matrix_builder.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="src\solver\paralel_matrix_builder.cpp">
+      <Filter>Source\solver</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

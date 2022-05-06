@@ -10,7 +10,9 @@
 namespace mesh
 {
 
-
+/**
+ * Class representing base geometry for mesh elements.
+ */
 class BaseGeometry
 {
     

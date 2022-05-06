@@ -17,6 +17,9 @@
 
 namespace solver
 {
+    /**
+     * Builds matrix using n number of threads.
+     */
     class ParalelMatrixBuilder : public BaseMatrixBuilder
     {
     public:

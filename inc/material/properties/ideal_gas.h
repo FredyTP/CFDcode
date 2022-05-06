@@ -15,7 +15,9 @@ namespace material
 namespace prop
 {
 
-
+    /**
+     * Ideal Gas state equation density. P=d*R*T
+     */
 class IdealGasDensity : public DensityBase
 {
 public:

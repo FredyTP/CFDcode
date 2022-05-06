@@ -108,9 +108,10 @@ void Face::_updateDistances()
     {
         vector2d cell2cell = cell2()->getCentroid() - cell1()->getCentroid();
         _cell_centroid_distance = cell2cell.norm();
+        vector2d face2cell = cell2()->getCentroid() - getCentroid();
         vector2d cell2face = getCentroid() - cell1()->getCentroid();
         _cell1_distance = cell2face.norm();
-        _lambda = _cell1_distance / _cell_centroid_distance;
+        _lambda = _cell1_distance / (_cell_centroid_distance+face2cell.norm());
     }
 
 }

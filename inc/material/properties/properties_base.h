@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   properties_base.h
- * \brief  
+ * \brief  Define the properties virtual interfaces to implement
  * 
  * \author alfre
  * \date   March 2022

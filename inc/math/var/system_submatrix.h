@@ -18,6 +18,9 @@
 
 namespace math
 {
+    /**
+     * This class handles the building of the system of equations.
+     */
     class SystemSubmatrix
     {
     public:
@@ -29,6 +32,11 @@ namespace math
             _coeficients->resize(size);
             _coeficients->setZero();
         }
+        /**
+         * Move the saved data into another class.
+         * 
+         * \param other
+         */
         void moveInto(SystemSubmatrix* other)
         {
             other->_cellCoeficients = std::move(_cellCoeficients);
@@ -36,6 +44,13 @@ namespace math
             other->_coeficients = std::move(_coeficients);
         }
         int index = 0;
+
+        /**
+         * Add the cell value to the both cells containing that face. Handles the sign change of the opposite cell
+         * 
+         * \param face
+         * \param cellvalue
+         */
         void addFaceValues(const mesh::Face* face, const CellValue<double>& cellvalue)
         {
             if (cellvalue.cell != nullptr)
@@ -49,6 +64,13 @@ namespace math
                 (*_coeficients.get())(face->cell2()->index()) -= cellvalue.coef;
             }
         }
+
+        /**
+         * Add a list of cell values to both cells containing the face.
+         * 
+         * \param face
+         * \param cellvalues
+         */
         void addFaceValues(const mesh::Face* face, const std::vector<CellValue<double>>& cellvalues)
         {
             for (auto& cellvalue : cellvalues)
@@ -56,6 +78,10 @@ namespace math
                 addFaceValues(face, cellvalue);
             }          
         }
+
+        /**
+         * Add a cell value to only one cell.
+         */
 
         void addCellValues(const mesh::Cell* cell, const CellValue<double>& cellvalue, bool invert = false)
         {
@@ -70,6 +96,14 @@ namespace math
                 (*_coeficients.get())(cell->index()) += coef;
             }
         }
+
+        /**
+         * Add cell dot values(time derivative) to only one cell.
+         * 
+         * \param cell
+         * \param cellvalue
+         * \param invert
+         */
         void addCellDotValues(const mesh::Cell* cell, const CellValue<double>& cellvalue, bool invert = false)
         {
             double coef = cellvalue.coef;
@@ -83,6 +117,14 @@ namespace math
                 (*_coeficients.get())(cell->index()) += coef;
             }    
         }
+
+        /**
+         * Add a list of cell values to only one cell.
+         * 
+         * \param cell
+         * \param cellvalues
+         * \param invert
+         */
         void addCellValues(const mesh::Cell* cell, const std::vector<CellValue<double>>& cellvalues, bool invert = false)
         {
             for (auto& cellvalue : cellvalues)
@@ -91,6 +133,14 @@ namespace math
             }
 
         }
+
+        /**
+         * Add a list of cell dot values to only one cell.
+         * 
+         * \param cell
+         * \param cellvalues
+         * \param invert
+         */
         void addCellDotValues(const mesh::Cell* cell, const std::vector<CellValue<double>>& cellvalues, bool invert = false)
         {
             for (auto& cellvalue : cellvalues)

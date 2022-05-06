@@ -43,4 +43,33 @@ namespace bc
     private:
         double _temperature;
     };
+
+    /**
+     * Boundary condition of variable temperature [K] with position and time.
+     */
+    class VariableTemperature : public BoundaryCondition
+    {
+    public:
+        VariableTemperature(std::function<double(double, vector2d)> getTemperature) : _getTemperature (getTemperature) {
+            _convectiveTerm = nullptr;
+            _diffusiveTerm = nullptr;
+        };
+
+        /**
+         * Calculate constant temperature boundary condition
+         *
+         * \param submatrix
+         * \param cell
+         * \param field
+         * \param actualTime current simulation Time [s]
+         */
+        virtual void getBoundaryCondition(math::SystemSubmatrix* submatrix, const mesh::Cell* cell, const field::Fields* field, double actualTime) const
+        {
+            submatrix->addCellValues(cell, math::CellValue<double>(nullptr, _getTemperature(actualTime,cell->position())));
+            submatrix->addCellValues(cell, math::CellValue<double>(cell, 1));
+        }
+
+    private:
+        std::function<double(double, vector2d)> _getTemperature;
+    };
 }

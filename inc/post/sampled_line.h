@@ -12,6 +12,9 @@
 #include <math/interpolation/gradient_interpolation.h>
 namespace post
 {
+    /**
+     * Class for saving results on a 2d line.
+     */
     class PostProcessLine
     {
     public:

@@ -10,6 +10,9 @@
 #include <mesh/base/face.h>
 namespace math
 {
+    /**
+     * This class represents a face value to be interpolated.
+     */
     template<typename _Ty>
     class FaceValue
     {

@@ -51,12 +51,11 @@ namespace math
         /**
          * \brief Computes the Central Differencing Scheme (CDS) interpolation
          * on the cell's face.
-         *
-         * \param lamba relation of cell distance to face divided to distance
-         * of centroid's cells connected bu the face
-         * \param phi_cell value of phi of the cell
-         * \param phi_neig value of phi of neightbour cell
-         * \return
+         * 
+         * \param face
+         * \param lambda
+         * \param cellvalues
+         * \param factor
          */
         template<class _Type>
         static void CentralDifferencingScheme(const mesh::Face* face,
@@ -67,13 +66,14 @@ namespace math
         }
 
         /**
-         * .
-         *
-         * \param cell
-         * \param face
+         * Computes the POWER LAW Differencing Scheme on the cell's face.
+         * 
+         * \param face 
          * \param peclet_number
-         * \param lambda
+         * \param x
+         * \param L
          * \param cellvalues
+         * \param factor
          */
         template<class _Type>
         static void PowerLaw(const mesh::Face* face,
@@ -95,7 +95,15 @@ namespace math
             }
         }
 
-
+        /**
+         * Computes the second order upwind differencing scheme.
+         * 
+         * \param cell
+         * \param face
+         * \param vel_dot_normal
+         * \param cellvalues
+         * \param factor
+         */
         static void SecondOrderUpwind(const mesh::Cell* cell, const mesh::Face* face,
             double vel_dot_normal, std::vector<CellValue<double>>& cellvalues, double factor = 1.0)
         {

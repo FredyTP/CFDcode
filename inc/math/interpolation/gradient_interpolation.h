@@ -24,16 +24,41 @@ namespace math
     {
     public:
 
-
+        /**
+         * Simple Gradient obtained by cell centroid finite differences.
+         * 
+         * \param face
+         * \param cellvalues
+         * \param factor
+         */
         static void FiniteDifferenceGradient(const mesh::Face* face, std::vector<CellValue<vector2d>>& cellvalues, double factor = 1.0);
 
-        //Green-Gauss Gradient interpolation
+        /**
+         * Green Gauss Gradient.
+         * 
+         * \param cell
+         * \param cellvalues
+         * \param factor
+         */
         static void GreenGaussGradient(const mesh::Cell* cell, std::vector<CellValue<vector2d>>& cellvalues, double factor = 1.0);
 
 
-        //Least Squares Gradient
+        /**
+         * Least Squares Gradient calculation.
+         * 
+         * \param cell
+         * \param cellvalues
+         * \param factor
+         */
         static void LeastSquaresGradient(const mesh::Cell* cell, std::vector<CellValue<vector2d>>& cellvalues, double factor = 1.0);
 
+        /**
+         * Implementation of dot product for vector of cell values.
+         * 
+         * \param result
+         * \param cellvalues
+         * \param vec
+         */
         static void DotProduct(std::vector<CellValue<double>>& result, std::vector<CellValue<vector2d>>& cellvalues, vector2d vec);
     };
 

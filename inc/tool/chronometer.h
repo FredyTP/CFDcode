@@ -13,6 +13,9 @@
 
 namespace tool
 {
+    /**
+     * Class for time measurement.
+     */
     class Chronometer
     {
     public:
