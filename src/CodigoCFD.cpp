@@ -31,7 +31,7 @@
 #include <tool/chronometer.h>
 
 #include <solver/propagator/propagator.h>
-void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* faceInterpolation, term::GradientFlux* gradientFlux,solver::Propagator* propagator, double density,double conductivity,double specificHeat,vector2d velocity,double temperature,bool temporal)
+void solveProjectProblem(bool tri_mesh, int n_mesh, term::FaceInterpolation* faceInterpolation, term::GradientFlux* gradientFlux, solver::Propagator* propagator, double density, double conductivity, double specificHeat, vector2d velocity, double temperature, bool temporal)
 {
     sys::Problem problem;
     int n_cell = pow(4, n_mesh);
@@ -70,50 +70,50 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
         std::unique_ptr<mesh::MeshSelection<mesh::Face>> bot_bc = std::make_unique<mesh::MeshSelection<mesh::Face>>();
         bot_bc->selectFromMesh(problem.mesh(),
             [](mesh::Face* face) {
-                    if (face->position().y() < 1e-7 && face->isBoundary())
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                if (face->position().y() < 1e-7 && face->isBoundary())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             });
         std::unique_ptr<mesh::MeshSelection<mesh::Face>> top_bc = std::make_unique<mesh::MeshSelection<mesh::Face>>();
         top_bc->selectFromMesh(problem.mesh(),
             [h](mesh::Face* face) {
-                    if (face->position().y() > h - 1e-7 && face->isBoundary())
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                if (face->position().y() > h - 1e-7 && face->isBoundary())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             });
         std::unique_ptr<mesh::MeshSelection<mesh::Face>> left_bc = std::make_unique<mesh::MeshSelection<mesh::Face>>();
         left_bc->selectFromMesh(problem.mesh(),
             [](mesh::Face* face) {
-                    if (face->position().x() < 1e-7 && face->isBoundary())
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                if (face->position().x() < 1e-7 && face->isBoundary())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             });
         std::unique_ptr<mesh::MeshSelection<mesh::Face>> right_bc = std::make_unique<mesh::MeshSelection<mesh::Face>>();
         right_bc->selectFromMesh(problem.mesh(),
             [w](mesh::Face* face) {
-                    if (face->position().x() > w - 1e-7 && face->isBoundary())
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                if (face->position().x() > w - 1e-7 && face->isBoundary())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             });
 
         problem.addFaceSelection(bot_bc);
@@ -121,11 +121,11 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
         problem.addFaceSelection(left_bc);
         problem.addFaceSelection(right_bc);
     }
-   timer.tac(true, "building mesh");
+    timer.tac(true, "building mesh");
     //______MATERIAL PROPERTIES_____//
     problem.addConstantMaterial(density, 1e-5, conductivity, specificHeat);
     problem.assignMaterial();
-    
+
     //______BOUNDARY CONDITIONS_____//
     problem.addConstTempBoundary(300);    //BOTTOM
     problem.addConstFluxBoundary(0);       //TOP
@@ -151,7 +151,7 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
     problem.configDiffusiveTerm(gradientFlux);
 
     problem.buildProblem();
-    
+
 
     //______MATRIX BUILDERS_____//
     solver::ParalelMatrixBuilder paralelBuilder(4);
@@ -189,41 +189,41 @@ void solveProjectProblem(bool tri_mesh,int n_mesh ,term::FaceInterpolation* face
     else
     {
         //TEMPORAL SOLVER
-        timestep::FixedTimeStep timeStep(0.05);
-        solver::stop::StopAtStep stoppingCriteria(3);
+        timestep::FixedTimeStep timeStep(0.005);
+        solver::stop::StopAtStep stoppingCriteria(30);
         solver::TemporalSolver solver(&serialBuilder);
         solver::FixedStepActivity printTimeStep(1);
         solver::FixedStepActivity* pPrint = &printTimeStep;
         printTimeStep.setAction([&](double time, double dt, sys::Problem* problem, field::Fields* field)
             {
-                    std::cout << "Step number: " << pPrint->step() << ", actual time: " << time << std::endl;
+                std::cout << "Step number: " << pPrint->step() << ", actual time: " << time << std::endl;
             });
         solver.addActivity(&printTimeStep);
 
 
         //CONTOUR SAVER CREATION
         post::Contour solutionSaver;
-        std::string file_name = "temperature_contour";
+        std::string file_name = "temperature_contour" + propagator->name();
         solutionSaver.setProblem(&problem);
         solutionSaver.initfile(file_name);
         int currentIteration = 0;
         double spacingFactor = 0.03;
-        solver::FixedStepActivity saveContour(1);
+        solver::FixedStepActivity saveContour(10);
         solutionSaver.saveSnapshot(problem.fields()->scalarField(field::temperature));
         saveContour.setAction([&](double time, double dt, sys::Problem* problem, field::Fields* field) {
             currentIteration++;
             std::cout << "SAVING SOLUTION..." << std::endl;
             vector2d box = problem->mesh()->boundingBox().size;
-            
-            vector2d offset((double)currentIteration* (1 + spacingFactor)* box.x(),0);
-            solutionSaver.saveSnapshot(field->scalarField(field::temperature),offset);
+
+            vector2d offset((double)currentIteration * (1 + spacingFactor) * box.x(), 0);
+            solutionSaver.saveSnapshot(field->scalarField(field::temperature), offset);
             });
         solver.addActivity(&saveContour);
 
         timer.tic();
         //SOLVER
         solver.solve(&problem, &timeStep, &stoppingCriteria, propagator);
-        timer.tac(true, "SIMULATION") / 100;
+        timer.tac(true, "SIMULATION");
         solutionSaver.save_contour(10, 1080, 720);
 
     }
@@ -259,12 +259,13 @@ int main()
     std::vector<double> timeQuadCDS;
     std::vector<double> timeQuadPL;
     std::vector<double> timeQuadSOUP;
-    
+
     double timeMesh;
     double timeSimulation;
     int times = 1;
     tool::Chronometer timer;
     timer.tic();
+    solveProjectProblem(false, 6, uds.get(), centralDiffGrad.get(), eulerImplicid.get(), density, conductivity, specificHeat, velocity, initialTemperature, true);
     solveProjectProblem(false, 6, uds.get(), centralDiffGrad.get(), crankNicolson.get(), density, conductivity, specificHeat, velocity, initialTemperature, true);
 
     timer.tac(true, "TIME ALL SIMULATIONS");
@@ -275,5 +276,5 @@ int main()
 
 
 
-    
+
 

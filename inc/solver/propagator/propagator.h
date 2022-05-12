@@ -1,20 +1,23 @@
 #pragma once
 /*****************************************************************//**
  * \file   eurler_explicit.h
- * \brief  
- * 
+ * \brief
+ *
  * \author alfre
  * \date   March 2022
  *********************************************************************/
 
 #include <Eigen/Eigen>
 #include <Eigen/SparseLU>
+#include <terminal/named_object.h>
 namespace solver
 {
 
-    class Propagator
+    class Propagator : public terminal::NamedObject
     {
+
     public:
+        Propagator(const std::string name) : NamedObject(name) {}
         virtual void propagate(const Eigen::SparseMatrix<double>& M, const Eigen::SparseMatrix<double>& F, const Eigen::VectorXd& S, double dt,
     const Eigen::VectorXd& lastStep, Eigen::VectorXd& newStep) = 0;
     };
@@ -26,6 +29,7 @@ namespace solver
     class EulerImplicit : public Propagator
     {
     public:
+        EulerImplicit() : Propagator("Euler_Implicit") {}
         /**
         *  Solve Equation in the form: M*phidot+F*phi=S with Euler Implicit method
         *
@@ -54,6 +58,7 @@ namespace solver
     class CrankNicolson : public Propagator
     {
     public:
+        CrankNicolson() : Propagator("Crank_Nicolson") {}
         /**
          *  Solve Equation in the form: M*phidot+F*phi=S with Euler Implicit method
          *
@@ -69,7 +74,7 @@ namespace solver
         {
             using namespace Eigen;
             SparseMatrix<double> dep = M + F * 0.5 * dt;
-            VectorXd ind = M * lastStep + S * dt - F * 0.5 * dt;
+            VectorXd ind = (M - F * 0.5 * dt) * lastStep + S * dt;
 
             SparseLU<SparseMatrix<double>> linearSolver(dep);
             newStep = linearSolver.solve(ind);
